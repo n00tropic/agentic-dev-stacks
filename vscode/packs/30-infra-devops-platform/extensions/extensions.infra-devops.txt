@@ -3,7 +3,6 @@
 
 GitHub.copilot
 GitHub.copilot-chat
-your-org.codex-vscode
 ms-azuretools.vscode-docker
 ms-kubernetes-tools.vscode-kubernetes-tools
 hashicorp.terraform

@@ -3,7 +3,6 @@
 
 GitHub.copilot
 GitHub.copilot-chat
-your-org.codex-vscode
 dbaeumer.vscode-eslint
 biomejs.biome
 esbenp.prettier-vscode

@@ -3,4 +3,3 @@
 
 GitHub.copilot
 GitHub.copilot-chat
-your-org.codex-vscode

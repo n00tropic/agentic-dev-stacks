@@ -3,7 +3,6 @@
 
 GitHub.copilot
 GitHub.copilot-chat
-your-org.codex-vscode
 tauri-apps.tauri-vscode
 bradlc.vscode-tailwindcss
 esbenp.prettier-vscode

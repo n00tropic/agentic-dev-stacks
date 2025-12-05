@@ -3,7 +3,6 @@
 
 GitHub.copilot
 GitHub.copilot-chat
-your-org.codex-vscode
 ms-python.python
 ms-python.vscode-pylance
 charliermarsh.ruff

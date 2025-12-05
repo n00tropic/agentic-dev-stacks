@@ -3,7 +3,6 @@
 
 GitHub.copilot
 GitHub.copilot-chat
-your-org.codex-vscode
 yzhang.markdown-all-in-one
 DavidAnson.vscode-markdownlint
 bierner.markdown-preview-github-styles

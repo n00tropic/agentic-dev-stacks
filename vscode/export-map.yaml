@@ -1,0 +1,117 @@
+{
+  "profiles":
+    {
+      "core-base-dev":
+        {
+          "pack": "00-core-base",
+          "workspace_dir": "vscode/exports/workspaces/core-base-dev",
+          "workspace_file": "vscode/exports/workspaces/core-base-dev/core-base-dev.code-workspace",
+          "profile_name": "Core / Base Dev",
+        },
+      "qa-static-analysis":
+        {
+          "pack": "00-core-base",
+          "workspace_dir": "vscode/exports/workspaces/qa-static-analysis",
+          "workspace_file": "vscode/exports/workspaces/qa-static-analysis/qa-static-analysis.code-workspace",
+          "profile_name": "QA / Static Analysis",
+        },
+      "docs-librarian":
+        {
+          "pack": "40-docs-knowledge",
+          "workspace_dir": "vscode/exports/workspaces/docs-librarian",
+          "workspace_file": "vscode/exports/workspaces/docs-librarian/docs-librarian.code-workspace",
+          "profile_name": "Docs & Librarian",
+        },
+      "gitops-code-review":
+        {
+          "pack": "00-core-base",
+          "workspace_dir": "vscode/exports/workspaces/gitops-code-review",
+          "workspace_file": "vscode/exports/workspaces/gitops-code-review/gitops-code-review.code-workspace",
+          "profile_name": "GitOps & Code Review",
+        },
+      "experimental-preview":
+        {
+          "pack": "50-experimental-playground",
+          "workspace_dir": "vscode/exports/workspaces/experimental-preview",
+          "workspace_file": "vscode/exports/workspaces/experimental-preview/experimental-preview.code-workspace",
+          "profile_name": "Experimental / Preview",
+        },
+      "fullstack-js-ts":
+        {
+          "pack": "10-fullstack-js-ts",
+          "workspace_dir": "vscode/exports/workspaces/fullstack-js-ts",
+          "workspace_file": "vscode/exports/workspaces/fullstack-js-ts/fullstack-js-ts.code-workspace",
+          "profile_name": "Fullstack JS/TS – Web & API",
+        },
+      "frontend-ux-ui":
+        {
+          "pack": "10-fullstack-js-ts",
+          "workspace_dir": "vscode/exports/workspaces/frontend-ux-ui",
+          "workspace_file": "vscode/exports/workspaces/frontend-ux-ui/frontend-ux-ui.code-workspace",
+          "profile_name": "Frontend UX/UI – React / Storybook / DX",
+        },
+      "node-backend-services":
+        {
+          "pack": "10-fullstack-js-ts",
+          "workspace_dir": "vscode/exports/workspaces/node-backend-services",
+          "workspace_file": "vscode/exports/workspaces/node-backend-services/node-backend-services.code-workspace",
+          "profile_name": "Node / Backend Services – TS/Node",
+        },
+      "python-services-clis":
+        {
+          "pack": "20-python-data-ml",
+          "workspace_dir": "vscode/exports/workspaces/python-services-clis",
+          "workspace_file": "vscode/exports/workspaces/python-services-clis/python-services-clis.code-workspace",
+          "profile_name": "Python Services & CLIs",
+        },
+      "python-data-ml":
+        {
+          "pack": "20-python-data-ml",
+          "workspace_dir": "vscode/exports/workspaces/python-data-ml",
+          "workspace_file": "vscode/exports/workspaces/python-data-ml/python-data-ml.code-workspace",
+          "profile_name": "Python Data & ML",
+        },
+      "infra-devops":
+        {
+          "pack": "30-infra-devops-platform",
+          "workspace_dir": "vscode/exports/workspaces/infra-devops",
+          "workspace_file": "vscode/exports/workspaces/infra-devops/infra-devops.code-workspace",
+          "profile_name": "Infra & DevOps (Docker/K8s/Terraform)",
+        },
+      "data-db-analytics":
+        {
+          "pack": "30-infra-devops-platform",
+          "workspace_dir": "vscode/exports/workspaces/data-db-analytics",
+          "workspace_file": "vscode/exports/workspaces/data-db-analytics/data-db-analytics.code-workspace",
+          "profile_name": "Data / DB & Analytics",
+        },
+      "desktop-gui-cross":
+        {
+          "pack": "10-fullstack-js-ts",
+          "workspace_dir": "vscode/exports/workspaces/desktop-gui-cross",
+          "workspace_file": "vscode/exports/workspaces/desktop-gui-cross/desktop-gui-cross.code-workspace",
+          "profile_name": "Desktop & GUI – Swift / TS / Python",
+        },
+      "macos-apple-platforms":
+        {
+          "pack": "00-core-base",
+          "workspace_dir": "vscode/exports/workspaces/macos-apple-platforms",
+          "workspace_file": "vscode/exports/workspaces/macos-apple-platforms/macos-apple-platforms.code-workspace",
+          "profile_name": "macOS – Apple Platforms & Tooling",
+        },
+      "windows-polyglot-wsl":
+        {
+          "pack": "00-core-base",
+          "workspace_dir": "vscode/exports/workspaces/windows-polyglot-wsl",
+          "workspace_file": "vscode/exports/workspaces/windows-polyglot-wsl/windows-polyglot-wsl.code-workspace",
+          "profile_name": "Windows – Polyglot + WSL",
+        },
+      "linux-ci-headless":
+        {
+          "pack": "30-infra-devops-platform",
+          "workspace_dir": "vscode/exports/workspaces/linux-ci-headless",
+          "workspace_file": "vscode/exports/workspaces/linux-ci-headless/linux-ci-headless.code-workspace",
+          "profile_name": "Linux – CI/Headless",
+        },
+    },
+}

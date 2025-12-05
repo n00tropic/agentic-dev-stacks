@@ -104,6 +104,17 @@ Before proposing or committing changes that affect packs, MCP manifests, or scri
 
    - A reminder that `vscode/codex-mcp.generated.toml` is **not** to be committed and is only a local staging file.
 
+### C. Export workspace-ready packs
+
+Use exports when you need ready-to-open workspaces without touching user dotfiles:
+
+1. Keep source of truth in `vscode/packs/**` (profiles, extensions, settings, MCP).
+2. Generate exports under `vscode/exports/**` (gitignored, throw-away):
+   - `cd vscode`
+   - `python3 scripts/export-packs.py <slug> [<slug> ...]`
+3. Open the exported workspace: `code exports/workspaces/<slug>/<slug>.code-workspace`.
+4. Never commit `vscode/exports/**` or `vscode/codex-mcp.generated.toml`; these are local artefacts only.
+
 ## MCP-specific rules
 
 1. **Prefer manifests**

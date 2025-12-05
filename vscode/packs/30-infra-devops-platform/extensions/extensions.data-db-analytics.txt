@@ -3,6 +3,5 @@
 
 GitHub.copilot
 GitHub.copilot-chat
-your-org.codex-vscode
 ms-mssql.mssql
 mtxr.sqltools

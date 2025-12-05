@@ -2,7 +2,7 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SCRIPT="$ROOT/scripts/validate_extensions.py"
+SCRIPT="$ROOT/../validate_extensions.py"
 
 if [[ ! -f $SCRIPT ]]; then
 	echo "Validator script not found at: $SCRIPT"
