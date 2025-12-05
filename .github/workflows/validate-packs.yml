@@ -5,18 +5,18 @@ on:
     branches:
       - main
     paths:
-      - "vscode/**"
-      - "CONTROL.md"
-      - "AGENTS.md"
-      - "copilot-instructions.md"
-      - ".github/workflows/validate-packs.yml"
+      - vscode/**
+      - CONTROL.md
+      - AGENTS.md
+      - copilot-instructions.md
+      - .github/workflows/validate-packs.yml
   pull_request:
     paths:
-      - "vscode/**"
-      - "CONTROL.md"
-      - "AGENTS.md"
-      - "copilot-instructions.md"
-      - ".github/workflows/validate-packs.yml"
+      - vscode/**
+      - CONTROL.md
+      - AGENTS.md
+      - copilot-instructions.md
+      - .github/workflows/validate-packs.yml
 
 jobs:
   validate:
