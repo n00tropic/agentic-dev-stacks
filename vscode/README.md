@@ -1,36 +1,47 @@
-# VS Code packs and exports
+# VS Code Packs (source → exports)
 
-## What lives here
+This directory holds the **source-of-truth packs** and the tooling to generate reproducible, workspace-ready exports. Nothing here touches your global VS Code settings; all outputs land under `exports/`.
 
-- `packs/` — canonical, versioned sources (profiles, extensions, settings, MCP manifests).
+## Structure
+
+- `packs/<pack>/profiles/PROFILE.<slug>.md` — profile descriptor.
+- `packs/<pack>/extensions/extensions.<slug>.txt` — curated extensions.
+- `packs/<pack>/settings/settings.<slug>.json` — settings overlay for the profile.
+- `packs/<pack>/mcp/servers.<slug>.json` — MCP manifest for the profile.
+- `packs/<pack>/workspace-templates/` — example `.code-workspace` files.
+- `scripts/` — export + validation tooling (`export-packs.py`, `merge-mcp-fragments.py`, helpers).
 - `export-map.yaml` — slug → pack → export paths → display name mapping.
-- `scripts/` — helper tooling (validation, MCP merge, exports).
-- `exports/` — generated, gitignored workspace-ready outputs (safe to delete/regenerate).
+- `exports/` — **generated, gitignored** workspaces and install aids (safe to delete/regenerate).
 
-## Generate workspace exports
+## How to export workspaces (source → exports)
 
 ```bash
 cd vscode
-python3 scripts/export-packs.py <slug> [<slug> ...]
+python scripts/export-packs.py <slug> [<slug> ...]
 ```
 
-- Uses `export-map.yaml` to locate the pack and export paths.
+- Reads pack data via `export-map.yaml`.
 - Writes to `exports/workspaces/<slug>/`:
-  - `.vscode/settings.json` (copied from pack settings)
-  - `.vscode/extensions.list` (normalized extension IDs)
-  - `<slug>.code-workspace` (standard workspace pointing one level up)
+  - `.vscode/extensions.list`
+  - `.vscode/settings.json`
+  - `<slug>.code-workspace`
 - Overwrite-safe; never writes outside `exports/`.
 
-## Open an exported workspace
+## How to apply exports on a new machine
 
-```bash
-code exports/workspaces/<slug>/<slug>.code-workspace
-```
-
-You can pair this with VS Code CLI profiles if desired; no global settings are changed by the script.
+1. Install extensions (optionally scoped to a profile):
+   ```bash
+   cd vscode
+   cat exports/workspaces/<slug>/.vscode/extensions.list | xargs -L1 code --install-extension --profile "<Profile Name>"
+   ```
+   _On Windows PowerShell:_ `Get-Content exports/workspaces/<slug>/.vscode/extensions.list | ForEach-Object { code --install-extension $_ --profile "<Profile Name>" }`
+2. Open the workspace with (or without) the profile:
+   ```bash
+   code exports/workspaces/<slug>/<slug>.code-workspace --profile "<Profile Name>"
+   ```
 
 ## Validation reminders
 
-- Profile content remains in `packs/**`; keep it in sync with `CONTROL.md`.
-- Run `./scripts/helpers/validate-extensions.sh` from `vscode/` after modifying extensions.
-- For MCP changes, use `python scripts/merge-mcp-fragments.py ...` to stage TOML locally; do not commit generated files.
+- Keep source packs in `packs/**` aligned with `CONTROL.md`.
+- After changing extensions: run `./scripts/helpers/validate-extensions.sh` (or `.\scripts\helpers\Validate-Extensions.ps1` on Windows).
+- After MCP manifest changes: consider `python scripts/merge-mcp-fragments.py ...` to stage `codex-mcp.generated.toml` locally (never commit generated files).

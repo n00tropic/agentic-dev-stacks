@@ -1,28 +1,37 @@
-# VS Code Packs Scaffold
+# Agentic Dev Stacks
 
-Canonical VS Code configuration packs for macOS, Windows, and Linux.
-Open this folder as a workspace in VS Code and let your AI assistants
-(Copilot, Codex, etc.) orchestrate profile setup from here.
+Scoped, cross-OS VS Code packs plus MCP manifests, designed for human + AI agent workflows (macOS, Windows, Linux).
 
-## Structure
+## What lives where
 
-- `packs/<pack-name>/profiles/` – Profile descriptors (`PROFILE.<slug>.md`) and exported profile files.
-- `packs/<pack-name>/extensions/` – Curated extension lists for each profile.
-- `packs/<pack-name>/settings/` – Settings overrides per profile.
-- `packs/<pack-name>/qa/` – Linters, formatters, and QA tooling config.
-- `packs/<pack-name>/mcp/` – MCP client/server configuration (e.g. dependency intelligence).
-- `packs/<pack-name>/workspace-templates/` – Example `.code-workspace` files per pack.
-- `packs/<pack-name>/scripts/` – OS-specific helper scripts for that pack.
+- **Root** – governance and agent docs: `AGENTS.md`, `CONTROL.md`, `copilot-instructions.md`.
+- **`vscode/`** – source of truth for packs (profiles, extensions, settings, MCP), export tooling, and gitignored exports.
+- **`codex/`** – docs and examples for wiring MCP into Codex (`config-guides.md`, `safe-vs-danger-modes.md`).
 
-## Automation scripts
+## Golden Path (new machine)
 
-Root-level scripts under `scripts/` help apply settings overrides in a safe, merge-friendly way:
+1. Clone repo, then `cd vscode`.
+2. Generate exports: `python scripts/export-packs.py <slug> [<slug> ...]`.
+3. Install extensions from each export: `cat exports/workspaces/<slug>/.vscode/extensions.list | xargs -L1 code --install-extension` (add `--profile "<Profile Name>"` if you want it scoped).
+4. Open the workspace: `code exports/workspaces/<slug>/<slug>.code-workspace --profile "<Profile Name>"`.
 
-- `scripts/macos/merge-settings.sh` – Merge a settings override JSON into the current user's VS Code settings on macOS (or generic Unix).
-- `scripts/linux/merge-settings.sh` – Thin wrapper that forwards to the macOS merge script for Linux.
-- `scripts/windows/Merge-Settings.ps1` – PowerShell version that merges override settings into `%APPDATA%\Code\User\settings.json`.
+## Golden Path (just profiles)
 
-Each script:
+- Import a `.code-profile` or gist via VS Code **Import Profile…**.
+- See `PROFILE_DIST.md` for slug → profile name → dist artifact mapping (gists may be `<TO_FILL>` placeholders).
 
-- Backs up the existing `settings.json` (if it exists) with a timestamped `.bak` suffix.
-- Merges the override on top of the existing settings (shallow merge, with override keys winning).
+## Structure (sources → exports → dist)
+
+- Source packs live in `vscode/packs/<pack>/`:
+  - `profiles/PROFILE.<slug>.md`
+  - `extensions/extensions.<slug>.txt`
+  - `settings/settings.<slug>.json`
+  - `mcp/servers.<slug>.json`
+  - `workspace-templates/` examples
+- Exports are generated to `vscode/exports/**` (gitignored) via `scripts/export-packs.py`.
+- Dist profile exports (optional) go in `vscode/profiles-dist/*.code-profile` and are catalogued in `PROFILE_DIST.md`.
+
+## Safety notes
+
+- Never edit `~/.codex/config.toml` or VS Code global settings from this repo; copy blocks instead.
+- Do not commit generated files (`vscode/exports/**`, `vscode/codex-mcp.generated.toml`).

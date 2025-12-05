@@ -4,10 +4,10 @@
 
 This repository is the canonical source of truth for:
 
-- VS Code profile packs (profiles, extensions, settings).
-- MCP server manifests for each profile.
-- Helper scripts for validation and TOML generation.
-- Documentation for configuring Codex safely with these profiles.
+- VS Code profile packs (profiles, extensions, settings) **under `vscode/packs/**`\*\*.
+- MCP server manifests per profile (also under `vscode/packs/**/mcp/`).
+- Helper scripts for validation, exports, and MCP TOML generation (`vscode/scripts/**`).
+- Documentation for configuring Codex safely with these profiles (`codex/docs/**`).
 
 Any AI agent (Codex, GitHub Copilot coding agent, ChatGPT, etc.) working in this repo MUST follow these rules.
 
@@ -20,8 +20,9 @@ Any AI agent (Codex, GitHub Copilot coding agent, ChatGPT, etc.) working in this
    - Do NOT invent new slugs or packs without updating `CONTROL.md`.
 
 2. **Scoped paths**
-   - All VS Code packs and scripts live under `vscode/`.
+   - All VS Code packs and scripts live under `vscode/` (source of truth).
    - Do NOT create new top-level `packs/` or `scripts/` directories outside `vscode/`.
+   - Dist profile exports live under `vscode/profiles-dist/` (generated via VS Code export). Do NOT hand-edit; regenerate instead.
 
 3. **No dotfile edits**
    - Do NOT edit:
@@ -44,8 +45,10 @@ Any AI agent (Codex, GitHub Copilot coding agent, ChatGPT, etc.) working in this
 5. **Generated files**
    - The following are treated as **throw-away artefacts** and MUST NOT be committed:
      - `vscode/codex-mcp.generated.toml`
+     - `vscode/exports/**`
      - Any `*.bak.*` files produced by local tooling or editors.
-   - Use generated files as staging areas for the user to copy from into their own config files.
+   - Dist profile exports (`vscode/profiles-dist/*.code-profile`) may be committed but **never hand-edited**; regenerate via VS Code “Export Profile…”.
+   - Use generated files as staging areas for users to copy into their own config files.
 
 ## Standard workflows
 
@@ -114,6 +117,16 @@ Use exports when you need ready-to-open workspaces without touching user dotfile
    - `python3 scripts/export-packs.py <slug> [<slug> ...]`
 3. Open the exported workspace: `code exports/workspaces/<slug>/<slug>.code-workspace`.
 4. Never commit `vscode/exports/**` or `vscode/codex-mcp.generated.toml`; these are local artefacts only.
+
+### D. Publish/update dist profiles
+
+For `.code-profile` / gist distribution:
+
+1. Ensure packs are updated; regenerate exports as needed.
+2. In VS Code, **Export Profile…** for the target profile name.
+3. Save to `vscode/profiles-dist/<slug>.code-profile` (overwrite is expected).
+4. If publishing a gist, use a **secret gist** and record the URL in `PROFILE_DIST.md` (`<TO_FILL>` placeholders are allowed).
+5. Do NOT hand-edit `.code-profile` files; regenerate via VS Code.
 
 ## MCP-specific rules
 
