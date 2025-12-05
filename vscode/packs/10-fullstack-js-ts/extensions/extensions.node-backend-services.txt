@@ -1,0 +1,12 @@
+# Extensions for profile: Node / Backend Services – TS/Node
+# Replace Codex placeholder with the actual extension id
+
+GitHub.copilot
+GitHub.copilot-chat
+your-org.codex-vscode
+dbaeumer.vscode-eslint
+biomejs.biome
+esbenp.prettier-vscode
+humao.rest-client
+ms-vscode.vscode-typescript-next
+ms-azuretools.vscode-docker

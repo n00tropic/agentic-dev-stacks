@@ -1,0 +1,8 @@
+# Extensions for profile: Data / DB & Analytics
+# Replace Codex placeholder with the actual extension id
+
+GitHub.copilot
+GitHub.copilot-chat
+your-org.codex-vscode
+ms-mssql.mssql
+mtxr.sqltools

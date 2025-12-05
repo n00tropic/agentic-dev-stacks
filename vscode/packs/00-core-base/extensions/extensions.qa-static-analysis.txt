@@ -1,0 +1,13 @@
+# Extensions for profile: QA / Static Analysis
+# Replace Codex placeholder with the actual extension id
+
+GitHub.copilot
+GitHub.copilot-chat
+your-org.codex-vscode
+dbaeumer.vscode-eslint
+biomejs.biome
+esbenp.prettier-vscode
+ms-python.python
+ms-python.vscode-pylance
+charliermarsh.ruff
+yoavbls.pretty-ts-errors

@@ -1,0 +1,15 @@
+# Extensions for profile: Fullstack JS/TS – Web & API
+# Replace Codex placeholder with the actual extension id
+
+GitHub.copilot
+GitHub.copilot-chat
+your-org.codex-vscode
+dbaeumer.vscode-eslint
+biomejs.biome
+esbenp.prettier-vscode
+yoavbls.pretty-ts-errors
+bradlc.vscode-tailwindcss
+ms-vscode.vscode-typescript-next
+firsttris.vscode-jest-runner
+vitest.explorer
+ms-azuretools.vscode-docker

@@ -1,0 +1,6 @@
+# Extensions for profile: Linux – CI/Headless
+# Replace Codex placeholder with the actual extension id
+
+GitHub.copilot
+GitHub.copilot-chat
+your-org.codex-vscode

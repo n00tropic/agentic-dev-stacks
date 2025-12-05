@@ -1,0 +1,12 @@
+# Extensions for profile: Infra & DevOps (Docker/K8s/Terraform)
+# Replace Codex placeholder with the actual extension id
+
+GitHub.copilot
+GitHub.copilot-chat
+your-org.codex-vscode
+ms-azuretools.vscode-docker
+ms-kubernetes-tools.vscode-kubernetes-tools
+hashicorp.terraform
+redhat.vscode-yaml
+github.vscode-github-actions
+ms-vscode.remote-containers

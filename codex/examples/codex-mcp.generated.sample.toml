@@ -1,0 +1,18 @@
+# Sample Codex MCP Configuration
+# 
+# This is an example of what codex-mcp.generated.toml looks like after running:
+# python vscode/scripts/merge-mcp-fragments.py <profile-slugs...>
+#
+# DO NOT commit your actual codex-mcp.generated.toml - it may contain secrets
+# or account-specific paths.
+
+# TODO: Add example TOML configuration structure
+
+# Example MCP server entry:
+# [[mcpServers]]
+# id = "filesystem"
+# human_name = "Filesystem"
+# command = "npx"
+# args = ["-y", "@modelcontextprotocol/server-filesystem", "/path/to/workspace"]
+# env = {}
+# disabled = false

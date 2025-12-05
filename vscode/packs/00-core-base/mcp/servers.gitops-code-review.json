@@ -1,0 +1,59 @@
+{
+  "profile_slug": "gitops-code-review",
+  "profile_name": "GitOps & Code Review",
+  "pack": "00-core-base",
+  "description": "Recommended MCP servers for the GitOps & Code Review profile.",
+  "servers": [
+    {
+      "id": "sonatype-deps",
+      "human_name": "Sonatype Dependency Management MCP",
+      "category": "dependency-intelligence",
+      "source": {
+        "type": "github",
+        "url": "https://github.com/sonatype/dependency-management-mcp-server"
+      },
+      "recommended_usage": [
+        "Audit dependencies for security, license, and maintenance risk.",
+        "Guide safer dependency choices during code generation and reviews."
+      ],
+      "config_fragments": {
+        "codex_config_toml": "[mcp_servers.sonatype-deps]\n# Refer to official Sonatype MCP setup for the correct command/args.\ncommand = \"<TO_FILL>\"",
+        "notes": "Fill in command/args from Sonatype docs; keep credentials outside VCS."
+      }
+    },
+    {
+      "id": "context7-docs",
+      "human_name": "Context7 MCP (Upstash)",
+      "category": "docs",
+      "source": {
+        "type": "github",
+        "url": "https://github.com/upstash/context7"
+      },
+      "recommended_usage": [
+        "Fetch versioned, up-to-date library and framework docs.",
+        "Disambiguate APIs across versions during coding and review."
+      ],
+      "config_fragments": {
+        "codex_config_toml": "[mcp_servers.context7-docs]\n# Provide the Context7 binary/command per Upstash docs.\ncommand = \"<TO_FILL>\"",
+        "notes": "Requires Context7 token/config; supply via env vars or secrets manager."
+      }
+    },
+    {
+      "id": "github",
+      "human_name": "GitHub MCP Server",
+      "category": "vcs",
+      "source": {
+        "type": "github",
+        "url": "https://github.com/github/mcp-server"
+      },
+      "recommended_usage": [
+        "Browse repos, issues, and pull requests from within the agent.",
+        "Trigger safe workflow automation during reviews."
+      ],
+      "config_fragments": {
+        "codex_config_toml": "[mcp_servers.github]\n# Configure with a fine-scoped GitHub token; see official docs.\ncommand = \"<TO_FILL>\"",
+        "notes": "Use least-privilege PAT/OIDC; avoid broad org scopes."
+      }
+    }
+  ]
+}

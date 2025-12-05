@@ -1,0 +1,13 @@
+# Extensions for profile: Docs & Librarian
+# Replace Codex placeholder with the actual extension id
+
+GitHub.copilot
+GitHub.copilot-chat
+your-org.codex-vscode
+yzhang.markdown-all-in-one
+DavidAnson.vscode-markdownlint
+bierner.markdown-preview-github-styles
+yzane.markdown-pdf
+hediet.vscode-drawio
+jebbs.plantuml
+streetsidesoftware.code-spell-checker
