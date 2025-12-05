@@ -10,8 +10,8 @@
 from __future__ import annotations
 
 import sys
-from pathlib import Path
 from collections import Counter
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PACKS_DIR = ROOT / "packs"
@@ -31,7 +31,9 @@ def validate_extensions_file(path: Path) -> dict:
             errors.append(f"{path}: line {lineno}: invalid id (missing dot): {line!r}")
         ids.append(line)
         if line == CODEX_PLACEHOLDER:
-            warnings.append(f"{path}: line {lineno}: Codex placeholder still present; replace with the real extension id.")
+            warnings.append(
+                f"{path}: line {lineno}: Codex placeholder still present; replace with the real extension id."
+            )
 
     counter = Counter(ids)
     dups = [ext for ext, count in counter.items() if count > 1]

@@ -7,6 +7,7 @@ MCP servers can operate in different modes with varying levels of access and cap
 ## Safe Mode (Read-Only)
 
 Safe mode restricts MCP servers to read-only operations, preventing:
+
 - File system modifications
 - Command execution
 - External API calls that mutate state
@@ -21,6 +22,7 @@ Safe mode restricts MCP servers to read-only operations, preventing:
 ## Danger Mode (Full Access)
 
 Danger mode enables full capabilities including:
+
 - File creation, modification, and deletion
 - Terminal command execution
 - External API calls with write permissions
@@ -45,6 +47,7 @@ Some MCP servers have `privacy_sensitive = true` flags in their manifests. Revie
 ## Related
 
 See profile-specific MCP manifests in `vscode/packs/*/mcp/servers.*.json` for server-specific safety flags like:
+
 - `recommended_read_only`
 - `privacy_sensitive`
 - `experimental`
@@ -70,7 +73,7 @@ There are two orthogonal dimensions to keep in mind:
    How much power Codex has over your filesystem, shell, and network from this machine.
 
 2. **MCP server capabilities and configuration**  
-   What each MCP server is *allowed* to do (read-only, read–write, external APIs, cloud mutations, etc.).
+   What each MCP server is _allowed_ to do (read-only, read–write, external APIs, cloud mutations, etc.).
 
 A “dangerous” setup usually means **both**:
 
@@ -304,7 +307,7 @@ A practical, low‑friction approach:
    - `config.toml` – your normal, perhaps more powerful working config.
    - `config.safe.toml` – a stripped‑down, read‑only‑oriented version for untrusted repos.
 
-2. **Use this repo only for the *structure* of power:**
+2. **Use this repo only for the _structure_ of power:**
    - Profile‑level MCP manifests.
    - Scripts (`merge-mcp-fragments.py`) that generate candidate configs.
    - Documentation (this file and `config-guides.md`).

@@ -9,6 +9,7 @@ This guide covers how to configure Codex for use with the agentic dev stacks pro
 ## Configuration File Location
 
 Codex configuration is typically stored at:
+
 - macOS/Linux: `~/.codex/config.toml`
 - Windows: `%USERPROFILE%\.codex\config.toml`
 
@@ -45,12 +46,12 @@ This guide explains how to configure Codex for use with the `agentic-dev-stacks`
 
 Codex reads its configuration from a single TOML file:
 
-- **macOS / Linux:** `~/.codex/config.toml`  
+- **macOS / Linux:** `~/.codex/config.toml`
 - **Windows:** `%USERPROFILE%\.codex\config.toml`
 
 This file is shared between:
 
-- The **Codex CLI** (`codex` in your terminal).  
+- The **Codex CLI** (`codex` in your terminal).
 - The **Codex IDE extension** (e.g. in VS Code).
 
 Use it to configure:
@@ -150,8 +151,7 @@ command = "<TO_FILL>"
 Once you have generated `vscode/codex-mcp.generated.toml`:
 
 1. **Open your local config:**
-
-   - macOS/Linux: `~/.codex/config.toml`  
+   - macOS/Linux: `~/.codex/config.toml`
    - Windows: `%USERPROFILE%\.codex\config.toml`
 
 2. **Locate the MCP section** in your config, where your current `[mcp_servers.*]` blocks live.
@@ -169,7 +169,6 @@ Once you have generated `vscode/codex-mcp.generated.toml`:
    ```
 
 4. **Fill in any `<TO_FILL>` placeholders** using the official server documentation (e.g. GitHub or vendor docs). This typically means:
-
    - Replacing `command` with the actual executable (e.g. `npx`, `uvx`, or a local binary).
    - Supplying `args = [...]` and environment variables if required.
 

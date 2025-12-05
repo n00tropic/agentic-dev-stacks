@@ -21,6 +21,5 @@ React/Next.js, Node APIs, and monorepo tooling (pnpm/Nx/Turbo).
   ```
 
 - Merge `settings.fullstack-js-ts.json` into your user `settings.json` using the root-level merge scripts:
-
   - macOS/Linux: `scripts/macos/merge-settings.sh path/to/settings.fullstack-js-ts.json`
   - Windows: `scripts/windows/Merge-Settings.ps1 -OverridePath path\to\settings.fullstack-js-ts.json`

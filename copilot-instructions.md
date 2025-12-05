@@ -3,6 +3,7 @@
 ## What this repo is
 
 This repo defines:
+
 - VS Code “packs” for scoped profiles and workspaces.
 - MCP server manifests per profile.
 - Validation and merge scripts (e.g. `validate-extensions`, `merge-mcp-fragments`).
@@ -17,7 +18,7 @@ Use it to keep my dev environments and MCP configs consistent across macOS, Wind
    - `packs/**/extensions/extensions.*.txt`
    - `packs/**/settings/settings.*.json`
    - `packs/**/mcp/servers.*.json`
-   and the `scripts/` directory.
+     and the `scripts/` directory.
 3. Never edit my home dotfiles (`~/.codex/config.toml`, VS Code global settings) directly.
 4. When a change affects MCP or profiles, propose:
    - A short plan.

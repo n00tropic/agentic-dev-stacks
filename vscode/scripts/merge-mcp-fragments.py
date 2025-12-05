@@ -19,7 +19,6 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
-
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_FILE = ROOT / "codex-mcp.generated.toml"
 OUTPUT_TMP = OUTPUT_FILE.with_suffix(".tmp")
@@ -48,10 +47,16 @@ def usage() -> None:
 def find_manifest(slug: str) -> Optional[Path]:
     matches = sorted(ROOT.glob(f"packs/*/mcp/servers.{slug}.json"))
     if not matches:
-        print(f"[ERROR] No manifest found for slug '{slug}'. Expected packs/*/mcp/servers.{slug}.json", file=sys.stderr)
+        print(
+            f"[ERROR] No manifest found for slug '{slug}'. Expected packs/*/mcp/servers.{slug}.json",
+            file=sys.stderr,
+        )
         return None
     if len(matches) > 1:
-        print(f"[ERROR] Multiple manifests found for slug '{slug}', refusing to guess:", file=sys.stderr)
+        print(
+            f"[ERROR] Multiple manifests found for slug '{slug}', refusing to guess:",
+            file=sys.stderr,
+        )
         for m in matches:
             print(f"  - {m}", file=sys.stderr)
         return None
@@ -66,7 +71,10 @@ def load_manifest(path: Path, slug: str) -> Optional[Dict]:
         return None
 
     if data.get("profile_slug") != slug:
-        print(f"[ERROR] Manifest {path} profile_slug '{data.get('profile_slug')}' does not match requested '{slug}'", file=sys.stderr)
+        print(
+            f"[ERROR] Manifest {path} profile_slug '{data.get('profile_slug')}' does not match requested '{slug}'",
+            file=sys.stderr,
+        )
         return None
     servers = data.get("servers")
     if not isinstance(servers, list):
@@ -76,7 +84,10 @@ def load_manifest(path: Path, slug: str) -> Optional[Dict]:
         sid = server.get("id")
         cfg = server.get("config_fragments", {}).get("codex_config_toml")
         if not sid or not cfg:
-            print(f"[ERROR] Manifest {path} server #{idx} missing id or config_fragments.codex_config_toml", file=sys.stderr)
+            print(
+                f"[ERROR] Manifest {path} server #{idx} missing id or config_fragments.codex_config_toml",
+                file=sys.stderr,
+            )
             return None
     data["__path"] = str(path)
     return data
@@ -122,7 +133,9 @@ def merge_servers(manifests: List[Dict]) -> Tuple[Dict[str, ServerEntry], List[s
     return merged, conflicts
 
 
-def write_toml(slugs: List[str], servers: Dict[str, ServerEntry], conflicts: List[str]) -> int:
+def write_toml(
+    slugs: List[str], servers: Dict[str, ServerEntry], conflicts: List[str]
+) -> int:
     if not servers:
         print("[ERROR] No servers to write; nothing generated.", file=sys.stderr)
         return 1

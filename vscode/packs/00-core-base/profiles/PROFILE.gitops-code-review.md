@@ -21,6 +21,5 @@ Code review, Git history, and GitOps operations with minimal language noise.
   ```
 
 - Merge `settings.gitops-code-review.json` into your user `settings.json` using the root-level merge scripts:
-
   - macOS/Linux: `scripts/macos/merge-settings.sh path/to/settings.gitops-code-review.json`
   - Windows: `scripts/windows/Merge-Settings.ps1 -OverridePath path\to\settings.gitops-code-review.json`

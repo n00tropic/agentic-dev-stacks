@@ -21,6 +21,5 @@ Windows profile optimised for WSL, PowerShell, and polyglot development.
   ```
 
 - Merge `settings.windows-polyglot-wsl.json` into your user `settings.json` using the root-level merge scripts:
-
   - macOS/Linux: `scripts/macos/merge-settings.sh path/to/settings.windows-polyglot-wsl.json`
   - Windows: `scripts/windows/Merge-Settings.ps1 -OverridePath path\to\settings.windows-polyglot-wsl.json`

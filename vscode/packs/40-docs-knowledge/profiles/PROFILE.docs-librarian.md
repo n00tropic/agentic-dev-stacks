@@ -21,6 +21,5 @@ Technical writing, docs grooming, and knowledge curation profile.
   ```
 
 - Merge `settings.docs-librarian.json` into your user `settings.json` using the root-level merge scripts:
-
   - macOS/Linux: `scripts/macos/merge-settings.sh path/to/settings.docs-librarian.json`
   - Windows: `scripts/windows/Merge-Settings.ps1 -OverridePath path\to\settings.docs-librarian.json`

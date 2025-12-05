@@ -21,6 +21,5 @@ Notebook-heavy data exploration and ML experimentation.
   ```
 
 - Merge `settings.python-data-ml.json` into your user `settings.json` using the root-level merge scripts:
-
   - macOS/Linux: `scripts/macos/merge-settings.sh path/to/settings.python-data-ml.json`
   - Windows: `scripts/windows/Merge-Settings.ps1 -OverridePath path\to\settings.python-data-ml.json`

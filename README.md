@@ -23,5 +23,6 @@ Root-level scripts under `scripts/` help apply settings overrides in a safe, mer
 - `scripts/windows/Merge-Settings.ps1` – PowerShell version that merges override settings into `%APPDATA%\Code\User\settings.json`.
 
 Each script:
+
 - Backs up the existing `settings.json` (if it exists) with a timestamped `.bak` suffix.
 - Merges the override on top of the existing settings (shallow merge, with override keys winning).

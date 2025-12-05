@@ -21,6 +21,5 @@ Minimal profile mirroring a typical Linux CI/headless agent environment.
   ```
 
 - Merge `settings.linux-ci-headless.json` into your user `settings.json` using the root-level merge scripts:
-
   - macOS/Linux: `scripts/macos/merge-settings.sh path/to/settings.linux-ci-headless.json`
   - Windows: `scripts/windows/Merge-Settings.ps1 -OverridePath path\to\settings.linux-ci-headless.json`

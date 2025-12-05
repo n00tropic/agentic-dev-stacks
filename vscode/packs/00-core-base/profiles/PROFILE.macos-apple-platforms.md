@@ -21,6 +21,5 @@ macOS and Apple platforms profile, tuned for Swift/Xcode-adjacent workflows.
   ```
 
 - Merge `settings.macos-apple-platforms.json` into your user `settings.json` using the root-level merge scripts:
-
   - macOS/Linux: `scripts/macos/merge-settings.sh path/to/settings.macos-apple-platforms.json`
   - Windows: `scripts/windows/Merge-Settings.ps1 -OverridePath path\to\settings.macos-apple-platforms.json`

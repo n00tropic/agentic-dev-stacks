@@ -21,6 +21,5 @@ Try new or heavy extensions and AI agents here, isolated from production profile
   ```
 
 - Merge `settings.experimental-preview.json` into your user `settings.json` using the root-level merge scripts:
-
   - macOS/Linux: `scripts/macos/merge-settings.sh path/to/settings.experimental-preview.json`
   - Windows: `scripts/windows/Merge-Settings.ps1 -OverridePath path\to\settings.experimental-preview.json`
