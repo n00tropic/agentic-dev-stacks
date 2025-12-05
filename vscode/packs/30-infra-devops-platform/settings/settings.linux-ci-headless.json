@@ -5,6 +5,7 @@
   "editor.tabSize": 2,
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
-  "workbench.colorTheme": "Default Dark Modern",
-  "workbench.startupEditor": "none"
+  "workbench.colorTheme": "Tokyo Night",
+  "workbench.startupEditor": "none",
+  "cSpell.language": "en-GB"
 }

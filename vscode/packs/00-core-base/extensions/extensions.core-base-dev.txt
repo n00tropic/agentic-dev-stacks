@@ -8,3 +8,6 @@ usernamehw.errorlens
 streetsidesoftware.code-spell-checker
 oderwat.indent-rainbow
 gruntfuggly.todo-tree
+esbenp.prettier-vscode
+enkia.tokyo-night
+trunk.io

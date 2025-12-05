@@ -50,11 +50,13 @@ def read_extension_ids(source: Path) -> list[str]:
     return cleaned
 
 
-def copy_settings(source: Path, dest: Path) -> None:
+def copy_settings(source: Path, dest: Path) -> Dict[str, Any]:
     if not source.exists():
         raise FileNotFoundError(f"Missing settings: {source}")
+    text = source.read_text(encoding="utf-8")
     dest.parent.mkdir(parents=True, exist_ok=True)
-    dest.write_text(source.read_text(encoding="utf-8"), encoding="utf-8")
+    dest.write_text(text, encoding="utf-8")
+    return json.loads(text)
 
 
 def write_extensions_list(ext_ids: list[str], dest: Path) -> None:
@@ -62,13 +64,21 @@ def write_extensions_list(ext_ids: list[str], dest: Path) -> None:
     dest.write_text("\n".join(ext_ids) + ("\n" if ext_ids else ""), encoding="utf-8")
 
 
-def write_workspace_file(profile_name: str, slug: str, dest: Path) -> None:
+def write_workspace_file(
+    profile_name: str,
+    slug: str,
+    dest: Path,
+    settings: Dict[str, Any],
+    extensions: list[str],
+) -> None:
     dest.parent.mkdir(parents=True, exist_ok=True)
     workspace = {
         "folders": [{"path": ".."}],
-        "settings": {},
+        "settings": settings,
         "name": profile_name,
     }
+    if extensions:
+        workspace["extensions"] = {"recommendations": extensions}
     dest.write_text(json.dumps(workspace, indent=2) + "\n", encoding="utf-8")
 
 
@@ -89,12 +99,14 @@ def export_profile(slug: str, config: Dict[str, Any], repo_root: Path) -> None:
     settings_src = pack_root / "settings" / f"settings.{slug}.json"
     extensions_src = pack_root / "extensions" / f"extensions.{slug}.txt"
 
-    copy_settings(settings_src, workspace_dir / ".vscode" / "settings.json")
+    settings_data = copy_settings(
+        settings_src, workspace_dir / ".vscode" / "settings.json"
+    )
 
     extensions = read_extension_ids(extensions_src)
     write_extensions_list(extensions, workspace_dir / ".vscode" / "extensions.list")
 
-    write_workspace_file(profile_name, slug, workspace_file)
+    write_workspace_file(profile_name, slug, workspace_file, settings_data, extensions)
 
     print(f"[OK] {slug}: exported to {workspace_dir}")
 

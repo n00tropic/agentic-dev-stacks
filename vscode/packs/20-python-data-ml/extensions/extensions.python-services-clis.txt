@@ -9,3 +9,8 @@ charliermarsh.ruff
 ms-python.black-formatter
 ms-python.isort
 ms-toolsai.jupyter
+ms-python.debugpy
+kevinrose.vsc-python-indent
+humao.rest-client
+enkia.tokyo-night
+trunk.io

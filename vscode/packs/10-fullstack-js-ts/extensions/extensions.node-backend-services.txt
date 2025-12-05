@@ -9,3 +9,9 @@ esbenp.prettier-vscode
 humao.rest-client
 ms-vscode.vscode-typescript-next
 ms-azuretools.vscode-docker
+christian-kohler.npm-intellisense
+christian-kohler.path-intellisense
+wix.vscode-import-cost
+mhutchie.git-graph
+enkia.tokyo-night
+trunk.io

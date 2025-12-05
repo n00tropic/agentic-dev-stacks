@@ -9,3 +9,9 @@ hashicorp.terraform
 redhat.vscode-yaml
 github.vscode-github-actions
 ms-vscode.remote-containers
+ms-azuretools.vscode-azureterraform
+redhat.ansible
+ms-vscode-remote.remote-ssh
+tim-koehler.helm-intellisense
+enkia.tokyo-night
+trunk.io

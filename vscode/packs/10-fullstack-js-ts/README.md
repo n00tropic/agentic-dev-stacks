@@ -5,5 +5,5 @@ Full-stack JavaScript/TypeScript: Node.js, React/Next.js, API backends, monorepo
 ## Intent
 
 - Canonical, reusable VS Code configuration for this domain.
-- Always includes GitHub Copilot, Codex, and core QA tooling by default.
+- Always includes GitHub Copilot, Codex, and core QA tooling by default; vendor-neutral extras stay opt-in.
 - Designed to be OS-agnostic: works on macOS, Windows, and Linux.

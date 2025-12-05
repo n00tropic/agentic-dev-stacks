@@ -4,7 +4,7 @@ Scoped, cross-OS VS Code packs plus MCP manifests, designed for human + AI agent
 
 ## What lives where
 
-- **Root** – governance and agent docs: `AGENTS.md`, `CONTROL.md`, `copilot-instructions.md`.
+- **Root** – governance and agent docs: `AGENTS.md`, `CONTROL.md`, `copilot-instructions.md`, `agent-instructions.md`.
 - **`vscode/`** – source of truth for packs (profiles, extensions, settings, MCP), export tooling, and gitignored exports.
 - **`codex/`** – docs and examples for wiring MCP into Codex (`config-guides.md`, `safe-vs-danger-modes.md`).
 
@@ -18,7 +18,7 @@ Scoped, cross-OS VS Code packs plus MCP manifests, designed for human + AI agent
 ## Golden Path (just profiles)
 
 - Import a `.code-profile` or gist via VS Code **Import Profile…**.
-- See `PROFILE_DIST.md` for slug → profile name → dist artifact mapping (gists may be `<TO_FILL>` placeholders).
+- See `PROFILE_DIST.md` for slug → profile name → dist artifact mapping (local exports and optional secret gists may be `<TO_FILL>` placeholders).
 
 ## Structure (sources → exports → dist)
 
@@ -35,3 +35,4 @@ Scoped, cross-OS VS Code packs plus MCP manifests, designed for human + AI agent
 
 - Never edit `~/.codex/config.toml` or VS Code global settings from this repo; copy blocks instead.
 - Do not commit generated files (`vscode/exports/**`, `vscode/codex-mcp.generated.toml`).
+- Profiles ship with GitHub/Copilot support but remain usable offline; align future changes accordingly.

@@ -23,3 +23,22 @@ Technical writing, docs grooming, and knowledge curation profile.
 - Merge `settings.docs-librarian.json` into your user `settings.json` using the root-level merge scripts:
   - macOS/Linux: `scripts/macos/merge-settings.sh path/to/settings.docs-librarian.json`
   - Windows: `scripts/windows/Merge-Settings.ps1 -OverridePath path\to\settings.docs-librarian.json`
+
+## QA & style workflow
+
+- Keep Microsoft + Google Vale style packs synced:
+
+  ```bash
+  vale sync
+  vale ls
+  ```
+
+- Point the VS Code Vale extension at your `.vale.ini` (fill the `vale.valeCLI.config` placeholder) and tune `MinAlertLevel` / `IgnoredScopes` inside the config rather than muting rules in-editor.
+- Run Trunk + Vale before publishing:
+
+  ```bash
+  trunk check
+  vale docs/**/*.md
+  ```
+
+- Use LTeX+ suggestions to iterate on structure and wording, then re-run Vale to confirm alignment with Microsoft/Google guidance.

@@ -14,11 +14,13 @@
       },
       "recommended_usage": [
         "Audit dependencies for security, license, and maintenance risk.",
-        "Guide safer dependency choices during code generation and reviews."
+        "Guide safer dependency choices during code generation and reviews.",
+        "Monitor CocoaPods, Swift Package Manager, and Homebrew inputs for stale or vulnerable artifacts."
       ],
+      "privacy_sensitive": true,
       "config_fragments": {
-        "codex_config_toml": "[mcp_servers.sonatype-deps]\n# Refer to official Sonatype MCP setup for the correct command/args.\ncommand = \"<TO_FILL>\"",
-        "notes": "Fill in command/args from Sonatype docs; keep credentials outside VCS."
+        "codex_config_toml": "[mcp_servers.sonatype-deps]\ncommand = \"<TO_FILL>\"\nargs = [\"--profile\", \"macos-apple-platforms\"]",
+        "notes": "Refer to Sonatype docs for the latest CLI/binary path, pass credentials via env vars (e.g. SONATYPE_TOKEN=<TO_FILL>), and avoid sending private app names when operating outside trusted sandboxes."
       }
     },
     {
@@ -33,9 +35,10 @@
         "Fetch versioned, up-to-date library and framework docs.",
         "Disambiguate APIs across versions during coding and review."
       ],
+      "optional": true,
       "config_fragments": {
-        "codex_config_toml": "[mcp_servers.context7-docs]\n# Provide the Context7 binary/command per Upstash docs.\ncommand = \"<TO_FILL>\"",
-        "notes": "Requires Context7 token/config; supply via env vars or secrets manager."
+        "codex_config_toml": "[mcp_servers.context7-docs]\ncommand = \"<TO_FILL>\"\nargs = [\"--space\", \"apple-frameworks\"]",
+        "notes": "Requires Context7 token/config (e.g. CONTEXT7_API_KEY=<TO_FILL>); treat as cloud-hosted and disable when handling sensitive IP."
       }
     },
     {

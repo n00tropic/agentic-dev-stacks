@@ -9,5 +9,7 @@
   "editor.tabSize": 2,
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
-  "typescript.tsserver.maxTsServerMemory": 4096
+  "typescript.tsserver.maxTsServerMemory": 4096,
+  "workbench.colorTheme": "Tokyo Night",
+  "cSpell.language": "en-GB"
 }

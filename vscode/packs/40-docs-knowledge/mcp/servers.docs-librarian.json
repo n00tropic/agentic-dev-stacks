@@ -31,12 +31,15 @@
       },
       "recommended_usage": [
         "Fetch versioned, up-to-date library and framework docs.",
-        "Disambiguate APIs across versions during coding and review."
+        "Disambiguate APIs across versions for technical writing and examples.",
+        "Support cross-referencing docs during multi-framework documentation projects."
       ],
       "config_fragments": {
-        "codex_config_toml": "[mcp_servers.context7-docs]\n# Provide the Context7 binary/command per Upstash docs.\ncommand = \"<TO_FILL>\"",
-        "notes": "Requires Context7 token/config; supply via env vars or secrets manager."
-      }
+        "codex_config_toml": "[mcp_servers.context7-docs]\ncommand = \"<TO_FILL>\"\nargs = [\"--space\", \"docs\"]",
+        "notes": "Requires Context7 token/config (e.g. CONTEXT7_API_KEY=<TO_FILL>); treat as cloud-hosted."
+      },
+      "optional": true,
+      "privacy_sensitive": true
     },
     {
       "id": "github",
@@ -64,13 +67,16 @@
         "url": "https://github.com/elastic/elastic-mcp"
       },
       "recommended_usage": [
-        "Search and analytics over logs/content for app and data profiles.",
-        "Support documentation search for docs-focused work."
+        "Search and analytics over documentation repositories and content archives.",
+        "Enable full-text search across large doc sets (Antora, MkDocs, etc.).",
+        "Support knowledge base queries during authoring and editing."
       ],
       "config_fragments": {
-        "codex_config_toml": "[mcp_servers.elasticsearch]\n# Point to Elasticsearch endpoint; keep credentials out of VCS.\ncommand = \"<TO_FILL>\"",
-        "notes": "Prefer scoped API keys; consider read-only roles by default."
-      }
+        "codex_config_toml": "[mcp_servers.elasticsearch]\ncommand = \"<TO_FILL>\"\nargs = [\"--endpoint\", \"<TO_FILL>\"]",
+        "notes": "Point to docs-focused Elasticsearch cluster; prefer scoped API keys with read-only roles."
+      },
+      "optional": true,
+      "recommended_read_only": true
     },
     {
       "id": "apify-web-search",

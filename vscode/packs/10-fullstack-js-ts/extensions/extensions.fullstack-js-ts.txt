@@ -12,3 +12,9 @@ ms-vscode.vscode-typescript-next
 firsttris.vscode-jest-runner
 vitest.explorer
 ms-azuretools.vscode-docker
+ZixuanChen.vitest-explorer
+christian-kohler.npm-intellisense
+christian-kohler.path-intellisense
+wix.vscode-import-cost
+enkia.tokyo-night
+trunk.io

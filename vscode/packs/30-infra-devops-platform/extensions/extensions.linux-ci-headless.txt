@@ -3,3 +3,5 @@
 
 GitHub.copilot
 GitHub.copilot-chat
+enkia.tokyo-night
+trunk.io

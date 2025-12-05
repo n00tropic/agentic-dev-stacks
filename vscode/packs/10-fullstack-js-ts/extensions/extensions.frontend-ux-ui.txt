@@ -14,3 +14,10 @@ vitest.explorer
 ms-azuretools.vscode-docker
 Orta.vscode-jest
 styled-components.vscode-styled-components
+ZixuanChen.vitest-explorer
+christian-kohler.npm-intellisense
+christian-kohler.path-intellisense
+wix.vscode-import-cost
+steoates.autoimport
+enkia.tokyo-night
+trunk.io

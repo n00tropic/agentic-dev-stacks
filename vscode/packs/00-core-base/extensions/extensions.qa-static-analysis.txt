@@ -10,3 +10,7 @@ ms-python.python
 ms-python.vscode-pylance
 charliermarsh.ruff
 yoavbls.pretty-ts-errors
+sonarsource.sonarlint-vscode
+ms-vscode.vscode-typescript-next
+enkia.tokyo-night
+trunk.io

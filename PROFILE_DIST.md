@@ -1,6 +1,6 @@
 # Profile Dist Map (code-profile & gist exports)
 
-This file maps internal profile slugs to their dist exports for quick import via VS Code **Import Profile…**. Dist artefacts live in `vscode/profiles-dist/*.code-profile` (exported from VS Code) and may also have secret gist URLs for one-click import.
+This file maps internal profile slugs to their dist exports for quick import via VS Code **Import Profile…**. Dist artefacts live in `vscode/profiles-dist/*.code-profile` (exported from VS Code) for local/offline use, and may also have optional secret gist URLs for one-click import.
 
 > Dist files are **generated** via VS Code “Export Profile…”; do **not** hand-edit them. If a file or gist is missing, treat it as `<TO_FILL>` and regenerate.
 

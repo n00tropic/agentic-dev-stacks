@@ -9,3 +9,8 @@ streetsidesoftware.code-spell-checker
 oderwat.indent-rainbow
 gruntfuggly.todo-tree
 ms-vscode.powershell
+ms-vscode-remote.remote-wsl
+ms-vscode.cpptools
+esbenp.prettier-vscode
+enkia.tokyo-night
+trunk.io

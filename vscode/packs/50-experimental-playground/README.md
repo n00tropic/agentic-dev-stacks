@@ -5,5 +5,5 @@ Heavy or experimental tools, preview extensions, and sandbox profiles that shoul
 ## Intent
 
 - Canonical, reusable VS Code configuration for this domain.
-- Always includes GitHub Copilot, Codex, and core QA tooling by default.
+- Always includes GitHub Copilot, Codex, and core QA tooling by default; experimental add-ons stay opt-in.
 - Designed to be OS-agnostic: works on macOS, Windows, and Linux.

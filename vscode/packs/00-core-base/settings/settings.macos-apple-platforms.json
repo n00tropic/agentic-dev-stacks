@@ -4,5 +4,10 @@
   "editor.rulers": [80, 100],
   "editor.tabSize": 2,
   "files.insertFinalNewline": true,
-  "files.trimTrailingWhitespace": true
+  "files.trimTrailingWhitespace": true,
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "swift.path": "<TO_FILL>",
+  "lldb.executable": "<TO_FILL>",
+  "workbench.colorTheme": "Tokyo Night",
+  "cSpell.language": "en-GB"
 }

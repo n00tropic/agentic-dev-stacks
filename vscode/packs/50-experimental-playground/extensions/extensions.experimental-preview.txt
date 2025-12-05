@@ -8,3 +8,9 @@ usernamehw.errorlens
 streetsidesoftware.code-spell-checker
 oderwat.indent-rainbow
 gruntfuggly.todo-tree
+ms-vscode.vscode-typescript-next
+ms-python.python
+ms-python.vscode-pylance
+esbenp.prettier-vscode
+enkia.tokyo-night
+trunk.io

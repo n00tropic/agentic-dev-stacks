@@ -5,5 +5,5 @@ Docs, technical writing, and knowledge systems: Markdown, AsciiDoc, SSGs (Docusa
 ## Intent
 
 - Canonical, reusable VS Code configuration for this domain.
-- Always includes GitHub Copilot, Codex, and core QA tooling by default.
+- Always includes GitHub Copilot, Codex, and core QA tooling by default; vendor-neutral doc tooling stays opt-in.
 - Designed to be OS-agnostic: works on macOS, Windows, and Linux.

@@ -11,3 +11,8 @@ ms-python.isort
 ms-toolsai.jupyter
 ms-toolsai.jupyter-renderers
 ms-toolsai.datawrangler
+ms-toolsai.jupyter-keymap
+ms-python.debugpy
+kevinrose.vsc-python-indent
+enkia.tokyo-night
+trunk.io

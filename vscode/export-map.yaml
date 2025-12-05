@@ -57,6 +57,13 @@
           "workspace_file": "vscode/exports/workspaces/node-backend-services/node-backend-services.code-workspace",
           "profile_name": "Node / Backend Services – TS/Node",
         },
+      "desktop-gui-cross":
+        {
+          "pack": "10-fullstack-js-ts",
+          "workspace_dir": "vscode/exports/workspaces/desktop-gui-cross",
+          "workspace_file": "vscode/exports/workspaces/desktop-gui-cross/desktop-gui-cross.code-workspace",
+          "profile_name": "Desktop & GUI – Swift / TS / Python",
+        },
       "python-services-clis":
         {
           "pack": "20-python-data-ml",
@@ -84,13 +91,6 @@
           "workspace_dir": "vscode/exports/workspaces/data-db-analytics",
           "workspace_file": "vscode/exports/workspaces/data-db-analytics/data-db-analytics.code-workspace",
           "profile_name": "Data / DB & Analytics",
-        },
-      "desktop-gui-cross":
-        {
-          "pack": "10-fullstack-js-ts",
-          "workspace_dir": "vscode/exports/workspaces/desktop-gui-cross",
-          "workspace_file": "vscode/exports/workspaces/desktop-gui-cross/desktop-gui-cross.code-workspace",
-          "profile_name": "Desktop & GUI – Swift / TS / Python",
         },
       "macos-apple-platforms":
         {

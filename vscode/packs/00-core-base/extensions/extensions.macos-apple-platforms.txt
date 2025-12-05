@@ -9,3 +9,13 @@ streetsidesoftware.code-spell-checker
 oderwat.indent-rainbow
 gruntfuggly.todo-tree
 vadimcn.vscode-lldb
+enkia.tokyo-night
+ms-vscode.cpptools
+ms-vscode.cmake-tools
+ms-vscode.makefile-tools
+xaver.clang-format
+ms-azuretools.vscode-docker
+vknabel.vscode-swift-development-environment
+vknabel.vscode-swiftlint
+sswg.swift-lang
+trunk.io
