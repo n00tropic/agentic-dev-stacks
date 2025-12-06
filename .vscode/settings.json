@@ -19,5 +19,11 @@
   ],
   "cSpell.enabled": true,
   "cSpell.language": "en-GB",
-  "cSpell.locale": "en-GB"
+  "cSpell.locale": "en-GB",
+  "json.schemas": [
+    {
+      "fileMatch": ["/.vscode/mcp.json"],
+      "url": "./.vscode/mcp.schema.json"
+    }
+  ]
 }

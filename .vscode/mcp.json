@@ -1,0 +1,67 @@
+{
+  "$schema": "./mcp.schema.json",
+  "mcpServers": {
+    "sonatype-deps": {
+      "command": "<TO_FILL_SONATYPE_CMD>",
+      "args": [],
+      "env": {}
+    },
+    "context7-docs": {
+      "command": "<TO_FILL_CONTEXT7_CMD>",
+      "args": [],
+      "env": {
+        "CONTEXT7_TOKEN": "<TO_FILL>"
+      }
+    },
+    "github": {
+      "command": "<TO_FILL_GITHUB_CMD>",
+      "args": [],
+      "env": {
+        "GITHUB_TOKEN": "<TO_FILL_FINE_SCOPED>"
+      }
+    },
+    "kubernetes": {
+      "command": "<TO_FILL_KUBERNETES_CMD>",
+      "args": [],
+      "env": {
+        "KUBECONFIG": "<TO_FILL_READ_ONLY>"
+      }
+    },
+    "elasticsearch": {
+      "command": "<TO_FILL_ELASTICSEARCH_CMD>",
+      "args": [],
+      "env": {
+        "ELASTIC_ENDPOINT": "<TO_FILL>",
+        "ELASTIC_API_KEY": "<TO_FILL_READ_ONLY>"
+      }
+    },
+    "postgres": {
+      "command": "<TO_FILL_POSTGRES_CMD>",
+      "args": [],
+      "env": {
+        "PGCONN": "<TO_FILL_READ_ONLY>"
+      }
+    },
+    "mongodb": {
+      "command": "<TO_FILL_MONGODB_CMD>",
+      "args": [],
+      "env": {
+        "MONGODB_URI": "<TO_FILL_READ_ONLY>"
+      }
+    },
+    "apify-web-search": {
+      "command": "<TO_FILL_APIFY_CMD>",
+      "args": [],
+      "env": {
+        "APIFY_TOKEN": "<TO_FILL>"
+      }
+    },
+    "aws": {
+      "command": "<TO_FILL_AWS_CMD>",
+      "args": [],
+      "env": {
+        "AWS_PROFILE": "<TO_FILL_READ_ONLY>"
+      }
+    }
+  }
+}
