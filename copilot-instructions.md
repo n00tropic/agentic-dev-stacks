@@ -10,6 +10,7 @@ This repo defines:
 - Export tooling and generated workspaces under `vscode/exports/**` (gitignored, reproducible).
 - Dist profile exports (`vscode/profiles-dist/*.code-profile`) plus mapping in `PROFILE_DIST.md`.
 - Validation and merge scripts (`export-packs.py`, `merge-mcp-fragments.py`, helpers).
+- Custom Copilot agents SSoT under `agents/<slug>/*.agent.md` (copied into bundles at `workspace/.github/agents/`).
 
 Use it to keep dev environments and MCP configs consistent across macOS, Windows, and Linux.
 

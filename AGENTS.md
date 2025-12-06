@@ -9,6 +9,7 @@ This repository is the canonical source of truth for:
 - Helper scripts for validation, exports, and MCP TOML generation (`vscode/scripts/**`).
 - Documentation for configuring Codex safely with these profiles (`codex/docs/**`).
 - Development container: `.devcontainer/devcontainer.json` builds bundles + runs validation automatically (preferred sandbox; keeps host dot files untouched).
+- Custom Copilot agents SSoT: `agents/<slug>/*.agent.md` (copied into bundles at `workspace/.github/agents/`).
 
 Any AI agent (Codex, GitHub Copilot coding agent, ChatGPT, etc.) working in this repo MUST follow these rules.
 
@@ -72,6 +73,7 @@ Agents must never fabricate `.code-profile` content; always use the VS Code Expo
 - Build bundles (git-ignored) to hand to users/CI:
   - `cd vscode && python scripts/build-bundles.py [<slug> ...]`
   - Outputs: `exports/bundles/<slug>/` and `exports/bundles/<slug>-bundle.zip`.
+  - Bundles include `.github/agents/*.agent.md` copied from `agents/<slug>/`.
 - Validate bundles without touching host profiles: `cd vscode && scripts/validate-all-bundles.sh`.
 - Development container will run both build + validate on creation.
 

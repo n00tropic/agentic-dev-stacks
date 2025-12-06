@@ -37,6 +37,7 @@ WORKSPACES = EXPORTS / "workspaces"
 BUNDLES = EXPORTS / "bundles"
 PACKS = VSCODE / "packs"
 PROMPTS = ROOT / "prompts" / "packs"
+AGENTS_ROOT = ROOT / "agents"
 CONTROL = ROOT / "CONTROL.md"
 
 
@@ -144,6 +145,16 @@ def copy_prompts(slug: str, bundle_dir: Path):
             candidates = [base]
     for p in candidates:
         shutil.copy2(p, dest / p.name)
+
+
+def copy_agents(slug: str, bundle_dir: Path):
+    src_dir = AGENTS_ROOT / slug
+    if not src_dir.exists():
+        return
+    dest = bundle_dir / "workspace" / ".github" / "agents"
+    dest.mkdir(parents=True, exist_ok=True)
+    for agent_file in src_dir.glob("*.agent.md"):
+        shutil.copy2(agent_file, dest / agent_file.name)
 
 
 def write_meta(meta: Dict[str, str], bundle_dir: Path):
@@ -286,6 +297,7 @@ def build_bundle(slug: str, pack: str):
     copy_mcp(slug, pack, bundle_dir)
     generate_mcp_toml(slug, bundle_dir)
     copy_prompts(slug, bundle_dir)
+    copy_agents(slug, bundle_dir)
     write_meta(meta, bundle_dir)
     write_install_scripts(meta, bundle_dir)
     write_readme(meta, bundle_dir)

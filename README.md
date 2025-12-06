@@ -13,6 +13,7 @@ Scoped, cross-OS VS Code packs plus MCP manifests, designed as a **compiler**: p
     - `packs/<pack>/extensions/extensions.<slug>.txt`
     - `packs/<pack>/settings/settings.<slug>.json`
     - `packs/<pack>/mcp/servers.<slug>.json`
+  - Custom agents SSoT: `../agents/<slug>/*.agent.md` (copied into bundles under `.github/agents/`)
   - Tooling: `scripts/**`
   - Exports (gitignored, reproducible): `exports/workspaces/<slug>/...`
   - Dist exports (versioned if present): `profiles-dist/*.code-profile` (never hand-edit)
