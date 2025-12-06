@@ -2,6 +2,53 @@
 
 A reproducible, agent-friendly scaffolding for VS Code profiles, MCP manifests, custom Copilot agents, and bundles. This site mirrors the repository structure and governance.
 
+[plantuml]
+....
+@startuml
+!theme plain
+
+package "Agentic Dev Stacks" {
+  component "VS Code Packs" as packs {
+    [Profiles]
+    [Extensions]
+    [Settings]
+    [MCP Manifests]
+  }
+  
+  component "Build System" as build {
+    [Export Scripts]
+    [Bundle Builder]
+    [Validators]
+  }
+  
+  component "Outputs" as outputs {
+    [Workspaces]
+    [Bundles (ZIP)]
+    [Dist Profiles]
+  }
+  
+  component "Documentation" as docs {
+    [Codex Guides]
+    [Agent Rules]
+    [Config Guides]
+  }
+  
+  packs --> build : Source
+  build --> outputs : Generate
+  docs ..> packs : Documents
+  docs ..> outputs : Documents
+}
+
+actor Developer
+Developer --> packs : Edit
+Developer --> outputs : Use
+
+@enduml
+....
+
+.Architecture Overview
+High-level architecture showing the relationship between packs, build system, outputs, and documentation.
+
 == What this project provides
 
 - VS Code packs (profiles, extensions, settings, MCP manifests) under `vscode/packs/**`.

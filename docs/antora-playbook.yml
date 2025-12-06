@@ -16,6 +16,9 @@ asciidoc:
     sectanchors: ""
     sectnums: ""
     source-highlighter: highlightjs
+    kroki-fetch-diagram!:
+  extensions:
+    - asciidoctor-kroki
 
 output:
   dir: build/site

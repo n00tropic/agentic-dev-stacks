@@ -2,6 +2,44 @@
 
 This page summarises governance from `AGENTS.md` and profile budgeting from `CONTROL.md`.
 
+[mermaid]
+....
+stateDiagram-v2
+    [*] --> Planning: Task Received
+    Planning --> EditPacks: Modify Profile
+    Planning --> ValidateConfig: Check Config
+    
+    EditPacks --> ValidateExtensions: Run Validators
+    ValidateExtensions --> ValidateMCP: Check MCP Manifests
+    ValidateMCP --> ExportWorkspace: Generate Exports
+    
+    ExportWorkspace --> BuildBundle: Create Bundle
+    BuildBundle --> TestBundle: Validate Bundle
+    
+    TestBundle --> UpdateDocs: Document Changes
+    UpdateDocs --> CodeReview: Request Review
+    
+    CodeReview --> FixIssues: Issues Found
+    FixIssues --> TestBundle
+    CodeReview --> Complete: Approved
+    
+    ValidateConfig --> UpdateDocs
+    Complete --> [*]
+    
+    note right of EditPacks
+        Never edit user dotfiles
+        Update CONTROL.md if needed
+    end note
+    
+    note right of ValidateMCP
+        Check for secrets
+        Verify placeholders
+    end note
+....
+
+.Agent Workflow State Diagram
+State machine showing the standard workflow for agents making changes to profiles and configuration.
+
 == Core invariants
 
 - Source of truth lives under `vscode/` (packs, scripts) and `agents/` (custom agents).
