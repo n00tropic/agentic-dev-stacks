@@ -1,7 +1,44 @@
-= MCP Integration (stub)
+= MCP Integration
 
-TODO: document MCP manifests and codex-mcp.generated.toml workflow.
+How MCP manifests become usable Codex config.
 
-- Source manifests: `vscode/packs/*/mcp/servers.<slug>.json`
-- Merge script: `vscode/scripts/merge-mcp-fragments.py <slug>`
-- Generated output: `vscode/codex-mcp.generated.toml` (never committed; bundles copy a slug-scoped variant)
+== Sources
+
+- Manifests: `vscode/packs/*/mcp/servers.<slug>.json`
+- Each server entry: `id`, `human_name`, `category`, `source`, `config_fragments`, flags (`optional`, `experimental`, `privacy_sensitive`, `recommended_read_only`).
+
+== Merge workflow
+
+[source,bash]
+----
+cd vscode
+python scripts/merge-mcp-fragments.py core-base-dev fullstack-js-ts infra-devops docs-librarian
+----
+
+Result:
+
+- `vscode/codex-mcp.generated.toml` (local, not committed)
+- Commented metadata showing which profiles contributed each server
+- `<TO_FILL>` placeholders for commands/args/env to be filled from official server docs
+
+== Applying to Codex
+
+1. Open your `~/.codex/config.toml` (or `%USERPROFILE%/.codex/config.toml`).
+2. Copy only the `[mcp_servers.*]` blocks you want from `codex-mcp.generated.toml`.
+3. Replace `<TO_FILL>` with real commands/args/env.
+4. Save and restart Codex/IDE if needed.
+
+== Safety and flags
+
+Use manifest flags to decide what to enable:
+
+- `optional`: leave out unless needed.
+- `experimental`: keep to experimental-preview contexts.
+- `privacy_sensitive`: enable only where external logging is acceptable.
+- `recommended_read_only`: prefer read-only operations (e.g. get/list/watch).
+
+== Bundles
+
+Bundles may include a slug-scoped generated MCP TOML for convenience, but it is still treated as a generated artefact. Do not commit `codex-mcp.generated.toml`; regenerate when manifests change.
+
+Related pages: xref:config-guides.adoc[] and xref:safe-vs-danger-modes.adoc[].

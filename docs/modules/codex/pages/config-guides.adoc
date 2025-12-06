@@ -1,7 +1,94 @@
-= Codex Configuration Guides (stub)
+= Codex Configuration Guides
 
-TODO: migrate content from `codex/docs/config-guides.md`.
+This guide explains how to configure Codex for use with the `agentic-dev-stacks` profiles, focusing on where configuration lives, how to merge MCP fragments, and how to stay safe when enabling servers.
 
-- Using MCP with Codex
-- Safe configuration patterns
-- Example TOML snippets
+== 1. Where Codex stores configuration
+
+Codex reads a single TOML file:
+
+- macOS / Linux: `~/.codex/config.toml`
+- Windows: `%USERPROFILE%/.codex/config.toml`
+
+This file is shared by the Codex CLI and IDE extension. It controls model choice, approval policy, sandbox/exec policy, and MCP servers.
+
+== 2. Baseline config structure (example)
+
+[source,toml]
+----
+approval_policy = "never"
+model = "gpt-5.1-codex-max"
+model_reasoning_effort = "high"
+sandbox_mode = "danger-full-access"
+
+[features]
+rmcp_client = true
+web_search_request = true
+
+[sandbox_workspace_write]
+network_access = true
+
+[sandbox_danger_full_access]
+network_access = true
+
+# MCP servers go under [mcp_servers.*] blocks
+[mcp_servers.context7]
+command = "npx"
+args = ["-y", "@upstash/context7-mcp"]
+----
+
+This repository never manages your personal `config.toml`; instead it provides MCP manifests and a generator for TOML fragments.
+
+== 3. Generate MCP fragments from profiles
+
+From the repo root:
+
+[source,bash]
+----
+cd vscode
+python scripts/merge-mcp-fragments.py core-base-dev fullstack-js-ts infra-devops docs-librarian
+----
+
+The script reads `vscode/packs/*/mcp/servers.<slug>.json`, deduplicates by server id, and writes:
+
+- `vscode/codex-mcp.generated.toml` (local artefact; never commit)
+
+Each block is annotated with profile sources, category, and safety flags (optional, experimental, privacy_sensitive, recommended_read_only). Fill `<TO_FILL>` placeholders per official server docs (commands/args/env).
+
+== 4. Apply MCP fragments to your local config
+
+. Open your local `config.toml`.
+. Locate existing `[mcp_servers.*]` blocks.
+. Copy only the servers you need from `codex-mcp.generated.toml`.
+. Replace `<TO_FILL>` with real commands/args/env from the server's documentation.
+. Save and restart Codex/IDE if needed.
+
+== 5. Profile-specific patterns (high level)
+
+- Core/base (`core-base-dev`, `qa-static-analysis`, `gitops-code-review`): dependency intelligence, docs/search, GitHub.
+- JS/TS (`fullstack-js-ts`, `frontend-ux-ui`, `node-backend-services`, `desktop-gui-cross`): web/API stacks, DB/search MCPs, docs/search MCPs.
+- Python (`python-services-clis`, `python-data-ml`): SQL/DB, analytics/search, docs/search MCPs.
+- Infra/data (`infra-devops`, `data-db-analytics`, `linux-ci-headless`): GitHub, K8s/infra, SQL/DB, search/logging.
+- Docs (`docs-librarian`): documentation-focused MCPs; privacy-sensitive web search is opt-in.
+- Experimental (`experimental-preview`): core trio plus clearly marked optional/experimental MCPs.
+
+Check `servers.<slug>.json` for exact recommendations and flags.
+
+== 6. Sandbox and safety
+
+Codex sandbox modes and MCP capabilities combine to set blast radius. For untrusted repos, use safer sandbox modes (e.g. workspace-write, limited network) and a minimal MCP set. For trusted work, danger-full-access can be acceptable with intentional MCP choices.
+
+== 7. Troubleshooting
+
+- **TOML syntax errors:** validate `config.toml` (no duplicate keys, proper quotes).
+- **MCP not appearing:** ensure command exists on PATH, args/env correct, network requirements met, IDE uses same config.
+- **Conflicts across profiles:** merge script keeps the first block per id; narrow the slug list or edit manually in `config.toml`.
+
+== 8. Staying aligned
+
+After pulling repo changes:
+
+. Re-run `merge-mcp-fragments.py` for the slugs you use.
+. Review `codex-mcp.generated.toml`.
+. Update your `config.toml` with any new or changed servers you want.
+
+Never commit `codex-mcp.generated.toml`; it is a local working file.

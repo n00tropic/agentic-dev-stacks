@@ -1,8 +1,30 @@
-= Agent Guidelines (stub)
+= Agent Guidelines
 
-This module will summarise AGENTS.md (governance, invariants) and CONTROL.md.
+This page summarises governance from `AGENTS.md` and profile budgeting from `CONTROL.md`.
 
-TODO:
-- Port AGENTS.md key rules (no dot files, generated artefacts policy, MCP safety flags).
-- Link to agent-instructions.md and copilot-instructions.md.
-- Outline standard workflows (profile changes, MCP changes, bundle builds).
+== Core invariants
+
+- Source of truth lives under `vscode/` (packs, scripts) and `agents/` (custom agents).
+- `CONTROL.md` defines profile slugs and the 20-profile budget; do not invent new slugs without updating it.
+- Do not edit user dotfiles (e.g. `~/.codex/config.toml`) from this repo; copy snippets instead.
+- Generated artefacts to avoid committing: `vscode/exports/**`, `vscode/codex-mcp.generated.toml`, any `.code-profile` hand-edits.
+- MCP manifests must use placeholders for secrets/paths; never commit credentials.
+
+== Standard workflows
+
+- **Republish a profile to gist:** export workspaces, export profile from VS Code to `vscode/profiles-dist/<slug>.code-profile`, optionally to a secret gist, record in `PROFILE_DIST.md`.
+- **Bundle builder & validation:** `cd vscode && python scripts/build-bundles.py [...]`; validate with `scripts/validate-all-bundles.sh` (devcontainer runs both post-create).
+- **Add/change a profile:** edit profile/extensions/settings/MCP under `vscode/packs/<pack>/`; run `./scripts/helpers/validate-extensions.sh` (or PowerShell variant); validate MCP JSON; suggest `merge-mcp-fragments.py ...` if MCP changed.
+- **Before PR:** run extension validation; ensure MCP JSON validity and flags; remind that `codex-mcp.generated.toml` stays local.
+- **Exports:** generate with `python3 scripts/export-packs.py <slug> [...]` into `vscode/exports/**`; never commit exports or generated Codex TOML.
+- **Dist profiles:** regenerate via VS Code **Export Profile…**, save to `vscode/profiles-dist/<slug>.code-profile`, optionally publish to secret gist and update `PROFILE_DIST.md`.
+
+== Safety flags for MCP
+
+- `optional`, `experimental`, `privacy_sensitive`, `recommended_read_only` guide enablement and blast radius.
+- Prefer read-only for flagged servers; enable privacy-sensitive ones only in acceptable contexts.
+
+== Communication
+
+- Keep AGENTS/CONTROL in sync with pack changes.
+- Link to custom agent instructions: xref:custom-agents.adoc[] and repo files `copilot-instructions.md`, `agent-instructions.md` (if present).

@@ -1,7 +1,24 @@
-= Custom Copilot Agents (stub)
+= Custom Copilot Agents
 
-TODO:
-- Describe SSoT location: `agents/<slug>/*.agent.md`.
-- How bundles copy agents into `.github/agents/`.
-- Frontmatter fields (description, target, tools, mcp-servers, etc.).
-- How to add new agents safely.
+== Source of truth
+
+- Agents live in `agents/<slug>/*.agent.md` (one slug per agent bundle).
+- Bundles copy agents into `.github/agents/` so they travel with exports/zips.
+
+== Authoring guidelines
+
+- Use clear frontmatter: name/slug, description, target (IDE/CLI), tools/MCP required, safety flags or scopes.
+- Keep en-GB spelling (per repo convention) and avoid secrets or machine-specific paths.
+- Reference MCP servers by id that exist in `vscode/packs/*/mcp/servers.<slug>.json`; avoid untracked servers.
+
+== Adding a new agent
+
+1. Create `agents/<slug>/<name>.agent.md` with frontmatter and instructions.
+2. Ensure any required MCP servers are present in relevant manifests; mark optional/experimental/privacy_sensitive appropriately.
+3. Rebuild bundles (`python vscode/scripts/build-bundles.py <slug> ...`) so the agent is copied into `.github/agents/` in exports.
+4. Validate the agent instructions for clarity and safety; avoid prescribing danger-only sandboxes unless essential.
+
+== Related
+
+- Governance and workflows: xref:agents-overview.adoc[]
+- MCP merge flow: xref:codex:mcp-integration.adoc[]

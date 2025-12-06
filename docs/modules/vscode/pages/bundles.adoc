@@ -1,6 +1,6 @@
-= Bundles & Exports
+= Bundles & Dist Exports
 
-Bundles are reproducible ZIPs that contain everything to spin up a profile: workspace, .vscode settings, extensions list, MCP manifests, custom agents, and install scripts.
+Bundles are reproducible ZIPs containing workspace, settings, extensions list, MCP manifests, custom agents, and install scripts.
 
 == Build bundles
 
@@ -23,11 +23,18 @@ Outputs:
 bash vscode/scripts/validate-all-bundles.sh
 ----
 
-Validation checks structure, JSON/TOML, and (optionally) installs extensions using an isolated VS Code user data directory.
+Checks structure, JSON/TOML, and extension install via an isolated VS Code user data dir.
 
 == Install scripts (inside each bundle)
 
 - `scripts/install-macos.sh` / `install-linux.sh`
 - `scripts/Install-Windows.ps1`
 
-They call `code --profile` and `--install-extension` and open the workspace.
+Scripts create/open the profile, install extensions, and open the workspace using `code --profile`.
+
+== Dist profiles and gists
+
+- Authoritative dist `.code-profile` exports live in `vscode/profiles-dist/*.code-profile` (regenerated via VS Code **Export Profile…**, never hand-edited).
+- `PROFILE_DIST.md` maps slug → profile name → dist path → gist URL (or `<TO_FILL>` placeholders).
+- Optional GitHub Actions workflow `export-profile-to-gist.yml` publishes to a secret gist using `secrets.GIST_TOKEN` (scope: gist).
+- Manual SSH path: create a secret gist, then run `./scripts/helpers/export-gist-ssh.sh <slug> <gist_id>` after exporting the profile.

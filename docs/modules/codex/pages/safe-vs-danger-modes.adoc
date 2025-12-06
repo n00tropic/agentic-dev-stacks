@@ -1,7 +1,112 @@
-= Safe vs Danger Modes (stub)
+= Safe vs Danger Modes for MCP and Codex
 
-TODO: migrate content from `codex/docs/safe-vs-danger-modes.md`.
+This guide explains how to reason about safe vs danger modes when using MCP servers with Codex.
 
-- Sandbox levels
-- When to use danger vs safe
-- MCP considerations
+== 1. Mental model
+
+Two dimensions drive risk:
+
+1. Codex sandbox / execution mode (filesystem, shell, network power).
+2. MCP server capabilities (read-only vs mutating, external APIs, cloud actions).
+
+“Danger” usually means a permissive sandbox **and** powerful MCP servers. “Safe” constrains at least one of these.
+
+== 2. Safe-mode patterns (read-mostly)
+
+Use safe mode by default for unfamiliar repos or shared environments.
+
+- Prefer restrictive sandbox (e.g. workspace-write, limited/no network).
+- Choose read-only/introspective MCP servers (docs, search, logs, metadata).
+- Avoid deploy/delete/write operations.
+
+Example (conceptual):
+
+[source,toml]
+----
+approval_policy = "always"
+sandbox_mode = "workspace-write"
+
+[features]
+rmcp_client = true
+web_search_request = false
+
+[sandbox_workspace_write]
+network_access = false
+----
+
+== 3. Danger-mode patterns (full access, trusted contexts)
+
+Acceptable for trusted repos and intentional automation (build, refactor, deploy).
+
+[source,toml]
+----
+approval_policy = "never"
+sandbox_mode = "danger-full-access"
+
+[features]
+rmcp_client = true
+web_search_request = true
+
+[sandbox_danger_full_access]
+network_access = true
+
+[sandbox_workspace_write]
+network_access = true
+----
+
+Treat this like a powerful automation account; enable only when comfortable with the blast radius.
+
+== 4. Using MCP safety flags
+
+Each `servers.<slug>.json` includes:
+
+- `optional`: safe to omit.
+- `experimental`: enable in experimental contexts only.
+- `privacy_sensitive`: may log data to third parties; enable only in suitable contexts.
+- `recommended_read_only`: prefer read-only usage (e.g. get/list/watch).
+- `category`: hints at capability (dependency-intelligence, docs, database, search, cloud, etc.).
+
+Practical guidance:
+
+- Optional: include only if needed.
+- Experimental: keep to `experimental-preview` or non-critical setups.
+- Privacy-sensitive: enable only when external logging is acceptable.
+- Recommended read-only: consult server docs to disable mutations; use read-only kubeconfigs/DB creds where relevant.
+
+== 5. Example MCP patterns
+
+Read-only cluster (conceptual):
+
+[source,toml]
+----
+[mcp_servers.kubernetes-ro]
+command = "<TO_FILL>"
+# args = ["--read-only"]
+# env = { KUBECONFIG = "/path/to/readonly/kubeconfig" }
+----
+
+Full-access cluster (trusted only):
+
+[source,toml]
+----
+[mcp_servers.kubernetes-rw]
+command = "<TO_FILL>"
+# args = ["--allow-writes"]
+# env = { KUBECONFIG = "/path/to/admin/kubeconfig" }
+----
+
+== 6. Decision rules
+
+- Do I trust this repo? If not, choose safer sandbox + minimal MCP set.
+- Could an error cause real damage? Be conservative for prod clusters/DBs/cloud.
+- Does this MCP write or call externals? Treat as high-risk.
+- Is this always-on or one-off? Enable powerful MCPs only when needed.
+- What do the flags say? Optional/experimental/privacy_sensitive mean explicit opt-in.
+
+== 7. Recommended workflow
+
+- Keep two configs if helpful: a normal config and a safe config.
+- Use this repo for structure (manifests, generator, docs), not for your personal `config.toml`.
+- After repo changes: re-run the merge script for relevant slugs, review output, update your configs.
+
+Related: xref:config-guides.adoc[] for merge flow and TOML integration.

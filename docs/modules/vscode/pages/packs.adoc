@@ -9,9 +9,9 @@ Packs are the source of truth for profiles, extensions, settings, and MCP manife
 - `vscode/packs/<pack>/settings/settings.<slug>.json`
 - `vscode/packs/<pack>/mcp/servers.<slug>.json`
 
-Edit these files to change a profile. Keep CONTROL.md in sync when adding/removing profiles.
+Edit these files to change a profile. Keep `CONTROL.md` in sync when adding/removing profiles (20-profile budget).
 
-== Exporting to workspaces
+== Export to workspaces
 
 [source,bash]
 ----
@@ -19,4 +19,22 @@ cd vscode
 python scripts/export-packs.py <slug> [<slug> ...]
 ----
 
-Outputs go to `vscode/exports/workspaces/<slug>/` (gitignored).
+Outputs: `vscode/exports/workspaces/<slug>/` (git-ignored) containing `.vscode/extensions.list`, `.vscode/settings.json`, `<slug>.code-workspace`.
+
+== Apply exports on a machine
+
+[source,bash]
+----
+cd vscode
+cat exports/workspaces/<slug>/.vscode/extensions.list | xargs -L1 code --install-extension --profile "<Profile Name>"
+code exports/workspaces/<slug>/<slug>.code-workspace --profile "<Profile Name>"
+----
+
+Fast path: use `scripts/macos/install-profiles.sh`, `scripts/linux/install-profiles.sh`, or `scripts/windows/Install-Profiles.ps1` to loop through slugs.
+
+== Validation
+
+- After extension changes: `./scripts/helpers/validate-extensions.sh` (or PowerShell variant).
+- After MCP manifest changes: optionally run `python scripts/validate_extensions.py` and/or `python scripts/merge-mcp-fragments.py ...` to stage MCP TOML locally (never commit generated files).
+
+Related: xref:bundles.adoc[] for bundle builds and dist exports.
