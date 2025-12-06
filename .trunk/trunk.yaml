@@ -40,6 +40,16 @@ lint:
       linters:
         - vale
     - paths:
+        - styles/**
+      linters:
+        - vale
+        - yamllint
+        - markdownlint
+    - paths:
+        - "**/*.sh"
+      linters:
+        - vale
+    - paths:
         - .trunk/trunk.yaml
         - .vale.ini
       linters:

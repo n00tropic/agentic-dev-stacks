@@ -1,4 +1,4 @@
-# Profile Dist Map (code-profile & gist exports)
+# Profile dist map: code-profile and gist exports
 
 This file maps internal profile slugs to their dist exports for quick import via VS Code **Import Profile…**. Dist artefacts live in `vscode/profiles-dist/*.code-profile` (exported from VS Code) for local/offline use, and may also have optional secret gist URLs for one-click import.
 
@@ -117,3 +117,15 @@ This file maps internal profile slugs to their dist exports for quick import via
 - Trigger `Export profile to gist` workflow (`workflow_dispatch`) with `slug` (and optional `gist_id`).
 - Workflow generates the workspace archive and uploads to a secret gist using `secrets.GIST_TOKEN` (scope: `gist` only).
 - Artifacts are also stored as workflow artifacts for review.
+
+### Publish via SSH (manual, existing gist)
+
+- Create a (secret) gist once in the GitHub UI and note its ID.
+- Ensure your SSH key has gist write access.
+- Run from the repository root:
+
+  ```bash
+  cd vscode
+  python scripts/export-packs.py <slug>
+  ./scripts/helpers/export-gist-ssh.sh <slug> <gist_id>
+  ```
