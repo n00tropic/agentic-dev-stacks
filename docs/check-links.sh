@@ -11,16 +11,16 @@ detect_target() {
 	local os arch
 	os="$(uname -s)"
 	arch="$(uname -m)"
-	case "$os" in
+	case "${os}" in
 	Darwin)
-		case "$arch" in
+		case "${arch}" in
 		arm64 | aarch64) echo "aarch64-apple-darwin" ;;
 		x86_64) echo "x86_64-apple-darwin" ;;
 		*) return 1 ;;
 		esac
 		;;
 	Linux)
-		case "$arch" in
+		case "${arch}" in
 		arm64 | aarch64) echo "aarch64-unknown-linux-gnu" ;;
 		x86_64) echo "x86_64-unknown-linux-gnu" ;;
 		*) return 1 ;;
@@ -32,14 +32,24 @@ detect_target() {
 
 run_lychee() {
 	local target url tmpdir bin
+	local -a lychee_flags
+	lychee_flags=(--no-progress)
+	if [[ ${CHECK_EXTERNAL:-0} == "1" ]]; then
+		echo "Running lychee with external link checks (http/https)."
+		lychee_flags+=(--scheme http --scheme https)
+	else
+		echo "Running lychee in offline mode (local files and anchors only)."
+		lychee_flags+=(--offline)
+	fi
+	lychee_flags+=(build/site)
 	if command -v lychee >/dev/null 2>&1; then
-		lychee --scheme http --scheme https --no-progress build/site
+		lychee "${lychee_flags[@]}"
 		return
 	fi
-	target="$(detect_target)" || {
+	if ! target="$(detect_target)"; then
 		echo "Unsupported platform for lychee binary" >&2
 		exit 1
-	}
+	fi
 	url="https://github.com/lycheeverse/lychee/releases/latest/download/lychee-${target}.tar.gz"
 	tmpdir="$(mktemp -d)"
 	trap 'rm -rf "${tmpdir}"' EXIT
@@ -51,7 +61,7 @@ run_lychee() {
 	tar -xzf "${tmpdir}/lychee.tar.gz" -C "${tmpdir}"
 	bin="${tmpdir}/lychee"
 	chmod +x "${bin}"
-	"${bin}" --scheme http --scheme https --no-progress build/site
+	"${bin}" "${lychee_flags[@]}"
 }
 
 run_lychee
