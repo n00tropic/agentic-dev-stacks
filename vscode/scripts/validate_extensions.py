@@ -19,9 +19,21 @@ CODEX_PLACEHOLDER = "your-org.codex-vscode"
 
 
 def validate_extensions_file(path: Path) -> dict:
-    errors = []
-    warnings = []
-    ids = []
+    ids, errors, warnings = _collect_extension_issues(path)
+    warnings.extend(_duplicate_warnings(ids, path))
+
+    return {
+        "path": path,
+        "errors": errors,
+        "warnings": warnings,
+        "count": len(ids),
+    }
+
+
+def _collect_extension_issues(path: Path) -> tuple[list[str], list[str], list[str]]:
+    errors: list[str] = []
+    warnings: list[str] = []
+    ids: list[str] = []
 
     for lineno, raw in enumerate(path.read_text().splitlines(), start=1):
         line = raw.strip()
@@ -35,17 +47,16 @@ def validate_extensions_file(path: Path) -> dict:
                 f"{path}: line {lineno}: Codex placeholder still present; replace with the real extension id."
             )
 
-    counter = Counter(ids)
-    dups = [ext for ext, count in counter.items() if count > 1]
-    for ext in dups:
-        warnings.append(f"{path}: duplicate extension id in file: {ext}")
+    return ids, errors, warnings
 
-    return {
-        "path": path,
-        "errors": errors,
-        "warnings": warnings,
-        "count": len(ids),
-    }
+
+def _duplicate_warnings(ids: list[str], path: Path) -> list[str]:
+    counter = Counter(ids)
+    return [
+        f"{path}: duplicate extension id in file: {ext}"
+        for ext, count in counter.items()
+        if count > 1
+    ]
 
 
 def main() -> int:
@@ -58,31 +69,37 @@ def main() -> int:
         print("No extensions.*.txt files found under packs/", file=sys.stderr)
         return 1
 
-    total_files = 0
-    total_ids = 0
-    total_errors = 0
-    total_warnings = 0
+    totals = {"files": 0, "ids": 0, "errors": 0, "warnings": 0}
 
     for path in all_txt_files:
-        total_files += 1
+        totals["files"] += 1
         result = validate_extensions_file(path)
-        total_ids += result["count"]
-        if result["errors"] or result["warnings"]:
-            print(f"\n=== {path} ===")
-        for msg in result["errors"]:
-            print(f"ERROR: {msg}")
-            total_errors += 1
-        for msg in result["warnings"]:
-            print(f"WARNING: {msg}")
-            total_warnings += 1
+        totals["ids"] += result["count"]
+        _print_result(path, result, totals)
 
+    _print_summary(totals)
+    return 1 if totals["errors"] else 0
+
+
+def _print_result(path: Path, result: dict, totals: dict) -> None:
+    if result["errors"] or result["warnings"]:
+        print(f"\n=== {path} ===")
+    totals["errors"] += _print_messages("ERROR", result["errors"])
+    totals["warnings"] += _print_messages("WARNING", result["warnings"])
+
+
+def _print_messages(label: str, messages: list[str]) -> int:
+    for msg in messages:
+        print(f"{label}: {msg}")
+    return len(messages)
+
+
+def _print_summary(totals: dict) -> None:
     print("\nValidation summary:")
-    print(f"  Files checked:   {total_files}")
-    print(f"  IDs inspected:   {total_ids}")
-    print(f"  Errors:          {total_errors}")
-    print(f"  Warnings:        {total_warnings}")
-
-    return 1 if total_errors else 0
+    print(f"  Files checked:   {totals['files']}")
+    print(f"  IDs inspected:   {totals['ids']}")
+    print(f"  Errors:          {totals['errors']}")
+    print(f"  Warnings:        {totals['warnings']}")
 
 
 if __name__ == "__main__":
