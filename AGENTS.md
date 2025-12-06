@@ -130,6 +130,8 @@ Before proposing or committing changes that affect packs, MCP manifests, or scri
      python scripts/merge-mcp-fragments.py core-base-dev fullstack-js-ts ...
      ```
 
+   - Ensure any MCP IDs used by agents exist in both `.vscode/mcp.json` (launcher) and the relevant `vscode/packs/*/mcp/servers.<slug>.json` manifest.
+
    - A reminder that `vscode/codex-mcp.generated.toml` is **not** to be committed and is only a local staging file.
 
 ### C. Export workspace-ready packs

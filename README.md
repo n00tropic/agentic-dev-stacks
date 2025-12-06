@@ -48,6 +48,14 @@ Scoped, cross-OS VS Code packs plus MCP manifests, designed as a **compiler**: p
 
   Output: `docs/build/site` (git-ignored).
 
+- Workspace MCP validation (macOS/Linux):
+
+  ```bash
+  python scripts/validate-mcp-config.py
+  ```
+
+  Validates `.vscode/mcp.json` structure (command/args/env per server); warns if commands diverge from the standard `/bin/sh -c` pattern.
+
 ## Layout (truths up front)
 
 - **Root**

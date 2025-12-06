@@ -2,66 +2,83 @@
   "$schema": "./mcp.schema.json",
   "mcpServers": {
     "sonatype-deps": {
-      "command": "<TO_FILL_SONATYPE_CMD>",
-      "args": [],
+      "command": "/bin/sh",
+      "args": ["-c", "${MCP_SONATYPE_CMD:-sonatype-deps-mcp}"],
       "env": {}
     },
     "context7-docs": {
-      "command": "<TO_FILL_CONTEXT7_CMD>",
-      "args": [],
-      "env": {
-        "CONTEXT7_TOKEN": "<TO_FILL>"
-      }
+      "command": "/bin/sh",
+      "args": ["-c", "${MCP_CONTEXT7_CMD:-context7-mcp}"],
+      "env": {}
     },
     "github": {
-      "command": "<TO_FILL_GITHUB_CMD>",
-      "args": [],
-      "env": {
-        "GITHUB_TOKEN": "<TO_FILL_FINE_SCOPED>"
-      }
+      "command": "/bin/sh",
+      "args": ["-c", "${MCP_GITHUB_CMD:-github-mcp}"],
+      "env": {}
     },
     "kubernetes": {
-      "command": "<TO_FILL_KUBERNETES_CMD>",
-      "args": [],
-      "env": {
-        "KUBECONFIG": "<TO_FILL_READ_ONLY>"
-      }
+      "command": "/bin/sh",
+      "args": ["-c", "${MCP_KUBERNETES_CMD:-mcp-kubernetes}"],
+      "env": {}
     },
     "elasticsearch": {
-      "command": "<TO_FILL_ELASTICSEARCH_CMD>",
-      "args": [],
-      "env": {
-        "ELASTIC_ENDPOINT": "<TO_FILL>",
-        "ELASTIC_API_KEY": "<TO_FILL_READ_ONLY>"
-      }
+      "command": "/bin/sh",
+      "args": ["-c", "${MCP_ELASTICSEARCH_CMD:-elastic-mcp}"],
+      "env": {}
     },
     "postgres": {
-      "command": "<TO_FILL_POSTGRES_CMD>",
-      "args": [],
-      "env": {
-        "PGCONN": "<TO_FILL_READ_ONLY>"
-      }
+      "command": "/bin/sh",
+      "args": ["-c", "${MCP_POSTGRES_CMD:-mcp-postgres}"],
+      "env": {}
     },
     "mongodb": {
-      "command": "<TO_FILL_MONGODB_CMD>",
-      "args": [],
-      "env": {
-        "MONGODB_URI": "<TO_FILL_READ_ONLY>"
-      }
+      "command": "/bin/sh",
+      "args": ["-c", "${MCP_MONGODB_CMD:-mcp-mongodb}"],
+      "env": {}
     },
     "apify-web-search": {
-      "command": "<TO_FILL_APIFY_CMD>",
-      "args": [],
+      "command": "/bin/sh",
+      "args": [
+        "-c",
+        "${MCP_APIFY_CMD:-npx -y @apify/actors-mcp-server --actors apify/google-search-scraper}"
+      ],
       "env": {
-        "APIFY_TOKEN": "<TO_FILL>"
+        "APIFY_TOKEN": "${APIFY_TOKEN}"
       }
     },
     "aws": {
-      "command": "<TO_FILL_AWS_CMD>",
-      "args": [],
-      "env": {
-        "AWS_PROFILE": "<TO_FILL_READ_ONLY>"
-      }
+      "command": "/bin/sh",
+      "args": ["-c", "${MCP_AWS_CMD:-aws-mcp}"],
+      "env": {}
+    },
+    "filesystem": {
+      "command": "/bin/sh",
+      "args": [
+        "-c",
+        "${MCP_FILESYSTEM_CMD:-npx -y @modelcontextprotocol/server-filesystem}"
+      ],
+      "env": {}
+    },
+    "docker": {
+      "command": "/bin/sh",
+      "args": [
+        "-c",
+        "${MCP_DOCKER_CMD:-npx -y @modelcontextprotocol/server-docker}"
+      ],
+      "env": {}
+    },
+    "git": {
+      "command": "/bin/sh",
+      "args": ["-c", "${MCP_GIT_CMD:-uvx mcp-server-git --repository .}"],
+      "env": {}
+    },
+    "markitdown": {
+      "command": "/bin/sh",
+      "args": [
+        "-c",
+        "${MCP_MARKITDOWN_CMD:-uvx --python 3.13 markitdown-mcp==0.0.1a4}"
+      ],
+      "env": {}
     }
   }
 }
