@@ -158,9 +158,11 @@ Each profile in `vscode/packs/**` has a corresponding MCP manifest that recommen
 - **Infra / DevOps / data** (`infra-devops`, `data-db-analytics`, `linux-ci-headless`):
   - GitHub MCP, Kubernetes/infra MCPs, SQL/DB, search/logging MCPs (Elasticsearch).
 - **Docs & librarian** (`docs-librarian`):
-  - Documentation-focused servers (GitHub, docs/search MCPs), with optional web-search MCPs explicitly marked as privacy-sensitive.
+  - Documentation-focused servers (Context7, docs/search MCPs), with optional web-search MCPs explicitly marked as privacy-sensitive.
 - **Experimental** (`experimental-preview`):
   - Core trio only by default, plus any optional/experimental servers clearly marked as such.
+
+> Track MCP spec and SDK releases (Context7, Sonatype, official Java/TS/Python SDKs). When the spec adds features like OAuth or structured tool outputs, rerun `merge-mcp-fragments.py` and refresh your local `config.toml`.
 
 For concrete details, read the relevant `servers.<slug>.json` in:
 

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":semanticCommits",
+    ":label(renovate)",
+    ":automergeBranch",
+    "github>renovatebot/renovate-config//helpers:pinGitHubActionDigests",
+    "schedule:weekly"
+  ],
+  "timezone": "America/New_York",
+  "assignees": [],
+  "prConcurrentLimit": 4,
+  "packageRules": [
+    {
+      "description": "Group GitHub Actions updates",
+      "matchManagers": ["github-actions"],
+      "groupName": "github-actions",
+      "separateMajorMinor": true
+    },
+    {
+      "description": "Python tooling",
+      "matchManagers": ["pip_requirements"],
+      "matchPaths": ["vscode/requirements*.txt", "scripts/requirements*.txt"],
+      "groupName": "python-deps",
+      "separateMajorMinor": true
+    },
+    {
+      "description": "Node/Trunk toolchain",
+      "matchManagers": ["npm"],
+      "groupName": "node-tooling",
+      "separateMajorMinor": true
+    },
+    {
+      "description": "Do not touch generated exports",
+      "matchPaths": ["vscode/exports/**"],
+      "enabled": false
+    }
+  ]
+}

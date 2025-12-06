@@ -67,3 +67,4 @@ When I ask you to “refresh” or “re-sync” this system, by default:
 - This repo may reference MCP servers with write capabilities. When suggesting MCP usage:
   - Prefer read-only tools unless I explicitly ask for write operations.
   - Call out any privacy-sensitive or cloud-dependent servers (AWS, Apify, etc.) and the fact that credentials are needed.
+- Maintain prompts and instructions in en-GB (Oxford) to align with LTeX and spell-check defaults.

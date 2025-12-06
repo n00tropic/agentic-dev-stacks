@@ -1,0 +1,52 @@
+name: Export profile to gist
+
+on:
+  # checkov:skip=CKV_GHA_7: workflow_dispatch inputs are intentional for selecting profile slugs/gists.
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: Profile slug to export (e.g., fullstack-js-ts)
+        required: true
+        type: string
+      gist_id:
+        description: Optional existing secret gist ID to overwrite
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Export pack workspace
+        working-directory: vscode
+        run: |
+          python scripts/export-packs.py "${{ inputs.slug }}"
+          tar -czf "../${{ inputs.slug }}.tar.gz" "exports/workspaces/${{ inputs.slug }}"
+
+      - name: Upload archive artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ inputs.slug }}-workspace
+          path: ${{ inputs.slug }}.tar.gz
+          if-no-files-found: error
+
+      - name: Publish to secret gist
+        if: env.GIST_TOKEN != ''
+        uses: exuanbo/actions-deploy-gist@v1
+        env:
+          GIST_TOKEN: ${{ secrets.GIST_TOKEN }}
+        with:
+          token: ${{ secrets.GIST_TOKEN }}
+          gist_id: ${{ inputs.gist_id }}
+          file_path: ${{ inputs.slug }}.tar.gz
+          file_name: ${{ inputs.slug }}.tar.gz

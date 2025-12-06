@@ -11,6 +11,8 @@ This repository is the canonical source of truth for:
 
 Any AI agent (Codex, GitHub Copilot coding agent, ChatGPT, etc.) working in this repo MUST follow these rules.
 
+Use en-GB (Oxford) spelling for docs and LTeX defaults unless profile notes say otherwise.
+
 ## Core invariants
 
 1. **Single source of truth (SSoT)**

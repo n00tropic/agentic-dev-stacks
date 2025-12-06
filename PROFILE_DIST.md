@@ -111,3 +111,9 @@ This file maps internal profile slugs to their dist exports for quick import via
    - Save the `.code-profile` to `vscode/profiles-dist/<slug>.code-profile` (overwrite allowed).
    - Publish a **secret** gist via the export dialog; paste the URL above.
 5. Commit updated docs and dist `.code-profile` files (never edit them manually).
+
+### Publish via GitHub Actions (optional)
+
+- Trigger `Export profile to gist` workflow (`workflow_dispatch`) with `slug` (and optional `gist_id`).
+- Workflow generates the workspace archive and uploads to a secret gist using `secrets.GIST_TOKEN` (scope: `gist` only).
+- Artifacts are also stored as workflow artifacts for review.

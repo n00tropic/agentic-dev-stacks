@@ -12,6 +12,7 @@ This directory holds the **source-of-truth packs** and the tooling to generate r
 - `scripts/` — export + validation tooling (`export-packs.py`, `merge-mcp-fragments.py`, helpers).
 - `export-map.yaml` — slug → pack → export paths → display name mapping.
 - `exports/` — **generated, gitignored** workspaces and install aids (safe to delete/regenerate).
+- `prompts/packs/**` — reusable prompt packs you can copy into exports or Copilot custom instructions (keep en-GB spelling).
 
 ## How to export workspaces (source → exports)
 
@@ -45,3 +46,4 @@ python scripts/export-packs.py <slug> [<slug> ...]
 - Keep source packs in `packs/**` aligned with `CONTROL.md`.
 - After changing extensions: run `./scripts/helpers/validate-extensions.sh` (or `.\scripts\helpers\Validate-Extensions.ps1` on Windows).
 - After MCP manifest changes: consider `python scripts/merge-mcp-fragments.py ...` to stage `codex-mcp.generated.toml` locally (never commit generated files).
+- Optional publishing: use `Export profile to gist` workflow (`workflow_dispatch`) with `slug` (and optional `gist_id`) plus `secrets.GIST_TOKEN` (scope: gist) to ship a secret gist archive of an exported workspace.

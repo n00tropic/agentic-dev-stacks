@@ -7,6 +7,7 @@ Scoped, cross-OS VS Code packs plus MCP manifests, designed for human + AI agent
 - **Root** – governance and agent docs: `AGENTS.md`, `CONTROL.md`, `copilot-instructions.md`, `agent-instructions.md`.
 - **`vscode/`** – source of truth for packs (profiles, extensions, settings, MCP), export tooling, and gitignored exports.
 - **`codex/`** – docs and examples for wiring MCP into Codex (`config-guides.md`, `safe-vs-danger-modes.md`).
+- **`prompts/`** – prompt packs for Copilot/sub-agents (copy into workspaces as needed).
 
 ## Golden Path (new machine)
 
@@ -35,4 +36,5 @@ Scoped, cross-OS VS Code packs plus MCP manifests, designed for human + AI agent
 
 - Never edit `~/.codex/config.toml` or VS Code global settings from this repo; copy blocks instead.
 - Do not commit generated files (`vscode/exports/**`, `vscode/codex-mcp.generated.toml`).
+- Use prompt packs in `prompts/packs/` to keep Copilot/custom agents aligned (en-GB spellings, safety notes).
 - Profiles ship with GitHub/Copilot support but remain usable offline; align future changes accordingly.
