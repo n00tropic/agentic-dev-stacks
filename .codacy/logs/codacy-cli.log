@@ -445,3 +445,11 @@
 2025-12-06T15:32:00+02:00 [INFO] (codacy-cli-v2/cmd/analyze.go:353) Config file found for tool toolConfigPath=.codacy/tools-configs/trivy.yaml tool=trivy
 2025-12-06T15:32:00+02:00 [INFO] (codacy-cli-v2/cmd/analyze.go:353) Config file found for tool tool=dartanalyzer toolConfigPath=.codacy/tools-configs/analysis_options.yaml
 2025-12-06T15:32:01+02:00 [INFO] (codacy-cli-v2/cmd/analyze.go:353) Config file found for tool tool=eslint toolConfigPath=.codacy/tools-configs/eslint.config.mjs
+2025-12-06T15:50:10+02:00 [INFO] (codacy-cli-v2/cli-v2.go:27) Starting Codacy CLI version=1.0.0-main.363.sha.f0a5bd7 (f0a5bd7) built at 2025-12-02T15:19:12Z
+2025-12-06T15:50:10+02:00 [INFO] (codacy-cli-v2/cmd/root.go:34) Executing CLI command full_command=[/Users/jonathanbotha/Library/Caches/Codacy/codacy-cli-v2/1.0.0-main.363.sha.f0a5bd7/codacy-cli-v2 analyze styles/proselint/Diacritical.yml --format sarif] args=[styles/proselint/Diacritical.yml] command=analyze
+2025-12-06T15:50:10+02:00 [INFO] (codacy-cli-v2/cmd/analyze.go:353) Config file found for tool tool=trivy toolConfigPath=.codacy/tools-configs/trivy.yaml
+2025-12-06T15:50:10+02:00 [INFO] (codacy-cli-v2/cmd/analyze.go:353) Config file found for tool tool=semgrep toolConfigPath=.codacy/tools-configs/semgrep.yaml
+2025-12-06T15:50:22+02:00 [INFO] (codacy-cli-v2/cli-v2.go:27) Starting Codacy CLI version=1.0.0-main.363.sha.f0a5bd7 (f0a5bd7) built at 2025-12-02T15:19:12Z
+2025-12-06T15:50:22+02:00 [INFO] (codacy-cli-v2/cmd/root.go:34) Executing CLI command args=[styles/proselint/Typography.yml] command=analyze full_command=[/Users/jonathanbotha/Library/Caches/Codacy/codacy-cli-v2/1.0.0-main.363.sha.f0a5bd7/codacy-cli-v2 analyze styles/proselint/Typography.yml --format sarif]
+2025-12-06T15:50:22+02:00 [INFO] (codacy-cli-v2/cmd/analyze.go:353) Config file found for tool tool=trivy toolConfigPath=.codacy/tools-configs/trivy.yaml
+2025-12-06T15:50:22+02:00 [INFO] (codacy-cli-v2/cmd/analyze.go:353) Config file found for tool toolConfigPath=.codacy/tools-configs/semgrep.yaml tool=semgrep
