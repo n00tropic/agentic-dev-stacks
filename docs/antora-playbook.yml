@@ -19,3 +19,8 @@ asciidoc:
 
 output:
   dir: build/site
+
+ui:
+  bundle:
+    url: ./ui/ui-bundle.zip
+    snapshot: true

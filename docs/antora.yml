@@ -1,0 +1,5 @@
+name: agentic-dev-stacks
+title: Agentic Dev Stacks
+version: main
+nav:
+  - modules/ROOT/nav.adoc
