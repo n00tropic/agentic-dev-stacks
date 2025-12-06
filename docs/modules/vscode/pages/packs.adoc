@@ -2,6 +2,42 @@
 
 Packs are the source of truth for profiles, extensions, settings, and MCP manifests.
 
+[mermaid]
+....
+graph TB
+    subgraph "vscode/packs/"
+        subgraph "Pack Structure"
+            P[pack-name/]
+            P --> PRO[profiles/]
+            P --> EXT[extensions/]
+            P --> SET[settings/]
+            P --> MCP[mcp/]
+            
+            PRO --> PROMD[PROFILE.slug.md]
+            EXT --> EXTTXT[extensions.slug.txt]
+            SET --> SETJSON[settings.slug.json]
+            MCP --> MCPJSON[servers.slug.json]
+        end
+    end
+    
+    subgraph "Export Process"
+        PROMD --> W[Workspace]
+        EXTTXT --> W
+        SETJSON --> W
+        MCPJSON --> W
+        
+        W --> B[Bundle]
+        W --> I[Install Scripts]
+    end
+    
+    style P fill:#e1f5ff
+    style W fill:#fff3e0
+    style B fill:#f3e5f5
+....
+
+.Pack Structure and Export Process
+Diagram showing how pack files are organized and exported to workspaces and bundles.
+
 == Layout
 
 - `vscode/packs/<pack>/profiles/PROFILE.<slug>.md`

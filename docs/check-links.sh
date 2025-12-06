@@ -52,16 +52,19 @@ run_lychee() {
 	}
 	url="https://github.com/lycheeverse/lychee/releases/latest/download/lychee-${target}.tar.gz"
 	tmpdir="$(mktemp -d)"
-	trap 'rm -rf "${tmpdir}"' EXIT
 	echo "Downloading lychee binary for ${target}..."
 	if ! curl -fsSL "${url}" -o "${tmpdir}/lychee.tar.gz"; then
 		echo "Failed to download lychee from ${url}" >&2
+		rm -rf "${tmpdir}"
 		exit 1
 	fi
 	tar -xzf "${tmpdir}/lychee.tar.gz" -C "${tmpdir}"
 	bin="${tmpdir}/lychee"
 	chmod +x "${bin}"
 	"${bin}" "${lychee_flags[@]}"
+	local result=$?
+	rm -rf "${tmpdir}"
+	return $result
 }
 
 run_lychee

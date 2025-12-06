@@ -5,7 +5,7 @@ site:
 content:
   sources:
     - url: ..
-      branches: [main]
+      branches: HEAD
       start_path: docs
 
 runtime:
@@ -16,6 +16,9 @@ asciidoc:
     sectanchors: ""
     sectnums: ""
     source-highlighter: highlightjs
+    kroki-fetch-diagram!:
+  extensions:
+    - asciidoctor-kroki
 
 output:
   dir: build/site

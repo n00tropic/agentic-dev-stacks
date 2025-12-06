@@ -2,6 +2,25 @@
 
 This is the minimal, repeatable path to bootstrap a profile on a fresh machine.
 
+[mermaid]
+....
+flowchart TD
+    A[Fresh Machine] --> B{Path Choice}
+    B -->|Repo-Aware| C[Clone Repository]
+    B -->|Bundle| D[Download Bundle ZIP]
+    C --> E[Export Packs]
+    E --> F[Install Extensions]
+    F --> G[Open Workspace]
+    D --> H[Unzip Bundle]
+    H --> I[Run Installer Script]
+    I --> G
+    G --> J[Validate Setup]
+    J --> K[Ready to Code]
+....
+
+.Golden Path Workflow
+Diagram showing the two main paths for setting up a development environment on a new machine.
+
 == Repo-aware path
 
 . Clone the repo and enter the vscode directory.

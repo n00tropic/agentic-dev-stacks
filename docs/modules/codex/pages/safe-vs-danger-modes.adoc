@@ -11,6 +11,36 @@ Two dimensions drive risk:
 
 “Danger” usually means a permissive sandbox **and** powerful MCP servers. “Safe” constrains at least one of these.
 
+[mermaid]
+....
+graph TB
+    subgraph "Risk Dimensions"
+        S[Sandbox Mode]
+        M[MCP Capabilities]
+    end
+    
+    S --> SR[Restrictive: workspace-write]
+    S --> SP[Permissive: danger-full-access]
+    
+    M --> MR[Read-only: docs, logs, search]
+    M --> MW[Write: deploy, delete, mutate]
+    
+    subgraph "Risk Levels"
+        SR & MR --> SAFE[✅ SAFE MODE]
+        SR & MW --> LOW[⚠️ Low Risk]
+        SP & MR --> MOD[⚠️ Moderate Risk]
+        SP & MW --> HIGH[🔴 HIGH RISK]
+    end
+    
+    style SAFE fill:#c8e6c9
+    style LOW fill:#fff9c4
+    style MOD fill:#ffe0b2
+    style HIGH fill:#ffcdd2
+....
+
+.Risk Assessment Model
+The combination of sandbox permissions and MCP capabilities determines the overall risk level.
+
 == 2. Safe-mode patterns (read-mostly)
 
 Use safe mode by default for unfamiliar repos or shared environments.

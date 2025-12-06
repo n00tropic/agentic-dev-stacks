@@ -2,6 +2,31 @@
 
 How MCP manifests become usable Codex config.
 
+[mermaid]
+....
+sequenceDiagram
+    participant Dev as Developer
+    participant Manifest as MCP Manifests
+    participant Script as merge-mcp-fragments.py
+    participant Gen as codex-mcp.generated.toml
+    participant Config as ~/.codex/config.toml
+    participant Codex as Codex/IDE
+    
+    Dev->>Manifest: Edit servers.<slug>.json
+    Manifest->>Script: Input: profile slugs
+    Script->>Gen: Generate merged config
+    Note over Gen: Local file, not committed
+    Dev->>Gen: Review generated config
+    Dev->>Config: Copy [mcp_servers.*] blocks
+    Dev->>Config: Replace <TO_FILL> placeholders
+    Dev->>Codex: Restart/Reload
+    Codex->>Config: Load MCP servers
+    Codex-->>Dev: MCP tools available
+....
+
+.MCP Integration Workflow
+Sequence diagram showing how MCP manifests are merged and integrated into Codex configuration.
+
 == Sources
 
 - Manifests: `vscode/packs/*/mcp/servers.<slug>.json`
