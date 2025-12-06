@@ -76,8 +76,8 @@ PY
 		[[ -z $ext ]] && continue
 		code --user-data-dir "$USER_DATA_DIR" --install-extension "$ext" --profile "$PROFILE_NAME" >/dev/null 2>&1 || true
 	done <"$BROOT/workspace/.vscode/extensions.list"
-	echo "Installed extensions (isolated dir):"
-	code --user-data-dir "$USER_DATA_DIR" --profile "$PROFILE_NAME" --list-extensions || true
+	COUNT=$(grep -cvE '^\s*$' "${BROOT}/workspace/.vscode/extensions.list" || true)
+	echo "Installed ${COUNT} extensions in isolated profile"
 	rm -rf "$USER_DATA_DIR"
 else
 	echo "VS Code CLI not present; skipped CLI checks." >&2

@@ -9,7 +9,7 @@
       "version": "22"
     }
   },
-  "postCreateCommand": "pip3 install --user pyyaml toml && python3 vscode/scripts/build-bundles.py && bash vscode/scripts/validate-all-bundles.sh",
+  "postCreateCommand": "pip3 install --user pyyaml toml && python3 vscode/scripts/build-bundles.py && bash vscode/scripts/validate-all-bundles.sh && (command -v trunk >/dev/null 2>&1 && trunk check --no-progress || true)",
   "customizations": {
     "vscode": {
       "settings": {
