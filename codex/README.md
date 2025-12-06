@@ -1,22 +1,5 @@
 # Codex Configuration
 
-This directory contains Codex-specific configuration, examples, and documentation.
-
-## Structure
-
-- `examples/` - Sample configuration files (not committed to version control)
-- `docs/` - Documentation for Codex configuration and usage patterns
-
-## Usage
-
-<!-- TODO: Add usage instructions for Codex configuration -->
-
-## Related
-
-See `../vscode/scripts/merge-mcp-fragments.py` for generating Codex MCP configuration from profile manifests.
-
-# Codex Configuration
-
 This directory contains Codex-specific configuration examples and documentation for wiring MCP servers into your local Codex setup.
 
 ## Structure

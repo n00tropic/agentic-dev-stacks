@@ -1,5 +1,7 @@
 # GitHub Copilot – Repository Instructions
 
+<!-- markdownlint-disable MD024 MD025 MD026 MD033 -->
+
 ## What this repo is
 
 This repo defines:
@@ -11,7 +13,7 @@ This repo defines:
 
 Use it to keep dev environments and MCP configs consistent across macOS, Windows, and Linux.
 
-## When working in this repo, always:
+## When working in this repo, always
 
 1. Read `AGENTS.md` and obey all invariants.
 2. Prefer editing under `vscode/` only:

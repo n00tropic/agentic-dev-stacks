@@ -18,6 +18,9 @@ on:
       - copilot-instructions.md
       - .github/workflows/validate-packs.yml
 
+permissions:
+  contents: read
+
 jobs:
   validate:
     runs-on: ubuntu-latest

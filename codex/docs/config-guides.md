@@ -1,38 +1,5 @@
 # Codex Configuration Guides
 
-<!-- TODO: Add comprehensive Codex configuration documentation -->
-
-## Overview
-
-This guide covers how to configure Codex for use with the agentic dev stacks profiles.
-
-## Configuration File Location
-
-Codex configuration is typically stored at:
-
-- macOS/Linux: `~/.codex/config.toml`
-- Windows: `%USERPROFILE%\.codex\config.toml`
-
-## Merging MCP Fragments
-
-To generate a complete Codex MCP configuration from profile manifests:
-
-```bash
-python vscode/scripts/merge-mcp-fragments.py core-base-dev fullstack-js-ts
-```
-
-This creates `codex-mcp.generated.toml` which you can review and copy into your `~/.codex/config.toml`.
-
-## Profile-Specific Configuration
-
-<!-- TODO: Document profile-specific Codex configuration patterns -->
-
-## Troubleshooting
-
-<!-- TODO: Add troubleshooting guide for common Codex configuration issues -->
-
-# Codex Configuration Guides
-
 This guide explains how to configure Codex for use with the `agentic-dev-stacks` profiles, with a focus on:
 
 - Where Codex reads its configuration from.

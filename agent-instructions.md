@@ -1,6 +1,6 @@
 # Agent Workflow Instructions
 
-> Also see `copilot-instructions.md` for GitHub/Copilot-specific guidance. This file is vendor-neutral first but assumes GitHub workflows are still available when enabled.
+<!-- markdownlint-disable MD024 MD025 MD026 MD033 -->
 
 ## What this repo is
 
@@ -14,14 +14,14 @@ This repo defines:
 
 Use it to keep dev environments and MCP configs consistent across macOS, Windows, and Linux.
 
-## When working in this repo, always:
+## When working in this repo, always
 
 1. Read `AGENTS.md` and obey all invariants.
 2. Prefer editing under `vscode/` only:
-   - `vscode/packs/**/profiles/PROFILE.<slug>.md`
-   - `vscode/packs/**/extensions/extensions.<slug>.txt`
-   - `vscode/packs/**/settings/settings.<slug>.json`
-   - `vscode/packs/**/mcp/servers.<slug>.json`
+   - `vscode/packs/**/profiles/PROFILE.&lt;slug&gt;.md`
+   - `vscode/packs/**/extensions/extensions.&lt;slug&gt;.txt`
+   - `vscode/packs/**/settings/settings.&lt;slug&gt;.json`
+   - `vscode/packs/**/mcp/servers.&lt;slug&gt;.json`
    - `vscode/scripts/**`
 3. Never edit my home dotfiles (`~/.codex/config.toml`, VS Code global settings) directly.
 4. When a change affects MCP or profiles, propose:
@@ -55,11 +55,11 @@ When I ask you to “refresh” or “re-sync” this system, by default:
 ## Task patterns
 
 - “Add a new profile” → follow the workflow in `AGENTS.md` (“Add or change a profile”).
-- “Update MCP for X” → edit `vscode/packs/**/mcp/servers.<slug>.json` and show an updated `merge-mcp-fragments.py` command.
-- “Prepare a workspace for profile <slug>” → edit nothing; instead:
-  - Suggest `python scripts/export-packs.py <slug>` (run from `vscode/`).
-  - Use `exports/workspaces/<slug>/.vscode/extensions.list` with `code --install-extension` (optionally `--profile "<Name>"`).
-  - Open `exports/workspaces/<slug>/<slug>.code-workspace` (optionally with `--profile "<Name>"`).
+- “Update MCP for X” → edit `vscode/packs/**/mcp/servers.&lt;slug&gt;.json` and show an updated `merge-mcp-fragments.py` command.
+- “Prepare a workspace for profile &lt;slug&gt;” → edit nothing; instead:
+  - Suggest `python scripts/export-packs.py &lt;slug&gt;` (run from `vscode/`).
+  - Use `exports/workspaces/&lt;slug&gt;/.vscode/extensions.list` with `code --install-extension` (optionally `--profile "<Name>"`).
+  - Open `exports/workspaces/&lt;slug&gt;/&lt;slug&gt;.code-workspace` (optionally with `--profile "<Name>"`).
 - “Publish a profile for import” → follow `PROFILE_DIST.md` checklist; never hand-edit `.code-profile` files. If publishing gists, mark them secret.
 
 ## Safety
