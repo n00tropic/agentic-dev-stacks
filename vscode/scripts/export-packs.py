@@ -66,7 +66,6 @@ def write_extensions_list(ext_ids: list[str], dest: Path) -> None:
 
 def write_workspace_file(
     profile_name: str,
-    slug: str,
     dest: Path,
     settings: Dict[str, Any],
     extensions: list[str],
@@ -106,7 +105,7 @@ def export_profile(slug: str, config: Dict[str, Any], repo_root: Path) -> None:
     extensions = read_extension_ids(extensions_src)
     write_extensions_list(extensions, workspace_dir / ".vscode" / "extensions.list")
 
-    write_workspace_file(profile_name, slug, workspace_file, settings_data, extensions)
+    write_workspace_file(profile_name, workspace_file, settings_data, extensions)
 
     print(f"[OK] {slug}: exported to {workspace_dir}")
 

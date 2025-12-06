@@ -22,7 +22,7 @@ if (-not $PythonCmd) {
 }
 $PythonPath = $PythonCmd.Source
 
-function Confirm-Export {
+function Test-ExportExists {
   if (Test-Path $WorkspaceFile) { return }
   Write-Host "[$ProfileSlug] Export not found; generating via export-packs.py"
   $proc = Start-Process -FilePath $PythonPath -ArgumentList @("$($VsCodeDir)/scripts/export-packs.py", $ProfileSlug) -WorkingDirectory $VsCodeDir -Wait -PassThru
@@ -36,7 +36,7 @@ function Confirm-Export {
   }
 }
 
-function Write-ExtensionsList {
+function Set-ExtensionsList {
   $dest = Join-Path $ExportDir ".vscode/extensions.list"
   if (Test-Path $dest -and (Get-Item $dest).Length -gt 0) { return }
   New-Item -ItemType Directory -Path (Split-Path $dest) -Force | Out-Null
@@ -62,8 +62,8 @@ function Install-Extensions {
   }
 }
 
-Confirm-Export
-Write-ExtensionsList
+Test-ExportExists
+Set-ExtensionsList
 
 Write-Host "[$ProfileSlug] Ensuring profile '$ProfileName' exists"
 code --profile "$ProfileName" --list-extensions *> $null

@@ -25,7 +25,6 @@ import os
 import shutil
 import subprocess
 import sys
-import textwrap
 import zipfile
 from pathlib import Path
 from typing import Dict, List, Tuple
@@ -39,6 +38,7 @@ PACKS = VSCODE / "packs"
 PROMPTS = ROOT / "prompts" / "packs"
 AGENTS_ROOT = ROOT / "agents"
 CONTROL = ROOT / "CONTROL.md"
+VSCODE_DIRNAME = ".vscode"
 
 
 def parse_args() -> argparse.Namespace:
@@ -95,17 +95,17 @@ def copy_workspace(slug: str, bundle_dir: Path):
         raise FileNotFoundError(f"workspace export missing: {ws_src}")
     dest_ws = bundle_dir / "workspace"
     dest_ws.mkdir(parents=True, exist_ok=True)
-    for item in [f"{slug}.code-workspace", ".vscode"]:
+    for item in [f"{slug}.code-workspace", VSCODE_DIRNAME]:
         src = ws_src / item
         if src.exists():
             if src.is_dir():
-                shutil.copytree(src, dest_ws / ".vscode", dirs_exist_ok=True)
+                shutil.copytree(src, dest_ws / VSCODE_DIRNAME, dirs_exist_ok=True)
             else:
                 shutil.copy2(src, dest_ws / src.name)
 
 
 def ensure_extensions_list(slug: str, pack: str, bundle_dir: Path):
-    dest = bundle_dir / "workspace" / ".vscode" / "extensions.list"
+    dest = bundle_dir / "workspace" / VSCODE_DIRNAME / "extensions.list"
     dest.parent.mkdir(parents=True, exist_ok=True)
     if dest.exists() and dest.stat().st_size > 0:
         return
@@ -243,7 +243,7 @@ def write_install_scripts(meta: Dict[str, str], bundle_dir: Path):
     (scripts_dir / "install-linux.sh").write_text(INSTALL_SH.format(**meta))
     (scripts_dir / "Install-Windows.ps1").write_text(INSTALL_PS.format(**meta))
     for sh in ["install-macos.sh", "install-linux.sh"]:
-        os.chmod(scripts_dir / sh, 0o755)
+        os.chmod(scripts_dir / sh, 0o750)
 
 
 def write_readme(meta: Dict[str, str], bundle_dir: Path):
