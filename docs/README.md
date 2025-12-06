@@ -4,4 +4,4 @@
 - Link checks (requires a built site):
   - Offline/local only (anchors and local assets): `cd docs && ./check-links.sh`.
   - External HTTP/HTTPS (opt-in, uses network): `cd docs && CHECK_EXTERNAL=1 ./check-links.sh`.
-- Tooling notes: Antora uses the vendored UI at `docs/ui/ui-bundle.zip`; lychee is downloaded on demand if not already installed.
+- Tooling notes: the docs site uses the bundled UI at `docs/ui/ui-bundle.zip`; lychee is downloaded on demand if not already installed.

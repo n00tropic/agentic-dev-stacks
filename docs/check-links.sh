@@ -46,10 +46,10 @@ run_lychee() {
 		lychee "${lychee_flags[@]}"
 		return
 	fi
-	if ! target="$(detect_target)"; then
+	target="$(detect_target)" || {
 		echo "Unsupported platform for lychee binary" >&2
 		exit 1
-	fi
+	}
 	url="https://github.com/lycheeverse/lychee/releases/latest/download/lychee-${target}.tar.gz"
 	tmpdir="$(mktemp -d)"
 	trap 'rm -rf "${tmpdir}"' EXIT
