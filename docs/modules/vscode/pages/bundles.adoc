@@ -2,6 +2,55 @@
 
 Bundles are reproducible ZIPs containing workspace, settings, extensions list, MCP manifests, custom agents, and install scripts.
 
+[mermaid]
+....
+flowchart LR
+    subgraph Source
+        P[Packs]
+        A[Custom Agents]
+        S[Scripts]
+    end
+    
+    subgraph Build
+        B[build-bundles.py]
+    end
+    
+    subgraph Output
+        W[Workspace Files]
+        Z[Bundle ZIP]
+        I[Install Scripts]
+    end
+    
+    subgraph Deployment
+        D1[Manual Install]
+        D2[CI/CD]
+        D3[Gist Distribution]
+    end
+    
+    P --> B
+    A --> B
+    S --> B
+    
+    B --> W
+    B --> Z
+    B --> I
+    
+    W --> D1
+    Z --> D1
+    Z --> D2
+    I --> D1
+    
+    Z --> D3
+    D3 --> D1
+    
+    style B fill:#e1f5ff
+    style Z fill:#fff3e0
+    style D3 fill:#f3e5f5
+....
+
+.Bundle Build and Distribution Flow
+Diagram showing how packs are built into bundles and distributed to users.
+
 == Build bundles
 
 [source,bash]
