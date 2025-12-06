@@ -2,6 +2,40 @@
 
 Scoped, cross-OS VS Code packs plus MCP manifests, designed as a **compiler**: packs (source) → reproducible exports → importable profiles. Full docs: <https://n00tropic.github.io/agentic-dev-stacks>
 
+## Why / Who
+
+- Why: Single source of truth for reproducible, sandbox-friendly VS Code profiles and MCP manifests without touching host dotfiles.
+- Who: Engineers and reviewers who need predictable, policy-aligned environments across macOS, Windows, and Linux.
+
+## Quickstart (reference profile: Core / Base Dev)
+
+- Prereqs: VS Code CLI `code` in PATH, Python 3, Git + curl (for docs/bundle steps).
+- macOS / Linux (one-liner):
+
+  ```bash
+  cd vscode && ./scripts/install-core-base-dev.sh
+  ```
+
+- Windows PowerShell:
+
+  ```powershell
+  cd vscode
+  .\scripts\Install-CoreBaseDev.ps1
+  ```
+
+- What it does: ensures the `core-base-dev` export exists (runs `export-packs.py` if missing), installs extensions into the `Core / Base Dev` profile via `code --install-extension --profile`, and opens the exported workspace under that profile. No global settings or dotfiles are touched.
+
+## Bundle builder (for handoff)
+
+- Build a distributable bundle (git-ignored) for any slug:
+
+  ```bash
+  cd vscode
+  python3 scripts/build-bundles.py core-base-dev
+  ```
+
+- Output: `vscode/exports/bundles/<slug>/` plus `<slug>-bundle.zip` with workspace, extensions list, MCP manifest + generated TOML, prompts, agents, per-OS install scripts, and metadata.
+
 ## Documentation
 
 - Docs site (Antora, GitHub Pages): <https://n00tropic.github.io/agentic-dev-stacks>
@@ -65,6 +99,12 @@ Scoped, cross-OS VS Code packs plus MCP manifests, designed as a **compiler**: p
 - Open in VS Code with the Development Containers extension or run `devcontainer up` (uses `.devcontainer/devcontainer.json`).
 - Post-create runs: `pip3 install --user pyyaml toml && python3 vscode/scripts/build-bundles.py && bash vscode/scripts/validate-all-bundles.sh`.
 - Result: fresh bundles + zips under `vscode/exports/bundles/**`, validated without touching host dot files.
+
+## CI coverage
+
+- `validate-packs`: validates extension lists and metadata on PRs/pushes touching packs/control docs.
+- `docs-check`: PR link checker + docs build; `docs-antora`: deploys docs to GitHub Pages on main.
+- `ci-minimal` (added): runs `trunk check --ci`, Python syntax checks, and JSON/TOML validation to keep scripts and manifests healthy.
 
 ## Safety notes
 

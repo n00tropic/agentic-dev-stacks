@@ -1,0 +1,67 @@
+name: CI (minimal)
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  trunk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: trunk-io/trunk-action@v1
+      - name: Trunk check
+        run: trunk check --no-progress --ci
+
+  python-and-schemas:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Python syntax check
+        run: python -m compileall vscode codex scripts docs
+      - name: Validate JSON
+        run: |
+          python - <<'PY'
+          import json, pathlib, sys
+          root = pathlib.Path('.')
+          skip_parts = {'.trunk/tools', 'exports/'}
+          fail = False
+          for path in root.rglob('*.json'):
+            posix = path.as_posix()
+            if any(part in posix for part in skip_parts):
+              continue
+            try:
+              json.loads(path.read_text(encoding='utf-8'))
+            except Exception as exc:  # pragma: no cover - CI guardrail
+              print(f"{path}: {exc}")
+              fail = True
+          if fail:
+            sys.exit(1)
+          PY
+      - name: Validate TOML
+        run: |
+          python - <<'PY'
+          import pathlib, sys
+          import tomllib
+          root = pathlib.Path('.')
+          skip_parts = {'.trunk/tools', 'exports/'}
+          fail = False
+          for path in root.rglob('*.toml'):
+            posix = path.as_posix()
+            if any(part in posix for part in skip_parts):
+              continue
+            try:
+              tomllib.loads(path.read_text(encoding='utf-8'))
+            except Exception as exc:  # pragma: no cover - CI guardrail
+              print(f"{path}: {exc}")
+              fail = True
+          if fail:
+            sys.exit(1)
+          PY
