@@ -36,6 +36,7 @@ Use en-GB (Oxford) spelling for docs and LTeX defaults unless profile notes say 
      - When touching anything related to Codex configuration or MCP, consult:
        - `codex/docs/config-guides.md`
        - `codex/docs/safe-vs-danger-modes.md`
+   - Do NOT hand-edit `vscode/profiles-dist/*.code-profile`; always regenerate via VS Code **Export Profile…**.
 
 4. **No secrets**
    - Never create or commit:
@@ -53,6 +54,17 @@ Use en-GB (Oxford) spelling for docs and LTeX defaults unless profile notes say 
    - Use generated files as staging areas for users to copy into their own config files.
 
 ## Standard workflows
+
+### Republish a profile to gist (one-click import)
+
+1. Export workspace(s): `cd vscode && python scripts/export-packs.py <slug>` (repro, git-ignored).
+2. Apply the export to a real VS Code profile (extensions/settings) using CLI or the helper install scripts.
+3. In VS Code, **Export Profile…** for that profile name:
+   - Save to `vscode/profiles-dist/<slug>.code-profile` (overwrite allowed; never hand-edit).
+   - Optionally export to a secret gist for one-click import.
+4. Update `PROFILE_DIST.md` with the `.code-profile` path and gist URL (or `<TO_FILL>` placeholder).
+
+Agents must never fabricate `.code-profile` content; always use the VS Code Export Profile UI.
 
 ### A. Add or change a profile
 

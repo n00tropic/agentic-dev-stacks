@@ -41,6 +41,8 @@ python scripts/export-packs.py <slug> [<slug> ...]
    code exports/workspaces/<slug>/<slug>.code-workspace --profile "<Profile Name>"
    ```
 
+> Fast path: `scripts/macos/install-profiles.sh`, `scripts/linux/install-profiles.sh`, or `scripts/windows/Install-Profiles.ps1` will loop through slugs (or the ones you pass) using `export-map.yaml`, ensure the profile exists, install extensions, and open the workspace once.
+
 ## Validation reminders
 
 - Keep source packs in `packs/**` aligned with `CONTROL.md`.
