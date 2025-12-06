@@ -57,7 +57,9 @@ def slugs_from_control() -> List[Tuple[str, str]]:
         if len(parts) < 4:
             continue
         pack, slug = parts[1], parts[2]
-        if slug and pack and slug != "Slug":
+        if slug in {"Slug", "---------------------"}:
+            continue
+        if slug and pack:
             rows.append((slug, pack))
     return rows
 
