@@ -51,7 +51,11 @@ run_lychee() {
 		exit 1
 	fi
 	url="https://github.com/lycheeverse/lychee/releases/latest/download/lychee-${target}.tar.gz"
-	tmpdir="$(mktemp -d)"
+	tmpdir="$(mktemp -d 2>/dev/null || true)"
+	if [[ -z ${tmpdir-} ]]; then
+		echo "Failed to create temporary directory for lychee" >&2
+		exit 1
+	fi
 	trap 'rm -rf "${tmpdir}"' EXIT
 	echo "Downloading lychee binary for ${target}..."
 	if ! curl -fsSL "${url}" -o "${tmpdir}/lychee.tar.gz"; then
