@@ -31,16 +31,14 @@ jobs:
       - name: Build Antora site
         working-directory: docs
         run: |
-          node -v
-          npm -v
-          npm exec --package @antora/site-generator@latest -- antora antora-playbook.yml
+          bash ./build-docs.sh
 
       - name: Link check (external)
         working-directory: docs
         env:
           CHECK_EXTERNAL: "1"
         run: |
-          ./check-links.sh
+          bash ./check-links.sh
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
