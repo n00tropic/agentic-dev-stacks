@@ -1,0 +1,7 @@
+= MCP Integration (stub)
+
+TODO: document MCP manifests and codex-mcp.generated.toml workflow.
+
+- Source manifests: `vscode/packs/*/mcp/servers.<slug>.json`
+- Merge script: `vscode/scripts/merge-mcp-fragments.py <slug>`
+- Generated output: `vscode/codex-mcp.generated.toml` (never committed; bundles copy a slug-scoped variant)

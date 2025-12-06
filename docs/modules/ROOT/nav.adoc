@@ -1,0 +1,5 @@
+* xref:index.adoc[Overview]
+* xref:golden-path.adoc[Golden Path]
+* xref:vscode:packs.adoc[VS Code Packs & Bundles]
+* xref:codex:config-guides.adoc[Codex & MCP]
+* xref:agents:agents-overview.adoc[Agents & Custom Agents]

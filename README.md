@@ -1,6 +1,18 @@
 # Agentic Dev Stacks
 
-Scoped, cross-OS VS Code packs plus MCP manifests, designed as a **compiler**: packs (source) → reproducible exports → importable profiles.
+Scoped, cross-OS VS Code packs plus MCP manifests, designed as a **compiler**: packs (source) → reproducible exports → importable profiles. Full docs: <https://n00tropic.github.io/agentic-dev-stacks>
+
+## Documentation
+
+- Docs site (Antora, GitHub Pages): <https://n00tropic.github.io/agentic-dev-stacks>
+- Source lives in `docs/` (Antora playbook + modules). Build locally:
+
+  ```bash
+  cd docs
+  ./build-docs.sh
+  ```
+
+  Output: `docs/build/site` (git-ignored).
 
 ## Layout (truths up front)
 
@@ -15,7 +27,7 @@ Scoped, cross-OS VS Code packs plus MCP manifests, designed as a **compiler**: p
     - `packs/<pack>/mcp/servers.<slug>.json`
   - Custom agents SSoT: `../agents/<slug>/*.agent.md` (copied into bundles under `.github/agents/`)
   - Tooling: `scripts/**`
-  - Exports (gitignored, reproducible): `exports/workspaces/<slug>/...`
+  - Exports (git-ignored, reproducible): `exports/workspaces/<slug>/...`
   - Dist exports (versioned if present): `profiles-dist/*.code-profile` (never hand-edit)
 - **`codex/`** – docs for configuring Codex and MCP safely (`config-guides.md`, `safe-vs-danger-modes.md`).
 - **`prompts/`** – prompt packs for Copilot/sub-agents (copy into workspaces; en-GB spelling).
@@ -24,16 +36,20 @@ Scoped, cross-OS VS Code packs plus MCP manifests, designed as a **compiler**: p
 
 1. Author in packs: edit `vscode/packs/**` (profiles, extensions, settings, MCP manifests).
 2. Export reproducible workspaces (generated, safe to delete):
+
    ```bash
    cd vscode
    python scripts/export-packs.py <slug> [<slug> ...]
    ```
+
 3. Materialise on a machine with official VS Code CLI:
+
    ```bash
    code --profile "<Profile Name>"
    cat exports/workspaces/<slug>/.vscode/extensions.list | xargs -n1 code --install-extension --profile "<Profile Name>"
    code exports/workspaces/<slug>/<slug>.code-workspace --profile "<Profile Name>"
    ```
+
 4. Export a “good” profile back out from VS Code:
    - **Export Profile…** → save `.code-profile` to `vscode/profiles-dist/<slug>.code-profile` (do not hand-edit).
    - Optional: export to secret gist for one-click import.
@@ -52,7 +68,7 @@ Scoped, cross-OS VS Code packs plus MCP manifests, designed as a **compiler**: p
 
 ## Safety notes
 
-- Do not edit `~/.codex/config.toml` or VS Code global settings from this repo; copy snippets instead.
+- Do not edit `~/.codex/config.toml` or VS Code global settings from this repository; copy snippets instead.
 - Never hand-edit `.code-profile` files; always regenerate via VS Code Export Profile.
 - Do not commit generated files (`vscode/exports/**`, `vscode/codex-mcp.generated.toml`).
 - MCP manifests must use placeholders for secrets/paths; avoid adding credentials.

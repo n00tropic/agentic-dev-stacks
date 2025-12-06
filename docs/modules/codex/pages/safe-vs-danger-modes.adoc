@@ -1,0 +1,7 @@
+= Safe vs Danger Modes (stub)
+
+TODO: migrate content from `codex/docs/safe-vs-danger-modes.md`.
+
+- Sandbox levels
+- When to use danger vs safe
+- MCP considerations

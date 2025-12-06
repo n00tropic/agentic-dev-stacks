@@ -1,0 +1,45 @@
+= Golden Path (new machine)
+
+This is the minimal, repeatable path to bootstrap a profile on a fresh machine.
+
+== Repo-aware path
+
+. Clone the repo and enter the vscode directory.
++
+[source,bash]
+----
+cd vscode
+python scripts/export-packs.py core-base-dev
+----
+. Install extensions into the profile (scoped):
++
+[source,bash]
+----
+cat exports/workspaces/core-base-dev/.vscode/extensions.list | \
+  xargs -L1 code --install-extension --profile "Core / Base Dev"
+----
+. Open the workspace with the profile:
++
+[source,bash]
+----
+code exports/workspaces/core-base-dev/core-base-dev.code-workspace \
+  --profile "Core / Base Dev"
+----
+
+== Bundle path (no repo edits)
+
+Use a prebuilt bundle zip (from `vscode/exports/bundles/<slug>-bundle.zip`):
+
+. Unzip anywhere.
+. Run the OS installer in `scripts/` (macOS/Linux shell or Windows PowerShell).
+. The installer creates/opens the profile, installs extensions, and opens the workspace.
+
+== Validation
+
+Run Trunk and bundle validation when you change packs or MCP:
++
+[source,bash]
+----
+trunk check
+bash vscode/scripts/validate-all-bundles.sh
+----

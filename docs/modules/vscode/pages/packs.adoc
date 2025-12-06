@@ -1,0 +1,22 @@
+= VS Code Packs
+
+Packs are the source of truth for profiles, extensions, settings, and MCP manifests.
+
+== Layout
+
+- `vscode/packs/<pack>/profiles/PROFILE.<slug>.md`
+- `vscode/packs/<pack>/extensions/extensions.<slug>.txt`
+- `vscode/packs/<pack>/settings/settings.<slug>.json`
+- `vscode/packs/<pack>/mcp/servers.<slug>.json`
+
+Edit these files to change a profile. Keep CONTROL.md in sync when adding/removing profiles.
+
+== Exporting to workspaces
+
+[source,bash]
+----
+cd vscode
+python scripts/export-packs.py <slug> [<slug> ...]
+----
+
+Outputs go to `vscode/exports/workspaces/<slug>/` (gitignored).

@@ -1,0 +1,33 @@
+= Bundles & Exports
+
+Bundles are reproducible ZIPs that contain everything to spin up a profile: workspace, .vscode settings, extensions list, MCP manifests, custom agents, and install scripts.
+
+== Build bundles
+
+[source,bash]
+----
+cd vscode
+python scripts/build-bundles.py            # all slugs
+python scripts/build-bundles.py <slug> ... # specific slugs
+----
+
+Outputs:
+
+- `vscode/exports/bundles/<slug>/`
+- `vscode/exports/bundles/<slug>-bundle.zip`
+
+== Validate bundles
+
+[source,bash]
+----
+bash vscode/scripts/validate-all-bundles.sh
+----
+
+Validation checks structure, JSON/TOML, and (optionally) installs extensions using an isolated VS Code user data directory.
+
+== Install scripts (inside each bundle)
+
+- `scripts/install-macos.sh` / `install-linux.sh`
+- `scripts/Install-Windows.ps1`
+
+They call `code --profile` and `--install-extension` and open the workspace.

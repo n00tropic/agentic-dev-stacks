@@ -1,0 +1,21 @@
+site:
+  title: Agentic Dev Stacks
+  start_page: agentic-dev-stacks::index.adoc
+
+content:
+  sources:
+    - url: ..
+      branches: [main]
+      start_path: docs
+
+runtime:
+  fetch: false
+
+asciidoc:
+  attributes:
+    sectanchors: ""
+    sectnums: ""
+    source-highlighter: highlightjs
+
+output:
+  dir: build/site

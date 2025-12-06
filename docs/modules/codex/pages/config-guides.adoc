@@ -1,0 +1,7 @@
+= Codex Configuration Guides (stub)
+
+TODO: migrate content from `codex/docs/config-guides.md`.
+
+- Using MCP with Codex
+- Safe configuration patterns
+- Example TOML snippets

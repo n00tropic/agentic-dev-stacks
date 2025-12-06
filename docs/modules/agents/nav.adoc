@@ -1,0 +1,3 @@
+* xref:agents-overview.adoc[Agent Guidelines]
+* xref:custom-agents.adoc[Custom Copilot Agents]
+* xref:mcp-tools.adoc[MCP & Tools]

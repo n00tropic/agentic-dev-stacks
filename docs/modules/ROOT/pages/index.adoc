@@ -1,0 +1,22 @@
+= Agentic Dev Stacks
+
+A reproducible, agent-friendly scaffolding for VS Code profiles, MCP manifests, custom Copilot agents, and bundles. This site mirrors the repository structure and governance.
+
+== What this project provides
+
+- VS Code packs (profiles, extensions, settings, MCP manifests) under `vscode/packs/**`.
+- Bundle compiler: packs -> exports -> bundles/zips with workspaces, MCP, custom agents.
+- Codex/MCP guidance and safety modes.
+- Governance and agent rules (AGENTS.md).
+- Prompt packs and custom Copilot agents per profile.
+
+== Where to start
+
+- Golden Path: xref:golden-path.adoc[]
+- Packs & bundles: xref:vscode:packs.adoc[] and xref:vscode:bundles.adoc[]
+- Codex/MCP config: xref:codex:config-guides.adoc[]
+- Agent rules & custom agents: xref:agents:agents-overview.adoc[]
+
+== Governance
+
+Follow AGENTS.md and CONTROL.md when editing packs, MCP, or agents. Never edit user dotfiles; regenerate exports/bundles instead.

@@ -1,0 +1,3 @@
+* xref:config-guides.adoc[Codex Config Guides]
+* xref:safe-vs-danger-modes.adoc[Safe vs Danger Modes]
+* xref:mcp-integration.adoc[MCP Integration]

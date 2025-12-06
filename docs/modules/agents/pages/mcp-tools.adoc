@@ -1,0 +1,6 @@
+= MCP & Tools (stub)
+
+TODO:
+- MCP manifest expectations per profile.
+- Using merge-mcp-fragments.py and generated TOML safely.
+- Any tooling guidance for MCP servers.

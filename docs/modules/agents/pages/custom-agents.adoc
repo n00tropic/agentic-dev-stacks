@@ -1,0 +1,7 @@
+= Custom Copilot Agents (stub)
+
+TODO:
+- Describe SSoT location: `agents/<slug>/*.agent.md`.
+- How bundles copy agents into `.github/agents/`.
+- Frontmatter fields (description, target, tools, mcp-servers, etc.).
+- How to add new agents safely.

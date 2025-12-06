@@ -1,0 +1,8 @@
+= Agent Guidelines (stub)
+
+This module will summarise AGENTS.md (governance, invariants) and CONTROL.md.
+
+TODO:
+- Port AGENTS.md key rules (no dot files, generated artefacts policy, MCP safety flags).
+- Link to agent-instructions.md and copilot-instructions.md.
+- Outline standard workflows (profile changes, MCP changes, bundle builds).
