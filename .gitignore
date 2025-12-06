@@ -12,3 +12,9 @@ actions-runner/.credentials*
 
 #Ignore vscode AI rules
 .github/instructions/codacy.instructions.md
+
+# Codacy CLI logs
+.codacy/logs/
+
+# Python bytecode caches
+**/__pycache__/
