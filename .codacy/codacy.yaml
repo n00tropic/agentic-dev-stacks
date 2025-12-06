@@ -1,11 +1,3 @@
-## NOTE: PMD analysis is known to fail on some third-party plugin fixtures that live
-## under `./.trunk/plugins/**` (these contain test_data and vendor assets with
-## invalid inputs for rules using JS/SQL parsers). For now PMD is configured but
-## NOT enabled in `tools:` to avoid pipeline failures.
-##
-## To re-enable PMD: either remove or fix the problematic fixtures, or tighten the
-## excludes in this block. Example excludes: `./.trunk/**/test_data/**`,
-## `./docs/build/**`, `./vscode/exports/**`, and `./vendor/**`.
 pmd:
   arguments:
     - --no-progress

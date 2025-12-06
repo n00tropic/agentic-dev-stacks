@@ -45,40 +45,65 @@ def looks_like_secret(val: str) -> bool:
     )
 
 
-def validate_server(name: str, srv: Dict[str, Any]) -> None:
-    required = ["command", "args", "env"]
-    for key in required:
-        if key not in srv:
+def _assert_required_keys(name: str, obj: Dict[str, Any], keys: list[str]) -> None:
+    for key in keys:
+        if key not in obj:
             sys.stderr.write(f"ERROR: server '{name}' missing '{key}'\n")
             sys.exit(1)
-    if not isinstance(srv["command"], str):
-        sys.stderr.write(f"ERROR: server '{name}' command must be string\n")
+
+
+def _assert_string_field(name: str, obj: Dict[str, Any], key: str) -> None:
+    if not isinstance(obj[key], str):
+        sys.stderr.write(f"ERROR: server '{name}' {key} must be string\n")
         sys.exit(1)
-    if not isinstance(srv["args"], list) or not all(
-        isinstance(a, str) for a in srv["args"]
-    ):
-        sys.stderr.write(f"ERROR: server '{name}' args must be list[str]\n")
+
+
+def _assert_list_of_strings(name: str, obj: Dict[str, Any], key: str) -> None:
+    if not isinstance(obj[key], list) or not all(isinstance(a, str) for a in obj[key]):
+        sys.stderr.write(f"ERROR: server '{name}' {key} must be list[str]\n")
         sys.exit(1)
-    if not isinstance(srv["env"], dict) or not all(
-        isinstance(k, str) and isinstance(v, str) for k, v in srv["env"].items()
+
+
+def _assert_env_map(name: str, obj: Dict[str, Any], key: str) -> None:
+    if not isinstance(obj[key], dict) or not all(
+        isinstance(k, str) and isinstance(v, str) for k, v in obj[key].items()
     ):
         sys.stderr.write(
-            f"ERROR: server '{name}' env must be object of string values\n"
+            f"ERROR: server '{name}' {key} must be object of string values\n"
         )
         sys.exit(1)
 
-    # Warnings (non-fatal)
-    if srv["command"] != "/bin/sh":
+
+def _warn_command_not_sh(name: str, obj: Dict[str, Any]) -> None:
+    if obj["command"] != "/bin/sh":
         sys.stderr.write(
-            f"WARN: server '{name}' command is not /bin/sh (got '{srv['command']}')\n"
+            f"WARN: server '{name}' command is not /bin/sh (got '{obj['command']}')\n"
         )
-    if not (len(srv["args"]) >= 2 and srv["args"][0] == "-c"):
+
+
+def _warn_args_not_prefix(name: str, obj: Dict[str, Any]) -> None:
+    if len(obj["args"]) < 2 or obj["args"][0] != "-c":
         sys.stderr.write(f"WARN: server '{name}' args do not start with ['-c', ...]\n")
-    for k, v in srv["env"].items():
+
+
+def _warn_inline_secrets(name: str, obj: Dict[str, Any]) -> None:
+    for k, v in obj["env"].items():
         if looks_like_secret(v):
             sys.stderr.write(
                 f"WARN: server '{name}' env '{k}' looks like inline secret; prefer env vars\n"
             )
+
+
+def validate_server(name: str, srv: Dict[str, Any]) -> None:
+    # Validate required keys present.
+    _assert_required_keys(name, srv, ["command", "args", "env"])
+    _assert_string_field(name, srv, "command")
+    _assert_list_of_strings(name, srv, "args")
+    _assert_env_map(name, srv, "env")
+
+    _warn_command_not_sh(name, srv)
+    _warn_args_not_prefix(name, srv)
+    _warn_inline_secrets(name, srv)
 
 
 def main() -> None:
