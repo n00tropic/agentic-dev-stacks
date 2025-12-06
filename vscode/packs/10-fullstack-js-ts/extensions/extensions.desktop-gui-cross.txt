@@ -22,3 +22,17 @@ vknabel.vscode-swiftlint
 vadimcn.vscode-lldb
 enkia.tokyo-night
 trunk.io
+eamodio.gitlens
+usernamehw.errorlens
+streetsidesoftware.code-spell-checker
+oderwat.indent-rainbow
+gruntfuggly.todo-tree
+ms-vscode.js-debug-nightly
+ms-playwright.playwright
+rangav.vscode-thunder-client
+humao.rest-client
+ms-vscode.remote-repositories
+ms-vsliveshare.vsliveshare
+ms-vscode-remote.remote-containers
+ms-vscode.remote-ssh
+ms-vscode.cpptools-extension-pack

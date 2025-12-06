@@ -21,3 +21,17 @@ wix.vscode-import-cost
 steoates.autoimport
 enkia.tokyo-night
 trunk.io
+eamodio.gitlens
+usernamehw.errorlens
+streetsidesoftware.code-spell-checker
+oderwat.indent-rainbow
+gruntfuggly.todo-tree
+ms-vscode.js-debug-nightly
+ms-playwright.playwright
+rangav.vscode-thunder-client
+humao.rest-client
+formulahendry.auto-rename-tag
+stylelint.vscode-stylelint
+storybookjs.storybook
+ms-vscode.remote-repositories
+ms-vsliveshare.vsliveshare

@@ -15,3 +15,14 @@ ms-vscode-remote.remote-ssh
 tim-koehler.helm-intellisense
 enkia.tokyo-night
 trunk.io
+eamodio.gitlens
+usernamehw.errorlens
+streetsidesoftware.code-spell-checker
+oderwat.indent-rainbow
+gruntfuggly.todo-tree
+amazonwebservices.aws-toolkit-vscode
+pulumi.pulumi
+ms-azuretools.vscode-bicep
+ms-azuretools.azurerm-vscode-tools
+ms-vscode.remote-repositories
+ms-vsliveshare.vsliveshare

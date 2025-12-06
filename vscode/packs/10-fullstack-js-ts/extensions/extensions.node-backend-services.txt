@@ -15,3 +15,16 @@ wix.vscode-import-cost
 mhutchie.git-graph
 enkia.tokyo-night
 trunk.io
+eamodio.gitlens
+usernamehw.errorlens
+streetsidesoftware.code-spell-checker
+oderwat.indent-rainbow
+gruntfuggly.todo-tree
+yoavbls.pretty-ts-errors
+rangav.vscode-thunder-client
+ms-vscode.js-debug-nightly
+firsttris.vscode-jest-runner
+ZixuanChen.vitest-explorer
+ms-vscode-remote.remote-containers
+ms-vscode.remote-repositories
+ms-vsliveshare.vsliveshare

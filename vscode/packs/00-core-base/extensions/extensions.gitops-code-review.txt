@@ -13,3 +13,5 @@ mhutchie.git-graph
 donjayamanne.githistory
 enkia.tokyo-night
 trunk.io
+eamodio.gitstash
+donjayamanne.git-extension-pack

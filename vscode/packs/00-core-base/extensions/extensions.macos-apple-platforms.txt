@@ -19,3 +19,9 @@ vknabel.vscode-swift-development-environment
 vknabel.vscode-swiftlint
 sswg.swift-lang
 trunk.io
+ms-vscode.remote-repositories
+ms-vscode-remote.remote-containers
+ms-vscode.remote-ssh
+ms-vsliveshare.vsliveshare
+ms-vscode.js-debug-nightly
+ms-playwright.playwright

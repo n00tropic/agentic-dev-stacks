@@ -5,3 +5,13 @@ GitHub.copilot
 GitHub.copilot-chat
 enkia.tokyo-night
 trunk.io
+eamodio.gitlens
+usernamehw.errorlens
+streetsidesoftware.code-spell-checker
+oderwat.indent-rainbow
+gruntfuggly.todo-tree
+ms-vscode-remote.remote-ssh
+ms-vscode.remote-repositories
+ms-vscode-remote.remote-containers
+ms-vsliveshare.vsliveshare
+ms-azuretools.vscode-docker

@@ -18,3 +18,12 @@ christian-kohler.path-intellisense
 wix.vscode-import-cost
 enkia.tokyo-night
 trunk.io
+eamodio.gitlens
+usernamehw.errorlens
+streetsidesoftware.code-spell-checker
+ms-vscode.js-debug-nightly
+ms-playwright.playwright
+rangav.vscode-thunder-client
+humao.rest-client
+ms-vscode.remote-repositories
+ms-vsliveshare.vsliveshare

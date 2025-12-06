@@ -26,6 +26,7 @@ Technical writing, docs grooming, and knowledge curation profile.
 
 ## QA & style workflow
 
+- Start by copying `qa/linters/vale.ini.sample` into your docs workspace (for example `docs/.vale.ini`) and commit it along with the `styles/` directory produced by `vale sync`.
 - Keep Microsoft + Google Vale style packs synced:
 
   ```bash
