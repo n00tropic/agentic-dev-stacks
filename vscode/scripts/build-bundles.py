@@ -243,7 +243,7 @@ def write_install_scripts(meta: Dict[str, str], bundle_dir: Path):
     (scripts_dir / "install-linux.sh").write_text(INSTALL_SH.format(**meta))
     (scripts_dir / "Install-Windows.ps1").write_text(INSTALL_PS.format(**meta))
     for sh in ["install-macos.sh", "install-linux.sh"]:
-        os.chmod(scripts_dir / sh, 0o700)
+        os.chmod(scripts_dir / sh, 0o644)
 
 
 def write_readme(meta: Dict[str, str], bundle_dir: Path):

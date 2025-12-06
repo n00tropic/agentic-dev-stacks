@@ -3,6 +3,8 @@
 
 GitHub.copilot
 GitHub.copilot-chat
+GitHub.vscode-github-actions
+EditorConfig.EditorConfig
 yzhang.markdown-all-in-one
 DavidAnson.vscode-markdownlint
 bierner.markdown-preview-github-styles
@@ -24,5 +26,7 @@ vstirbu.vscode-mermaid-preview
 bpruitt-goddard.mermaid-markdown-syntax-highlighting
 quarto.quarto
 aykutsarac.jsoncrack-vscode
+tamasfe.even-better-toml
+eliostruyf.vscode-front-matter
 enkia.tokyo-night
 trunk.io

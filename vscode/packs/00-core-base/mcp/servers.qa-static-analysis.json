@@ -54,6 +54,44 @@
         "codex_config_toml": "[mcp_servers.github]\n# Configure with a fine-scoped GitHub token; see official docs.\ncommand = \"<TO_FILL>\"",
         "notes": "Use least-privilege PAT/OIDC; avoid broad org scopes."
       }
+    },
+    {
+      "id": "elasticsearch",
+      "human_name": "Elastic Elasticsearch MCP Server",
+      "category": "search",
+      "source": {
+        "type": "github",
+        "url": "https://github.com/elastic/elastic-mcp"
+      },
+      "recommended_usage": [
+        "Search QA artefacts (logs, traces, test outputs) during debugging.",
+        "Index and query code/search indexes to speed up static analysis triage."
+      ],
+      "config_fragments": {
+        "codex_config_toml": "[mcp_servers.elasticsearch]\n# Point to Elasticsearch endpoint; keep credentials out of VCS.\ncommand = \"<TO_FILL>\"",
+        "notes": "Prefer scoped API keys; consider read-only roles by default."
+      },
+      "optional": true,
+      "recommended_read_only": true
+    },
+    {
+      "id": "apify-web-search",
+      "human_name": "Apify Web Search MCP (optional, privacy-sensitive)",
+      "category": "search",
+      "source": {
+        "type": "registry",
+        "url": "https://apify.com/mcp/web-search-mcp-server"
+      },
+      "recommended_usage": [
+        "Optional: external web lookups for CVEs/mitigations when consented.",
+        "Use sparingly for cross-checking QA findings with public sources."
+      ],
+      "config_fragments": {
+        "codex_config_toml": "[mcp_servers.apify-web-search]\n# Provide Apify token via env var; enable only with consent.\ncommand = \"<TO_FILL>\"",
+        "notes": "Do not enable by default; sends queries to external services."
+      },
+      "optional": true,
+      "privacy_sensitive": true
     }
   ]
 }
