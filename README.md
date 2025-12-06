@@ -6,6 +6,10 @@
 
 Scoped, cross-OS VS Code packs plus MCP manifests, designed as a **compiler**: packs (source) → reproducible exports → importable profiles. Full docs: <https://n00tropic.github.io/agentic-dev-stacks>
 
+- Before: every machine grows its own VS Code / MCP quirks.
+- After: one repo, one truth; one-liner to land a vetted, agent-ready stack on macOS, Windows, or Linux.
+- Guardrails: profiles are exportable, reviewable, and avoid your global dotfiles.
+
 ## Why / Who
 
 - Why: Single source of truth for reproducible, sandbox-friendly VS Code profiles and MCP manifests without touching host dotfiles.
@@ -14,15 +18,15 @@ Scoped, cross-OS VS Code packs plus MCP manifests, designed as a **compiler**: p
 ## Quickstart (reference profile: Core / Base Dev)
 
 - Prereqs: VS Code CLI `code` in PATH, Python 3, Git + curl (for docs/bundle steps).
-- macOS / Linux (one-liner):
+- Exactly one first command per OS (fresh machines included):
 
   ```bash
+  # macOS / Linux
   cd vscode && ./scripts/install-core-base-dev.sh
   ```
 
-- Windows PowerShell:
-
   ```powershell
+  # Windows PowerShell
   cd vscode
   .\scripts\Install-CoreBaseDev.ps1
   ```
@@ -59,6 +63,8 @@ Scoped, cross-OS VS Code packs plus MCP manifests, designed as a **compiler**: p
   ```
 
   Validates `.vscode/mcp.json` structure (command/args/env per server); warns if commands diverge from the standard `/bin/sh -c` pattern.
+
+- Coming back online: visual walkthroughs (before/after profile import, MCP validation catching mistakes) will ship on the docs site; contributions welcome once the site is live again.
 
 ## Layout (truths up front)
 
@@ -101,10 +107,28 @@ Scoped, cross-OS VS Code packs plus MCP manifests, designed as a **compiler**: p
    - Optional: export to secret gist for one-click import.
 5. Record mapping in `PROFILE_DIST.md` (slug, profile name, dist path, gist URL or `<TO_FILL>`).
 
-## Golden paths
+## Golden paths (copy-pasta)
 
-- **Repo-aware machines** (Mac/Windows/Linux): follow steps 2–3 above; reuse `vscode/scripts/{macos,linux}/install-profiles.sh` or `vscode/scripts/windows/Install-Profiles.ps1` to automate installing extensions per profile from the exports.
-- **No-repo machines**: in VS Code, run **Import Profile…** and paste the gist URL listed in `PROFILE_DIST.md` (when populated). VS Code expects a gist containing a single `.code-profile` file; import URL format: `https://vscode.dev/editor/profile/github/<gist_id>`.
+- Solo dev on laptop (Core / Base Dev, quickest win):
+
+  ```bash
+  cd vscode && ./scripts/install-core-base-dev.sh
+  ```
+
+  ```powershell
+  cd vscode
+  .\scripts\Install-CoreBaseDev.ps1
+  ```
+
+- Reviewer on a locked-down machine (no repo checkout): use VS Code **Import Profile…** and paste the gist URL from `PROFILE_DIST.md` once populated (format: `https://vscode.dev/editor/profile/github/<gist_id>`). Profiles stay reviewable and avoid host dotfiles.
+
+- Team baseline via devcontainer (repro + validation):
+
+  ```bash
+  devcontainer up --workspace-folder .
+  ```
+
+  Post-create: `pip3 install --user pyyaml toml && python3 vscode/scripts/build-bundles.py && bash vscode/scripts/validate-all-bundles.sh` (runs in container; leaves host untouched).
 
 ## Development container (preferred automation)
 
