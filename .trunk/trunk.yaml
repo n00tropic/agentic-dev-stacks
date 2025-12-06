@@ -34,6 +34,16 @@ lint:
     - taplo@0.10.0
     - trufflehog@3.91.2
     - yamllint@1.37.1
+  ignore:
+    - paths:
+        - vscode/export-map.yaml
+      linters:
+        - vale
+    - paths:
+        - .trunk/trunk.yaml
+        - .vale.ini
+      linters:
+        - vale
 actions:
   enabled:
     - trunk-announce
