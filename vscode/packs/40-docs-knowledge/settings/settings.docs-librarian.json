@@ -30,6 +30,6 @@
   "ltex.enabled": ["markdown", "asciidoc", "latex"],
   "ltex.checkFrequency": "save",
   "vale.core.useCLI": true,
-  "vale.valeCLI.config": "<TO_FILL>",
+  "vale.valeCLI.config": "${workspaceFolder}/.vale.ini",
   "workbench.colorTheme": "Tokyo Night"
 }
