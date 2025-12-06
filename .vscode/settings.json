@@ -25,5 +25,9 @@
       "fileMatch": ["/.vscode/mcp.json"],
       "url": "./.vscode/mcp.schema.json"
     }
-  ]
+  ],
+  "sonarlint.connectedMode.project": {
+    "connectionId": "n00tropic",
+    "projectKey": "n00tropic_agentic-dev-stacks"
+  }
 }
