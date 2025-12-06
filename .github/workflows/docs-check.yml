@@ -1,0 +1,43 @@
+name: Docs Check (PR)
+
+on:
+  pull_request:
+    paths:
+      - docs/**
+      - README.md
+      - codex/**
+      - AGENTS.md
+      - CONTROL.md
+      - vscode/**
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-link-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Build docs
+        working-directory: docs
+        run: ./build-docs.sh
+
+      - name: Link check (lychee)
+        working-directory: docs
+        run: |
+          set -o pipefail
+          ./check-links.sh | tee ../lychee-report.md
+
+      - name: Upload link report
+        uses: actions/upload-artifact@v4
+        with:
+          name: lychee-report
+          path: lychee-report.md
