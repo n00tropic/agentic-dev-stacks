@@ -1,0 +1,30 @@
+{
+  "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+  "version": "0.2",
+  "language": "en-GB",
+  "dictionaries": [],
+  "words": [
+    "DevOps",
+    "GitOps",
+    "TypeScript",
+    "JavaScript",
+    "Trunk",
+    "Vitest",
+    "ESLint",
+    "mypy",
+    "ruff",
+    "Bandit",
+    "kube",
+    "kubeconform",
+    "workspace",
+    "codebase",
+    "gitignored"
+  ],
+  "ignorePaths": [
+    "node_modules",
+    "vscode/exports",
+    "vscode/profiles-dist",
+    "vscode/codex-mcp.generated.toml",
+    "**/*.zip"
+  ]
+}

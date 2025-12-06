@@ -1,0 +1,21 @@
+{
+  "language": "en-GB",
+  "disabledRules": {},
+  "dictionary": {
+    "en-GB": [
+      "DevOps",
+      "GitOps",
+      "TypeScript",
+      "JavaScript",
+      "Trunk",
+      "Vitest",
+      "ESLint",
+      "mypy",
+      "ruff",
+      "Bandit",
+      "infra",
+      "kube",
+      "kubeconform"
+    ]
+  }
+}
