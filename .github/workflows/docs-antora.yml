@@ -31,7 +31,9 @@ jobs:
       - name: Build Antora site
         working-directory: docs
         run: |
-          npx @antora/site-generator@latest antora-playbook.yml
+          node -v
+          npm -v
+          npm exec --package @antora/site-generator@latest -- antora-playbook.yml
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
