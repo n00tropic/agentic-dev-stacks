@@ -59,7 +59,7 @@ run_lychee() {
 		echo "Failed to create temporary directory for lychee" >&2
 		exit 1
 	fi
-	trap 'rm -rf "${tmpdir}"' EXIT
+	trap '[[ -n "${tmpdir:-}" ]] && rm -rf "${tmpdir}"' EXIT
 	echo "Downloading lychee binary for ${target}..."
 	if ! curl -fsSL "${url}" -o "${tmpdir}/lychee.tar.gz"; then
 		echo "Failed to download lychee from ${url}" >&2
