@@ -1,0 +1,23 @@
+{
+  "ltex.completionEnabled": true,
+  "ltex.language": "en-GB",
+  "ltex.enabled": [
+    "bibtex",
+    "context",
+    "context.tex",
+    "html",
+    "latex",
+    "markdown",
+    "mdx",
+    "typst",
+    "asciidoc",
+    "neorg",
+    "org",
+    "quarto",
+    "restructuredtext",
+    "rsweave"
+  ],
+  "cSpell.enabled": true,
+  "cSpell.language": "en-GB",
+  "cSpell.locale": "en-GB"
+}
