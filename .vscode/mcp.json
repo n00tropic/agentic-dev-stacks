@@ -3,81 +3,72 @@
   "mcpServers": {
     "sonatype-deps": {
       "command": "/bin/sh",
-      "args": ["-c", "${MCP_SONATYPE_CMD:-sonatype-deps-mcp}"],
+      "args": ["-c", "sonatype-deps-mcp"],
       "env": {}
     },
     "context7-docs": {
       "command": "/bin/sh",
-      "args": ["-c", "${MCP_CONTEXT7_CMD:-context7-mcp}"],
+      "args": ["-c", "context7-mcp"],
       "env": {}
     },
     "github": {
       "command": "/bin/sh",
-      "args": ["-c", "${MCP_GITHUB_CMD:-github-mcp}"],
+      "args": ["-c", "github-mcp"],
       "env": {}
     },
     "kubernetes": {
       "command": "/bin/sh",
-      "args": ["-c", "${MCP_KUBERNETES_CMD:-mcp-kubernetes}"],
+      "args": ["-c", "mcp-kubernetes"],
       "env": {}
     },
     "elasticsearch": {
       "command": "/bin/sh",
-      "args": ["-c", "${MCP_ELASTICSEARCH_CMD:-elastic-mcp}"],
+      "args": ["-c", "elastic-mcp"],
       "env": {}
     },
     "postgres": {
       "command": "/bin/sh",
-      "args": ["-c", "${MCP_POSTGRES_CMD:-mcp-postgres}"],
+      "args": ["-c", "mcp-postgres"],
       "env": {}
     },
     "mongodb": {
       "command": "/bin/sh",
-      "args": ["-c", "${MCP_MONGODB_CMD:-mcp-mongodb}"],
+      "args": ["-c", "mcp-mongodb"],
       "env": {}
     },
     "apify-web-search": {
       "command": "/bin/sh",
       "args": [
         "-c",
-        "${MCP_APIFY_CMD:-npx -y @apify/actors-mcp-server --actors apify/google-search-scraper}"
+        "npx -y @apify/actors-mcp-server --actors apify/google-search-scraper"
       ],
       "env": {
-        "APIFY_TOKEN": "${APIFY_TOKEN}"
+        "APIFY_TOKEN": "<TO_FILL>"
       }
     },
     "aws": {
       "command": "/bin/sh",
-      "args": ["-c", "${MCP_AWS_CMD:-aws-mcp}"],
+      "args": ["-c", "aws-mcp"],
       "env": {}
     },
     "filesystem": {
       "command": "/bin/sh",
-      "args": [
-        "-c",
-        "${MCP_FILESYSTEM_CMD:-npx -y @modelcontextprotocol/server-filesystem}"
-      ],
+      "args": ["-c", "npx -y @modelcontextprotocol/server-filesystem"],
       "env": {}
     },
     "docker": {
       "command": "/bin/sh",
-      "args": [
-        "-c",
-        "${MCP_DOCKER_CMD:-npx -y @modelcontextprotocol/server-docker}"
-      ],
+      "args": ["-c", "npx -y @modelcontextprotocol/server-docker"],
       "env": {}
     },
     "git": {
       "command": "/bin/sh",
-      "args": ["-c", "${MCP_GIT_CMD:-uvx mcp-server-git --repository .}"],
+      "args": ["-c", "uvx mcp-server-git --repository ."],
       "env": {}
     },
     "markitdown": {
       "command": "/bin/sh",
-      "args": [
-        "-c",
-        "${MCP_MARKITDOWN_CMD:-uvx --python 3.13 markitdown-mcp==0.0.1a4}"
-      ],
+      "args": ["-c", "uvx --python 3.13 markitdown-mcp==0.0.1a4"],
       "env": {}
     }
   }

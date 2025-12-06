@@ -3,6 +3,7 @@
   "title": "MCP Workspace Configuration",
   "type": "object",
   "properties": {
+    "$schema": { "type": "string" },
     "mcpServers": {
       "type": "object",
       "additionalProperties": {

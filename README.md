@@ -1,4 +1,8 @@
+<!-- vale off -->
+
 # Agentic Dev Stacks
+
+<!-- cspell:ignore Agentic Prereqs dotfiles Antora -->
 
 Scoped, cross-OS VS Code packs plus MCP manifests, designed as a **compiler**: packs (source) → reproducible exports → importable profiles. Full docs: <https://n00tropic.github.io/agentic-dev-stacks>
 
@@ -120,3 +124,5 @@ Scoped, cross-OS VS Code packs plus MCP manifests, designed as a **compiler**: p
 - Never hand-edit `.code-profile` files; always regenerate via VS Code Export Profile.
 - Do not commit generated files (`vscode/exports/**`, `vscode/codex-mcp.generated.toml`).
 - MCP manifests must use placeholders for secrets/paths; avoid adding credentials.
+
+<!-- vale on -->
