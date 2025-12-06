@@ -46,12 +46,20 @@ run_lychee() {
 		lychee "${lychee_flags[@]}"
 		return
 	fi
-	target="$(detect_target)" || {
+	target=""
+	detect_target_exit=0
+	target="$(detect_target)" || detect_target_exit=$?
+	if ((detect_target_exit != 0)) || [[ -z ${target-} ]]; then
 		echo "Unsupported platform for lychee binary" >&2
 		exit 1
-	}
+	fi
 	url="https://github.com/lycheeverse/lychee/releases/latest/download/lychee-${target}.tar.gz"
-	tmpdir="$(mktemp -d)"
+	tmpdir="$(mktemp -d 2>/dev/null || true)"
+	if [[ -z ${tmpdir-} ]]; then
+		echo "Failed to create temporary directory for lychee" >&2
+		exit 1
+	fi
+	trap '[[ -n "${tmpdir:-}" ]] && rm -rf "${tmpdir}"' EXIT
 	echo "Downloading lychee binary for ${target}..."
 	if ! curl -fsSL "${url}" -o "${tmpdir}/lychee.tar.gz"; then
 		echo "Failed to download lychee from ${url}" >&2
