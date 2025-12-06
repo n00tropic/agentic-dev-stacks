@@ -43,6 +43,12 @@ Scoped, cross-OS VS Code packs plus MCP manifests, designed as a **compiler**: p
 - **Repo-aware machines** (Mac/Windows/Linux): follow steps 2–3 above; reuse `vscode/scripts/{macos,linux}/install-profiles.sh` or `vscode/scripts/windows/Install-Profiles.ps1` to automate installing extensions per profile from the exports.
 - **No-repo machines**: in VS Code, run **Import Profile…** and paste the gist URL listed in `PROFILE_DIST.md` (when populated). VS Code expects a gist containing a single `.code-profile` file; import URL format: `https://vscode.dev/editor/profile/github/<gist_id>`.
 
+## Development container (preferred automation)
+
+- Open in VS Code with the Development Containers extension or run `devcontainer up` (uses `.devcontainer/devcontainer.json`).
+- Post-create runs: `pip3 install --user pyyaml toml && python3 vscode/scripts/build-bundles.py && bash vscode/scripts/validate-all-bundles.sh`.
+- Result: fresh bundles + zips under `vscode/exports/bundles/**`, validated without touching host dot files.
+
 ## Safety notes
 
 - Do not edit `~/.codex/config.toml` or VS Code global settings from this repo; copy snippets instead.

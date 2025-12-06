@@ -1,0 +1,22 @@
+{
+  "name": "agentic-dev-stacks",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+  "features": {
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.12"
+    },
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "22"
+    }
+  },
+  "postCreateCommand": "pip3 install --user pyyaml toml && python3 vscode/scripts/build-bundles.py && bash vscode/scripts/validate-all-bundles.sh",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+      },
+      "extensions": ["ms-python.python", "ms-python.vscode-pylance", "trunk.io"]
+    }
+  },
+  "remoteUser": "vscode"
+}

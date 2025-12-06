@@ -8,6 +8,7 @@ This repository is the canonical source of truth for:
 - MCP server manifests per profile (also under `vscode/packs/**/mcp/`).
 - Helper scripts for validation, exports, and MCP TOML generation (`vscode/scripts/**`).
 - Documentation for configuring Codex safely with these profiles (`codex/docs/**`).
+- Development container: `.devcontainer/devcontainer.json` builds bundles + runs validation automatically (preferred sandbox; keeps host dot files untouched).
 
 Any AI agent (Codex, GitHub Copilot coding agent, ChatGPT, etc.) working in this repo MUST follow these rules.
 
@@ -65,6 +66,14 @@ Use en-GB (Oxford) spelling for docs and LTeX defaults unless profile notes say 
 4. Update `PROFILE_DIST.md` with the `.code-profile` path and gist URL (or `<TO_FILL>` placeholder).
 
 Agents must never fabricate `.code-profile` content; always use the VS Code Export Profile UI.
+
+### Bundle builder & validation
+
+- Build bundles (git-ignored) to hand to users/CI:
+  - `cd vscode && python scripts/build-bundles.py [<slug> ...]`
+  - Outputs: `exports/bundles/<slug>/` and `exports/bundles/<slug>-bundle.zip`.
+- Validate bundles without touching host profiles: `cd vscode && scripts/validate-all-bundles.sh`.
+- Development container will run both build + validate on creation.
 
 ### A. Add or change a profile
 
