@@ -59,21 +59,24 @@ run_json_validation() {
 	fi
 	log "Validating JSON files"
 	ROOT_PATH="${ROOT}" python3 - <<'PY'
-	import json, os, pathlib, sys
-	root = pathlib.Path(os.environ["ROOT_PATH"])
-	skip_parts = {'.trunk/tools', 'exports/', '.vscode/'}
+import json, os, pathlib, sys
+
+root = pathlib.Path(os.environ["ROOT_PATH"])
+skip_parts = {'.trunk/tools', 'exports/', '.vscode/'}
 fail = False
+
 for path in root.rglob('*.json'):
-    posix = path.as_posix()
-    if any(part in posix for part in skip_parts):
-        continue
-    try:
-        json.loads(path.read_text(encoding='utf-8'))
-    except Exception as exc:  # pragma: no cover - CI guardrail
-        print(f"{path}: {exc}")
-        fail = True
+	posix = path.as_posix()
+	if any(part in posix for part in skip_parts):
+		continue
+	try:
+		json.loads(path.read_text(encoding='utf-8'))
+	except Exception as exc:  # pragma: no cover - CI guardrail
+		print(f"{path}: {exc}")
+		fail = True
+
 if fail:
-    sys.exit(1)
+	sys.exit(1)
 PY
 }
 
@@ -83,25 +86,29 @@ run_toml_validation() {
 	fi
 	log "Validating TOML files"
 	ROOT_PATH="${ROOT}" python3 - <<'PY'
-	import os, pathlib, sys
+import os, pathlib, sys
+
 try:
-    import tomllib  # Python 3.11+
+	import tomllib  # Python 3.11+
 except Exception:  # pragma: no cover - best effort
-    sys.exit(0)
+	sys.exit(0)
+
 root = pathlib.Path(os.environ["ROOT_PATH"])
-	skip_parts = {'.trunk/tools', 'exports/', '.vscode/'}
+skip_parts = {'.trunk/tools', 'exports/', '.vscode/'}
 fail = False
+
 for path in root.rglob('*.toml'):
-    posix = path.as_posix()
-    if any(part in posix for part in skip_parts):
-        continue
-    try:
-        tomllib.loads(path.read_text(encoding='utf-8'))
-    except Exception as exc:  # pragma: no cover - CI guardrail
-        print(f"{path}: {exc}")
-        fail = True
+	posix = path.as_posix()
+	if any(part in posix for part in skip_parts):
+		continue
+	try:
+		tomllib.loads(path.read_text(encoding='utf-8'))
+	except Exception as exc:  # pragma: no cover - CI guardrail
+		print(f"{path}: {exc}")
+		fail = True
+
 if fail:
-    sys.exit(1)
+	sys.exit(1)
 PY
 }
 
@@ -111,8 +118,8 @@ run_psscriptanalyzer() {
 		return
 	fi
 	log "Running PSScriptAnalyzer"
-	# shellcheck disable=SC2016  # PowerShell expands $env:ROOT_PATH inside the here-string
-	pwsh -NoLogo -NoProfile -Command @'
+	# shellcheck disable=SC2016  # PowerShell expands $env:ROOT_PATH inside the here-doc
+	pwsh -NoLogo -NoProfile -Command - <<'PS'
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
 $root = "$env:ROOT_PATH"
@@ -123,7 +130,7 @@ if (-not (Get-Module -ListAvailable -Name PSScriptAnalyzer)) {
     Install-Module -Name PSScriptAnalyzer -Scope CurrentUser -Force -ErrorAction Stop
 }
 Invoke-ScriptAnalyzer -Path $files.FullName -Settings $config -Recurse -EnableExit
-'@
+PS
 }
 
 main() {

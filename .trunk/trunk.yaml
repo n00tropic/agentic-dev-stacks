@@ -43,6 +43,7 @@ lint:
         - .codacy/**
       linters:
         - vale
+        - prettier
     - paths:
         - styles/**
       linters:
