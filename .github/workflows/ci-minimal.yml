@@ -45,6 +45,8 @@ jobs:
           if fail:
             sys.exit(1)
           PY
+      - name: Validate workspace MCP config
+        run: python scripts/validate-mcp-config.py
       - name: Validate TOML
         run: |
           python - <<'PY'
