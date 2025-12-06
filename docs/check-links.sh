@@ -52,7 +52,8 @@ run_lychee() {
 	}
 	url="https://github.com/lycheeverse/lychee/releases/latest/download/lychee-${target}.tar.gz"
 	tmpdir="$(mktemp -d)"
-	trap 'rm -rf "${tmpdir}"' EXIT
+	# shellcheck disable=SC2064
+	trap "rm -rf ${tmpdir}" EXIT
 	echo "Downloading lychee binary for ${target}..."
 	if ! curl -fsSL "${url}" -o "${tmpdir}/lychee.tar.gz"; then
 		echo "Failed to download lychee from ${url}" >&2
