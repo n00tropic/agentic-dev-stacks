@@ -3,3 +3,4 @@ title: Agentic Dev Stacks
 version: main
 nav:
   - modules/ROOT/nav.adoc
+  - modules/ROOT/nav-mcp.adoc
