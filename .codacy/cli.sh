@@ -1,6 +1,16 @@
 #!/usr/bin/env bash
 
-set -e +o pipefail
+set -euo pipefail
+IFS=$'\n\t'
+
+fatal() {
+	echo "Error: $*" >&2
+	exit 1
+}
+
+log() {
+	echo "[codacy-cli] $*"
+}
 
 # Set up paths first
 bin_name="codacy-cli-v2"
@@ -21,10 +31,10 @@ case "$arch" in
 	;;
 esac
 
-if [ -z "$CODACY_CLI_V2_TMP_FOLDER" ]; then
-	if [ "$(uname)" = "Linux" ]; then
+if [ -z "${CODACY_CLI_V2_TMP_FOLDER:-}" ]; then
+	if [ "${os_name}" = "Linux" ]; then
 		CODACY_CLI_V2_TMP_FOLDER="$HOME/.cache/codacy/codacy-cli-v2"
-	elif [ "$(uname)" = "Darwin" ]; then
+	elif [ "${os_name}" = "Darwin" ]; then
 		CODACY_CLI_V2_TMP_FOLDER="$HOME/Library/Caches/Codacy/codacy-cli-v2"
 	else
 		CODACY_CLI_V2_TMP_FOLDER=".codacy-cli-v2"
@@ -47,7 +57,7 @@ get_version_from_yaml() {
 
 get_latest_version() {
 	local response
-	if [ -n "$GH_TOKEN" ]; then
+	if [ -n "${GH_TOKEN:-}" ]; then
 		response=$(curl -Lq --header "Authorization: Bearer $GH_TOKEN" "https://api.github.com/repos/codacy/codacy-cli-v2/releases/latest" 2>/dev/null)
 	else
 		response=$(curl -Lq "https://api.github.com/repos/codacy/codacy-cli-v2/releases/latest" 2>/dev/null)
@@ -62,20 +72,20 @@ get_latest_version() {
 handle_rate_limit() {
 	local response="$1"
 	if echo "$response" | grep -q "API rate limit exceeded"; then
-		fatal "Error: GitHub API rate limit exceeded. Please try again later"
+		fatal "GitHub API rate limit exceeded. Please try again later"
 	fi
 }
 
 download_file() {
 	local url="$1"
 
-	echo "Downloading from URL: ${url}"
+	log "Downloading from URL: ${url}"
 	if command -v curl >/dev/null 2>&1; then
-		curl -# -LS "$url" -O
+		curl -# -f -L -S "$url" -O
 	elif command -v wget >/dev/null 2>&1; then
 		wget "$url"
 	else
-		fatal "Error: Could not find curl or wget, please install one."
+		fatal "Could not find curl or wget, please install one."
 	fi
 }
 
@@ -87,50 +97,59 @@ download() {
 }
 
 download_cli() {
-	# OS name lower case
-	suffix=$(echo "$os_name" | tr '[:upper:]' '[:lower:]')
-
 	local bin_folder="$1"
 	local bin_path="$2"
 	local version="$3"
+	local suffix remote_file url
+
+	suffix=$(echo "$os_name" | tr '[:upper:]' '[:lower:]')
 
 	if [ ! -f "$bin_path" ]; then
-		echo "📥 Downloading CLI version $version..."
+		log "Downloading CLI version $version..."
 
 		remote_file="codacy-cli-v2_${version}_${suffix}_${arch}.tar.gz"
 		url="https://github.com/codacy/codacy-cli-v2/releases/download/${version}/${remote_file}"
 
 		download "$url" "$bin_folder"
-		tar xzfv "${bin_folder}/${remote_file}" -C "${bin_folder}"
+		tar xzf "${bin_folder}/${remote_file}" -C "${bin_folder}"
 	fi
 }
 
 # Warn if CODACY_CLI_V2_VERSION is set and update is requested
-if [ -n "$CODACY_CLI_V2_VERSION" ] && [ "$1" = "update" ]; then
-	echo "⚠️  Warning: Performing update with forced version $CODACY_CLI_V2_VERSION"
-	echo "    Unset CODACY_CLI_V2_VERSION to use the latest version"
+if [ -n "${CODACY_CLI_V2_VERSION:-}" ] && [ "${1:-}" = "update" ]; then
+	log "Warning: Performing update with forced version $CODACY_CLI_V2_VERSION"
+	log "Unset CODACY_CLI_V2_VERSION to use the latest version"
 fi
 
 # Ensure version.yaml exists and is up to date
-if [ ! -f "$version_file" ] || [ "$1" = "update" ]; then
-	echo "ℹ️  Fetching latest version..."
+if [ ! -f "$version_file" ] || [ "${1:-}" = "update" ]; then
+	log "Fetching latest version..."
 	version=$(get_latest_version)
 	mkdir -p "$CODACY_CLI_V2_TMP_FOLDER"
 	echo "version: \"$version\"" >"$version_file"
 fi
 
 # Set the version to use
-if [ -n "$CODACY_CLI_V2_VERSION" ]; then
+if [ -n "${CODACY_CLI_V2_VERSION:-}" ]; then
 	version="$CODACY_CLI_V2_VERSION"
 else
 	version=$(get_version_from_yaml)
+fi
+
+if [ -z "$version" ]; then
+	fatal "Codacy CLI version could not be determined"
+fi
+
+# Allow CODACY_CLI_V2_VERSION to be a full release URL; extract the tag name
+if echo "$version" | grep -q '/'; then
+	version=${version##*/}
 fi
 
 # Set up version-specific paths
 bin_folder="${CODACY_CLI_V2_TMP_FOLDER}/${version}"
 
 mkdir -p "$bin_folder"
-bin_path="$bin_folder"/"$bin_name"
+bin_path="$bin_folder/$bin_name"
 
 # Download the tool if not already installed
 download_cli "$bin_folder" "$bin_path" "$version"
@@ -142,7 +161,7 @@ if [ -z "$run_command" ]; then
 fi
 
 if [ "$#" -eq 1 ] && [ "$1" = "download" ]; then
-	echo "Codacy cli v2 download succeeded"
+	log "Codacy cli v2 download succeeded"
 else
-	eval "$run_command $*"
+	"$run_command" "$@"
 fi

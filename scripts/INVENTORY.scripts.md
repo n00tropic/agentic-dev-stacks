@@ -1,0 +1,25 @@
+# Script Inventory
+
+- `.codacy/cli.sh` — shell — downloads and runs the codacy-cli-v2 release binary with caching per platform.
+- `docs/build-docs.sh` — shell — builds the `Antora` docs site via `npx`.
+- `docs/check-links.sh` — shell — runs `lychee` link checking against the built docs site.
+- `vscode/scripts/helpers/apply-profile.sh` — shell — merges pack settings for a given slug and prints extension install hints.
+- `vscode/scripts/helpers/export-gist-ssh.sh` — shell — pushes an exported VS Code `.code-profile` to a GitHub gist via SSH.
+- `vscode/scripts/helpers/validate-extensions.sh` — shell — invokes the Python extension metadata `validator`.
+- `vscode/scripts/linux/merge-settings.sh` — shell — delegates to the macOS merge-settings helper (POSIX wrapper).
+- `vscode/scripts/linux/install-profiles.sh` — shell — installs exported VS Code extensions into profiles on Linux.
+- `vscode/scripts/macos/merge-settings.sh` — shell — merges VS Code settings with backup and optional `jq` support.
+- `vscode/scripts/macos/install-profiles.sh` — shell — installs exported VS Code extensions into profiles on macOS.
+- `vscode/scripts/install-core-base-dev.sh` — shell — exports and installs the core-base-dev profile via VS Code CLI.
+- `vscode/scripts/validate-bundle.sh` — shell — validates a bundle zip structure plus JSON/TOML and optional VS Code CLI checks.
+- `vscode/scripts/validate-all-bundles.sh` — shell — loops all bundle zips and runs `validate-bundle.sh` per slug.
+- `vscode/scripts/helpers/Validate-Extensions.ps1` — PowerShell — runs the Python extension `validator`.
+- `vscode/scripts/helpers/Apply-Profile.ps1` — PowerShell — merges pack settings for a slug and prints extension install hints.
+- `vscode/scripts/windows/Merge-Settings.ps1` — PowerShell — merges VS Code settings.json with backup and deep merge.
+- `vscode/scripts/windows/Install-Profiles.ps1` — PowerShell — installs exported VS Code extensions into profiles (Windows).
+- `vscode/scripts/Install-CoreBaseDev.ps1` — PowerShell — exports and installs the core-base-dev profile on Windows.
+- `vscode/scripts/export-packs.py` — Python — exports pack settings/extensions into workspace-ready folders.
+- `vscode/scripts/merge-mcp-fragments.py` — Python — merges per-profile MCP manifests into a generated TOML fragment.
+- `vscode/scripts/validate_extensions.py` — Python — validates pack extension list files for structure and duplicates.
+- `vscode/scripts/build-bundles.py` — Python — builds per-profile bundle directories/zips from exports and metadata.
+- `scripts/validate-mcp-config.py` — Python — validates `.vscode/mcp.json` structure for workspace MCP `config`.

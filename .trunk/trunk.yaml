@@ -40,6 +40,10 @@ lint:
       linters:
         - vale
     - paths:
+        - .codacy/**
+      linters:
+        - vale
+    - paths:
         - styles/**
       linters:
         - vale

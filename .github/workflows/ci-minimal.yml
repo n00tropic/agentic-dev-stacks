@@ -74,3 +74,7 @@ jobs:
           if fail:
             sys.exit(1)
           PY
+      - name: Validate all scripts
+        env:
+          SKIP_TRUNK: "1"
+        run: bash scripts/validate-all-scripts.sh
