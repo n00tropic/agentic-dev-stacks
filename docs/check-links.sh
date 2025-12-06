@@ -46,7 +46,10 @@ run_lychee() {
 		lychee "${lychee_flags[@]}"
 		return
 	fi
-	if ! target="$(detect_target)"; then
+	target=""
+	detect_target_exit=0
+	target="$(detect_target)" || detect_target_exit=$?
+	if ((detect_target_exit != 0)) || [[ -z ${target-} ]]; then
 		echo "Unsupported platform for lychee binary" >&2
 		exit 1
 	fi
