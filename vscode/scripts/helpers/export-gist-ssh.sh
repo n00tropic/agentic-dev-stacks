@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Export a workspace tarball and push it to an existing GitHub gist over SSH.
+# Push an exported VS Code *.code-profile to an existing GitHub gist over SSH.
 # Requirements:
+# - Export the profile from VS Code (File → Preferences → Profiles → Export Profile…)
+#   to vscode/profiles-dist/<slug>.code-profile.
 # - You already created a gist (secret or public) in the GitHub UI and have its ID.
 # - Your SSH key is loaded and allowed to write to gists (same permissions as repo SSH).
 #
@@ -20,28 +22,24 @@ fi
 SLUG="$1"
 GIST_ID="$2"
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-EXPORT_DIR="${REPO_ROOT}/vscode/exports/workspaces/${SLUG}"
-TARBALL="${REPO_ROOT}/vscode/${SLUG}.tar.gz"
+PROFILE_FILE="${REPO_ROOT}/vscode/profiles-dist/${SLUG}.code-profile"
 
-if [[ ! -d ${EXPORT_DIR} ]]; then
-	echo "Export not found for slug '${SLUG}'. Run:"
-	echo "  cd vscode && python scripts/export-packs.py ${SLUG}"
+if [[ ! -f ${PROFILE_FILE} ]]; then
+	echo "Profile export not found for slug '${SLUG}'. Run the VS Code export flow and save to ${PROFILE_FILE}."
 	exit 1
 fi
 
-echo "Packing ${EXPORT_DIR} -> ${TARBALL}"
-tar -czf "${TARBALL}" -C "${EXPORT_DIR}" .
-
 TMPDIR="$(mktemp -d)"
-trap 'rm -rf "${TMPDIR}" "${TARBALL}"' EXIT
+trap 'rm -rf "${TMPDIR}"' EXIT
 
 cd "${TMPDIR}"
 git init -q
-cp "${TARBALL}" .
-git add "$(basename "${TARBALL}")"
-git commit -qm "Export ${SLUG}"
+cp "${PROFILE_FILE}" .
+git add "$(basename "${PROFILE_FILE}")"
+git commit -qm "Export ${SLUG} profile"
 
 git remote add origin "git@gist.github.com:${GIST_ID}.git"
-git push -f origin HEAD:master
+git branch -M main
+git push -f origin HEAD:main
 
-echo "Pushed ${SLUG} export to gist ${GIST_ID} over SSH."
+echo "Pushed ${SLUG} .code-profile to gist ${GIST_ID} over SSH."

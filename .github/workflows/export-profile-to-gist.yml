@@ -9,7 +9,7 @@ on:
         required: true
         type: string
       gist_id:
-        description: Optional existing secret gist ID to overwrite
+        description: Optional existing secret gist ID to overwrite (expects a .code-profile payload)
         required: false
         type: string
 
@@ -22,25 +22,24 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
-      - name: Export pack workspace
-        working-directory: vscode
+      - name: Locate code-profile export
+        id: profile
         run: |
-          python scripts/export-packs.py "${{ inputs.slug }}"
-          tar -czf "../${{ inputs.slug }}.tar.gz" "exports/workspaces/${{ inputs.slug }}"
+          file="vscode/profiles-dist/${{ inputs.slug }}.code-profile"
+          if [ ! -f "$file" ]; then
+            echo "::error::Missing $file. Export it from VS Code via 'Export Profile…' first." >&2
+            exit 1
+          fi
+          echo "file=$file" >> "$GITHUB_OUTPUT"
 
-      - name: Upload archive artifact
+      - name: Upload code-profile artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ inputs.slug }}-workspace
-          path: ${{ inputs.slug }}.tar.gz
+          name: ${{ inputs.slug }}-code-profile
+          path: ${{ steps.profile.outputs.file }}
           if-no-files-found: error
 
-      - name: Publish to secret gist
+      - name: Publish to secret gist (code-profile)
         if: env.GIST_TOKEN != '' && inputs.gist_id != ''
         uses: exuanbo/actions-deploy-gist@v1
         env:
@@ -48,5 +47,5 @@ jobs:
         with:
           token: ${{ secrets.GIST_TOKEN }}
           gist_id: ${{ inputs.gist_id }}
-          file_path: ${{ inputs.slug }}.tar.gz
+          file_path: ${{ steps.profile.outputs.file }}
           file_type: text

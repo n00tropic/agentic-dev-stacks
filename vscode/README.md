@@ -46,5 +46,5 @@ python scripts/export-packs.py <slug> [<slug> ...]
 - Keep source packs in `packs/**` aligned with `CONTROL.md`.
 - After changing extensions: run `./scripts/helpers/validate-extensions.sh` (or `.\scripts\helpers\Validate-Extensions.ps1` on Windows).
 - After MCP manifest changes: consider `python scripts/merge-mcp-fragments.py ...` to stage `codex-mcp.generated.toml` locally (never commit generated files).
-- Optional publishing: use `Export profile to gist` workflow (`workflow_dispatch`) with `slug` (and optional `gist_id`) plus `secrets.GIST_TOKEN` (scope: gist) to ship a secret gist archive of an exported workspace.
-- SSH alternative: create a gist in the UI, then run `./scripts/helpers/export-gist-ssh.sh <slug> <gist_id>` (SSH key with gist access required).
+- Optional publishing: use `Export profile to gist` workflow (`workflow_dispatch`) with `slug` (and optional `gist_id`) plus `secrets.GIST_TOKEN` (scope: gist) to ship the `.code-profile` export for that slug. VS Code imports via `https://vscode.dev/editor/profile/github/<gist_id>`.
+- SSH alternative: create a gist in the UI, then run `./scripts/helpers/export-gist-ssh.sh <slug> <gist_id>` (SSH key with gist access required; expects `vscode/profiles-dist/<slug>.code-profile`).
