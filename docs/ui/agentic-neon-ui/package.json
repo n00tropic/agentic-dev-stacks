@@ -10,12 +10,12 @@
     "watch": "gulp watch"
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.22",
-    "cssnano": "^7.1.2",
-    "del": "^8.0.1",
-    "gulp": "^5.0.1",
-    "gulp-postcss": "^10.0.0",
-    "gulp-zip": "^6.1.0",
-    "rimraf": "^6.1.2"
+    "autoprefixer": "^10.4.20",
+    "cssnano": "^6.0.1",
+    "del": "^7.1.0",
+    "gulp": "^4.0.2",
+    "gulp-postcss": "^9.0.1",
+    "gulp-zip": "^5.1.0",
+    "rimraf": "^5.0.7"
   }
 }
