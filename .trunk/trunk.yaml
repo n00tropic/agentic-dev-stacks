@@ -18,7 +18,8 @@ runtimes:
 # This is the section where you manage your linters. (https://docs.trunk.io/check/configuration)
 lint:
   enabled:
-    - renovate@42.39.1
+    - osv-scanner@2.3.0
+    - renovate@42.39.2
     - vale@3.13.0
     - actionlint@1.7.9
     - bandit@1.9.2
