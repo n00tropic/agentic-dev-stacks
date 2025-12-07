@@ -2,7 +2,7 @@
 
 # Agentic Dev Stacks
 
-Scoped, cross-OS VS Code packs plus MCP manifests and devcontainers. One repo, one truth, no host dotfiles touched.
+Scoped, cross-OS VS Code packs plus MCP manifests and devcontainers, aimed at teams that want governed, reproducible AI-ready setups (not ad-hoc dotfiles or one-off machines).
 
 ## What is this?
 
@@ -13,6 +13,12 @@ Why this exists
 - Onboard a new machine or hire with one governed VS Code profile per persona.
 - Keep agent + MCP setup reproducible across macOS, Windows, and Linux.
 - Respect profile budgets and safety flags (`CONTROL.md`, `AGENTS.md`), with devcontainer-first flows to avoid host dotfiles.
+
+## Hero quickstart (Codespaces or devcontainer)
+
+- Codespaces: open this repo in GitHub Codespaces (default devcontainer) and wait for build; then run `bash scripts/qa-preflight.sh`.
+- Local devcontainer: `devcontainer up --workspace-folder .` (requires Docker/Podman + Dev Containers extension), then `bash scripts/qa-preflight.sh`.
+- Prefer the Core / Base Dev flow below for the quickest local install per OS.
 
 ## Quickstart: Core / Base Dev (3 minutes)
 
@@ -77,6 +83,7 @@ Mini golden path (JS/TS)
 
 - JS/TS refactor + tests: `docs/golden-paths/js-ts-refactor.md`
 - Incident review + postmortem: `docs/golden-paths/incident-postmortem.md`
+- Docs site: <https://n00tropic.github.io/agentic-dev-stacks> (hero path: JS/TS refactor + tests)
 
 ## Stacks you can install
 
@@ -117,6 +124,8 @@ Status: JS/TS and Core are production-quality; other stacks are in active develo
 - Docs site: <https://n00tropic.github.io/agentic-dev-stacks> (built from `docs/`). Build locally with `cd docs && ./build-docs.sh`.
 - Safe vs danger modes and Codex wiring: `codex/docs/config-guides.md`, `codex/docs/safe-vs-danger-modes.md`.
 - Prompts: `prompts/stacks/*.prompts.md`; agent contracts and schemas: `agent-ecosystems/contracts/`, `agent-ecosystems/schemas/structured-outputs/`.
+- License: MIT (see `LICENSE`).
+- Community: `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md`, `SUPPORT.md`.
 
 For any new agent/toolset/stack/bundle, add at least one scenario under `agent-ecosystems/tests/scenarios/` and ensure `scripts/check-agent-ecosystems.sh` passes.
 
