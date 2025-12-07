@@ -8,16 +8,35 @@ Scoped, cross-OS VS Code packs plus MCP manifests and devcontainers. One repo, o
 
 Agentic development stacks built as a compiler: packs in `vscode/packs/**`, agents in `agents/**`, MCP manifests under `vscode/packs/*/mcp/`, and reproducible exports under `vscode/exports/**` (git-ignored). Dist profile exports live in `vscode/profiles-dist/*.code-profile` (never hand-edit; regenerate via VS Code **Export Profile…**).
 
-## Why you might care
+Why this exists
 
-- New machines and new hires land in a governed VS Code profile within minutes.
-- Reproducible agent + MCP setup across macOS, Windows, and Linux.
-- Profile budgets and safety flags are explicit (see `CONTROL.md` and `AGENTS.md`).
-- Devcontainer-first: keep host dotfiles clean while validating stacks end-to-end.
+- Onboard a new machine or hire with one governed VS Code profile per persona.
+- Keep agent + MCP setup reproducible across macOS, Windows, and Linux.
+- Respect profile budgets and safety flags (`CONTROL.md`, `AGENTS.md`), with devcontainer-first flows to avoid host dotfiles.
 
-## 5-minute Quickstart (Fullstack JS/TS)
+## Quickstart: Core / Base Dev (3 minutes)
 
-Prerequisites: VS Code with `code` CLI enabled, Git, Python 3; Docker/Podman + Dev Containers extension if you want the containerised toolchain.
+Prereqs: VS Code with `code` CLI enabled, Git, Python 3.
+
+```bash
+# macOS / Linux
+git clone https://github.com/n00tropic/agentic-dev-stacks.git
+cd agentic-dev-stacks/vscode
+./scripts/install-core-base-dev.sh
+```
+
+```powershell
+# Windows (PowerShell)
+git clone https://github.com/n00tropic/agentic-dev-stacks.git
+cd agentic-dev-stacks\vscode
+./scripts/Install-CoreBaseDev.ps1
+```
+
+What you get: the `Core / Base Dev` profile appears in VS Code, extensions install via CLI, and the exported workspace opens under that profile (`vscode/exports/workspaces/core-base-dev/core-base-dev.code-workspace`).
+
+## 5-minute trial: Fullstack JS/TS
+
+Prereqs: VS Code with `code` CLI, Git, Python 3; Docker/Podman + Dev Containers extension if you want the containerised toolchain.
 
 ```bash
 # macOS
@@ -37,7 +56,7 @@ cd agentic-dev-stacks
 # Windows (PowerShell)
 git clone https://github.com/n00tropic/agentic-dev-stacks.git
 cd agentic-dev-stacks
-.\scripts\install\fullstack-js-ts-windows.ps1
+./scripts/install/fullstack-js-ts-windows.ps1
 ```
 
 What happens:
@@ -46,7 +65,13 @@ What happens:
 - Installs extensions into the `Fullstack JS/TS – Web & API` profile via the VS Code CLI.
 - Opens the exported workspace at `vscode/exports/workspaces/fullstack-js-ts/fullstack-js-ts.code-workspace`.
 - Leaves global settings untouched. Optional: import a vetted profile export from `vscode/profiles-dist/fullstack-js-ts.code-profile` once you have generated a real export.
-- Verify: `code --profile "Fullstack JS/TS – Web & API" --list-extensions | wc -l` (PowerShell: `code --profile "Fullstack JS/TS – Web & API" --list-extensions | measure-object`) and optionally `python scripts/validate-mcp-config.py` from repo root.
+- Verify: `code --profile "Fullstack JS/TS – Web & API" --list-extensions | wc -l` (PowerShell: `... | measure-object`) and optionally `python scripts/validate-mcp-config.py` from repo root.
+
+Mini golden path (JS/TS)
+
+- Open Copilot Chat and select the `refactor-surgeon` agent.
+- Paste: "Propose a small refactor plan for <file>, keeping behaviour unchanged."
+- Expect: a short plan and diff; then switch to `test-writer` with "Add/adjust tests for the changes in <file>" and run the suggested test command.
 
 ## Golden paths
 
@@ -55,13 +80,16 @@ What happens:
 
 ## Stacks you can install
 
-| Stack                 | Persona           | Agents & toolsets (high level)                                               | Quickstart                                        |
-| --------------------- | ----------------- | ---------------------------------------------------------------------------- | ------------------------------------------------- |
-| fullstack-js-ts       | Full-stack JS/TS  | refactor-surgeon, test-writer, doc-surgeon; local-dev + review-only toolsets | `./scripts/install/fullstack-js-ts-<os>.sh`       |
-| python-data-analytics | Data/ML/analytics | data-explorer, pipeline-refactorer, doc-surgeon; local-dev + review-only     | `./scripts/install/python-data-analytics-<os>.sh` |
-| infra-ops-sre         | Infra / SRE       | infra-reviewer, incident-scribe, doc-surgeon; review-only                    | `./scripts/install/infra-ops-sre-<os>.sh`         |
+| Stack                 | Persona                      | Status     | Supported OSes          | Agents & toolsets (high level)                                               | Quickstart                                                                                       |
+| --------------------- | ---------------------------- | ---------- | ----------------------- | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| core-base-dev         | Core / Base Dev              | Production | macOS / Windows / Linux | Baseline extensions and settings; no MCP by default                          | `cd vscode && ./scripts/install-core-base-dev.sh` (Windows: `./scripts/Install-CoreBaseDev.ps1`) |
+| fullstack-js-ts       | Full-stack JS/TS – Web & API | Production | macOS / Windows / Linux | refactor-surgeon, test-writer, doc-surgeon; local-dev + review-only toolsets | `./scripts/install/fullstack-js-ts-<os>.sh`                                                      |
+| python-data-analytics | Data/ML/analytics            | Beta       | macOS / Windows / Linux | data-explorer, pipeline-refactorer, doc-surgeon; local-dev + review-only     | `./scripts/install/python-data-analytics-<os>.sh`                                                |
+| infra-ops-sre         | Infra / SRE                  | Beta       | macOS / Windows / Linux | infra-reviewer, incident-scribe, doc-surgeon; review-only                    | `./scripts/install/infra-ops-sre-<os>.sh`                                                        |
 
 More detail: `docs/stack-catalogue.md` (personas, MCP servers, prompts).
+
+Status: JS/TS and Core are production-quality; other stacks are in active development while `.code-profile` exports and MCP manifests are refined.
 
 ## Governance and safety
 
