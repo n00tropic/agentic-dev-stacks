@@ -1,0 +1,11 @@
+{
+  "$schema": "../schemas/stack.schema.json",
+  "id": "fullstack-js-ts",
+  "name": "Fullstack JS/TS Stack",
+  "description": "JS/TS development stack with Copilot Chat, MCP integrations, and bundled agents/toolsets.",
+  "devcontainerPath": "vscode/.devcontainer/devcontainer.json",
+  "profilePath": "vscode/profiles-dist/fullstack-js-ts.code-profile",
+  "defaultAgents": ["refactor-surgeon", "test-writer", "doc-surgeon"],
+  "defaultToolsets": ["toolset.local-dev", "toolset.review-only"],
+  "tags": ["javascript", "typescript", "ai-heavy", "default"]
+}

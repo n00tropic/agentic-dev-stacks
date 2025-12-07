@@ -1,0 +1,32 @@
+{
+  "$schema": "../schemas/bundle.schema.json",
+  "id": "python-data-analytics-windows",
+  "version": "0.1.0",
+  "stackId": "python-data-analytics",
+  "os": "windows",
+  "artifacts": [
+    "vscode/.devcontainer/python-data-analytics/devcontainer.json",
+    "vscode/profiles-dist/python-data-analytics.code-profile",
+    "agent-ecosystems/stacks/python-data-analytics.stack.json",
+    "agent-ecosystems/agents/data-explorer.agent.json",
+    "agent-ecosystems/agents/pipeline-refactorer.agent.json",
+    "agent-ecosystems/agents/doc-surgeon.agent.json",
+    "agent-ecosystems/toolsets/toolset.local-dev.json",
+    "agent-ecosystems/toolsets/toolset.review-only.json",
+    "scripts/install/python-data-analytics-windows.ps1"
+  ],
+  "install": {
+    "macos": {
+      "description": "Use the macOS script instead of this Windows bundle.",
+      "command": "./scripts/install/python-data-analytics-macos.sh"
+    },
+    "windows": {
+      "description": "Validate configs and guide manual profile import for python-data-analytics (Windows).",
+      "command": "./scripts/install/python-data-analytics-windows.ps1"
+    },
+    "linux": {
+      "description": "Use the Linux script instead of this Windows bundle.",
+      "command": "./scripts/install/python-data-analytics-linux.sh"
+    }
+  }
+}

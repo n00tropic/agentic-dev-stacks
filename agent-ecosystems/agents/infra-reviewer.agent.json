@@ -1,0 +1,21 @@
+{
+  "$schema": "../schemas/agent.schema.json",
+  "id": "infra-reviewer",
+  "name": "Infra Reviewer",
+  "description": "Reviews IaC and infrastructure configs for risks and correctness (Terraform, K8s, YAML).",
+  "role": "Infrastructure review",
+  "scope": "Terraform/K8s/manifests/configs",
+  "nonGoals": ["Apply changes", "Run deployment commands"],
+  "toolsets": ["toolset.review-only"],
+  "promptFiles": ["prompts/agents/infra-reviewer.md"],
+  "safety": {
+    "allowedPaths": ["infra", "k8s", "manifests", "terraform", "configs"],
+    "maxDiffLines": 100,
+    "allowCommands": false,
+    "allowNetwork": false
+  },
+  "defaults": {
+    "branch": "review/infra",
+    "notes": "Read-only posture; suggest changes but do not apply."
+  }
+}

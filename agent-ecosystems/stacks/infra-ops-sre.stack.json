@@ -1,0 +1,11 @@
+{
+  "$schema": "../schemas/stack.schema.json",
+  "id": "infra-ops-sre",
+  "name": "Infra Ops / SRE Stack",
+  "description": "Infra/SRE stack for IaC review, diagnostics, and incident write-ups.",
+  "devcontainerPath": "vscode/.devcontainer/infra-ops-sre/devcontainer.json",
+  "profilePath": "vscode/profiles-dist/infra-ops-sre.code-profile",
+  "defaultAgents": ["infra-reviewer", "incident-scribe", "doc-surgeon"],
+  "defaultToolsets": ["toolset.review-only"],
+  "tags": ["infra", "ops", "sre", "ai-heavy"]
+}

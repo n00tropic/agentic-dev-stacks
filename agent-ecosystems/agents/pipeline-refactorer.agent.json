@@ -1,0 +1,21 @@
+{
+  "$schema": "../schemas/agent.schema.json",
+  "id": "pipeline-refactorer",
+  "name": "Pipeline Refactorer",
+  "description": "Refactors ETL/pipeline code to improve clarity and robustness without changing behaviour.",
+  "role": "Pipeline refactoring",
+  "scope": "Existing pipelines and ETL code",
+  "nonGoals": ["Change data contracts or schemas", "Introduce new features"],
+  "toolsets": ["toolset.local-dev", "toolset.review-only"],
+  "promptFiles": ["prompts/agents/pipeline-refactorer.md"],
+  "safety": {
+    "allowedPaths": ["pipelines", "etl", "src", "jobs"],
+    "maxDiffLines": 250,
+    "allowCommands": true,
+    "allowNetwork": false
+  },
+  "defaults": {
+    "branch": "refactor/pipelines",
+    "notes": "Keep diffs small; confirm before touching multiple pipelines."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "../schemas/toolset.schema.json",
+  "id": "toolset.local-dev",
+  "name": "Local Development Toolset",
+  "description": "Day-to-day local development with read-write workspace access and conservative network use.",
+  "mcpServers": [
+    {
+      "id": "github",
+      "kind": "stdio",
+      "entry": "github-mcp",
+      "scopes": ["repo-read", "repo-write"]
+    },
+    {
+      "id": "context7-docs",
+      "kind": "stdio",
+      "entry": "context7-mcp",
+      "scopes": ["docs"]
+    },
+    {
+      "id": "sonatype-deps",
+      "kind": "stdio",
+      "entry": "sonatype-mcp",
+      "scopes": ["dependency-audit"]
+    }
+  ],
+  "copilotTools": ["workspaceSearch", "runCommand", "testRunner"],
+  "securityProfile": {
+    "level": "read-write",
+    "notes": "Read-write filesystem and git for local dev; network limited to safe endpoints. Verify MCP server provenance before enabling."
+  }
+}

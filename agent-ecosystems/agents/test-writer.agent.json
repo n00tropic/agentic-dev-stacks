@@ -1,0 +1,21 @@
+{
+  "$schema": "../schemas/agent.schema.json",
+  "id": "test-writer",
+  "name": "Test Writer",
+  "description": "Creates and improves automated tests without modifying production code.",
+  "role": "Expand and improve automated test coverage",
+  "scope": "Tests and supporting fixtures only",
+  "nonGoals": ["Refactor production code", "Introduce new features"],
+  "toolsets": ["toolset.local-dev"],
+  "promptFiles": ["prompts/agents/test-writer.md"],
+  "safety": {
+    "allowedPaths": ["tests", "__tests__", "spec", "test"],
+    "maxDiffLines": 400,
+    "allowCommands": true,
+    "allowNetwork": false
+  },
+  "defaults": {
+    "branch": "tests/add-coverage",
+    "notes": "May create new test files; avoid production code edits unless adding seams is approved."
+  }
+}

@@ -1,0 +1,91 @@
+name: Agent Ecosystems Release
+
+on:
+  push:
+    tags:
+      - "agent-stacks-v*"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Release version (default: derived from tag)"
+        required: false
+      build_bundles:
+        description: "Build bundles"
+        required: false
+        default: "true"
+      run_agent_scenarios:
+        description: "Run agent scenarios"
+        required: false
+        default: "true"
+
+jobs:
+  validate-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Set version
+        id: set_version
+        run: |
+          ref="${GITHUB_REF##*/}"
+          manual="${{ github.event.inputs.version }}"
+          version="${manual:-$ref}"
+          if [[ "$version" =~ agent-stacks-v(.+) ]]; then
+            version="${BASH_REMATCH[1]}"
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+      - name: Validate agent ecosystems
+        run: |
+          if [[ "${{ github.event.inputs.run_agent_scenarios || 'true' }}" == "false" ]]; then
+            python3 agent-ecosystems/scripts/validate-ecosystem-configs.py
+          else
+            bash scripts/check-agent-ecosystems.sh
+          fi
+      - name: Build agent ecosystem bundles
+        if: ${{ github.event.inputs.build_bundles != 'false' }}
+        run: bash scripts/build-agent-ecosystem-bundles.sh
+      - name: Upload bundle artifacts
+        if: ${{ github.event.inputs.build_bundles != 'false' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: agent-ecosystem-bundles
+          path: |
+            dist/bundles/**
+            dist/metadata/**
+
+  create-release:
+    needs: validate-and-build
+    if: ${{ github.event_name == 'push' || github.event.inputs.build_bundles != 'false' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: agent-ecosystem-bundles
+          path: dist
+      - name: Set version
+        id: set_version
+        run: |
+          ref="${GITHUB_REF##*/}"
+          manual="${{ github.event.inputs.version }}"
+          version="${manual:-$ref}"
+          if [[ "$version" =~ agent-stacks-v(.+) ]]; then
+            version="${BASH_REMATCH[1]}"
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: agent-stacks-v${{ steps.set_version.outputs.version }}
+          name: Agentic Dev Stacks v${{ steps.set_version.outputs.version }}
+          body: |
+            Bundles for agent ecosystems.
+
+            See dist/metadata/bundles-index.json for included stacks/agents/toolsets.
+          files: |
+            dist/bundles/*.zip
+            dist/metadata/checksums-v*.txt
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

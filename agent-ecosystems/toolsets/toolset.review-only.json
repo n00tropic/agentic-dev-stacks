@@ -1,0 +1,31 @@
+{
+  "$schema": "../schemas/toolset.schema.json",
+  "id": "toolset.review-only",
+  "name": "Review-Only Toolset",
+  "description": "Read-only review posture for code and docs; no destructive operations.",
+  "mcpServers": [
+    {
+      "id": "github",
+      "kind": "stdio",
+      "entry": "github-mcp",
+      "scopes": ["repo-read"]
+    },
+    {
+      "id": "context7-docs",
+      "kind": "stdio",
+      "entry": "context7-mcp",
+      "scopes": ["docs"]
+    },
+    {
+      "id": "elasticsearch",
+      "kind": "stdio",
+      "entry": "elastic-mcp",
+      "scopes": ["search-readonly"]
+    }
+  ],
+  "copilotTools": ["workspaceSearch", "diagnostics"],
+  "securityProfile": {
+    "level": "read-only",
+    "notes": "Review-only; avoid run-command. Docs server should be audited and kept read-only."
+  }
+}

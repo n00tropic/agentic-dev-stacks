@@ -4,16 +4,19 @@
 
 <!-- cspell:ignore Agentic Prereqs dotfiles Antora -->
 
-Scoped, cross-OS VS Code packs plus MCP manifests, designed as a **compiler**: packs (source) → reproducible exports → importable profiles. Full docs: <https://n00tropic.github.io/agentic-dev-stacks>
+Scoped, cross-OS VS Code packs plus MCP manifests, designed as a **compiler**: devcontainers + profiles + curated agents + MCP toolsets. Full docs: <https://n00tropic.github.io/agentic-dev-stacks>
 
 - Before: every machine grows its own VS Code / MCP quirks.
 - After: one repo, one truth; one-liner to land a vetted, agent-ready stack on macOS, Windows, or Linux.
 - Guardrails: profiles are exportable, reviewable, and avoid your global dotfiles.
 
+See vscode/prompts/phase-4-agent-ops.md for the Agent Ops meta-prompt (used with Copilot Chat).
+
 ## Why / Who
 
 - Why: Single source of truth for reproducible, sandbox-friendly VS Code profiles and MCP manifests without touching host dotfiles.
 - Who: Engineers and reviewers who need predictable, policy-aligned environments across macOS, Windows, and Linux.
+- Hero stack now: Fullstack JS/TS (agents + toolsets). See `docs/stack-catalogue.md`.
 
 ## Quickstart (reference profile: Core / Base Dev)
 
@@ -166,7 +169,13 @@ cd vscode/packs/10-fullstack-js-ts/scripts/macos
 
 - `validate-packs`: validates extension lists and metadata on PRs/pushes touching packs/control docs.
 - `docs-check`: PR link checker + docs build; `docs-antora`: deploys docs to GitHub Pages on main.
-- `ci-minimal` (added): runs `trunk check --ci`, Python syntax checks, and JSON/TOML validation to keep scripts and manifests healthy.
+- `ci-minimal` (added): runs `trunk check --ci`, Python syntax checks, JSON/TOML validation, and agent-ecosystems checks (schemas + scenarios) to keep scripts and manifests healthy.
+
+## Agent ecosystems release flow
+
+- Tag: `agent-stacks-vX.Y.Z` (or trigger the workflow dispatch with a version).
+- CI runs validations, scenarios, and bundle builds; outputs ZIPs to `dist/bundles/` plus metadata in `dist/metadata/`.
+- GitHub Release attaches the built ZIPs and checksums.
 
 ## QA preflight (pre-release health checks)
 
@@ -177,6 +186,7 @@ bash scripts/qa-preflight.sh
 ```
 
 This validates:
+
 - Extension lists (shell + Python validators)
 - MCP configuration structure
 - Python syntax across all scripts
@@ -184,6 +194,9 @@ This validates:
 - Shell script integrity
 - Metadata consistency (CONTROL.md ↔ export-map.yaml)
 - Presence of all installation scripts (standalone + pack-level)
+- Agent ecosystems configs and scenarios (via `scripts/check-agent-ecosystems.sh`)
+
+For any new agent/toolset/stack/bundle, add at least one scenario under `agent-ecosystems/tests/scenarios/` and ensure `scripts/check-agent-ecosystems.sh` passes.
 
 ## Safety notes
 

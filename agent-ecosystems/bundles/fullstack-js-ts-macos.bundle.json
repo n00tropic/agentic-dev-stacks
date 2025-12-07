@@ -1,0 +1,32 @@
+{
+  "$schema": "../schemas/bundle.schema.json",
+  "id": "fullstack-js-ts-macos",
+  "version": "0.1.0",
+  "stackId": "fullstack-js-ts",
+  "os": "macos",
+  "artifacts": [
+    "vscode/.devcontainer/devcontainer.json",
+    "vscode/profiles-dist/fullstack-js-ts.code-profile",
+    "agent-ecosystems/stacks/fullstack-js-ts.stack.json",
+    "agent-ecosystems/agents/refactor-surgeon.agent.json",
+    "agent-ecosystems/agents/test-writer.agent.json",
+    "agent-ecosystems/agents/doc-surgeon.agent.json",
+    "agent-ecosystems/toolsets/toolset.local-dev.json",
+    "agent-ecosystems/toolsets/toolset.review-only.json",
+    "scripts/install/fullstack-js-ts-macos.sh"
+  ],
+  "install": {
+    "macos": {
+      "description": "Run the macOS installer to validate configs, show devcontainer/profile paths, and guide manual import (non-destructive).",
+      "command": "./scripts/install/fullstack-js-ts-macos.sh"
+    },
+    "windows": {
+      "description": "Use the Windows script instead of this macOS bundle.",
+      "command": "./scripts/install/fullstack-js-ts-windows.ps1"
+    },
+    "linux": {
+      "description": "Use the Linux script instead of this macOS bundle.",
+      "command": "./scripts/install/fullstack-js-ts-linux.sh"
+    }
+  }
+}

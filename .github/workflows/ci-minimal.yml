@@ -78,3 +78,13 @@ jobs:
         env:
           SKIP_TRUNK: "1"
         run: bash scripts/validate-all-scripts.sh
+
+  agent-ecosystems:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate agent ecosystems configs and scenarios
+        run: bash scripts/check-agent-ecosystems.sh

@@ -1,0 +1,31 @@
+{
+  "$schema": "../schemas/bundle.schema.json",
+  "id": "infra-ops-sre-windows",
+  "version": "0.1.0",
+  "stackId": "infra-ops-sre",
+  "os": "windows",
+  "artifacts": [
+    "vscode/.devcontainer/infra-ops-sre/devcontainer.json",
+    "vscode/profiles-dist/infra-ops-sre.code-profile",
+    "agent-ecosystems/stacks/infra-ops-sre.stack.json",
+    "agent-ecosystems/agents/infra-reviewer.agent.json",
+    "agent-ecosystems/agents/incident-scribe.agent.json",
+    "agent-ecosystems/agents/doc-surgeon.agent.json",
+    "agent-ecosystems/toolsets/toolset.review-only.json",
+    "scripts/install/infra-ops-sre-windows.ps1"
+  ],
+  "install": {
+    "macos": {
+      "description": "Use the macOS script instead of this Windows bundle.",
+      "command": "./scripts/install/infra-ops-sre-macos.sh"
+    },
+    "windows": {
+      "description": "Validate configs and guide manual profile import for infra-ops-sre (Windows).",
+      "command": "./scripts/install/infra-ops-sre-windows.ps1"
+    },
+    "linux": {
+      "description": "Use the Linux script instead of this Windows bundle.",
+      "command": "./scripts/install/infra-ops-sre-linux.sh"
+    }
+  }
+}

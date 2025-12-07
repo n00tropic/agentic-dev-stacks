@@ -65,6 +65,10 @@ if fail:
 PY
 '
 
+# 4b. Agent ecosystem schema validation
+run_check "Agent ecosystem config validation" \
+	python3 agent-ecosystems/scripts/validate-ecosystem-configs.py
+
 # 5. TOML validation
 run_check "TOML syntax validation" bash -c '
 python3 - <<PY

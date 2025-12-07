@@ -2,6 +2,10 @@ docs/build/
 docs/.cache/
 vscode/exports/
 
+# Build artefacts
+dist/bundles/
+dist/tmp/
+
 # Local GitHub Actions runner artefacts (setup scripts, credentials, work dirs)
 actions-runner/
 actions-runner/_work/

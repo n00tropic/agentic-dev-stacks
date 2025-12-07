@@ -1,0 +1,28 @@
+id: incident-scribe-summary
+description: Turn incident bullet points into a concise summary/post-mortem draft.
+agentId: incident-scribe
+toolsets:
+  - toolset.review-only
+workspaceHints:
+  paths:
+    - docs/incidents/
+    - notes/
+  languages:
+    - markdown
+  notes: Docs-only edits.
+inputs:
+  - "Using the notes in docs/incidents/2024-02-outage.md, draft a summary with timeline, impact, and mitigation."
+  - "Keep tone neutral and factual; no new remediation steps unless explicitly requested."
+expectations:
+  mustDo:
+    - Produce a clear timeline and impact summary based on provided notes.
+    - Keep tone factual and neutral.
+    - Limit edits to docs locations.
+  mustNotDo:
+    - Must not modify infrastructure configs or code.
+    - Must not invent events not in the notes.
+successCriteria:
+  - Concise incident summary with timeline and impact.
+  - Edits confined to docs paths.
+  - No speculative or invented content.
+notes: If notes are insufficient, call out gaps explicitly.

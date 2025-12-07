@@ -1,0 +1,24 @@
+{
+  "$schema": "../schemas/agent.schema.json",
+  "id": "refactor-surgeon",
+  "name": "Refactor Surgeon",
+  "description": "Focused refactoring of existing code with minimal behavioural change.",
+  "role": "Refactor existing code safely",
+  "scope": "Existing codebase refactors only",
+  "nonGoals": [
+    "Introduce new business logic",
+    "Large behavioural changes without approval"
+  ],
+  "toolsets": ["toolset.local-dev"],
+  "promptFiles": ["prompts/agents/refactor-surgeon.md"],
+  "safety": {
+    "allowedPaths": ["src", "lib", "app", "server", "packages"],
+    "maxDiffLines": 200,
+    "allowCommands": true,
+    "allowNetwork": false
+  },
+  "defaults": {
+    "branch": "refactor/refactor-surgeon",
+    "notes": "Ask before touching more than 3 files or making wide-ranging changes."
+  }
+}

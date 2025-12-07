@@ -1,0 +1,11 @@
+{
+  "$schema": "../schemas/stack.schema.json",
+  "id": "python-data-analytics",
+  "name": "Python Data & Analytics Stack",
+  "description": "Python-first stack for data/analytics engineers working on notebooks, ETL, and tests.",
+  "devcontainerPath": "vscode/.devcontainer/python-data-analytics/devcontainer.json",
+  "profilePath": "vscode/profiles-dist/python-data-analytics.code-profile",
+  "defaultAgents": ["data-explorer", "pipeline-refactorer", "doc-surgeon"],
+  "defaultToolsets": ["toolset.local-dev", "toolset.review-only"],
+  "tags": ["python", "data", "analytics", "ai-heavy"]
+}

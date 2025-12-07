@@ -1,0 +1,29 @@
+id: data-explorer-notebook-overview
+description: Summarise a Jupyter notebook and suggest next analytical steps.
+agentId: data-explorer
+toolsets:
+  - toolset.local-dev
+  - toolset.review-only
+workspaceHints:
+  paths:
+    - notebooks/
+    - data/
+  languages:
+    - python
+  notes: Notebook-driven exploration; keep edits minimal.
+inputs:
+  - "Review the notebook in notebooks/exploration.ipynb and summarise its purpose."
+  - "Suggest next steps and validation checks without modifying code."
+expectations:
+  mustDo:
+    - Identify data sources and key transformations described in the notebook.
+    - Suggest validation checks or quick sanity tests.
+    - Keep recommendations read-only unless edits are requested.
+  mustNotDo:
+    - Must not create or modify notebooks without asking.
+    - Must not change data files.
+successCriteria:
+  - Clear summary of notebook intent and outputs.
+  - Actionable next steps and validation ideas.
+  - No code or data changes performed.
+notes: Keep guidance concise; propose optional follow-up tasks.

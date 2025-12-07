@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://n00tropic.dev/agent-ecosystems/schemas/agent.schema.json",
+  "title": "Agent Blueprint",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "description",
+    "role",
+    "scope",
+    "nonGoals",
+    "toolsets",
+    "promptFiles",
+    "safety",
+    "defaults"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-_.]+$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "role": {
+      "type": "string"
+    },
+    "scope": {
+      "type": "string"
+    },
+    "nonGoals": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "toolsets": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "promptFiles": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "safety": {
+      "type": "object",
+      "required": [
+        "allowedPaths",
+        "maxDiffLines",
+        "allowCommands",
+        "allowNetwork"
+      ],
+      "properties": {
+        "allowedPaths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "maxDiffLines": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "allowCommands": {
+          "type": "boolean"
+        },
+        "allowNetwork": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "defaults": {
+      "type": "object",
+      "properties": {
+        "branch": { "type": "string" },
+        "workingDir": { "type": "string" },
+        "notes": { "type": "string" }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

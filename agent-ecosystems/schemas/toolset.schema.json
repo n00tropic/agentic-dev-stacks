@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://n00tropic.dev/agent-ecosystems/schemas/toolset.schema.json",
+  "title": "Toolset",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "description",
+    "mcpServers",
+    "copilotTools",
+    "securityProfile"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-_.]+$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "mcpServers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "kind", "entry"],
+        "properties": {
+          "id": { "type": "string" },
+          "kind": { "type": "string", "enum": ["stdio", "http", "sse"] },
+          "entry": { "type": "string" },
+          "scopes": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "copilotTools": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "securityProfile": {
+      "type": "object",
+      "required": ["level", "notes"],
+      "properties": {
+        "level": {
+          "type": "string",
+          "enum": ["read-only", "read-write", "admin"]
+        },
+        "notes": { "type": "string" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

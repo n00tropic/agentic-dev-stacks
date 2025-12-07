@@ -1,0 +1,29 @@
+id: refactor-surgeon-small-refactor
+description: Small refactor of an existing function to improve readability without behaviour change.
+agentId: refactor-surgeon
+toolsets:
+  - toolset.local-dev
+workspaceHints:
+  paths:
+    - src/
+    - lib/
+  languages:
+    - typescript
+    - javascript
+  notes: Target a single module with light refactors; avoid sweeping changes.
+inputs:
+  - "Please refactor the data fetching helper to be more readable. Keep behaviour the same."
+  - "Limit changes to the existing file unless strictly necessary."
+expectations:
+  mustDo:
+    - Use workspace search or navigation to locate the function before editing.
+    - Keep diff small and focused; avoid API changes.
+    - Preserve behaviour and existing tests.
+  mustNotDo:
+    - Must not introduce new features or endpoints.
+    - Must not modify more than a couple of files without asking.
+successCriteria:
+  - Refactor improves clarity/structure without changing behaviour.
+  - Diff stays small and reviewable.
+  - No new breaking changes; tests still pass in principle.
+notes: Prefer incremental commits; ask before expanding scope.

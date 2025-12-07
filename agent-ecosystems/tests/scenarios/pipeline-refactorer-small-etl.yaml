@@ -1,0 +1,30 @@
+id: pipeline-refactorer-small-etl
+description: Refactor a small ETL script for clarity and testability without changing outputs.
+agentId: pipeline-refactorer
+toolsets:
+  - toolset.local-dev
+  - toolset.review-only
+workspaceHints:
+  paths:
+    - pipelines/
+    - etl/
+    - src/
+  languages:
+    - python
+  notes: Keep diffs small; preserve contracts and outputs.
+inputs:
+  - "Refactor pipelines/daily_ingest.py to improve readability and error handling."
+  - "Keep the output schema and side effects identical; add small helper functions if needed."
+expectations:
+  mustDo:
+    - Preserve external behaviour and data contracts.
+    - Keep changes minimal and explain risks before larger refactors.
+    - Suggest or add minimal tests only if directly tied to the refactor.
+  mustNotDo:
+    - Must not change output schema or destination paths.
+    - Must not introduce new dependencies without approval.
+successCriteria:
+  - Refactored script remains functionally identical.
+  - Code is clearer and easier to test.
+  - Any proposed tests are scoped and justified.
+notes: Ask before modifying multiple files; prefer incremental diffs.

@@ -1,0 +1,28 @@
+id: doc-surgeon-doc-edit
+description: Update documentation to clarify setup steps and link to related ADRs without touching code.
+agentId: doc-surgeon
+toolsets:
+  - toolset.review-only
+workspaceHints:
+  paths:
+    - docs/
+    - README.md
+  languages:
+    - markdown
+  notes: Cross-link relevant ADRs if helpful; keep tone consistent with existing docs.
+inputs:
+  - "Improve the setup section to mention the devcontainer and profile export."
+  - "Add links to any ADRs related to tooling or MCP usage."
+expectations:
+  mustDo:
+    - Edit only documentation files.
+    - Keep style/tone aligned with existing docs.
+    - Add cross-links where they aid discoverability.
+  mustNotDo:
+    - Must not modify source code or configs.
+    - Must not add speculative behaviour changes.
+successCriteria:
+  - Docs clearly describe setup steps (devcontainer, profile export).
+  - Relevant ADRs or docs are linked.
+  - No code changes.
+notes: If ADRs are missing, note the gap instead of inventing content.

@@ -1,0 +1,21 @@
+{
+  "$schema": "../schemas/agent.schema.json",
+  "id": "data-explorer",
+  "name": "Data Explorer",
+  "description": "Explores datasets, notebooks, and ETL scripts to summarise and propose next analytical steps.",
+  "role": "Data exploration and understanding",
+  "scope": "Read-heavy analysis of data/code with minimal edits",
+  "nonGoals": ["Large destructive edits", "Changing business logic"],
+  "toolsets": ["toolset.local-dev", "toolset.review-only"],
+  "promptFiles": ["prompts/agents/data-explorer.md"],
+  "safety": {
+    "allowedPaths": ["data", "notebooks", "etl", "pipelines", "src"],
+    "maxDiffLines": 200,
+    "allowCommands": true,
+    "allowNetwork": false
+  },
+  "defaults": {
+    "branch": "experiments/data-exploration",
+    "notes": "Ask before creating files; prefer read-only guidance unless edits are requested."
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "../schemas/agent.schema.json",
+  "id": "incident-scribe",
+  "name": "Incident Scribe",
+  "description": "Drafts incident summaries and post-mortems from timelines, logs, and impact notes.",
+  "role": "Incident documentation",
+  "scope": "Docs and summaries only",
+  "nonGoals": ["Change infrastructure configs", "Run commands or deployments"],
+  "toolsets": ["toolset.review-only"],
+  "promptFiles": ["prompts/agents/incident-scribe.md"],
+  "safety": {
+    "allowedPaths": ["docs", "adr", "runbooks", "notes"],
+    "maxDiffLines": 300,
+    "allowCommands": false,
+    "allowNetwork": false
+  },
+  "defaults": {
+    "branch": "docs/incidents",
+    "notes": "Docs-only; keep content factual and scoped to provided data."
+  }
+}

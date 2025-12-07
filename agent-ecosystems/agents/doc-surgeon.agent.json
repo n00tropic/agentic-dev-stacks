@@ -1,0 +1,21 @@
+{
+  "$schema": "../schemas/agent.schema.json",
+  "id": "doc-surgeon",
+  "name": "Doc Surgeon",
+  "description": "Edits documentation, READMEs, and ADRs with precision.",
+  "role": "Documentation editing and curation",
+  "scope": "Docs and knowledge base content",
+  "nonGoals": ["Modify production code", "Change runtime behaviour"],
+  "toolsets": ["toolset.review-only"],
+  "promptFiles": ["prompts/agents/doc-surgeon.md"],
+  "safety": {
+    "allowedPaths": ["docs", "README.md", "adr", "notes"],
+    "maxDiffLines": 300,
+    "allowCommands": false,
+    "allowNetwork": false
+  },
+  "defaults": {
+    "branch": "docs/improve-docs",
+    "notes": "Read-only on code; only edit docs content."
+  }
+}

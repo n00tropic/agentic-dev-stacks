@@ -1,0 +1,29 @@
+id: infra-reviewer-terraform
+description: Review a Terraform change for risks and best practices.
+agentId: infra-reviewer
+toolsets:
+  - toolset.review-only
+workspaceHints:
+  paths:
+    - infra/
+    - terraform/
+  languages:
+    - hcl
+    - yaml
+  notes: Read-only; suggest fixes, do not apply.
+inputs:
+  - "Review the Terraform changes under infra/terraform/modules/networking."
+  - "Call out security or reliability risks and suggest minimal fixes."
+expectations:
+  mustDo:
+    - Identify potential security, reliability, or cost risks.
+    - Suggest concise remediation steps without applying them.
+    - Keep recommendations scoped to the diff.
+  mustNotDo:
+    - Must not run terraform apply or other deployment commands.
+    - Must not modify state files or configs.
+successCriteria:
+  - Clear list of risks and suggested fixes.
+  - No destructive actions proposed.
+  - Read-only posture maintained.
+notes: Keep feedback actionable and prioritised.

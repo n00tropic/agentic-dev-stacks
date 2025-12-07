@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://n00tropic.dev/agent-ecosystems/schemas/bundle.schema.json",
+  "title": "Bundle",
+  "type": "object",
+  "required": ["id", "version", "stackId", "os", "artifacts", "install"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "id": { "type": "string", "pattern": "^[a-z0-9-_.]+$" },
+    "version": { "type": "string" },
+    "stackId": { "type": "string" },
+    "os": { "type": "string", "enum": ["macos", "windows", "linux"] },
+    "artifacts": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "install": {
+      "type": "object",
+      "required": ["macos", "windows", "linux"],
+      "properties": {
+        "macos": {
+          "type": "object",
+          "required": ["description", "command"],
+          "properties": {
+            "description": { "type": "string" },
+            "command": { "type": "string" }
+          },
+          "additionalProperties": false
+        },
+        "windows": {
+          "type": "object",
+          "required": ["description", "command"],
+          "properties": {
+            "description": { "type": "string" },
+            "command": { "type": "string" }
+          },
+          "additionalProperties": false
+        },
+        "linux": {
+          "type": "object",
+          "required": ["description", "command"],
+          "properties": {
+            "description": { "type": "string" },
+            "command": { "type": "string" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
