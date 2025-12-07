@@ -13,6 +13,9 @@ html {
 body.agentic-neon {
   margin: 0;
   max-width: 100%;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease;
   background:
     radial-gradient(
       circle at 10% 20%,
@@ -721,6 +724,27 @@ pre {
 
 .pagination {
   border-top: 1px solid var(--card-border);
+}
+
+.imageblock {
+  margin: var(--spacing-lg) 0;
+}
+
+.imageblock img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--card-border);
+  background: var(--bg-elevated);
+  box-shadow: var(--shadow-1);
+  padding: var(--spacing-md);
+}
+
+.imageblock .title {
+  color: var(--fg-muted);
+  margin-top: var(--spacing-sm);
+  font-size: 14px;
 }
 
 .footer {
