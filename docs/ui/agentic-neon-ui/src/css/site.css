@@ -223,8 +223,17 @@ pre {
 }
 
 .nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
   padding: var(--spacing-lg);
   overflow-y: auto;
+}
+
+.nav .panels {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
 }
 
 .nav .title {
