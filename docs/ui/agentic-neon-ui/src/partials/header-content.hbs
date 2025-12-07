@@ -1,6 +1,6 @@
 <header class="topbar">
   <div class="topbar__inner">
-    <a class="brand" href="{{{or site.url (relativize 'index.html')}}}">
+    <a class="brand" href="{{{relativize (concat '/agentic-dev-stacks/' page.componentVersion.version '/index.html')}}}">
       <span class="brand__glow" aria-hidden="true"></span>
       <span class="brand__text">
         Agentic Dev Stacks
@@ -8,9 +8,9 @@
       </span>
     </a>
     <nav class="topbar__nav" id="topbar-nav">
-      <a class="topbar__link" href="{{{relativize 'vscode/packs.html'}}}">Stacks</a>
-      <a class="topbar__link" href="{{{relativize 'agents/agents-overview.html'}}}">Agents</a>
-      <a class="topbar__link" href="{{{relativize 'golden-path.html'}}}">Golden Paths</a>
+      <a class="topbar__link" href="{{{relativize (concat '/agentic-dev-stacks/' page.componentVersion.version '/vscode/packs.html')}}}">Stacks</a>
+      <a class="topbar__link" href="{{{relativize (concat '/agentic-dev-stacks/' page.componentVersion.version '/agents/agents-overview.html')}}}">Agents</a>
+      <a class="topbar__link" href="{{{relativize (concat '/agentic-dev-stacks/' page.componentVersion.version '/golden-path.html')}}}">Golden Paths</a>
       <a class="topbar__link" href="https://github.com/n00tropic/agentic-dev-stacks" target="_blank" rel="noreferrer">GitHub</a>
     </nav>
     <div class="topbar__actions">
