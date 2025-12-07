@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://n00tropic.dev/agent-ecosystems/schemas/structured-outputs/test-writer-output.schema.json",
+  "title": "Test Writer Output",
+  "type": "object",
+  "required": ["summary", "testsAdded"],
+  "properties": {
+    "summary": { "type": "string" },
+    "testsAdded": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "purpose"],
+        "properties": {
+          "path": { "type": "string" },
+          "purpose": { "type": "string" },
+          "coverageArea": { "type": "string" }
+        }
+      }
+    },
+    "gaps": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "additionalProperties": false
+}

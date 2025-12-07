@@ -3,6 +3,7 @@ description: Small refactor of an existing function to improve readability witho
 agentId: refactor-surgeon
 toolsets:
   - toolset.local-dev
+circuitId: js-refactor-and-test
 workspaceHints:
   paths:
     - src/

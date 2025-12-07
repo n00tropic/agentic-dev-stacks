@@ -17,6 +17,29 @@
     "restructuredtext",
     "rsweave"
   ],
+  "ltex.dictionary": {
+    "en-GB": [
+      "repo",
+      "repos",
+      "config",
+      "configs",
+      "execpolicy",
+      "MCPs",
+      "OAuth",
+      "SDKs",
+      "Postgres",
+      "MongoDB",
+      "Elasticsearch",
+      "Kubernetes",
+      "VPNs",
+      "untrusted",
+      "deduplicates",
+      "Deduplicates",
+      "Context7",
+      "Sonatype",
+      "validator"
+    ]
+  },
   "cSpell.enabled": true,
   "cSpell.language": "en-GB",
   "cSpell.locale": "en-GB",

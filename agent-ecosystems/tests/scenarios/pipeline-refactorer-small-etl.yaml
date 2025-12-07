@@ -4,6 +4,7 @@ agentId: pipeline-refactorer
 toolsets:
   - toolset.local-dev
   - toolset.review-only
+circuitId: data-pipeline-hardening
 workspaceHints:
   paths:
     - pipelines/

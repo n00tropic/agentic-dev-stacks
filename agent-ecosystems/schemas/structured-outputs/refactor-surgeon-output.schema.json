@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://n00tropic.dev/agent-ecosystems/schemas/structured-outputs/refactor-surgeon-output.schema.json",
+  "title": "Refactor Surgeon Output",
+  "type": "object",
+  "required": ["summary", "filesChanged"],
+  "properties": {
+    "summary": { "type": "string" },
+    "filesChanged": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "changeType"],
+        "properties": {
+          "path": { "type": "string" },
+          "changeType": { "type": "string", "enum": ["refactor", "cleanup"] },
+          "notes": { "type": "string" }
+        }
+      }
+    },
+    "riskNotes": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "additionalProperties": false
+}

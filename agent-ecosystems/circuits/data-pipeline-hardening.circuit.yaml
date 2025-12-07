@@ -1,0 +1,15 @@
+id: data-pipeline-hardening
+stackId: python-data-analytics
+pattern: handoff
+agents:
+  - id: pipeline-refactorer
+    role: refactor
+  - id: data-explorer
+    role: validation
+entryAgent: pipeline-refactorer
+steps:
+  - "Pipeline refactorer cleans up ETL script without changing outputs."
+  - "Handoff to data explorer to propose validation and sanity checks."
+successCriteria:
+  - Behaviour preserved with clearer pipeline
+  - Validation steps identified for data quality

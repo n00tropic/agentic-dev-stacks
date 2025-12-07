@@ -4,6 +4,6 @@
   "allowedPaths": ["src/**", "lib/**", "app/**", "server/**", "packages/**"],
   "forbiddenPaths": ["infra/state/**", "node_modules/**", "dist/**"],
   "toolsets": ["toolset.local-dev"],
-  "structuredOutputSchema": null,
+  "structuredOutputSchema": "agent-ecosystems/schemas/structured-outputs/refactor-surgeon-output.schema.json",
   "scenarios": ["refactor-surgeon-small-refactor"]
 }

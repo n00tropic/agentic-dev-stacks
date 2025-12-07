@@ -3,6 +3,7 @@ description: Turn incident bullet points into a concise summary/post-mortem draf
 agentId: incident-scribe
 toolsets:
   - toolset.review-only
+circuitId: incident-review-and-postmortem
 workspaceHints:
   paths:
     - docs/incidents/

@@ -1,0 +1,15 @@
+id: incident-review-and-postmortem
+stackId: infra-ops-sre
+pattern: manager-worker
+agents:
+  - id: infra-reviewer
+    role: review
+  - id: incident-scribe
+    role: documentation
+entryAgent: infra-reviewer
+steps:
+  - "Infra reviewer inspects config/manifest changes for contributing factors."
+  - "Handoff to incident scribe to draft summary and follow-ups."
+successCriteria:
+  - Risks or contributing factors identified
+  - Clear incident summary with follow-up actions

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://n00tropic.dev/agent-ecosystems/schemas/structured-outputs/incident-scribe-output.schema.json",
+  "title": "Incident Scribe Output",
+  "type": "object",
+  "required": ["incidentSummary", "timeline"],
+  "properties": {
+    "incidentSummary": { "type": "string" },
+    "timeline": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["timestamp", "event"],
+        "properties": {
+          "timestamp": { "type": "string" },
+          "event": { "type": "string" },
+          "impact": { "type": "string" }
+        }
+      }
+    },
+    "rootCauseHypotheses": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "followUpActions": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "additionalProperties": false
+}

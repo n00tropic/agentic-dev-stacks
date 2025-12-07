@@ -4,6 +4,6 @@
   "allowedPaths": ["docs/**", "adr/**", "runbooks/**", "notes/**"],
   "forbiddenPaths": ["infra/**", "k8s/**", "terraform/**", "src/**"],
   "toolsets": ["toolset.review-only"],
-  "structuredOutputSchema": null,
+  "structuredOutputSchema": "agent-ecosystems/schemas/structured-outputs/incident-scribe-output.schema.json",
   "scenarios": ["incident-scribe-summary"]
 }

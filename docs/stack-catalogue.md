@@ -20,15 +20,18 @@ Notes
 - What you get: Node/TypeScript devcontainer, placeholder profile, agents (refactor-surgeon, test-writer, doc-surgeon), toolsets (local-dev, review-only).
 - Who it’s for: Web/API engineers.
 - How to install: run the OS script under `scripts/install/fullstack-js-ts-*.sh|ps1`, then import the `.code-profile` via VS Code.
+- Prompts: See `prompts/stacks/fullstack-js-ts.prompts.md`.
 
 ### Python Data & Analytics
 
 - What you get: Python devcontainer, placeholder profile, agents (data-explorer, pipeline-refactorer, doc-surgeon), toolsets (local-dev, review-only).
 - Who it’s for: Data/ML/analytics engineers.
 - How to install: run `scripts/install/python-data-analytics-*.sh|ps1`, then import the `.code-profile` via VS Code.
+- Prompts: See `prompts/stacks/python-data-analytics.prompts.md`.
 
 ### Infra Ops / SRE
 
 - What you get: Infra-focused devcontainer, placeholder profile, agents (infra-reviewer, incident-scribe, doc-surgeon), toolsets (review-only).
 - Who it’s for: Infra/platform/SRE engineers.
 - How to install: run `scripts/install/infra-ops-sre-*.sh|ps1`, then import the `.code-profile` via VS Code.
+- Prompts: See `prompts/stacks/infra-ops-sre.prompts.md`.

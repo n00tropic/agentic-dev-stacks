@@ -44,7 +44,21 @@
     "rmcp",
     "sequentialthinking",
     "Sonatype",
-    "sonatype"
+    "sonatype",
+    "repo",
+    "execpolicy",
+    "MCPs",
+    "OAuth",
+    "SDKs",
+    "Postgres",
+    "MongoDB",
+    "Elasticsearch",
+    "Kubernetes",
+    "VPNs",
+    "untrusted",
+    "deduplicates",
+    "Deduplicates",
+    "Context7"
   ],
   "ignorePaths": [
     "node_modules",

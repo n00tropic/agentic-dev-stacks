@@ -11,6 +11,7 @@ import argparse
 import fnmatch
 import json
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List
 
@@ -24,12 +25,20 @@ SCENARIO_DIR = TEST_ROOT / "scenarios"
 OUTPUT_DIR = TEST_ROOT / "output"
 SCHEMA_PATH = TEST_ROOT / "scenario.schema.yaml"
 CONTRACT_DIR = ECOSYSTEM_ROOT / "contracts"
+OUTPUT_FIXTURE_DIR = TEST_ROOT / "output-fixtures"
+STRUCTURED_SCHEMA_DIR = ECOSYSTEM_ROOT / "schemas" / "structured-outputs"
+CIRCUIT_DIR = ECOSYSTEM_ROOT / "circuits"
+LOG_SCRIPT = ECOSYSTEM_ROOT / "scripts" / "log-agent-run.py"
+
+
+def load_json_from_path(path: Path) -> dict:
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def load_json_files(directory: Path) -> Dict[str, dict]:
     items: Dict[str, dict] = {}
     for path in sorted(directory.glob("*.json")):
-        data = json.loads(path.read_text(encoding="utf-8"))
+        data = load_json_from_path(path)
         items[data["id"]] = data
     return items
 
@@ -45,9 +54,46 @@ def load_contracts() -> Dict[str, dict]:
     if not CONTRACT_DIR.exists():
         return contracts
     for path in sorted(CONTRACT_DIR.glob("*.contract.json")):
-        data = json.loads(path.read_text(encoding="utf-8"))
+        data = load_json_from_path(path)
         contracts[data.get("id")] = data
     return contracts
+
+
+def load_structured_schema(schema_path: str | None) -> dict | None:
+    if not schema_path:
+        return None
+    path = ROOT / schema_path
+    if not path.exists():
+        raise FileNotFoundError(f"Structured output schema missing: {path}")
+    return load_json_from_path(path)
+
+
+def load_circuits() -> Dict[str, dict]:
+    circuits: Dict[str, dict] = {}
+    if not CIRCUIT_DIR.exists():
+        return circuits
+    for path in sorted(CIRCUIT_DIR.glob("*.circuit.yaml")):
+        data = yaml.safe_load(path.read_text(encoding="utf-8"))
+        circuits[data.get("id")] = data
+    return circuits
+
+
+def validate_output_fixture(
+    scenario_id: str, contract: dict, schema: dict | None
+) -> List[str]:
+    errors: List[str] = []
+    if not schema:
+        return errors
+    fixture_path = OUTPUT_FIXTURE_DIR / f"{scenario_id}.json"
+    if not fixture_path.exists():
+        errors.append(f"Fixture missing for structured output: {fixture_path}")
+        return errors
+    fixture = load_json_from_path(fixture_path)
+    validator = Draft202012Validator(schema)
+    for err in validator.iter_errors(fixture):
+        location = "/".join(str(p) for p in err.path) or "<root>"
+        errors.append(f"{fixture_path}: {location}: {err.message}")
+    return errors
 
 
 def validate_against_schema(instance: dict, schema: dict, path: Path) -> List[str]:
@@ -64,6 +110,7 @@ def validate_cross_references(
     agents: Dict[str, dict],
     toolsets: Dict[str, dict],
     contracts: Dict[str, dict],
+    circuits: Dict[str, dict],
     path: Path,
 ) -> List[str]:
     errors: List[str] = []
@@ -88,6 +135,18 @@ def validate_cross_references(
                     errors.append(
                         f"{path}: toolset '{ts}' not allowed by contract for '{agent_id}'"
                     )
+    circuit_id = scenario.get("circuitId")
+    if circuit_id:
+        if circuit_id not in circuits:
+            errors.append(f"{path}: circuitId '{circuit_id}' not found")
+        else:
+            circuit_agents = {
+                a.get("id") for a in circuits[circuit_id].get("agents", [])
+            }
+            if agent_id not in circuit_agents:
+                errors.append(
+                    f"{path}: circuitId '{circuit_id}' does not include agent '{agent_id}'"
+                )
     return errors
 
 
@@ -146,12 +205,36 @@ def main() -> int:
     parser.add_argument(
         "--no-output", action="store_true", help="Skip writing markdown outputs"
     )
+    parser.add_argument(
+        "--validate-outputs",
+        action="store_true",
+        help="Validate structured output fixtures against schemas when contracts specify them",
+    )
+    parser.add_argument(
+        "--log-runs",
+        action="store_true",
+        help="Append run metadata to agent-ecosystems/logs/runs/runs.jsonl",
+    )
+    parser.add_argument(
+        "--list-circuits",
+        action="store_true",
+        help="List available circuits (if configured)",
+    )
     args = parser.parse_args()
 
     agents = load_json_files(ECOSYSTEM_ROOT / "agents")
     toolsets = load_json_files(ECOSYSTEM_ROOT / "toolsets")
     stacks = load_json_files(ECOSYSTEM_ROOT / "stacks")  # reserved for future use
     contracts = load_contracts()
+    circuits = load_circuits()
+
+    if args.list_circuits:
+        print("Available circuits:")
+        for cid, data in circuits.items():
+            print(
+                f"- {cid} (stack={data.get('stackId')}, pattern={data.get('pattern')}, agents={[a.get('id') for a in data.get('agents', [])]})"
+            )
+        return 0
 
     schema = load_schema()
 
@@ -170,15 +253,22 @@ def main() -> int:
         errs = []
         errs.extend(validate_against_schema(scenario, schema, path))
         errs.extend(
-            validate_cross_references(scenario, agents, toolsets, contracts, path)
+            validate_cross_references(
+                scenario, agents, toolsets, contracts, circuits, path
+            )
         )
 
+        contract = contracts.get(scenario.get("agentId"))
         warnings = []
         if not errs:
-            warnings = check_contract_warnings(
-                scenario, contracts.get(scenario.get("agentId")), path
-            )
+            warnings = check_contract_warnings(scenario, contract, path)
             all_warnings.extend(warnings)
+
+        if args.validate_outputs and not errs and contract:
+            schema_obj = load_structured_schema(contract.get("structuredOutputSchema"))
+            errs.extend(
+                validate_output_fixture(scenario.get("id"), contract, schema_obj)
+            )
 
         status = "OK" if not errs else "FAIL"
         notes = ""
@@ -193,6 +283,26 @@ def main() -> int:
             agent = agents.get(scenario["agentId"], {})
             md = render_checklist(scenario, agent)
             (output_dir / f"{path.stem}.md").write_text(md, encoding="utf-8")
+
+        if args.log_runs:
+            status_field = "success" if not errs else "failure"
+            subprocess.run(
+                [
+                    sys.executable,
+                    str(LOG_SCRIPT),
+                    "--agent",
+                    scenario.get("agentId", ""),
+                    "--stack",
+                    scenario.get("stackId", ""),
+                    "--status",
+                    status_field,
+                    "--scenario",
+                    scenario.get("id", ""),
+                    "--circuit",
+                    scenario.get("circuitId", ""),
+                ],
+                check=False,
+            )
 
     print("SCENARIO ID | AGENT | STATUS | NOTES")
     for row in summary:

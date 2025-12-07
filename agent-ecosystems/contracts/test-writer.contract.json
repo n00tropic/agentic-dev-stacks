@@ -4,6 +4,6 @@
   "allowedPaths": ["tests/**", "__tests__/**", "spec/**", "test/**"],
   "forbiddenPaths": ["src/**", "lib/**", "app/**", "server/**"],
   "toolsets": ["toolset.local-dev"],
-  "structuredOutputSchema": null,
+  "structuredOutputSchema": "agent-ecosystems/schemas/structured-outputs/test-writer-output.schema.json",
   "scenarios": ["test-writer-new-tests"]
 }

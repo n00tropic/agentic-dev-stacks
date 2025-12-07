@@ -1,0 +1,11 @@
+{
+  "summary": "Refactored helper to reduce duplication and improve readability",
+  "filesChanged": [
+    {
+      "path": "src/helpers/data.ts",
+      "changeType": "refactor",
+      "notes": "Extracted utility function"
+    }
+  ],
+  "riskNotes": ["Behaviour preserved; tests unaffected"]
+}

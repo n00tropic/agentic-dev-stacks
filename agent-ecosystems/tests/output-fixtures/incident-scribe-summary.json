@@ -1,0 +1,17 @@
+{
+  "incidentSummary": "Outage due to config regression; mitigated by rollback",
+  "timeline": [
+    {
+      "timestamp": "2024-02-01T10:00Z",
+      "event": "Regression deployed",
+      "impact": "Errors for EU users"
+    },
+    {
+      "timestamp": "2024-02-01T10:20Z",
+      "event": "Rollback initiated",
+      "impact": "Partial recovery"
+    }
+  ],
+  "rootCauseHypotheses": ["Config default mismatch"],
+  "followUpActions": ["Add deployment validation", "Improve config tests"]
+}

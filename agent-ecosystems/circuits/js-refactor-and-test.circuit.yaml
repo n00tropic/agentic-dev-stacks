@@ -1,0 +1,15 @@
+id: js-refactor-and-test
+stackId: fullstack-js-ts
+pattern: manager-worker
+agents:
+  - id: refactor-surgeon
+    role: refactor
+  - id: test-writer
+    role: tests
+entryAgent: refactor-surgeon
+steps:
+  - "Refactor surgeon proposes small refactor and executes it."
+  - "Handoff to test writer to add/adjust tests covering the change."
+successCriteria:
+  - Small, behaviour-safe refactor
+  - Tests updated or added for touched areas

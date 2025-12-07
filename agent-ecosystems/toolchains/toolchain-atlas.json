@@ -1,0 +1,58 @@
+{
+  "stacks": [
+    {
+      "id": "fullstack-js-ts",
+      "defaultAgents": ["refactor-surgeon", "test-writer", "doc-surgeon"],
+      "toolsets": ["toolset.local-dev", "toolset.review-only"],
+      "mcpServers": [
+        "github",
+        "context7-docs",
+        "sonatype-deps",
+        "elasticsearch"
+      ]
+    },
+    {
+      "id": "python-data-analytics",
+      "defaultAgents": ["data-explorer", "pipeline-refactorer", "doc-surgeon"],
+      "toolsets": ["toolset.local-dev", "toolset.review-only"],
+      "mcpServers": [
+        "github",
+        "context7-docs",
+        "sonatype-deps",
+        "elasticsearch"
+      ]
+    },
+    {
+      "id": "infra-ops-sre",
+      "defaultAgents": ["infra-reviewer", "incident-scribe", "doc-surgeon"],
+      "toolsets": ["toolset.review-only"],
+      "mcpServers": ["github", "context7-docs", "elasticsearch"]
+    }
+  ],
+  "mcpServers": [
+    {
+      "id": "github",
+      "purpose": "Repo/VCS access",
+      "riskLevel": "read-write-code",
+      "expectedEnvVars": ["GITHUB_MCP_TOKEN"]
+    },
+    {
+      "id": "context7-docs",
+      "purpose": "Docs lookup",
+      "riskLevel": "read-only",
+      "expectedEnvVars": ["CONTEXT7_TOKEN"]
+    },
+    {
+      "id": "sonatype-deps",
+      "purpose": "Dependency audit",
+      "riskLevel": "read-only",
+      "expectedEnvVars": ["SONATYPE_TOKEN"]
+    },
+    {
+      "id": "elasticsearch",
+      "purpose": "Search over logs/content",
+      "riskLevel": "read-only",
+      "expectedEnvVars": ["ELASTIC_API_KEY"]
+    }
+  ]
+}

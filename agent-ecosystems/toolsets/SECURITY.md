@@ -1,6 +1,6 @@
 # MCP Security Notes
 
-Expected MCP servers in exemplar toolsets:
+Expected MCP servers in exemplar toolsets (see `agent-ecosystems/toolchains/toolchain-atlas.json`):
 
 - `github-mcp`: GitHub access. Use read-only tokens for review-only flows; use narrowly scoped repo write tokens for local-dev when needed. Avoid org-wide scopes.
 - `context7-mcp`: Documentation fetcher. Configure with Context7 token via env var; no secrets in git.

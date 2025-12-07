@@ -18,6 +18,8 @@ See vscode/prompts/phase-4-agent-ops.md for the Agent Ops meta-prompt (used with
 - Who: Engineers and reviewers who need predictable, policy-aligned environments across macOS, Windows, and Linux.
 - Hero stack now: Fullstack JS/TS (agents + toolsets). See `docs/stack-catalogue.md`.
 - Additional stacks (beta): Python Data & Analytics; Infra Ops / SRE.
+- Prompt packs live under `prompts/stacks/`; golden paths under `docs/golden-paths.md`.
+- Agent contracts and structured outputs live in `agent-ecosystems/contracts/` and `agent-ecosystems/schemas/structured-outputs/`; scenarios can be validated with `--validate-outputs`.
 
 ## Quickstart (reference profile: Core / Base Dev)
 

@@ -34,6 +34,9 @@ python3 agent-ecosystems/scripts/run-agent-scenarios.py
 ```
 
 This performs static validation (schema + cross-references) and writes manual checklists to `agent-ecosystems/tests/output/`. Use these with Copilot Chat and the relevant stack/profile to run manual evaluations.
+Contracts/structured outputs: add `--validate-outputs` to check fixtures against schemas. Contracts live in `agent-ecosystems/contracts/`.
+
+Circuits: list with `python3 agent-ecosystems/scripts/run-agent-scenarios.py --list-circuits`.
 
 ## Building bundles
 
@@ -63,6 +66,28 @@ Outputs follow the naming conventions documented in `dist/README.md`.
 ## Stack catalogue
 
 See `docs/stack-catalogue.md` for a catalogue of stacks and install pointers.
+
+## Prompt packs
+
+Starter prompts per stack live under `prompts/stacks/`:
+
+- Fullstack JS/TS: `prompts/stacks/fullstack-js-ts.prompts.md`
+- Python Data & Analytics: `prompts/stacks/python-data-analytics.prompts.md`
+- Infra Ops / SRE: `prompts/stacks/infra-ops-sre.prompts.md`
+
+## Toolchain atlas
+
+`agent-ecosystems/toolchains/toolchain-atlas.json` summarises stacks, agents, toolsets, and MCP servers with expected env vars and risk levels.
+
+## Circuits and golden paths
+
+- Circuits capture multi-agent flows under `agent-ecosystems/circuits/` (list with `python3 agent-ecosystems/scripts/run-agent-scenarios.py --list-circuits`).
+- Docs: `docs/golden-paths.md`.
+
+## Observability
+
+- Log runs (optional) with `agent-ecosystems/scripts/log-agent-run.py` (JSONL under `agent-ecosystems/logs/runs/`).
+- Summarise logs with `agent-ecosystems/scripts/summarise-logs.py`.
 
 ## Automation roadmap
 

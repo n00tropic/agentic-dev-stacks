@@ -58,4 +58,6 @@ properties:
     items: { type: string }
   notes:
     type: string
+  circuitId:
+    type: string
 additionalProperties: false
