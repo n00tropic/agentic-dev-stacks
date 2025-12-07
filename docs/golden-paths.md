@@ -1,9 +1,20 @@
 # Golden Paths (Circuits)
 
-Configuration-only multi-agent flows capturing repeatable workflows:
+Repeatable, multi-agent workflows mapped to stacks. Detailed guides:
 
-- `js-refactor-and-test` (fullstack-js-ts): refactor-surgeon then test-writer.
-- `data-pipeline-hardening` (python-data-analytics): pipeline-refactorer then data-explorer for validation ideas.
-- `incident-review-and-postmortem` (infra-ops-sre): infra-reviewer then incident-scribe.
+- JS/TS refactor + tests: `docs/golden-paths/js-ts-refactor.md`
+- Incident review + postmortem: `docs/golden-paths/incident-postmortem.md`
 
-Use `agent-ecosystems/circuits/*.circuit.yaml` as source of truth. The scenario harness can list circuits with `python3 agent-ecosystems/scripts/run-agent-scenarios.py --list-circuits`.
+Source of truth for circuits lives in `agent-ecosystems/circuits/*.circuit.yaml`.
+
+Scenario harness:
+
+```bash
+python3 agent-ecosystems/scripts/run-agent-scenarios.py --list-circuits
+```
+
+Run a circuit directly (example):
+
+```bash
+python3 agent-ecosystems/scripts/run-agent-scenarios.py --circuit js-refactor-and-test --stack fullstack-js-ts
+```

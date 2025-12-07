@@ -49,7 +49,7 @@ run_check "JSON syntax validation" bash -c '
 python3 - <<PY
 import json, pathlib, sys
 root = pathlib.Path(".")
-skip_parts = {".trunk/tools", "exports/", ".vscode/"}
+skip_parts = {".trunk/tools", "exports/", ".vscode/", "node_modules/"}
 fail = False
 for path in root.rglob("*.json"):
   posix = path.as_posix()
@@ -82,7 +82,7 @@ except ImportError:
   print("tomllib not available; skipping")
   sys.exit(0)
 root = pathlib.Path(".")
-skip_parts = {".trunk/tools", "exports/"}
+skip_parts = {".trunk/tools", "exports/", "node_modules/"}
 fail = False
 for path in root.rglob("*.toml"):
   posix = path.as_posix()

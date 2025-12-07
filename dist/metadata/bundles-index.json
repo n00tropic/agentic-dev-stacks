@@ -5,7 +5,7 @@
     "os": "linux",
     "stackId": "fullstack-js-ts",
     "filename": "fullstack-js-ts-linux-v0.1.0-linux.zip",
-    "sha256": "9d2cf2b87ce1df3ba47fd07d3f6a9819d2db71ffcb1875bf0bc35acffc2862f4",
+    "sha256": "da828a7c2e9acdf93b4dca3f9f9ecc8dc3de5c9855ac2527225ff805b42df8df",
     "agents": ["refactor-surgeon", "test-writer", "doc-surgeon"],
     "toolsets": ["toolset.local-dev", "toolset.review-only"]
   },
@@ -15,7 +15,7 @@
     "os": "macos",
     "stackId": "fullstack-js-ts",
     "filename": "fullstack-js-ts-macos-v0.1.0-macos.zip",
-    "sha256": "edf10e0e1c7f2acd378dd53ea0100487d59cf396a0df29bdd6890c8672cf611c",
+    "sha256": "f9433d570e4592023757ba220ab1cd65007890e2f4eedd2e32bc1a9c2098e17f",
     "agents": ["refactor-surgeon", "test-writer", "doc-surgeon"],
     "toolsets": ["toolset.local-dev", "toolset.review-only"]
   },
@@ -25,7 +25,7 @@
     "os": "windows",
     "stackId": "fullstack-js-ts",
     "filename": "fullstack-js-ts-windows-v0.1.0-windows.zip",
-    "sha256": "d6ed351cf25bfbd1173452ad64ed8d4aa21f3b8406ec174283459c9ab948d6ec",
+    "sha256": "1ee41b2aa09930b23ae16ff3ac4e4b42838b8726e9342f95d7fd0c5ec21a1cca",
     "agents": ["refactor-surgeon", "test-writer", "doc-surgeon"],
     "toolsets": ["toolset.local-dev", "toolset.review-only"]
   },
@@ -35,7 +35,7 @@
     "os": "linux",
     "stackId": "infra-ops-sre",
     "filename": "infra-ops-sre-linux-v0.1.0-linux.zip",
-    "sha256": "d54b02157f59fd906eb65e3a37c32df3bad6b838b407ab012a736253b9a5765b",
+    "sha256": "cd7620fdcb6ab51a2c70b099ab7999810e88fb1f37b8367dfdd7e7faebe4c47f",
     "agents": ["infra-reviewer", "incident-scribe", "doc-surgeon"],
     "toolsets": ["toolset.review-only"]
   },
@@ -45,7 +45,7 @@
     "os": "macos",
     "stackId": "infra-ops-sre",
     "filename": "infra-ops-sre-macos-v0.1.0-macos.zip",
-    "sha256": "11a8da78588a7d834745d558d63b284b9ec93b800a74bdacde9caf9f4dc44927",
+    "sha256": "1e5b01ab307201f768bbaebca3e123e23b71463956c239681178d480165bf789",
     "agents": ["infra-reviewer", "incident-scribe", "doc-surgeon"],
     "toolsets": ["toolset.review-only"]
   },
@@ -55,7 +55,7 @@
     "os": "windows",
     "stackId": "infra-ops-sre",
     "filename": "infra-ops-sre-windows-v0.1.0-windows.zip",
-    "sha256": "6cb0447667bcbf986b4044c2bf4bac7b4d0e733e5c55e110b63bf6e6031f6a59",
+    "sha256": "ea796d43e9af48620a325ad8f9a7c86f0e855c77c9c2fc9315a89a74f6d56006",
     "agents": ["infra-reviewer", "incident-scribe", "doc-surgeon"],
     "toolsets": ["toolset.review-only"]
   },
@@ -65,7 +65,7 @@
     "os": "linux",
     "stackId": "python-data-analytics",
     "filename": "python-data-analytics-linux-v0.1.0-linux.zip",
-    "sha256": "3bb389451af1e0c258bfb1e9c5943e57251ca48973d3eed9b9226c9cda7d03a5",
+    "sha256": "91138277a911b3d994eed17e4f3b047af1c54685d358d7cb7fc213f579a0c240",
     "agents": ["data-explorer", "pipeline-refactorer", "doc-surgeon"],
     "toolsets": ["toolset.local-dev", "toolset.review-only"]
   },
@@ -75,7 +75,7 @@
     "os": "macos",
     "stackId": "python-data-analytics",
     "filename": "python-data-analytics-macos-v0.1.0-macos.zip",
-    "sha256": "f934a3227a01f5c63c9f46b64ddaceff6255abdadccb939519ddf1755859bc77",
+    "sha256": "d1f100ec5cbc7e31bcf88dfe63122264c8b836d53a106b2f82450ed04e6f2309",
     "agents": ["data-explorer", "pipeline-refactorer", "doc-surgeon"],
     "toolsets": ["toolset.local-dev", "toolset.review-only"]
   },
@@ -85,7 +85,7 @@
     "os": "windows",
     "stackId": "python-data-analytics",
     "filename": "python-data-analytics-windows-v0.1.0-windows.zip",
-    "sha256": "8ff49e90387ccaae24a61c09351bdb59b98f5f8882dc7799178f4a11e471fb8d",
+    "sha256": "caa0bec00935e5071238405e0d2b22569736e6c6fc6962110f09cb03809985ae",
     "agents": ["data-explorer", "pipeline-refactorer", "doc-surgeon"],
     "toolsets": ["toolset.local-dev", "toolset.review-only"]
   }

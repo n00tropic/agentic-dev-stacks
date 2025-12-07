@@ -46,19 +46,20 @@ What happens:
 - Installs extensions into the `Fullstack JS/TS – Web & API` profile via the VS Code CLI.
 - Opens the exported workspace at `vscode/exports/workspaces/fullstack-js-ts/fullstack-js-ts.code-workspace`.
 - Leaves global settings untouched. Optional: import a vetted profile export from `vscode/profiles-dist/fullstack-js-ts.code-profile` once you have generated a real export.
+- Verify: `code --profile "Fullstack JS/TS – Web & API" --list-extensions | wc -l` (PowerShell: `code --profile "Fullstack JS/TS – Web & API" --list-extensions | measure-object`) and optionally `python scripts/validate-mcp-config.py` from repo root.
 
 ## Golden paths
 
-- JS/TS refactor + tests: pair refactor-surgeon with test-writer (see `docs/golden-paths.md`).
-- Incident review + postmortem: infra-reviewer then incident-scribe (see `docs/golden-paths.md`).
+- JS/TS refactor + tests: `docs/golden-paths/js-ts-refactor.md`
+- Incident review + postmortem: `docs/golden-paths/incident-postmortem.md`
 
 ## Stacks you can install
 
-| Stack                 | Persona           | Agents & toolsets (high level)                                               | Quickstart                                       |
-| --------------------- | ----------------- | ---------------------------------------------------------------------------- | ------------------------------------------------ | ---- |
-| fullstack-js-ts       | Full-stack JS/TS  | refactor-surgeon, test-writer, doc-surgeon; local-dev + review-only toolsets | `./scripts/install/fullstack-js-ts-<os>.sh       | ps1` |
-| python-data-analytics | Data/ML/analytics | data-explorer, pipeline-refactorer, doc-surgeon; local-dev + review-only     | `./scripts/install/python-data-analytics-<os>.sh | ps1` |
-| infra-ops-sre         | Infra / SRE       | infra-reviewer, incident-scribe, doc-surgeon; review-only                    | `./scripts/install/infra-ops-sre-<os>.sh         | ps1` |
+| Stack                 | Persona           | Agents & toolsets (high level)                                               | Quickstart                                        |
+| --------------------- | ----------------- | ---------------------------------------------------------------------------- | ------------------------------------------------- |
+| fullstack-js-ts       | Full-stack JS/TS  | refactor-surgeon, test-writer, doc-surgeon; local-dev + review-only toolsets | `./scripts/install/fullstack-js-ts-<os>.sh`       |
+| python-data-analytics | Data/ML/analytics | data-explorer, pipeline-refactorer, doc-surgeon; local-dev + review-only     | `./scripts/install/python-data-analytics-<os>.sh` |
+| infra-ops-sre         | Infra / SRE       | infra-reviewer, incident-scribe, doc-surgeon; review-only                    | `./scripts/install/infra-ops-sre-<os>.sh`         |
 
 More detail: `docs/stack-catalogue.md` (personas, MCP servers, prompts).
 
@@ -68,6 +69,7 @@ More detail: `docs/stack-catalogue.md` (personas, MCP servers, prompts).
 - No dotfile edits: profiles, MCP manifests, and prompts are authored under `vscode/**` and `agents/**`; generated artefacts in `vscode/exports/**` stay untracked.
 - Secrets stay out of git: MCP manifests use `<TO_FILL>` placeholders; copy generated TOML into `~/.codex/config.toml` per `codex/docs/config-guides.md`.
 - Dist profiles: `.code-profile` files are regenerated via VS Code **Export Profile…**; never hand-edit.
+- See `GOVERNANCE.md` and `AGENTS.md` for invariants and reviewer expectations.
 
 ## QA and validation
 

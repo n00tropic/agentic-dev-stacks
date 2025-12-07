@@ -49,8 +49,8 @@ run_python_compile() {
 		log "python3 not found; skipping compile step"
 		return
 	fi
-	log "Running python -m compileall"
-	python3 -m compileall "${ROOT}/vscode" "${ROOT}/codex" "${ROOT}/scripts" "${ROOT}/docs"
+	log "Running python -m compileall (excluding node_modules)"
+	python3 -m compileall -x 'node_modules' "${ROOT}/vscode" "${ROOT}/codex" "${ROOT}/scripts" "${ROOT}/docs"
 }
 
 run_json_validation() {
@@ -62,7 +62,7 @@ run_json_validation() {
 import json, os, pathlib, sys
 
 root = pathlib.Path(os.environ["ROOT_PATH"])
-skip_parts = {'.trunk/tools', 'exports/', '.vscode/'}
+skip_parts = {'.trunk/tools', 'exports/', '.vscode/', 'node_modules/'}
 fail = False
 
 for path in root.rglob('*.json'):
@@ -94,7 +94,7 @@ except Exception:  # pragma: no cover - best effort
 	sys.exit(0)
 
 root = pathlib.Path(os.environ["ROOT_PATH"])
-skip_parts = {'.trunk/tools', 'exports/', '.vscode/'}
+skip_parts = {'.trunk/tools', 'exports/', '.vscode/', 'node_modules/'}
 fail = False
 
 for path in root.rglob('*.toml'):

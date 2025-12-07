@@ -18,8 +18,18 @@
 
 If you want to publish a bundle for a server defined here:
 
-- Use the official MCP bundle tooling to package the server, keeping the `id` identical to the manifest entry.
+- Use the official MCP bundle tooling to package the server, keeping the `id` identical to the manifest entry. Example (adjust to the CLI you install):
+
+  ```bash
+  mcpb pack path/to/server --output ./dist/<id>.mcpb
+  ```
+
 - Document provenance and safety flags alongside the bundle download (mirroring `servers.<slug>.json`).
 - Treat the bundle as a distributable artefact; do not commit it. Ship it alongside release assets or via your preferred registry.
+
+Bundle-ready servers in this repo (keep ids aligned with manifests):
+
+- `github`, `context7-docs`, `sonatype-deps`, `elasticsearch`, `mongodb` (fullstack-js-ts)
+- `kubernetes`, `aws` (optional/opt-in), plus the above where relevant (infra/devops)
 
 This keeps the repo authoritative for ids, flags, and wiring, while letting teams distribute `.mcpb` files when that better suits their environment.
