@@ -43,6 +43,25 @@ python scripts/export-packs.py <slug> [<slug> ...]
 
 > Fast path: `scripts/macos/install-profiles.sh`, `scripts/linux/install-profiles.sh`, or `scripts/windows/Install-Profiles.ps1` will loop through slugs (or the ones you pass) using `export-map.yaml`, ensure the profile exists, install extensions, and open the workspace once.
 
+## Installation script generators
+
+Generate standalone and pack-level installation scripts from source:
+
+```bash
+# Generate standalone installation scripts for all profiles
+python scripts/generate-install-scripts.py              # all 16 profiles
+python scripts/generate-install-scripts.py slug1 slug2  # specific profiles
+
+# Generate pack-level installation scripts for all packs
+python scripts/generate-pack-scripts.py                 # all 6 packs
+python scripts/generate-pack-scripts.py pack1 pack2     # specific packs
+```
+
+- Standalone scripts: `scripts/install-<slug>.sh` and `scripts/Install-<Slug>.ps1`
+- Pack-level scripts: `packs/<pack>/scripts/{linux,macos,windows}/install-profiles.sh` (or `.ps1`)
+- Idempotent: safe to regenerate; scripts read from `export-map.yaml` for metadata
+- Generated scripts are committed to the repository for easy distribution
+
 ## Validation reminders
 
 - Keep source packs in `packs/**` aligned with `CONTROL.md`.

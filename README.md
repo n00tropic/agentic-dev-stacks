@@ -33,6 +33,32 @@ Scoped, cross-OS VS Code packs plus MCP manifests, designed as a **compiler**: p
 
 - What it does: ensures the `core-base-dev` export exists (runs `export-packs.py` if missing), installs extensions into the `Core / Base Dev` profile via `code --install-extension --profile`, and opens the exported workspace under that profile. No global settings or dotfiles are touched.
 
+## Installation scripts (all profiles)
+
+All 16 profiles have standalone installation scripts:
+
+```bash
+# macOS / Linux - install any profile
+cd vscode && ./scripts/install-<slug>.sh
+
+# Windows PowerShell
+cd vscode
+.\scripts\Install-<Slug>.ps1
+```
+
+Examples: `install-fullstack-js-ts.sh`, `Install-PythonDataMl.ps1`, `install-qa-static-analysis.sh`
+
+Pack-level installers (install all profiles from a pack or specific ones):
+
+```bash
+# Install all profiles from the 10-fullstack-js-ts pack (macOS)
+cd vscode/packs/10-fullstack-js-ts/scripts/macos
+./install-profiles.sh
+
+# Install specific profiles from a pack
+./install-profiles.sh fullstack-js-ts frontend-ux-ui
+```
+
 ## Bundle builder (for handoff)
 
 - Build a distributable bundle (git-ignored) for any slug:
@@ -141,6 +167,23 @@ Scoped, cross-OS VS Code packs plus MCP manifests, designed as a **compiler**: p
 - `validate-packs`: validates extension lists and metadata on PRs/pushes touching packs/control docs.
 - `docs-check`: PR link checker + docs build; `docs-antora`: deploys docs to GitHub Pages on main.
 - `ci-minimal` (added): runs `trunk check --ci`, Python syntax checks, and JSON/TOML validation to keep scripts and manifests healthy.
+
+## QA preflight (pre-release health checks)
+
+Run comprehensive health checks before any release:
+
+```bash
+bash scripts/qa-preflight.sh
+```
+
+This validates:
+- Extension lists (shell + Python validators)
+- MCP configuration structure
+- Python syntax across all scripts
+- JSON/TOML format validation
+- Shell script integrity
+- Metadata consistency (CONTROL.md ↔ export-map.yaml)
+- Presence of all installation scripts (standalone + pack-level)
 
 ## Safety notes
 
