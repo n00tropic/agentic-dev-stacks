@@ -32,25 +32,29 @@ case "$arch" in
 esac
 
 if [ -z "${CODACY_CLI_V2_TMP_FOLDER:-}" ]; then
-	if [ "${os_name}" = "Linux" ]; then
+	case "${os_name}" in
+	Linux)
 		CODACY_CLI_V2_TMP_FOLDER="$HOME/.cache/codacy/codacy-cli-v2"
-	elif [ "${os_name}" = "Darwin" ]; then
+		;;
+	Darwin)
 		CODACY_CLI_V2_TMP_FOLDER="$HOME/Library/Caches/Codacy/codacy-cli-v2"
-	else
+		;;
+	*)
 		CODACY_CLI_V2_TMP_FOLDER=".codacy-cli-v2"
-	fi
+		;;
+	esac
 fi
 
 version_file="$CODACY_CLI_V2_TMP_FOLDER/version.yaml"
 
 get_version_from_yaml() {
+	local version=""
 	if [ -f "$version_file" ]; then
-		local version
 		version=$(grep -o 'version: *"[^"]*"' "$version_file" | cut -d'"' -f2)
-		if [ -n "$version" ]; then
-			echo "$version"
-			return 0
-		fi
+	fi
+	if [ -n "$version" ]; then
+		echo "$version"
+		return 0
 	fi
 	return 1
 }

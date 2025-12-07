@@ -10,9 +10,6 @@ actions-runner/.runner
 actions-runner/.credentials*
 
 
-#Ignore vscode AI rules
-.github/instructions/codacy.instructions.md
-
 # Codacy CLI logs
 .codacy/logs/
 
@@ -22,3 +19,6 @@ actions-runner/.credentials*
 
 # macOS Finder cruft
 .DS_Store
+
+# Local virtual environments
+.venv/

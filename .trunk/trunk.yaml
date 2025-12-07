@@ -59,6 +59,11 @@ lint:
         - .vale.ini
       linters:
         - vale
+    - paths:
+        - tmp/**
+      linters:
+        - vale
+        - markdownlint
 actions:
   enabled:
     - trunk-announce
