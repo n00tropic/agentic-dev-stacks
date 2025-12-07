@@ -246,9 +246,31 @@ def write_install_scripts(meta: Dict[str, str], bundle_dir: Path):
         os.chmod(scripts_dir / sh, 0o644)
 
 
+def copy_pack_scripts(slug: str, pack: str, bundle_dir: Path):
+    """Copy pack-level installation scripts from pack directory to bundle"""
+    pack_scripts_dir = PACKS / pack / "scripts"
+    if not pack_scripts_dir.exists():
+        return
+    
+    # Copy from pack to bundle under pack-scripts/
+    dest_pack_scripts = bundle_dir / "pack-scripts"
+    dest_pack_scripts.mkdir(parents=True, exist_ok=True)
+    
+    for platform in ["linux", "macos", "windows"]:
+        platform_dir = pack_scripts_dir / platform
+        if platform_dir.exists():
+            dest_platform = dest_pack_scripts / platform
+            dest_platform.mkdir(parents=True, exist_ok=True)
+            for script in platform_dir.glob("install-*.sh"):
+                shutil.copy2(script, dest_platform / script.name)
+            for script in platform_dir.glob("Install-*.ps1"):
+                shutil.copy2(script, dest_platform / script.name)
+
+
 def write_readme(meta: Dict[str, str], bundle_dir: Path):
     slug = meta["slug"]
     profile = meta["profile_name"]
+    pack = meta["pack"]
     text = f"""# {profile} bundle ({slug})
 
 This bundle is generated from agentic-dev-stacks. It contains a ready-to-use VS Code workspace and profile assets for **{profile}**.
@@ -267,8 +289,27 @@ This bundle is generated from agentic-dev-stacks. It contains a ready-to-use VS 
 - workspace/ – .code-workspace and .vscode (settings, extensions.list, optional launch/tasks)
 - mcp/ – servers manifest and generated codex-mcp TOML (copy snippets into ~/.codex/config.toml manually)
 - prompts/ – suggested prompt packs for this stack
-- scripts/ – per-OS installers using VS Code CLI only
+- scripts/ – profile-specific installers using VS Code CLI only
+- pack-scripts/ – pack-level installers for all profiles in pack `{pack}` (cross-platform)
 - meta/bundle.meta.json – slug, pack, profile name
+
+## Alternative: Pack-level installation
+If you want to install all profiles from pack `{pack}`:
+```bash
+# Linux
+./pack-scripts/linux/install-profiles.sh
+
+# macOS
+./pack-scripts/macos/install-profiles.sh
+
+# Windows PowerShell
+./pack-scripts/windows/Install-Profiles.ps1
+```
+
+Or install specific profiles from the pack:
+```bash
+./pack-scripts/macos/install-profiles.sh {slug}
+```
 
 ## Regenerate
 ```bash
@@ -300,6 +341,7 @@ def build_bundle(slug: str, pack: str):
     copy_agents(slug, bundle_dir)
     write_meta(meta, bundle_dir)
     write_install_scripts(meta, bundle_dir)
+    copy_pack_scripts(slug, pack, bundle_dir)
     write_readme(meta, bundle_dir)
     print(f"[bundles] built {slug} -> {bundle_dir}")
 
