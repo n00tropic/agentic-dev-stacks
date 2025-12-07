@@ -4,6 +4,8 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
+export PYTHONWARNINGS="${PYTHONWARNINGS:-ignore::DeprecationWarning}"
+
 WITH_BUNDLES=0
 if [[ ${1-} == "--with-bundles" ]]; then
 	WITH_BUNDLES=1
