@@ -15,7 +15,7 @@
 - `vscode/scripts/validate-all-bundles.sh` — shell — loops all bundle zips and runs `validate-bundle.sh` per slug.
 - `vscode/scripts/helpers/Validate-Extensions.ps1` — PowerShell — runs the Python extension `validator`.
 - `vscode/scripts/helpers/Apply-Profile.ps1` — PowerShell — merges pack settings for a slug and prints extension install hints.
-- `vscode/scripts/windows/Merge-Settings.ps1` — PowerShell — merges VS Code settings.json with backup and deep merge.
+- `vscode/scripts/windows/Merge-Settings.ps1` — PowerShell — merges VS Code `settings.json` with backup and deep merge.
 - `vscode/scripts/windows/Install-Profiles.ps1` — PowerShell — installs exported VS Code extensions into profiles (Windows).
 - `vscode/scripts/Install-CoreBaseDev.ps1` — PowerShell — exports and installs the core-base-dev profile on Windows.
 - `vscode/scripts/export-packs.py` — Python — exports pack settings/extensions into workspace-ready folders.
