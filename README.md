@@ -17,6 +17,7 @@ See vscode/prompts/phase-4-agent-ops.md for the Agent Ops meta-prompt (used with
 - Why: Single source of truth for reproducible, sandbox-friendly VS Code profiles and MCP manifests without touching host dotfiles.
 - Who: Engineers and reviewers who need predictable, policy-aligned environments across macOS, Windows, and Linux.
 - Hero stack now: Fullstack JS/TS (agents + toolsets). See `docs/stack-catalogue.md`.
+- Additional stacks (beta): Python Data & Analytics; Infra Ops / SRE.
 
 ## Quickstart (reference profile: Core / Base Dev)
 

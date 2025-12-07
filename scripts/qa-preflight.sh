@@ -69,6 +69,9 @@ PY
 run_check "Agent ecosystem config validation" \
 	python3 agent-ecosystems/scripts/validate-ecosystem-configs.py
 
+run_check "Agent ecosystems full check (with bundles)" \
+	bash scripts/check-agent-ecosystems.sh --with-bundles
+
 # 5. TOML validation
 run_check "TOML syntax validation" bash -c '
 python3 - <<PY

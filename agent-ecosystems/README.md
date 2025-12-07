@@ -55,9 +55,14 @@ Outputs follow the naming conventions documented in `dist/README.md`.
 - **Toolsets:** `toolset.local-dev` (repo read/write, docs, deps) and `toolset.review-only` (read-only review posture).
 - **Typical tasks:** refactor services/components, add coverage for serializers/hooks, polish docs/ADRs, review changes with MCP-powered context.
 
+## Additional stacks (beta)
+
+- **Python Data & Analytics:** data/ML engineers; agents: data-explorer, pipeline-refactorer, doc-surgeon; devcontainer/profile placeholders under `vscode/.devcontainer/python-data-analytics/` and `vscode/profiles-dist/python-data-analytics.code-profile`.
+- **Infra Ops / SRE:** infra/platform engineers; agents: infra-reviewer, incident-scribe, doc-surgeon; devcontainer/profile placeholders under `vscode/.devcontainer/infra-ops-sre/` and `vscode/profiles-dist/infra-ops-sre.code-profile`.
+
 ## Stack catalogue
 
-See `docs/stack-catalogue.md` for a catalogue of stacks (Fullstack JS/TS available now; others coming soon).
+See `docs/stack-catalogue.md` for a catalogue of stacks and install pointers.
 
 ## Automation roadmap
 
