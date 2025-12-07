@@ -1,0 +1,21 @@
+{
+  "name": "agentic-neon-ui",
+  "version": "0.1.0",
+  "description": "Agentic Neon Antora UI bundle for Agentic Dev Stacks",
+  "private": true,
+  "scripts": {
+    "clean": "rimraf build",
+    "build": "npm run bundle",
+    "bundle": "gulp bundle",
+    "watch": "gulp watch"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "cssnano": "^6.0.1",
+    "del": "^7.1.0",
+    "gulp": "^4.0.2",
+    "gulp-postcss": "^9.0.1",
+    "gulp-zip": "^5.1.0",
+    "rimraf": "^5.0.7"
+  }
+}

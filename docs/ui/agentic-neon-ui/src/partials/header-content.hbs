@@ -1,0 +1,26 @@
+<header class="topbar">
+  <div class="topbar__inner">
+    <a class="brand" href="{{{or site.url (relativize 'index.html')}}}">
+      <span class="brand__glow" aria-hidden="true"></span>
+      <span class="brand__text">
+        Agentic Dev Stacks
+        <span class="brand__accent">Agentic Neon</span>
+      </span>
+    </a>
+    <nav class="topbar__nav" id="topbar-nav">
+      <a class="topbar__link" href="{{{relativize 'vscode/packs.html'}}}">Stacks</a>
+      <a class="topbar__link" href="{{{relativize 'agents/agents-overview.html'}}}">Agents</a>
+      <a class="topbar__link" href="{{{relativize 'golden-path.html'}}}">Golden Paths</a>
+      <a class="topbar__link" href="https://github.com/n00tropic/agentic-dev-stacks" target="_blank" rel="noreferrer">GitHub</a>
+    </nav>
+    <div class="topbar__actions">
+      <button class="theme-toggle" type="button" aria-label="Theme toggle (stub)" title="Light theme coming soon">
+        <span class="theme-toggle__icon" aria-hidden="true">●</span>
+      </button>
+      <button class="nav-trigger" type="button" data-target="topbar-nav" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+</header>

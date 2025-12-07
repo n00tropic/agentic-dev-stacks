@@ -1,4 +1,5 @@
 = Agentic Dev Stacks
+:page-layout: landing
 
 A reproducible, agent-friendly scaffolding for VS Code profiles, MCP manifests, custom Copilot agents, and bundles. This site mirrors the repository structure and governance.
 

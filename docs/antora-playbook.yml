@@ -25,5 +25,5 @@ output:
 
 ui:
   bundle:
-    url: ./ui/ui-bundle.zip
+    url: ./ui/agentic-neon-ui/build/ui-bundle.zip
     snapshot: true

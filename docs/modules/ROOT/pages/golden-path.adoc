@@ -62,3 +62,26 @@ Run Trunk and bundle validation when you change packs or MCP:
 trunk check
 bash vscode/scripts/validate-all-bundles.sh
 ----
+
+== Featured flows
+
+[[js-ts-refactor-tests]]
+=== JS/TS refactor + tests
+
+- Stack: `fullstack-js-ts`.
+- Agents: refactor-surgeon + test-writer; MCP for code search in read-only mode.
+- Flow: scope refactor, generate focused tests, run them locally, and stage changes with a review summary.
+
+[[data-pipeline-hardening]]
+=== Data pipeline hardening
+
+- Stack: `python-data-analytics`.
+- Agents: data-explorer + pipeline-refactorer.
+- Flow: lint + type-check notebooks, refactor ETL scripts, and document operational runbooks alongside MCP data fetches.
+
+[[incident-review-postmortem]]
+=== Incident review + postmortem
+
+- Stack: `infra-ops-sre`.
+- Agents: infra-reviewer + incident-scribe, defaulting to read-only MCP usage.
+- Flow: pull logs in read-only mode, assemble a timeline, capture remediation follow-ups, and publish the postmortem.

@@ -1,0 +1,48 @@
+:root {
+  color-scheme: dark;
+  --bg-main: #050816;
+  --bg-elevated: #0b1020;
+  --bg-code: #090f23;
+  --fg-main: #f5f7ff;
+  --fg-muted: #acb2cc;
+  --fg-subtle: #6f7490;
+  --accent-cyan: #5ef2ff;
+  --accent-violet: #c489ff;
+  --accent-amber: #ffcf6b;
+  --gradient-hero: linear-gradient(
+    135deg,
+    #5ef2ff 0%,
+    #c489ff 40%,
+    #ffcf6b 100%
+  );
+  --gradient-chip: linear-gradient(135deg, #272b44 0%, #181b30 100%);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --card-blur: blur(12px);
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --shadow-1: 0 18px 40px rgba(0, 0, 0, 0.45);
+  --shadow-2: 0 24px 64px rgba(0, 0, 0, 0.55);
+  --font-family-heading:
+    "Space Grotesk", "Soehne", "Inter", "Segoe UI", sans-serif;
+  --font-family-body:
+    "Inter", "Soehne", "Segoe UI", -apple-system, BlinkMacSystemFont,
+    "Helvetica Neue", sans-serif;
+  --font-family-mono:
+    "JetBrains Mono", "SFMono-Regular", Consolas, Menlo, monospace;
+  --font-size-body: 16px;
+  --font-size-h1: 32px;
+  --font-size-h2: 24px;
+  --font-size-h3: 20px;
+  --line-height-body: 1.6;
+  --line-height-heading: 1.2;
+  --spacing-xs: 6px;
+  --spacing-sm: 10px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  --spacing-3xl: 64px;
+  --border-glow: 1px solid rgba(255, 255, 255, 0.06);
+}

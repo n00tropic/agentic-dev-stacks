@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="{{or page.attributes.lang 'en'}}">
+  <head>
+{{> head defaultPageTitle=site.title}}
+  </head>
+  <body class="agentic-neon{{#with (or page.attributes.role page.role)}} {{{this}}}{{/with}}">
+{{> header}}
+{{> body}}
+{{> footer}}
+  </body>
+</html>

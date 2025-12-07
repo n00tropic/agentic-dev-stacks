@@ -1,0 +1,8 @@
+<div class="body">
+{{> nav}}
+{{#if (eq page.layout 'landing')}}
+{{> landing}}
+{{else}}
+{{> main}}
+{{/if}}
+</div>
