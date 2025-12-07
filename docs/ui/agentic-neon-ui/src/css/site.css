@@ -1,5 +1,9 @@
 @import "./theme.css";
 
+html {
+  scroll-behavior: smooth;
+}
+
 *,
 *::before,
 *::after {
@@ -131,6 +135,7 @@ pre {
   width: 0;
   height: 2px;
   background: var(--gradient-hero);
+  transition: width 0.2s ease;
   transition: width 0.2s ease;
 }
 
