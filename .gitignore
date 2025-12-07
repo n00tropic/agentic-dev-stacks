@@ -26,3 +26,6 @@ actions-runner/.credentials*
 
 # Local virtual environments
 .venv/
+
+# Node.js dependencies
+node_modules/
