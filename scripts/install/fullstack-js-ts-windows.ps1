@@ -1,52 +1,68 @@
 #!/usr/bin/env pwsh
-# Fullstack JS/TS bundle installer (Windows)
-# Non-destructive scaffold: validates configs, checks prerequisites, and prints next steps.
+# Fullstack JS/TS installer (Windows)
+# Runs the stack compiler for this persona, installs extensions into the profile, and opens the workspace.
 
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
 
 $ScriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $RepoRoot = Resolve-Path (Join-Path $ScriptRoot "..\")
+$VsCodeDir = Join-Path $RepoRoot "vscode"
 
-Write-Output "[fullstack-js-ts] Validating agent ecosystem configs"
-python3 (Join-Path $RepoRoot "agent-ecosystems/scripts/validate-ecosystem-configs.py")
+$ProfileSlug = "fullstack-js-ts"
+$ProfileName = "Fullstack JS/TS – Web & API"
+$ProfileDist = Join-Path $VsCodeDir "profiles-dist/$ProfileSlug.code-profile"
+$WorkspaceFile = Join-Path $VsCodeDir "exports/workspaces/$ProfileSlug/$ProfileSlug.code-workspace"
 
-$DevcontainerPath = Join-Path $RepoRoot "vscode/.devcontainer/devcontainer.json"
-$ProfilePath = Join-Path $RepoRoot "vscode/profiles-dist/fullstack-js-ts.code-profile"
-
-Write-Output "[fullstack-js-ts] Checking prerequisites"
-if (Get-Command code -ErrorAction SilentlyContinue) {
-  Write-Output "- VS Code CLI found: $(Get-Command code).Source"
-} else {
-  Write-Warning "- VS Code CLI not found. Install VS Code and enable 'Shell Command: Install code command in PATH' (or use VS Code UI)."
+function Require-Cmd {
+  param (
+    [string]$Name,
+    [string]$Message
+  )
+  if (-not (Get-Command $Name -ErrorAction SilentlyContinue)) {
+    Write-Error $Message
+    exit 1
+  }
 }
+
+Write-Output "[$ProfileSlug] Prerequisite check (Windows)"
+Require-Cmd git "Git is required; install via https://git-scm.com/download/win or winget"
+
+$Python = Get-Command python3 -ErrorAction SilentlyContinue
+if (-not $Python) { $Python = Get-Command python -ErrorAction SilentlyContinue }
+if (-not $Python) {
+  Write-Error "Python 3 is required (for export scripts). Install from https://www.python.org/downloads/windows/"
+  exit 1
+}
+Require-Cmd code "VS Code CLI 'code' not found. Install VS Code then enable the CLI via the Command Palette."
 
 if (Get-Command devcontainer -ErrorAction SilentlyContinue) {
   Write-Output "- Devcontainer CLI found: $(Get-Command devcontainer).Source"
 } else {
-  Write-Output "- Devcontainer CLI not found (optional). You can use VS Code Dev Containers UI instead."
+  Write-Output "- Devcontainer CLI not found (optional). You can still use VS Code Dev Containers UI."
+}
+if (Get-Command docker -ErrorAction SilentlyContinue) {
+  Write-Output "- Docker detected (required for the devcontainer)"
+} else {
+  Write-Output "- Docker/Podman not found. Devcontainer will remain optional until installed."
 }
 
-if (Test-Path $DevcontainerPath) {
-  Write-Output "[fullstack-js-ts] Devcontainer present: $DevcontainerPath"
-} else {
-  Write-Warning "[fullstack-js-ts] Devcontainer missing: $DevcontainerPath. TODO: add automation to fetch/prepare devcontainer."
-}
+Write-Output "[$ProfileSlug] Validating agent ecosystem configs"
+& $Python.Source (Join-Path $RepoRoot "agent-ecosystems/scripts/validate-ecosystem-configs.py")
 
-if (Test-Path $ProfilePath) {
-  Write-Output "[fullstack-js-ts] VS Code profile export present: $ProfilePath"
+Write-Output "[$ProfileSlug] Building export + installing profile"
+& (Join-Path $VsCodeDir "scripts/Install-FullstackJsTs.ps1")
+
+Write-Output "[$ProfileSlug] Workspace path: $WorkspaceFile"
+if (Test-Path $ProfileDist) {
+  Write-Output "[$ProfileSlug] Optional: import a vetted VS Code profile export from $ProfileDist (Profiles > Import Profile…) to mirror reviewed settings."
 } else {
-  Write-Warning "[fullstack-js-ts] VS Code profile export missing. Export via VS Code 'Export Profile…' to $ProfilePath."
+  Write-Warning "[$ProfileSlug] No dist profile export found yet. Use VS Code 'Export Profile…' to create $ProfileDist once you are happy."
 }
 
 Write-Output @'
-Next steps (manual):
-- Import the exported profile in VS Code (Settings Profiles > Import Profile... or `code --import-profile` when available).
-- Open the repository in the devcontainer (Command Palette: Dev Containers: Reopen in Container).
-- Ensure MCP commands (github-mcp, context7-mcp, sonatype-mcp, elastic-mcp) are installed and configured via environment variables (no secrets in git).
-
-TODOs for automation:
-- Auto-import the profile when safe.
-- Wire MCP command installation when packaged.
-- Add integrity checks for artefacts.
+Next steps:
+- If the workspace did not open, run: code vscode/exports/workspaces/fullstack-js-ts/fullstack-js-ts.code-workspace --profile "Fullstack JS/TS – Web & API"
+- To work in a containerised toolchain: Dev Containers: Reopen in Container (uses vscode/.devcontainer/devcontainer.json).
+- MCP servers ship with placeholders only; follow codex/docs/config-guides.md to merge generated TOML into your local ~/.codex/config.toml without adding secrets to git.
 '@

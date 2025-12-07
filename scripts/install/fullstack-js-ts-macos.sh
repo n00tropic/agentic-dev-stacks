@@ -1,53 +1,58 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Fullstack JS/TS bundle installer (macOS)
-# Non-destructive scaffold: validates configs, checks prerequisites, and prints next steps.
-
-set -euo pipefail
+# Fullstack JS/TS installer (macOS)
+# Runs the stack compiler for this persona, installs extensions into the profile, and opens the workspace.
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-REPO_ROOT="$(cd "${ROOT}/.." && pwd)"
+REPO_ROOT="$(cd "${ROOT}" && pwd)"
+VSCODE_DIR="${REPO_ROOT}/vscode"
+PROFILE_SLUG="fullstack-js-ts"
+PROFILE_NAME="Fullstack JS/TS – Web & API"
+PROFILE_DIST="${VSCODE_DIR}/profiles-dist/${PROFILE_SLUG}.code-profile"
+WORKSPACE_FILE="${VSCODE_DIR}/exports/workspaces/${PROFILE_SLUG}/${PROFILE_SLUG}.code-workspace"
 
-echo "[fullstack-js-ts] Validating agent ecosystem configs"
-python3 "${REPO_ROOT}/agent-ecosystems/scripts/validate-ecosystem-configs.py"
+require_cmd() {
+	local cmd="$1"
+	local msg="$2"
+	if ! command -v "${cmd}" >/dev/null 2>&1; then
+		echo "${msg}" >&2
+		exit 1
+	fi
+}
 
-DEVCONTAINER_PATH="${REPO_ROOT}/vscode/.devcontainer/devcontainer.json"
-PROFILE_PATH="${REPO_ROOT}/vscode/profiles-dist/fullstack-js-ts.code-profile"
-
-echo "[fullstack-js-ts] Checking prerequisites"
-if command -v code >/dev/null 2>&1; then
-	echo "- VS Code CLI found: $(command -v code)"
-else
-	echo "- VS Code CLI not found. Install VS Code and enable 'Shell Command: Install 'code' command in PATH'"
-fi
+echo "[${PROFILE_SLUG}] Prerequisite check (macOS)"
+require_cmd git "Git is required; install via Xcode Command Line Tools or https://git-scm.com/download/mac"
+require_cmd python3 "Python 3 is required (for export scripts). Install from https://www.python.org/downloads/"
+require_cmd code "VS Code CLI 'code' not found. Install VS Code then run 'Shell Command: Install \"code\" command in PATH'"
 
 if command -v devcontainer >/dev/null 2>&1; then
 	echo "- Devcontainer CLI found: $(command -v devcontainer)"
 else
-	echo "- Devcontainer CLI not found (optional). You can use VS Code Dev Containers UI instead."
+	echo "- Devcontainer CLI not found (optional). You can still use VS Code Dev Containers UI."
+fi
+if command -v docker >/dev/null 2>&1; then
+	echo "- Docker detected (required for the devcontainer)"
+else
+	echo "- Docker/Podman not found. Devcontainer will remain optional until installed."
 fi
 
-if [[ -f ${DEVCONTAINER_PATH} ]]; then
-	echo "[fullstack-js-ts] Devcontainer present: ${DEVCONTAINER_PATH}"
-else
-	echo "[fullstack-js-ts] Devcontainer missing: ${DEVCONTAINER_PATH}. TODO: add automation to fetch/prepare devcontainer."
-fi
+echo "[${PROFILE_SLUG}] Validating agent ecosystem configs"
+python3 "${REPO_ROOT}/agent-ecosystems/scripts/validate-ecosystem-configs.py"
 
-if [[ -f ${PROFILE_PATH} ]]; then
-	echo "[fullstack-js-ts] VS Code profile export present: ${PROFILE_PATH}"
+echo "[${PROFILE_SLUG}] Building export + installing profile"
+bash "${VSCODE_DIR}/scripts/install-fullstack-js-ts.sh"
+
+echo "[${PROFILE_SLUG}] Workspace path: ${WORKSPACE_FILE}"
+if [[ -f ${PROFILE_DIST} ]]; then
+	echo "[${PROFILE_SLUG}] Optional: import a vetted VS Code profile export from ${PROFILE_DIST} (Profiles > Import Profile…) to mirror reviewed settings."
 else
-	echo "[fullstack-js-ts] VS Code profile export missing. Export via VS Code 'Export Profile…' to ${PROFILE_PATH}."
+	echo "[${PROFILE_SLUG}] No dist profile export found yet. Use VS Code 'Export Profile…' to create ${PROFILE_DIST} once you are happy."
 fi
 
 cat <<'NOTE'
-Next steps (manual):
-- Import the exported profile in VS Code (File > Preferences > Profiles > Import Profile... or `code --import-profile` when available).
-- Open the repository in the devcontainer (Command Palette: Dev Containers: Reopen in Container).
-- Ensure MCP commands (github-mcp, context7-mcp, sonatype-mcp, elastic-mcp) are installed and configured via environment variables (no secrets in git).
-
-TODOs for automation:
-- Auto-import the profile when safe.
-- Wire MCP command installation when packaged.
-- Add integrity checks for artefacts.
+Next steps:
+- If the workspace did not open, run: code vscode/exports/workspaces/fullstack-js-ts/fullstack-js-ts.code-workspace --profile "Fullstack JS/TS – Web & API"
+- To work in a containerised toolchain: Dev Containers: Reopen in Container (uses vscode/.devcontainer/devcontainer.json).
+- MCP servers ship with placeholders only; follow codex/docs/config-guides.md to merge generated TOML into your local ~/.codex/config.toml without adding secrets to git.
 NOTE

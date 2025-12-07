@@ -2,202 +2,91 @@
 
 # Agentic Dev Stacks
 
-<!-- cspell:ignore Agentic Prereqs dotfiles Antora -->
+Scoped, cross-OS VS Code packs plus MCP manifests and devcontainers. One repo, one truth, no host dotfiles touched.
 
-Scoped, cross-OS VS Code packs plus MCP manifests, designed as a **compiler**: devcontainers + profiles + curated agents + MCP toolsets. Full docs: <https://n00tropic.github.io/agentic-dev-stacks>
+## What is this?
 
-- Before: every machine grows its own VS Code / MCP quirks.
-- After: one repo, one truth; one-liner to land a vetted, agent-ready stack on macOS, Windows, or Linux.
-- Guardrails: profiles are exportable, reviewable, and avoid your global dotfiles.
+Agentic development stacks built as a compiler: packs in `vscode/packs/**`, agents in `agents/**`, MCP manifests under `vscode/packs/*/mcp/`, and reproducible exports under `vscode/exports/**` (git-ignored). Dist profile exports live in `vscode/profiles-dist/*.code-profile` (never hand-edit; regenerate via VS Code **Export Profile…**).
 
-See vscode/prompts/phase-4-agent-ops.md for the Agent Ops meta-prompt (used with Copilot Chat).
+## Why you might care
 
-## Why / Who
+- New machines and new hires land in a governed VS Code profile within minutes.
+- Reproducible agent + MCP setup across macOS, Windows, and Linux.
+- Profile budgets and safety flags are explicit (see `CONTROL.md` and `AGENTS.md`).
+- Devcontainer-first: keep host dotfiles clean while validating stacks end-to-end.
 
-- Why: Single source of truth for reproducible, sandbox-friendly VS Code profiles and MCP manifests without touching host dotfiles.
-- Who: Engineers and reviewers who need predictable, policy-aligned environments across macOS, Windows, and Linux.
-- Hero stack now: Fullstack JS/TS (agents + toolsets). See `docs/stack-catalogue.md`.
-- Additional stacks (beta): Python Data & Analytics; Infra Ops / SRE.
-- Prompt packs live under `prompts/stacks/`; golden paths under `docs/golden-paths.md`.
-- Agent contracts and structured outputs live in `agent-ecosystems/contracts/` and `agent-ecosystems/schemas/structured-outputs/`; scenarios can be validated with `--validate-outputs`.
+## 5-minute Quickstart (Fullstack JS/TS)
 
-## Quickstart (reference profile: Core / Base Dev)
-
-- Prereqs: VS Code CLI `code` in PATH, Python 3, Git + curl (for docs/bundle steps).
-- Exactly one first command per OS (fresh machines included):
-
-  ```bash
-  # macOS / Linux
-  cd vscode && ./scripts/install-core-base-dev.sh
-  ```
-
-  ```powershell
-  # Windows PowerShell
-  cd vscode
-  .\scripts\Install-CoreBaseDev.ps1
-  ```
-
-- What it does: ensures the `core-base-dev` export exists (runs `export-packs.py` if missing), installs extensions into the `Core / Base Dev` profile via `code --install-extension --profile`, and opens the exported workspace under that profile. No global settings or dotfiles are touched.
-
-## Installation scripts (all profiles)
-
-All 16 profiles have standalone installation scripts:
+Prerequisites: VS Code with `code` CLI enabled, Git, Python 3; Docker/Podman + Dev Containers extension if you want the containerised toolchain.
 
 ```bash
-# macOS / Linux - install any profile
-cd vscode && ./scripts/install-<slug>.sh
-
-# Windows PowerShell
-cd vscode
-.\scripts\Install-<Slug>.ps1
+# macOS
+git clone https://github.com/n00tropic/agentic-dev-stacks.git
+cd agentic-dev-stacks
+./scripts/install/fullstack-js-ts-macos.sh
 ```
-
-Examples: `install-fullstack-js-ts.sh`, `Install-PythonDataMl.ps1`, `install-qa-static-analysis.sh`
-
-Pack-level installers (install all profiles from a pack or specific ones):
 
 ```bash
-# Install all profiles from the 10-fullstack-js-ts pack (macOS)
-cd vscode/packs/10-fullstack-js-ts/scripts/macos
-./install-profiles.sh
-
-# Install specific profiles from a pack
-./install-profiles.sh fullstack-js-ts frontend-ux-ui
+# Linux
+git clone https://github.com/n00tropic/agentic-dev-stacks.git
+cd agentic-dev-stacks
+./scripts/install/fullstack-js-ts-linux.sh
 ```
 
-## Bundle builder (for handoff)
-
-- Build a distributable bundle (git-ignored) for any slug:
-
-  ```bash
-  cd vscode
-  python3 scripts/build-bundles.py core-base-dev
-  ```
-
-- Output: `vscode/exports/bundles/<slug>/` plus `<slug>-bundle.zip` with workspace, extensions list, MCP manifest + generated TOML, prompts, agents, per-OS install scripts, and metadata.
-
-## Documentation
-
-- Docs site (Antora, GitHub Pages): <https://n00tropic.github.io/agentic-dev-stacks>
-- Source lives in `docs/` (Antora playbook + modules). Build locally:
-
-  ```bash
-  cd docs
-  ./build-docs.sh
-  ```
-
-  Output: `docs/build/site` (git-ignored).
-
-- Workspace MCP validation (macOS/Linux):
-
-  ```bash
-  python scripts/validate-mcp-config.py
-  ```
-
-  Validates `.vscode/mcp.json` structure (command/args/env per server); warns if commands diverge from the standard `/bin/sh -c` pattern.
-
-- Coming back online: visual walkthroughs (before/after profile import, MCP validation catching mistakes) will ship on the docs site; contributions welcome once the site is live again.
-
-## Layout (truths up front)
-
-- **Root**
-  - Governance/agent docs: `AGENTS.md`, `CONTROL.md`, `copilot-instructions.md`, `agent-instructions.md`.
-  - Profile dist map: `PROFILE_DIST.md` (slug → profile name → `.code-profile` → gist URL placeholders).
-- **`vscode/`**
-  - Packs (source of truth):
-    - `packs/<pack>/profiles/PROFILE.<slug>.md`
-    - `packs/<pack>/extensions/extensions.<slug>.txt`
-    - `packs/<pack>/settings/settings.<slug>.json`
-    - `packs/<pack>/mcp/servers.<slug>.json`
-  - Custom agents SSoT: `../agents/<slug>/*.agent.md` (copied into bundles under `.github/agents/`)
-  - Tooling: `scripts/**`
-  - Exports (git-ignored, reproducible): `exports/workspaces/<slug>/...`
-  - Dist exports (versioned if present): `profiles-dist/*.code-profile` (never hand-edit)
-- **`codex/`** – docs for configuring Codex and MCP safely (`config-guides.md`, `safe-vs-danger-modes.md`).
-- **`prompts/`** – prompt packs for Copilot/sub-agents (copy into workspaces; en-GB spelling).
-
-## Compiler pipeline (source → exports → dist)
-
-1. Author in packs: edit `vscode/packs/**` (profiles, extensions, settings, MCP manifests).
-2. Export reproducible workspaces (generated, safe to delete):
-
-   ```bash
-   cd vscode
-   python scripts/export-packs.py <slug> [<slug> ...]
-   ```
-
-3. Materialise on a machine with official VS Code CLI:
-
-   ```bash
-   code --profile "<Profile Name>"
-   cat exports/workspaces/<slug>/.vscode/extensions.list | xargs -n1 code --install-extension --profile "<Profile Name>"
-   code exports/workspaces/<slug>/<slug>.code-workspace --profile "<Profile Name>"
-   ```
-
-4. Export a “good” profile back out from VS Code:
-   - **Export Profile…** → save `.code-profile` to `vscode/profiles-dist/<slug>.code-profile` (do not hand-edit).
-   - Optional: export to secret gist for one-click import.
-5. Record mapping in `PROFILE_DIST.md` (slug, profile name, dist path, gist URL or `<TO_FILL>`).
-
-## Golden paths (copy-pasta)
-
-- Solo dev on laptop (Core / Base Dev, quickest win):
-
-  ```bash
-  cd vscode && ./scripts/install-core-base-dev.sh
-  ```
-
-  ```powershell
-  cd vscode
-  .\scripts\Install-CoreBaseDev.ps1
-  ```
-
-- Reviewer on a locked-down machine (no repo checkout): use VS Code **Import Profile…** and paste the gist URL from `PROFILE_DIST.md` once populated (format: `https://vscode.dev/editor/profile/github/<gist_id>`). Profiles stay reviewable and avoid host dotfiles.
-
-- Team baseline via devcontainer (repro + validation):
-
-  ```bash
-  devcontainer up --workspace-folder .
-  ```
-
-  Post-create: `pip3 install --user pyyaml toml && python3 vscode/scripts/build-bundles.py && bash vscode/scripts/validate-all-bundles.sh` (runs in container; leaves host untouched).
-
-## Development container (preferred automation)
-
-- Open in VS Code with the Development Containers extension or run `devcontainer up` (uses `.devcontainer/devcontainer.json`).
-- Post-create runs: `pip3 install --user pyyaml toml && python3 vscode/scripts/build-bundles.py && bash vscode/scripts/validate-all-bundles.sh`.
-- Result: fresh bundles + zips under `vscode/exports/bundles/**`, validated without touching host dot files.
-
-## CI coverage
-
-- `validate-packs`: validates extension lists and metadata on PRs/pushes touching packs/control docs.
-- `docs-check`: PR link checker + docs build; `docs-antora`: deploys docs to GitHub Pages on main.
-- `ci-minimal` (added): runs `trunk check --ci`, Python syntax checks, JSON/TOML validation, and agent-ecosystems checks (schemas + scenarios) to keep scripts and manifests healthy.
-
-## Agent ecosystems release flow
-
-- Tag: `agent-stacks-vX.Y.Z` (or trigger the workflow dispatch with a version).
-- CI runs validations, scenarios, and bundle builds; outputs ZIPs to `dist/bundles/` plus metadata in `dist/metadata/`.
-- GitHub Release attaches the built ZIPs and checksums.
-
-## QA preflight (pre-release health checks)
-
-Run comprehensive health checks before any release:
-
-```bash
-bash scripts/qa-preflight.sh
+```powershell
+# Windows (PowerShell)
+git clone https://github.com/n00tropic/agentic-dev-stacks.git
+cd agentic-dev-stacks
+.\scripts\install\fullstack-js-ts-windows.ps1
 ```
 
-This validates:
+What happens:
 
-- Extension lists (shell + Python validators)
-- MCP configuration structure
-- Python syntax across all scripts
-- JSON/TOML format validation
-- Shell script integrity
-- Metadata consistency (CONTROL.md ↔ export-map.yaml)
-- Presence of all installation scripts (standalone + pack-level)
-- Agent ecosystems configs and scenarios (via `scripts/check-agent-ecosystems.sh`)
+- Builds the `fullstack-js-ts` export via `vscode/scripts/export-packs.py`.
+- Installs extensions into the `Fullstack JS/TS – Web & API` profile via the VS Code CLI.
+- Opens the exported workspace at `vscode/exports/workspaces/fullstack-js-ts/fullstack-js-ts.code-workspace`.
+- Leaves global settings untouched. Optional: import a vetted profile export from `vscode/profiles-dist/fullstack-js-ts.code-profile` once you have generated a real export.
+
+## Golden paths
+
+- JS/TS refactor + tests: pair refactor-surgeon with test-writer (see `docs/golden-paths.md`).
+- Incident review + postmortem: infra-reviewer then incident-scribe (see `docs/golden-paths.md`).
+
+## Stacks you can install
+
+| Stack                 | Persona           | Agents & toolsets (high level)                                               | Quickstart                                       |
+| --------------------- | ----------------- | ---------------------------------------------------------------------------- | ------------------------------------------------ | ---- |
+| fullstack-js-ts       | Full-stack JS/TS  | refactor-surgeon, test-writer, doc-surgeon; local-dev + review-only toolsets | `./scripts/install/fullstack-js-ts-<os>.sh       | ps1` |
+| python-data-analytics | Data/ML/analytics | data-explorer, pipeline-refactorer, doc-surgeon; local-dev + review-only     | `./scripts/install/python-data-analytics-<os>.sh | ps1` |
+| infra-ops-sre         | Infra / SRE       | infra-reviewer, incident-scribe, doc-surgeon; review-only                    | `./scripts/install/infra-ops-sre-<os>.sh         | ps1` |
+
+More detail: `docs/stack-catalogue.md` (personas, MCP servers, prompts).
+
+## Governance and safety
+
+- Profile budget: tracked in `CONTROL.md` (VS Code limits ~20 profiles per installation).
+- No dotfile edits: profiles, MCP manifests, and prompts are authored under `vscode/**` and `agents/**`; generated artefacts in `vscode/exports/**` stay untracked.
+- Secrets stay out of git: MCP manifests use `<TO_FILL>` placeholders; copy generated TOML into `~/.codex/config.toml` per `codex/docs/config-guides.md`.
+- Dist profiles: `.code-profile` files are regenerated via VS Code **Export Profile…**; never hand-edit.
+
+## QA and validation
+
+- Validate extensions: `cd vscode && ./scripts/helpers/validate-extensions.sh`
+- Validate bundles: `cd vscode && bash scripts/validate-all-bundles.sh`
+- Full preflight: `bash scripts/qa-preflight.sh` (extensions, MCP JSON, shell lint, metadata checks, agent ecosystem scenarios).
+
+## Advanced use
+
+- Build a distributable bundle: `cd vscode && python scripts/build-bundles.py fullstack-js-ts` (outputs to `vscode/exports/bundles/`, git-ignored).
+- Author a new pack: update `vscode/packs/<pack>/` assets, then refresh exports via `python scripts/export-packs.py <slug>`; keep slugs aligned with `CONTROL.md`.
+- Devcontainer automation: `devcontainer up --workspace-folder .` to build + validate in isolation (preferred for CI-like runs).
+- MCP bundles: see `docs/mcp-bundles.md` for how to align existing MCP servers with `.mcpb` distribution.
+
+## Docs and references
+
+- Docs site: <https://n00tropic.github.io/agentic-dev-stacks> (built from `docs/`). Build locally with `cd docs && ./build-docs.sh`.
+- Safe vs danger modes and Codex wiring: `codex/docs/config-guides.md`, `codex/docs/safe-vs-danger-modes.md`.
+- Prompts: `prompts/stacks/*.prompts.md`; agent contracts and schemas: `agent-ecosystems/contracts/`, `agent-ecosystems/schemas/structured-outputs/`.
 
 For any new agent/toolset/stack/bundle, add at least one scenario under `agent-ecosystems/tests/scenarios/` and ensure `scripts/check-agent-ecosystems.sh` passes.
 
