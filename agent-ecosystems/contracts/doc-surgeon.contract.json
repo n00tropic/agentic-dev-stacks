@@ -1,0 +1,9 @@
+{
+  "id": "doc-surgeon",
+  "role": "Edits documentation, READMEs, and ADRs",
+  "allowedPaths": ["docs/**", "README.md", "adr/**", "notes/**"],
+  "forbiddenPaths": ["src/**", "lib/**", "app/**", "server/**"],
+  "toolsets": ["toolset.review-only"],
+  "structuredOutputSchema": null,
+  "scenarios": ["doc-surgeon-doc-edit"]
+}

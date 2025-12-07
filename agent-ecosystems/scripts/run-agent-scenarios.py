@@ -8,6 +8,7 @@
 from __future__ import annotations
 
 import argparse
+import fnmatch
 import json
 import sys
 from pathlib import Path
@@ -22,6 +23,7 @@ TEST_ROOT = ECOSYSTEM_ROOT / "tests"
 SCENARIO_DIR = TEST_ROOT / "scenarios"
 OUTPUT_DIR = TEST_ROOT / "output"
 SCHEMA_PATH = TEST_ROOT / "scenario.schema.yaml"
+CONTRACT_DIR = ECOSYSTEM_ROOT / "contracts"
 
 
 def load_json_files(directory: Path) -> Dict[str, dict]:
@@ -38,6 +40,16 @@ def load_schema() -> dict:
     return yaml.safe_load(SCHEMA_PATH.read_text(encoding="utf-8"))
 
 
+def load_contracts() -> Dict[str, dict]:
+    contracts: Dict[str, dict] = {}
+    if not CONTRACT_DIR.exists():
+        return contracts
+    for path in sorted(CONTRACT_DIR.glob("*.contract.json")):
+        data = json.loads(path.read_text(encoding="utf-8"))
+        contracts[data.get("id")] = data
+    return contracts
+
+
 def validate_against_schema(instance: dict, schema: dict, path: Path) -> List[str]:
     errors: List[str] = []
     validator = Draft202012Validator(schema)
@@ -48,7 +60,11 @@ def validate_against_schema(instance: dict, schema: dict, path: Path) -> List[st
 
 
 def validate_cross_references(
-    scenario: dict, agents: Dict[str, dict], toolsets: Dict[str, dict], path: Path
+    scenario: dict,
+    agents: Dict[str, dict],
+    toolsets: Dict[str, dict],
+    contracts: Dict[str, dict],
+    path: Path,
 ) -> List[str]:
     errors: List[str] = []
     agent_id = scenario.get("agentId")
@@ -63,7 +79,33 @@ def validate_cross_references(
                 errors.append(
                     f"{path}: toolset '{ts}' not listed on agent '{agent_id}'"
                 )
+        if contracts and agent_id not in contracts:
+            errors.append(f"{path}: contract missing for agent '{agent_id}'")
+        elif contracts and agent_id in contracts:
+            contract_toolsets = set(contracts[agent_id].get("toolsets", []))
+            for ts in scenario.get("toolsets", []):
+                if ts not in contract_toolsets:
+                    errors.append(
+                        f"{path}: toolset '{ts}' not allowed by contract for '{agent_id}'"
+                    )
     return errors
+
+
+def check_contract_warnings(
+    scenario: dict, contract: dict | None, path: Path
+) -> List[str]:
+    warnings: List[str] = []
+    if not contract:
+        return warnings
+    allowed = contract.get("allowedPaths", [])
+    forbidden = contract.get("forbiddenPaths", [])
+    hint_paths = scenario.get("workspaceHints", {}).get("paths", [])
+    for p in hint_paths:
+        if forbidden and any(fnmatch.fnmatch(p, fpat) for fpat in forbidden):
+            warnings.append(f"{path}: workspace hint '{p}' overlaps forbiddenPaths")
+        if allowed and not any(fnmatch.fnmatch(p, apat) for apat in allowed):
+            warnings.append(f"{path}: workspace hint '{p}' not covered by allowedPaths")
+    return warnings
 
 
 def render_checklist(scenario: dict, agent: dict) -> str:
@@ -109,10 +151,12 @@ def main() -> int:
     agents = load_json_files(ECOSYSTEM_ROOT / "agents")
     toolsets = load_json_files(ECOSYSTEM_ROOT / "toolsets")
     stacks = load_json_files(ECOSYSTEM_ROOT / "stacks")  # reserved for future use
+    contracts = load_contracts()
 
     schema = load_schema()
 
     all_errors: List[str] = []
+    all_warnings: List[str] = []
     summary: List[str] = []
 
     if args.no_output:
@@ -125,13 +169,24 @@ def main() -> int:
         scenario = yaml.safe_load(path.read_text(encoding="utf-8"))
         errs = []
         errs.extend(validate_against_schema(scenario, schema, path))
-        errs.extend(validate_cross_references(scenario, agents, toolsets, path))
+        errs.extend(
+            validate_cross_references(scenario, agents, toolsets, contracts, path)
+        )
+
+        warnings = []
+        if not errs:
+            warnings = check_contract_warnings(
+                scenario, contracts.get(scenario.get("agentId")), path
+            )
+            all_warnings.extend(warnings)
 
         status = "OK" if not errs else "FAIL"
         notes = ""
         if errs:
             all_errors.extend(errs)
             notes = f"{len(errs)} error(s)"
+        elif warnings:
+            notes = f"{len(warnings)} warning(s)"
         summary.append(f"{path.stem} | {scenario.get('agentId')} | {status} | {notes}")
 
         if not errs and output_dir:
@@ -148,6 +203,11 @@ def main() -> int:
         for e in all_errors:
             print(f"- {e}")
         return 1
+
+    if all_warnings:
+        print("Warnings:")
+        for w in all_warnings:
+            print(f"- {w}")
 
     print("All scenarios validated.")
     return 0

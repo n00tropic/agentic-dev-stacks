@@ -1,0 +1,9 @@
+{
+  "id": "incident-scribe",
+  "role": "Drafts incident summaries and post-mortems from timelines and logs",
+  "allowedPaths": ["docs/**", "adr/**", "runbooks/**", "notes/**"],
+  "forbiddenPaths": ["infra/**", "k8s/**", "terraform/**", "src/**"],
+  "toolsets": ["toolset.review-only"],
+  "structuredOutputSchema": null,
+  "scenarios": ["incident-scribe-summary"]
+}

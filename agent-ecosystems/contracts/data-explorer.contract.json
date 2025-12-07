@@ -1,0 +1,15 @@
+{
+  "id": "data-explorer",
+  "role": "Explore datasets, notebooks, and ETL scripts to summarise and recommend next steps",
+  "allowedPaths": [
+    "data/**",
+    "notebooks/**",
+    "etl/**",
+    "pipelines/**",
+    "src/**"
+  ],
+  "forbiddenPaths": ["infra/**", "terraform/**", "k8s/**"],
+  "toolsets": ["toolset.local-dev", "toolset.review-only"],
+  "structuredOutputSchema": null,
+  "scenarios": ["data-explorer-notebook-overview"]
+}

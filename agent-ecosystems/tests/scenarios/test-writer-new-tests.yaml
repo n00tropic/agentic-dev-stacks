@@ -6,7 +6,6 @@ toolsets:
 workspaceHints:
   paths:
     - tests/
-    - src/
   languages:
     - typescript
     - javascript

@@ -1,0 +1,9 @@
+{
+  "id": "test-writer",
+  "role": "Creates and improves automated tests without altering production logic",
+  "allowedPaths": ["tests/**", "__tests__/**", "spec/**", "test/**"],
+  "forbiddenPaths": ["src/**", "lib/**", "app/**", "server/**"],
+  "toolsets": ["toolset.local-dev"],
+  "structuredOutputSchema": null,
+  "scenarios": ["test-writer-new-tests"]
+}

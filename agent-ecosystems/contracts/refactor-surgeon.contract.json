@@ -1,0 +1,9 @@
+{
+  "id": "refactor-surgeon",
+  "role": "Safe refactoring of existing code with minimal behavioural change",
+  "allowedPaths": ["src/**", "lib/**", "app/**", "server/**", "packages/**"],
+  "forbiddenPaths": ["infra/state/**", "node_modules/**", "dist/**"],
+  "toolsets": ["toolset.local-dev"],
+  "structuredOutputSchema": null,
+  "scenarios": ["refactor-surgeon-small-refactor"]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "infra-reviewer",
+  "role": "Reviews IaC and infrastructure configs for risks and correctness",
+  "allowedPaths": [
+    "infra/**",
+    "k8s/**",
+    "manifests/**",
+    "terraform/**",
+    "configs/**"
+  ],
+  "forbiddenPaths": ["infra/state/**", "terraform/.terraform/**"],
+  "toolsets": ["toolset.review-only"],
+  "structuredOutputSchema": null,
+  "scenarios": ["infra-reviewer-terraform"]
+}

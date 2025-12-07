@@ -1,0 +1,9 @@
+{
+  "id": "pipeline-refactorer",
+  "role": "Refactors ETL/pipeline code for clarity and robustness without changing behaviour",
+  "allowedPaths": ["pipelines/**", "etl/**", "src/**", "jobs/**"],
+  "forbiddenPaths": ["data/raw/**", "infra/**", "terraform/**"],
+  "toolsets": ["toolset.local-dev", "toolset.review-only"],
+  "structuredOutputSchema": null,
+  "scenarios": ["pipeline-refactorer-small-etl"]
+}
