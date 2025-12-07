@@ -39,6 +39,8 @@ lint:
         - vscode/export-map.yaml
       linters:
         - vale
+        - prettier
+        - yamllint
     - paths:
         - .codacy/**
       linters:
