@@ -38,7 +38,7 @@ jobs:
           python - <<'PY'
           import json, pathlib, sys
           root = pathlib.Path('.')
-          skip_parts = {'.trunk/tools', 'exports/'}
+          skip_parts = {'.trunk/tools', 'exports/', 'node_modules/', '.vscode/'}
           fail = False
           for path in root.rglob('*.json'):
             posix = path.as_posix()
