@@ -1,6 +1,9 @@
+// vale off
 * xref:index.adoc[Overview]
+* xref:devcontainer-quickstart.adoc[Devcontainer Quickstart]
 * xref:golden-path.adoc[Golden Path]
 * xref:stack-catalogue.adoc[Stack Catalogue]
 * xref:vscode:packs.adoc[VS Code Packs & Bundles]
 * xref:codex:config-guides.adoc[Codex & MCP]
 * xref:agents:agents-overview.adoc[Agents & Custom Agents]
+// vale on

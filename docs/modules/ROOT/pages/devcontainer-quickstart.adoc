@@ -1,0 +1,27 @@
+// vale off
+= Devcontainer Quickstart
+
+The recommended way to try these stacks is via the bundled devcontainer (also used by GitHub Codespaces).
+
+== Prerequisites
+
+* Docker or Podman + VS Code Dev Containers extension, or GitHub Codespaces.
+* No host toolchain needed beyond Git.
+
+== Steps
+
+1. Open the repository in Codespaces **or** run `devcontainer up --workspace-folder .` locally.
+2. Wait for the container build (installs Python 3.12, Node 22, base tooling, and docs UI deps).
+3. Run the hero validation command:
++
++```
++bash scripts/validate-all.sh --fast
++# omit --fast to include docs build inside the container
++```
+4. Continue with stack-specific install scripts if you want a local profile (e.g. `./scripts/install/fullstack-js-ts-macos.sh`).
+
+Notes
+
+* Post-create installs `pyyaml`/`toml` and runs `npm ci` for the docs UI to speed up `docs/build-docs.sh`.
+* The validation script will run `trunk check` if `trunk` is available; otherwise it skips gracefully.
+// vale on

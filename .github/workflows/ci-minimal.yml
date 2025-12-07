@@ -7,84 +7,25 @@ on:
 
 permissions:
   contents: read
-  checks: write
 
 jobs:
-  trunk:
+  validate:
+    name: CI – Minimal validation
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Install jq
-        run: sudo apt-get update && sudo apt-get install -y jq
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.12
       - name: Install trunk
         run: |
           curl https://get.trunk.io -fsSL | bash
           echo "$HOME/.trunk/bin" >> "$GITHUB_PATH"
-      - uses: trunk-io/trunk-action@75699af9e26881e564e9d832ef7dc3af25ec031b # v1.2.4
-      - name: Trunk check
-        run: trunk check --no-progress --ci
-
-  python-and-schemas:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-      - name: Python syntax check
-        run: python -m compileall vscode codex scripts docs
-      - name: Validate JSON
-        run: |
-          python - <<'PY'
-          import json, pathlib, sys
-          root = pathlib.Path('.')
-          skip_parts = {'.trunk/tools', 'exports/', 'node_modules/', '.vscode/'}
-          fail = False
-          for path in root.rglob('*.json'):
-            posix = path.as_posix()
-            if any(part in posix for part in skip_parts):
-              continue
-            try:
-              json.loads(path.read_text(encoding='utf-8'))
-            except Exception as exc:  # pragma: no cover - CI guardrail
-              print(f"{path}: {exc}")
-              fail = True
-          if fail:
-            sys.exit(1)
-          PY
-      - name: Validate workspace MCP config
-        run: python scripts/validate-mcp-config.py
-      - name: Validate TOML
-        run: |
-          python - <<'PY'
-          import pathlib, sys
-          import tomllib
-          root = pathlib.Path('.')
-          skip_parts = {'.trunk/tools', 'exports/'}
-          fail = False
-          for path in root.rglob('*.toml'):
-            posix = path.as_posix()
-            if any(part in posix for part in skip_parts):
-              continue
-            try:
-              tomllib.loads(path.read_text(encoding='utf-8'))
-            except Exception as exc:  # pragma: no cover - CI guardrail
-              print(f"{path}: {exc}")
-              fail = True
-          if fail:
-            sys.exit(1)
-          PY
-      - name: Validate all scripts
+      - name: Run repository validation
         env:
-          SKIP_TRUNK: "1"
-        run: bash scripts/validate-all-scripts.sh
-
-  agent-ecosystems:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-      - name: Validate agent ecosystems configs, scenarios, and bundles
-        run: bash scripts/check-agent-ecosystems.sh --with-bundles
+          TRUNK_CHECK_ARGS: --no-progress --ci
+        run: bash scripts/validate-all.sh

@@ -2,7 +2,7 @@
 
 # Agentic Dev Stacks
 
-Scoped, cross-OS VS Code packs plus MCP manifests and devcontainers, aimed at teams that want governed, reproducible AI-ready setups (not ad-hoc dotfiles or one-off machines).
+Scoped, cross-OS VS Code packs plus MCP manifests and devcontainers, aimed at teams that want governed, reproducible AI-ready setups (not ad-hoc dotfiles or one-off machines). Recommended path: Codespaces or the bundled devcontainer.
 
 ## What is this?
 
@@ -16,9 +16,9 @@ Why this exists
 
 ## Hero quickstart (Codespaces or devcontainer)
 
-- Codespaces: open this repo in GitHub Codespaces (default devcontainer) and wait for build; then run `bash scripts/qa-preflight.sh`.
-- Local devcontainer: `devcontainer up --workspace-folder .` (requires Docker/Podman + Dev Containers extension), then `bash scripts/qa-preflight.sh`.
-- Prefer the Core / Base Dev flow below for the quickest local install per OS.
+- Codespaces: open this repo in GitHub Codespaces (default devcontainer) and wait for build; then run `bash scripts/validate-all.sh --fast` (full run without `--fast` builds docs).
+- Local devcontainer: `devcontainer up --workspace-folder .` (requires Docker/Podman + Dev Containers extension), then `bash scripts/validate-all.sh --fast`.
+- Prefer the Core / Base Dev flow below for the quickest profile install per OS.
 
 ## Quickstart: Core / Base Dev (3 minutes)
 
@@ -108,9 +108,9 @@ Status: JS/TS and Core are production-quality; other stacks are in active develo
 
 ## QA and validation
 
-- Validate extensions: `cd vscode && ./scripts/helpers/validate-extensions.sh`
-- Validate bundles: `cd vscode && bash scripts/validate-all-bundles.sh`
-- Full preflight: `bash scripts/qa-preflight.sh` (extensions, MCP JSON, shell lint, metadata checks, agent ecosystem scenarios).
+- Canonical: `bash scripts/validate-all.sh` (includes trunk if available, QA preflight, docs build). Use `--fast` to skip docs build.
+- Validate extensions only: `cd vscode && ./scripts/helpers/validate-extensions.sh`
+- Validate bundles only: `cd vscode && bash scripts/validate-all-bundles.sh`
 
 ## Advanced use
 
