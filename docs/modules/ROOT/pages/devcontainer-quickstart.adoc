@@ -18,10 +18,10 @@ The recommended way to try these stacks is via the bundled devcontainer (also us
 +bash scripts/validate-all.sh --fast
 +# omit --fast to include docs build inside the container
 +```
-4. Continue with stack-specific install scripts if you want a local profile (e.g. `./scripts/install/fullstack-js-ts-macos.sh`).
+4. Continue with stack-specific installation scripts if you want a local profile (e.g. `./scripts/install/fullstack-js-ts-macos.sh`).
 
 Notes
 
 * Post-create installs `pyyaml`/`toml` and runs `npm ci` for the docs UI to speed up `docs/build-docs.sh`.
-* The validation script will run `trunk check` if `trunk` is available; otherwise it skips gracefully.
+* The validation script will run `trunk check` if the Trunk linter is available; otherwise it skips gracefully.
 // vale on
