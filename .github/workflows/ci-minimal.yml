@@ -33,6 +33,4 @@ jobs:
           curl https://get.trunk.io -fsSL | bash
           echo "$HOME/.trunk/bin" >> "$GITHUB_PATH"
       - name: Run repository validation
-        env:
-          TRUNK_CHECK_ARGS: --no-progress --ci
         run: bash scripts/validate-all.sh

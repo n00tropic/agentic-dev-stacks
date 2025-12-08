@@ -107,7 +107,7 @@ PY
 run_or_skip_trunk() {
 	if command -v trunk >/dev/null 2>&1; then
 		log "Running trunk check"
-		TRUNK_ARGS=(--no-progress --ci)
+		TRUNK_ARGS=()
 		if [[ -n ${TRUNK_CHECK_ARGS:-} ]]; then
 			# shellcheck disable=SC2206 # intentional split for user-provided args
 			TRUNK_ARGS=(${TRUNK_CHECK_ARGS})
