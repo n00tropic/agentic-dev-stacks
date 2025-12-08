@@ -4,6 +4,9 @@ set -euo pipefail
 IFS=$'
 	'
 
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "${ROOT}"
+
 usage() {
 	cat <<'USAGE'
 Usage: scripts/validate-all.sh [--fast] [--help]
@@ -39,6 +42,24 @@ while (($#)); do
 done
 
 log() { echo "[validate-all] $*"; }
+check_python_deps() {
+	python3 - <<'PY'
+import importlib.util
+import sys
+
+missing = []
+for mod in ("jsonschema", "yaml"):
+    if importlib.util.find_spec(mod) is None:
+        missing.append(mod)
+
+if missing:
+    mods = ", ".join(sorted(missing))
+    sys.stderr.write(
+        f"Missing Python modules: {mods}. Install with 'pip3 install --user -r requirements-dev.txt' or run inside the devcontainer.\n"
+    )
+    sys.exit(1)
+PY
+}
 run_or_skip_trunk() {
 	if command -v trunk >/dev/null 2>&1; then
 		log "Running trunk check"
@@ -55,6 +76,7 @@ run_or_skip_trunk() {
 
 main() {
 	log "Starting validation suite"
+	check_python_deps
 	run_or_skip_trunk
 
 	log "Running qa-preflight"

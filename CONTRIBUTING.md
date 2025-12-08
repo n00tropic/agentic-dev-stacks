@@ -16,6 +16,7 @@ bash scripts/validate-all.sh    # use --fast to skip docs build locally
 ```
 
 This covers trunk (if installed), QA preflight (extensions, MCP config structure, scripts, metadata, agent ecosystems), and docs build (unless skipped with `--fast`).
+Outside the devcontainer, install Python deps once with `pip3 install --user -r requirements-dev.txt`.
 
 ## PR expectations
 
