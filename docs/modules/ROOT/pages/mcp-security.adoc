@@ -1,0 +1,51 @@
+:page-layout: default
+
+= MCP Security & Governance
+
+Opinionated guidance for enabling MCP servers safely in this repository’s stacks, drawing on OWASP-style principles, MCP best practices, and Microsoft/GitHub recommendations for extensibility security.
+
+== Threat model (practical)
+
+- Third-party MCP servers can exfiltrate data or run unintended operations if misconfigured or over-privileged.
+- Prompt injection and MCP-UPD (Unintended Privacy Disclosure) are risks whenever tools read untrusted content or repositories.
+- Over-broad filesystem/network access (e.g., pointing to `/` or arbitrary hosts) increases blast radius.
+- Misleading or undocumented servers (random npm/OCI images) may ship unsafe tooling or log data.
+
+== Principles for this project
+
+- **Least privilege by default**: prefer read-only servers; opt into write-capable servers consciously and mark them `optional`/`privacy_sensitive` in manifests.
+- **Human review**: MCP manifests under version control are meant to be read and approved; avoid auto-generated, unreviewed configs.
+- **No secrets in git**: keep tokens in env vars or secret stores (e.g., `CODACY_ACCOUNT_TOKEN`, `CONTEXT7_API_KEY`), never inline in JSON/TOML.
+- **Sandboxed hosts**: assume devcontainers/Codespaces or similarly sandboxed dev hosts, not production environments.
+
+== Choosing MCP servers
+
+- Prefer well-maintained, documented servers from reputable sources (official vendors, curated lists) with clear provenance and licences.
+- Avoid “drive-by” packages with unclear ownership or binaries you cannot inspect.
+- Use `optional`, `experimental`, and `privacy_sensitive` flags in `servers.<slug>.json` to signal risk and opt-in.
+
+== Configuration hygiene
+
+- Keep filesystem MCP roots narrow (e.g., workspace subfolders, not `/`).
+- Use env vars for credentials; if a server requires a token, use placeholders (`<TO_FILL>`) and set values locally.
+- For network-capable servers, prefer allowlisted hosts or proxies controlled by your organisation; avoid wildcards.
+- Treat Codex `~/.codex/config.toml` or VS Code MCP settings as workstation-level overlays; this repo provides reviewable inputs, not auto-trust.
+
+== Organisation controls
+
+- Enforce MCP allowlists/egress rules centrally where available; block unknown MCP hosts by default.
+- Require branch protection + code review on MCP manifest changes.
+- Enable GitHub security features (secret scanning, Dependabot, code scanning) and monitor for risky patterns.
+- Train users to run MCP in devcontainers/Codespaces with least-privilege credentials, and to disable optional servers when handling sensitive IP.
+
+== Operational tips
+
+- When adding a server, document provenance and required scopes in the manifest `notes` field.
+- Validate MCP JSON before use (included in `scripts/qa-preflight.sh` via `validate-mcp-config.py`).
+- Periodically rotate tokens; avoid long-lived personal tokens.
+- If a server logs data to third parties, mark it `privacy_sensitive` and keep it disabled by default.
+
+== If something looks unsafe
+
+- Stop and review the manifest; reduce scopes/paths; prefer read-only.
+- Report unsafe defaults or risky guidance via the private vulnerability channel in link:../../../SECURITY.md[SECURITY.md].

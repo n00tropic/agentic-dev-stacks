@@ -63,6 +63,7 @@ High-level architecture showing the relationship between packs, build system, ou
 - Golden Path: xref:golden-path.adoc[]
 - Packs & bundles: xref:vscode:packs.adoc[] and xref:vscode:bundles.adoc[]
 - Codex/MCP config: xref:codex:config-guides.adoc[]
+- MCP security posture: xref:mcp-security.adoc[]
 - Agent rules & custom agents: xref:agents:agents-overview.adoc[]
 
 == Governance

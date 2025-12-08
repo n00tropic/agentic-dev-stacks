@@ -3,6 +3,7 @@
 = MCP provisioning for this workspace
 
 Use this checklist to provision MCP servers safely, drawing from reputable curated lists and the existing profile fragments in `vscode/packs/*/mcp/`.
+Pair this with xref:mcp-security.adoc[MCP security & governance] for threat model and least-privilege guidance.
 
 == Curated sources to pull candidates from
 
