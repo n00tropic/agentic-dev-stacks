@@ -71,9 +71,12 @@ for path in root.rglob('*.json'):
 		continue
 	try:
 		json.loads(path.read_text(encoding='utf-8'))
-	except Exception as exc:  # pragma: no cover - CI guardrail
+	except (json.JSONDecodeError, UnicodeDecodeError, OSError) as exc:  # CI guardrail
 		print(f"{path}: {exc}")
 		fail = True
+	except Exception as exc:
+		print(f"{path}: Unexpected error: {exc}")
+		raise
 
 if fail:
 	sys.exit(1)
