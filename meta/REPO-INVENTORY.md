@@ -3,8 +3,8 @@
 Short map of key directories and their roles.
 
 - `vscode/`: Source of truth for VS Code packs (profiles, extensions, settings, MCP manifests), scripts, exports, and devcontainer assets.
-- `agents/`: Authoritative Copilot agent definitions per stack (copied into bundles/workspaces).
-- `agent-ecosystems/`: Circuits, toolchains, bundles, and validation harness for agent scenarios.
+- `agents/`: Copilot Chat agent definitions per stack (SSoT for `.github/agents/` copies inside bundles/workspaces).
+- `agent-ecosystems/`: Source of truth for agent ecosystems (agents packaged for circuits), toolchains, bundles, and scenario validation harness.
 - `prompts/`: Prompt packs per stack and shared instructions for agents.
 - `codex/`: Docs and guidance for configuring Codex/MCP safely on user machines.
 - `docs/`: Antora-based documentation site (includes UI bundle under `docs/ui/agentic-neon-ui`).
