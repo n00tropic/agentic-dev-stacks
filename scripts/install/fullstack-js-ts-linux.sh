@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
+IFS=$'\n\t'
 
 # Fullstack JS/TS installer (Linux)
 # Runs the stack compiler for this persona, installs extensions into the profile, and opens the workspace.

@@ -2,18 +2,21 @@
 set -euo pipefail
 IFS=$'\n\t'
 
+SCRIPT_NAME="validate-all-scripts"
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "${ROOT}"
+
 TRUNK_BIN="${TRUNK:-trunk}"
 # Allow override: TRUNK_CHECK_ARGS="--no-progress --ci"
 read -r -a TRUNK_FLAGS <<<"${TRUNK_CHECK_ARGS:---no-progress}"
 
 fatal() {
-	echo "[validate-all-scripts] Error: $*" >&2
+	printf '[%s] Error: %s\n' "${SCRIPT_NAME}" "$*" >&2
 	exit 1
 }
 
 log() {
-	echo "[validate-all-scripts] $*"
+	printf '[%s] %s\n' "${SCRIPT_NAME}" "$*" >&2
 }
 
 usage() {
@@ -24,6 +27,11 @@ Runs the full script validation suite:
 - trunk check (use TRUNK_CHECK_ARGS to override flags, or SKIP_TRUNK=1 to skip)
 - Python bytecode compile, JSON/TOML structural checks
 - PSScriptAnalyzer across PowerShell scripts (installs module if missing)
+
+Environment:
+  TRUNK               Override trunk binary path
+  TRUNK_CHECK_ARGS    Extra args for trunk check (default: --no-progress)
+  SKIP_TRUNK=1        Skip trunk check
 EOF
 }
 

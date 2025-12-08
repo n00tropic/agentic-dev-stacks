@@ -1,11 +1,39 @@
 #!/usr/bin/env bash
 set -euo pipefail
+IFS=$'\n\t'
 
-# Comprehensive QA preflight check for agentic-dev-stacks
-# Run this before any release to ensure everything is healthy
+SCRIPT_NAME="qa-preflight"
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "${REPO_ROOT}"
 
-ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-cd "$ROOT"
+log() {
+	printf '[%s] %s\n' "$SCRIPT_NAME" "$*" >&2
+}
+
+usage() {
+	cat <<'USAGE'
+Usage: scripts/qa-preflight.sh [--help]
+
+Runs QA preflight checks: extensions, MCP config, script validation, install script presence, and metadata consistency.
+
+Options:
+  -h, --help    Show this help message
+USAGE
+}
+
+if (($#)); then
+	case "$1" in
+	-h | --help)
+		usage
+		exit 0
+		;;
+	*)
+		printf 'Unknown option: %s\n' "$1" >&2
+		usage
+		exit 1
+		;;
+	esac
+fi
 
 echo "=========================================="
 echo "QA Preflight Health Checks"
@@ -18,7 +46,7 @@ FAIL=0
 run_check() {
 	local name="$1"
 	shift
-	echo ">>> Checking: $name"
+	log ">>> Checking: $name"
 	if "$@"; then
 		echo "    ✓ PASS"
 		PASS=$((PASS + 1))
@@ -102,7 +130,11 @@ PY
 run_check "Shell scripts validation" \
 	env SKIP_TRUNK=1 bash scripts/validate-all-scripts.sh
 
-# 7. Verify all profile slugs have installation scripts
+# 7. Script self-test harness (help text)
+run_check "Script self-test" \
+	bash scripts/test-scripts.sh
+
+# 8. Verify all profile slugs have installation scripts
 run_check "Verify standalone installation scripts exist" bash -c '
 for slug in core-base-dev qa-static-analysis docs-librarian gitops-code-review \
   experimental-preview fullstack-js-ts frontend-ux-ui node-backend-services \
@@ -116,7 +148,7 @@ done
 echo "All 16 profile installation scripts found"
 '
 
-# 8. Verify pack-level installation scripts exist
+# 9. Verify pack-level installation scripts exist
 run_check "Verify pack-level installation scripts exist" bash -c '
 for pack in 00-core-base 10-fullstack-js-ts 20-python-data-ml \
   30-infra-devops-platform 40-docs-knowledge 50-experimental-playground; do
@@ -136,7 +168,7 @@ done
 echo "All pack-level installation scripts found"
 '
 
-# 9. Check that CONTROL.md and export-map.yaml are in sync
+# 10. Check that CONTROL.md and export-map.yaml are in sync
 run_check "Profile metadata consistency check" bash -c '
 python3 - <<PY
 import json

@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
-# trunk-ignore-all(shfmt)
 set -euo pipefail
-IFS=$'
-	'
+IFS=$'\n\t'
 
-ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-cd "${ROOT}"
+SCRIPT_NAME="validate-all"
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "${REPO_ROOT}"
 
 usage() {
 	cat <<'USAGE'
@@ -18,6 +17,10 @@ Runs the standard validation suite:
 
 Options:
   --fast        Skip docs build
+  Environment:
+    VALIDATE_FAST=1            Equivalent to --fast
+    SKIP_TRUNK=1               Skip trunk check
+    SKIP_PROFILE_DIST_CHECK=1  Skip profile dist mapping check
   -h, --help    Show this help
 USAGE
 }
@@ -34,14 +37,16 @@ while (($#)); do
 		exit 0
 		;;
 	*)
-		echo "Unknown option: $1" >&2
+		printf 'Unknown option: %s\n' "$1" >&2
 		usage
 		exit 1
 		;;
 	esac
 done
 
-log() { echo "[validate-all] $*"; }
+log() {
+	printf '[%s] %s\n' "${SCRIPT_NAME}" "$*" >&2
+}
 check_python_deps() {
 	python3 - <<'PY'
 import importlib.util
@@ -105,10 +110,15 @@ if findings:
 PY
 }
 run_or_skip_trunk() {
+	if [[ ${SKIP_TRUNK:-0} == "1" ]]; then
+		log "Skipping trunk (SKIP_TRUNK=1)"
+		return
+	fi
+
 	if command -v trunk >/dev/null 2>&1; then
 		log "Running trunk check"
 		TRUNK_ARGS=()
-		if [[ -n ${TRUNK_CHECK_ARGS:-} ]]; then
+		if [[ -n ${TRUNK_CHECK_ARGS-} ]]; then
 			# shellcheck disable=SC2206 # intentional split for user-provided args
 			TRUNK_ARGS=(${TRUNK_CHECK_ARGS})
 		fi
@@ -127,14 +137,14 @@ main() {
 	log "Running qa-preflight"
 	bash scripts/qa-preflight.sh
 
-	if [[ "${SKIP_PROFILE_DIST_CHECK:-0}" == "1" ]]; then
+	if [[ ${SKIP_PROFILE_DIST_CHECK:-0} == "1" ]]; then
 		log "Skipping profile dist check (SKIP_PROFILE_DIST_CHECK=1)"
 	else
 		log "Checking profile dist exports"
 		python3 scripts/check-profile-dist.py
 	fi
 
-	if [[ "${FAST}" == "1" ]]; then
+	if [[ ${FAST} == "1" ]]; then
 		log "Skipping docs build (--fast)"
 	else
 		log "Building docs and running link check"

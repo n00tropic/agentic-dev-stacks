@@ -1,9 +1,16 @@
 #!/usr/bin/env bash
 set -euo pipefail
+IFS=$'\n\t'
 cd "$(dirname "$0")"
 
+SCRIPT_NAME="check-links"
+
+log() {
+	printf '[%s] %s\n' "${SCRIPT_NAME}" "$*" >&2
+}
+
 if [[ ! -d build/site ]]; then
-	echo "Docs not built. Run ./build-docs.sh first." >&2
+	log "Docs not built. Run ./build-docs.sh first."
 	exit 1
 fi
 
@@ -35,10 +42,10 @@ run_lychee() {
 	local -a lychee_flags
 	lychee_flags=(--no-progress)
 	if [[ ${CHECK_EXTERNAL:-0} == "1" ]]; then
-		echo "Running lychee with external link checks (http/https)."
+		log "Running lychee with external link checks (http/https)."
 		lychee_flags+=(--scheme http --scheme https)
 	else
-		echo "Running lychee in offline mode (local files and anchors only)."
+		log "Running lychee in offline mode (local files and anchors only)."
 		lychee_flags+=(--offline)
 	fi
 	lychee_flags+=(build/site)
@@ -50,19 +57,19 @@ run_lychee() {
 	detect_target_exit=0
 	target="$(detect_target)" || detect_target_exit=$?
 	if ((detect_target_exit != 0)) || [[ -z ${target-} ]]; then
-		echo "Unsupported platform for lychee binary" >&2
+		log "Unsupported platform for lychee binary"
 		exit 1
 	fi
 	url="https://github.com/lycheeverse/lychee/releases/latest/download/lychee-${target}.tar.gz"
 	tmpdir="$(mktemp -d 2>/dev/null || true)"
 	if [[ -z ${tmpdir-} ]]; then
-		echo "Failed to create temporary directory for lychee" >&2
+		log "Failed to create temporary directory for lychee"
 		exit 1
 	fi
 	trap '[[ -n "${tmpdir:-}" ]] && rm -rf "${tmpdir}"' EXIT
-	echo "Downloading lychee binary for ${target}..."
+	log "Downloading lychee binary for ${target}..."
 	if ! curl -fsSL "${url}" -o "${tmpdir}/lychee.tar.gz"; then
-		echo "Failed to download lychee from ${url}" >&2
+		log "Failed to download lychee from ${url}"
 		rm -rf "${tmpdir}"
 		exit 1
 	fi
