@@ -48,4 +48,4 @@ Opinionated guidance for enabling MCP servers safely in this repository’s stac
 == If something looks unsafe
 
 - Stop and review the manifest; reduce scopes/paths; prefer read-only.
-- Report unsafe defaults or risky guidance via the private vulnerability channel in link:../../../SECURITY.md[SECURITY.md].
+- Report unsafe defaults or risky guidance via the private vulnerability channel in link:https://github.com/n00tropic/agentic-dev-stacks/blob/main/SECURITY.md[SECURITY policy].

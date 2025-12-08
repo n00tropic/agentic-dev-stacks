@@ -130,8 +130,8 @@ main() {
 	if [[ "${FAST}" == "1" ]]; then
 		log "Skipping docs build (--fast)"
 	else
-		log "Building docs"
-		(cd docs && ./build-docs.sh)
+		log "Building docs and running link check"
+		bash scripts/qa/validate-docs.sh
 	fi
 	log "Validation complete"
 }
