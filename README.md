@@ -20,6 +20,7 @@ Why this exists
 - Local devcontainer: `devcontainer up --workspace-folder .` (Docker/Podman + Dev Containers extension), then run `bash scripts/validate-all.sh --fast` inside the container.
 - No container? Install Python 3.11+ and Node 18+, run `pip3 install --user -r requirements-dev.txt`, then `bash scripts/validate-all.sh --fast`.
 - Prefer the Core / Base Dev flow below for the quickest profile install per OS.
+- Detailed steps: see `docs/modules/ROOT/pages/golden-paths/hero-devcontainer-codespaces.adoc`.
 
 ## Quickstart: Core / Base Dev (3 minutes)
 

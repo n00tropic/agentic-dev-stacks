@@ -61,6 +61,7 @@ High-level architecture showing the relationship between packs, build system, ou
 == Where to start
 
 - Golden Path: xref:golden-path.adoc[]
+- Devcontainer Golden Path: xref:golden-paths/hero-devcontainer-codespaces.adoc[]
 - Packs & bundles: xref:vscode:packs.adoc[] and xref:vscode:bundles.adoc[]
 - Codex/MCP config: xref:codex:config-guides.adoc[]
 - MCP security posture: xref:mcp-security.adoc[]
