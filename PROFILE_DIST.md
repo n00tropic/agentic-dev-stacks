@@ -4,103 +4,34 @@ This file maps internal profile slugs to their dist exports for quick import via
 
 > Dist files are **generated** via VS Code “Export Profile…”; do **not** hand-edit them. If a file or gist is missing, treat it as `<TO_FILL>` and regenerate.
 
+<!-- vale off -->
+
 ## Profiles
 
-- **core-base-dev**
-  - Pack: `00-core-base`
-  - VS Code profile name: `Core / Base Dev`
-  - Local dist: `vscode/profiles-dist/core-base-dev.code-profile` (generated)
-  - Gist URL: `<TO_FILL>` (secret gist containing .code-profile; VS Code import URL: `https://vscode.dev/editor/profile/github/<gist_id>`)
+| Slug                  | Pack                       | VS Code profile                         | Local dist                                                | Gist URL    |
+| --------------------- | -------------------------- | --------------------------------------- | --------------------------------------------------------- | ----------- |
+| core-base-dev         | 00-core-base               | Core / Base Dev                         | `vscode/profiles-dist/core-base-dev.code-profile`         | `<TO_FILL>` |
+| qa-static-analysis    | 00-core-base               | QA / Static Analysis                    | `vscode/profiles-dist/qa-static-analysis.code-profile`    | `<TO_FILL>` |
+| docs-librarian        | 40-docs-knowledge          | Docs & Librarian                        | `vscode/profiles-dist/docs-librarian.code-profile`        | `<TO_FILL>` |
+| gitops-code-review    | 00-core-base               | GitOps & Code Review                    | `vscode/profiles-dist/gitops-code-review.code-profile`    | `<TO_FILL>` |
+| experimental-preview  | 50-experimental-playground | Experimental / Preview                  | `vscode/profiles-dist/experimental-preview.code-profile`  | `<TO_FILL>` |
+| fullstack-js-ts       | 10-fullstack-js-ts         | Fullstack JS/TS – Web & API             | `vscode/profiles-dist/fullstack-js-ts.code-profile`       | `<TO_FILL>` |
+| frontend-ux-ui        | 10-fullstack-js-ts         | Frontend UX/UI – React / Storybook / DX | `vscode/profiles-dist/frontend-ux-ui.code-profile`        | `<TO_FILL>` |
+| node-backend-services | 10-fullstack-js-ts         | Node / Backend Services – TS/Node       | `vscode/profiles-dist/node-backend-services.code-profile` | `<TO_FILL>` |
+| python-services-clis  | 20-python-data-ml          | Python Services & CLIs                  | `vscode/profiles-dist/python-services-clis.code-profile`  | `<TO_FILL>` |
+| python-data-ml        | 20-python-data-ml          | Python Data & ML                        | `vscode/profiles-dist/python-data-ml.code-profile`        | `<TO_FILL>` |
+| python-data-analytics | <TO_FILL>                  | Python Data & Analytics                 | `vscode/profiles-dist/python-data-analytics.code-profile` | `<TO_FILL>` |
+| infra-devops          | 30-infra-devops-platform   | Infra & DevOps (Docker/K8s/Terraform)   | `vscode/profiles-dist/infra-devops.code-profile`          | `<TO_FILL>` |
+| infra-ops-sre         | <TO_FILL>                  | Infra Ops / SRE                         | `vscode/profiles-dist/infra-ops-sre.code-profile`         | `<TO_FILL>` |
+| data-db-analytics     | 30-infra-devops-platform   | Data / DB & Analytics                   | `vscode/profiles-dist/data-db-analytics.code-profile`     | `<TO_FILL>` |
+| desktop-gui-cross     | 10-fullstack-js-ts         | Desktop & GUI – Swift / TS / Python     | `vscode/profiles-dist/desktop-gui-cross.code-profile`     | `<TO_FILL>` |
+| macos-apple-platforms | 00-core-base               | macOS – Apple Platforms & Tooling       | `vscode/profiles-dist/macos-apple-platforms.code-profile` | `<TO_FILL>` |
+| windows-polyglot-wsl  | 00-core-base               | Windows – Polyglot + WSL                | `vscode/profiles-dist/windows-polyglot-wsl.code-profile`  | `<TO_FILL>` |
+| linux-ci-headless     | 30-infra-devops-platform   | Linux – CI/Headless                     | `vscode/profiles-dist/linux-ci-headless.code-profile`     | `<TO_FILL>` |
 
-- **qa-static-analysis**
-  - Pack: `00-core-base`
-  - VS Code profile name: `QA / Static Analysis`
-  - Local dist: `vscode/profiles-dist/qa-static-analysis.code-profile`
-  - Gist URL: `<TO_FILL>` (secret gist containing .code-profile; VS Code import URL: `https://vscode.dev/editor/profile/github/<gist_id>`)
+Validation: `python3 scripts/check-profile-dist.py` fails if any production stack in `README.md` is missing a mapped `.code-profile` file. Set `SKIP_PROFILE_DIST_CHECK=1` to bypass when dist exports are intentionally absent during development.
 
-- **docs-librarian**
-  - Pack: `40-docs-knowledge`
-  - VS Code profile name: `Docs & Librarian`
-  - Local dist: `vscode/profiles-dist/docs-librarian.code-profile`
-  - Gist URL: `<TO_FILL>` (secret gist containing .code-profile; VS Code import URL: `https://vscode.dev/editor/profile/github/<gist_id>`)
-
-- **gitops-code-review**
-  - Pack: `00-core-base`
-  - VS Code profile name: `GitOps & Code Review`
-  - Local dist: `vscode/profiles-dist/gitops-code-review.code-profile`
-  - Gist URL: `<TO_FILL>` (secret gist containing .code-profile; VS Code import URL: `https://vscode.dev/editor/profile/github/<gist_id>`)
-
-- **experimental-preview**
-  - Pack: `50-experimental-playground`
-  - VS Code profile name: `Experimental / Preview`
-  - Local dist: `vscode/profiles-dist/experimental-preview.code-profile`
-  - Gist URL: `<TO_FILL>` (secret gist containing .code-profile; VS Code import URL: `https://vscode.dev/editor/profile/github/<gist_id>`)
-
-- **fullstack-js-ts**
-  - Pack: `10-fullstack-js-ts`
-  - VS Code profile name: `Fullstack JS/TS – Web & API`
-  - Local dist: `vscode/profiles-dist/fullstack-js-ts.code-profile`
-  - Gist URL: `<TO_FILL>` (secret gist containing .code-profile; VS Code import URL: `https://vscode.dev/editor/profile/github/<gist_id>`)
-
-- **frontend-ux-ui**
-  - Pack: `10-fullstack-js-ts`
-  - VS Code profile name: `Frontend UX/UI – React / Storybook / DX`
-  - Local dist: `vscode/profiles-dist/frontend-ux-ui.code-profile`
-  - Gist URL: `<TO_FILL>` (secret gist containing .code-profile; VS Code import URL: `https://vscode.dev/editor/profile/github/<gist_id>`)
-
-- **node-backend-services**
-  - Pack: `10-fullstack-js-ts`
-  - VS Code profile name: `Node / Backend Services – TS/Node`
-  - Local dist: `vscode/profiles-dist/node-backend-services.code-profile`
-  - Gist URL: `<TO_FILL>` (secret gist containing .code-profile; VS Code import URL: `https://vscode.dev/editor/profile/github/<gist_id>`)
-
-- **python-services-clis**
-  - Pack: `20-python-data-ml`
-  - VS Code profile name: `Python Services & CLIs`
-  - Local dist: `vscode/profiles-dist/python-services-clis.code-profile`
-  - Gist URL: `<TO_FILL>` (secret gist containing .code-profile; VS Code import URL: `https://vscode.dev/editor/profile/github/<gist_id>`)
-
-- **python-data-ml**
-  - Pack: `20-python-data-ml`
-  - VS Code profile name: `Python Data & ML`
-  - Local dist: `vscode/profiles-dist/python-data-ml.code-profile`
-  - Gist URL: `<TO_FILL>` (secret gist containing .code-profile; VS Code import URL: `https://vscode.dev/editor/profile/github/<gist_id>`)
-
-- **infra-devops**
-  - Pack: `30-infra-devops-platform`
-  - VS Code profile name: `Infra & DevOps (Docker/K8s/Terraform)`
-  - Local dist: `vscode/profiles-dist/infra-devops.code-profile`
-  - Gist URL: `<TO_FILL>` (secret gist containing .code-profile; VS Code import URL: `https://vscode.dev/editor/profile/github/<gist_id>`)
-
-- **data-db-analytics**
-  - Pack: `30-infra-devops-platform`
-  - VS Code profile name: `Data / DB & Analytics`
-  - Local dist: `vscode/profiles-dist/data-db-analytics.code-profile`
-  - Gist URL: `<TO_FILL>` (secret gist containing .code-profile; VS Code import URL: `https://vscode.dev/editor/profile/github/<gist_id>`)
-
-- **desktop-gui-cross**
-  - Pack: `10-fullstack-js-ts`
-  - VS Code profile name: `Desktop & GUI – Swift / TS / Python`
-  - Local dist: `vscode/profiles-dist/desktop-gui-cross.code-profile`
-  - Gist URL: `<TO_FILL>` (secret gist containing .code-profile; VS Code import URL: `https://vscode.dev/editor/profile/github/<gist_id>`)
-
-- **macos-apple-platforms**
-  - Pack: `00-core-base`
-  - VS Code profile name: `macOS – Apple Platforms & Tooling`
-  - Local dist: `vscode/profiles-dist/macos-apple-platforms.code-profile`
-  - Gist URL: `<TO_FILL>` (secret gist containing .code-profile; VS Code import URL: `https://vscode.dev/editor/profile/github/<gist_id>`)
-
-- **windows-polyglot-wsl**
-  - Pack: `00-core-base`
-  - VS Code profile name: `Windows – Polyglot + WSL`
-  - Local dist: `vscode/profiles-dist/windows-polyglot-wsl.code-profile`
-  - Gist URL: `<TO_FILL>` (secret gist containing .code-profile; VS Code import URL: `https://vscode.dev/editor/profile/github/<gist_id>`)
-
-- **linux-ci-headless**
-  - Pack: `30-infra-devops-platform`
-  - VS Code profile name: `Linux – CI/Headless`
-  - Local dist: `vscode/profiles-dist/linux-ci-headless.code-profile`
-  - Gist URL: `<TO_FILL>` (secret gist containing .code-profile; VS Code import URL: `https://vscode.dev/editor/profile/github/<gist_id>`)
+<!-- vale on -->
 
 ## Publishing checklist (dist refresh)
 

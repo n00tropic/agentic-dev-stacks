@@ -10,7 +10,7 @@ Scoped, cross-OS VS Code packs plus MCP manifests and devcontainers, aimed at te
 
 ## What is this?
 
-Agentic development stacks built as a compiler: packs in `vscode/packs/**`, agents in `agents/**`, MCP manifests under `vscode/packs/*/mcp/`, and reproducible exports under `vscode/exports/**` (git-ignored). Dist profile exports live in `vscode/profiles-dist/*.code-profile` (never hand-edit; regenerate via VS Code **Export Profile…**).
+Agentic development stacks built as a compiler: packs in `vscode/packs/**`, agents in `agents/**`, MCP manifests under `vscode/packs/*/mcp/`, and reproducible exports under `vscode/exports/**` (git-ignored). Dist profile exports live in `vscode/profiles-dist/*.code-profile` (never hand-edit; regenerate via VS Code **Export Profile…**); see `PROFILE_DIST.md` for the slug → `.code-profile` map.
 
 Why this exists
 
@@ -79,6 +79,21 @@ What happens:
 - Leaves global settings untouched. Optional: import a vetted profile export from `vscode/profiles-dist/fullstack-js-ts.code-profile` once you have generated a real export.
 - Verify: `code --profile "Fullstack JS/TS – Web & API" --list-extensions | wc -l` (PowerShell: `... | measure-object`) and optionally `python scripts/validate-mcp-config.py` from repo root.
 
+## Profiles-only import (no scripts)
+
+Prefer a quick, script-free path? Import the `.code-profile` dist directly:
+
+1. Download the profile file under `vscode/profiles-dist/<slug>.code-profile` (regenerate via VS Code **Export Profile…** if it is missing).
+2. In VS Code, run **Profiles: Import Profile…** → **Import from file…** and select the file.
+3. Switch to that profile, then open your project or the exported workspace for the stack.
+
+Production stacks with published profiles:
+
+- `core-base-dev`: `vscode/profiles-dist/core-base-dev.code-profile`
+- `fullstack-js-ts`: `vscode/profiles-dist/fullstack-js-ts.code-profile`
+
+See `PROFILE_DIST.md` for the full slug → file map (including beta stacks and gist URLs).
+
 Mini golden path (JS/TS)
 
 - Open Copilot Chat and select the `refactor-surgeon` agent.
@@ -120,6 +135,7 @@ Status: JS/TS and Core are production-quality; other stacks are in active develo
 ## QA and validation
 
 - Canonical: `bash scripts/validate-all.sh` (includes trunk if available, QA preflight, docs build + link check). First run: `bash scripts/validate-all.sh --fast`; full run (docs + links): `bash scripts/validate-all.sh`.
+- Validate profile dist: `python3 scripts/check-profile-dist.py` (set `SKIP_PROFILE_DIST_CHECK=1` to skip while iterating on exports).
 - Validate extensions only: `cd vscode && ./scripts/helpers/validate-extensions.sh`
 - Validate bundles only: `cd vscode && bash scripts/validate-all-bundles.sh`
 

@@ -127,6 +127,13 @@ main() {
 	log "Running qa-preflight"
 	bash scripts/qa-preflight.sh
 
+	if [[ "${SKIP_PROFILE_DIST_CHECK:-0}" == "1" ]]; then
+		log "Skipping profile dist check (SKIP_PROFILE_DIST_CHECK=1)"
+	else
+		log "Checking profile dist exports"
+		python3 scripts/check-profile-dist.py
+	fi
+
 	if [[ "${FAST}" == "1" ]]; then
 		log "Skipping docs build (--fast)"
 	else
