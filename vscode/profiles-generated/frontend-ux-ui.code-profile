@@ -1,0 +1,52 @@
+{
+  "name": "Frontend UX/UI \u2013 React / Storybook / DX",
+  "settings": {
+    "editor.formatOnSave": true,
+    "editor.insertSpaces": true,
+    "editor.rulers": [
+      80,
+      100
+    ],
+    "editor.tabSize": 2,
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true,
+    "workbench.colorTheme": "Tokyo Night",
+    "cSpell.language": "en-GB"
+  },
+  "extensions": [
+    "GitHub.copilot",
+    "GitHub.copilot-chat",
+    "dbaeumer.vscode-eslint",
+    "biomejs.biome",
+    "esbenp.prettier-vscode",
+    "yoavbls.pretty-ts-errors",
+    "bradlc.vscode-tailwindcss",
+    "ms-vscode.vscode-typescript-next",
+    "firsttris.vscode-jest-runner",
+    "vitest.explorer",
+    "ms-azuretools.vscode-docker",
+    "Orta.vscode-jest",
+    "styled-components.vscode-styled-components",
+    "ZixuanChen.vitest-explorer",
+    "christian-kohler.npm-intellisense",
+    "christian-kohler.path-intellisense",
+    "wix.vscode-import-cost",
+    "steoates.autoimport",
+    "enkia.tokyo-night",
+    "trunk.io",
+    "eamodio.gitlens",
+    "usernamehw.errorlens",
+    "streetsidesoftware.code-spell-checker",
+    "oderwat.indent-rainbow",
+    "gruntfuggly.todo-tree",
+    "ms-vscode.js-debug-nightly",
+    "ms-playwright.playwright",
+    "rangav.vscode-thunder-client",
+    "humao.rest-client",
+    "formulahendry.auto-rename-tag",
+    "stylelint.vscode-stylelint",
+    "storybookjs.storybook",
+    "ms-vscode.remote-repositories",
+    "ms-vsliveshare.vsliveshare"
+  ]
+}

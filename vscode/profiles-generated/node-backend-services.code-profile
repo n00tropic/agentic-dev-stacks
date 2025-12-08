@@ -1,0 +1,45 @@
+{
+  "name": "Node / Backend Services \u2013 TS/Node",
+  "settings": {
+    "editor.formatOnSave": true,
+    "editor.insertSpaces": true,
+    "editor.rulers": [
+      80,
+      100
+    ],
+    "editor.tabSize": 2,
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true,
+    "workbench.colorTheme": "Tokyo Night",
+    "cSpell.language": "en-GB"
+  },
+  "extensions": [
+    "GitHub.copilot",
+    "GitHub.copilot-chat",
+    "dbaeumer.vscode-eslint",
+    "biomejs.biome",
+    "esbenp.prettier-vscode",
+    "humao.rest-client",
+    "ms-vscode.vscode-typescript-next",
+    "ms-azuretools.vscode-docker",
+    "christian-kohler.npm-intellisense",
+    "christian-kohler.path-intellisense",
+    "wix.vscode-import-cost",
+    "mhutchie.git-graph",
+    "enkia.tokyo-night",
+    "trunk.io",
+    "eamodio.gitlens",
+    "usernamehw.errorlens",
+    "streetsidesoftware.code-spell-checker",
+    "oderwat.indent-rainbow",
+    "gruntfuggly.todo-tree",
+    "yoavbls.pretty-ts-errors",
+    "rangav.vscode-thunder-client",
+    "ms-vscode.js-debug-nightly",
+    "firsttris.vscode-jest-runner",
+    "ZixuanChen.vitest-explorer",
+    "ms-vscode-remote.remote-containers",
+    "ms-vscode.remote-repositories",
+    "ms-vsliveshare.vsliveshare"
+  ]
+}

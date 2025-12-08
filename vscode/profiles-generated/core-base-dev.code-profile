@@ -1,0 +1,29 @@
+{
+  "name": "Core / Base Dev",
+  "settings": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.insertSpaces": true,
+    "editor.rulers": [
+      80,
+      100
+    ],
+    "editor.tabSize": 2,
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true,
+    "workbench.colorTheme": "Tokyo Night",
+    "cSpell.language": "en-GB"
+  },
+  "extensions": [
+    "GitHub.copilot",
+    "GitHub.copilot-chat",
+    "eamodio.gitlens",
+    "usernamehw.errorlens",
+    "streetsidesoftware.code-spell-checker",
+    "oderwat.indent-rainbow",
+    "gruntfuggly.todo-tree",
+    "esbenp.prettier-vscode",
+    "enkia.tokyo-night",
+    "trunk.io"
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "core-base-dev": {
+    "name": "Core / Base Dev",
+    "sources": [{ "pack": "00-core-base", "profile": "core-base-dev" }]
+  },
+  "qa-static-analysis": {
+    "name": "QA / Static Analysis",
+    "sources": [{ "pack": "00-core-base", "profile": "qa-static-analysis" }]
+  },
+  "docs-librarian": {
+    "name": "Docs & Librarian",
+    "sources": [{ "pack": "40-docs-knowledge", "profile": "docs-librarian" }]
+  },
+  "gitops-code-review": {
+    "name": "GitOps & Code Review",
+    "sources": [{ "pack": "00-core-base", "profile": "gitops-code-review" }]
+  },
+  "experimental-preview": {
+    "name": "Experimental / Preview",
+    "sources": [
+      {
+        "pack": "50-experimental-playground",
+        "profile": "experimental-preview"
+      }
+    ]
+  },
+  "fullstack-js-ts": {
+    "name": "Fullstack JS/TS – Web & API",
+    "sources": [{ "pack": "10-fullstack-js-ts", "profile": "fullstack-js-ts" }]
+  },
+  "frontend-ux-ui": {
+    "name": "Frontend UX/UI – React / Storybook / DX",
+    "sources": [{ "pack": "10-fullstack-js-ts", "profile": "frontend-ux-ui" }]
+  },
+  "node-backend-services": {
+    "name": "Node / Backend Services – TS/Node",
+    "sources": [
+      { "pack": "10-fullstack-js-ts", "profile": "node-backend-services" }
+    ]
+  },
+  "python-services-clis": {
+    "name": "Python Services & CLIs",
+    "sources": [
+      { "pack": "20-python-data-ml", "profile": "python-services-clis" }
+    ]
+  },
+  "python-data-ml": {
+    "name": "Python Data & ML",
+    "sources": [{ "pack": "20-python-data-ml", "profile": "python-data-ml" }]
+  },
+  "infra-devops": {
+    "name": "Infra & DevOps (Docker/K8s/Terraform)",
+    "sources": [
+      { "pack": "30-infra-devops-platform", "profile": "infra-devops" }
+    ]
+  },
+  "data-db-analytics": {
+    "name": "Data / DB & Analytics",
+    "sources": [
+      { "pack": "30-infra-devops-platform", "profile": "data-db-analytics" }
+    ]
+  },
+  "desktop-gui-cross": {
+    "name": "Desktop & GUI – Swift / TS / Python",
+    "sources": [
+      { "pack": "10-fullstack-js-ts", "profile": "desktop-gui-cross" }
+    ]
+  },
+  "macos-apple-platforms": {
+    "name": "macOS – Apple Platforms & Tooling",
+    "sources": [{ "pack": "00-core-base", "profile": "macos-apple-platforms" }]
+  },
+  "windows-polyglot-wsl": {
+    "name": "Windows – Polyglot + WSL",
+    "sources": [{ "pack": "00-core-base", "profile": "windows-polyglot-wsl" }]
+  },
+  "linux-ci-headless": {
+    "name": "Linux – CI/Headless",
+    "sources": [
+      { "pack": "30-infra-devops-platform", "profile": "linux-ci-headless" }
+    ]
+  }
+}

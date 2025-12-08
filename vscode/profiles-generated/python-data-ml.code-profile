@@ -1,0 +1,44 @@
+{
+  "name": "Python Data & ML",
+  "settings": {
+    "editor.formatOnSave": true,
+    "editor.insertSpaces": true,
+    "editor.rulers": [
+      80,
+      100
+    ],
+    "editor.tabSize": 2,
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true,
+    "python.analysis.typeCheckingMode": "off",
+    "workbench.colorTheme": "Tokyo Night",
+    "cSpell.language": "en-GB"
+  },
+  "extensions": [
+    "GitHub.copilot",
+    "GitHub.copilot-chat",
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "charliermarsh.ruff",
+    "ms-python.black-formatter",
+    "ms-python.isort",
+    "ms-toolsai.jupyter",
+    "ms-toolsai.jupyter-renderers",
+    "ms-toolsai.datawrangler",
+    "ms-toolsai.jupyter-keymap",
+    "ms-python.debugpy",
+    "kevinrose.vsc-python-indent",
+    "enkia.tokyo-night",
+    "trunk.io",
+    "eamodio.gitlens",
+    "usernamehw.errorlens",
+    "streetsidesoftware.code-spell-checker",
+    "oderwat.indent-rainbow",
+    "gruntfuggly.todo-tree",
+    "randomfractalsinc.vscode-data-preview",
+    "github.vscode-github-issue-notebooks",
+    "ms-vscode-remote.remote-containers",
+    "ms-vscode.remote-repositories",
+    "ms-vsliveshare.vsliveshare"
+  ]
+}

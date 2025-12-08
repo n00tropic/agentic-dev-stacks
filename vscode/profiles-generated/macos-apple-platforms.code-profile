@@ -1,0 +1,45 @@
+{
+  "name": "macOS \u2013 Apple Platforms & Tooling",
+  "settings": {
+    "editor.formatOnSave": true,
+    "editor.insertSpaces": true,
+    "editor.rulers": [
+      80,
+      100
+    ],
+    "editor.tabSize": 2,
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true,
+    "terminal.integrated.defaultProfile.osx": "zsh",
+    "swift.path": "<TO_FILL>",
+    "lldb.executable": "<TO_FILL>",
+    "workbench.colorTheme": "Tokyo Night",
+    "cSpell.language": "en-GB"
+  },
+  "extensions": [
+    "GitHub.copilot",
+    "GitHub.copilot-chat",
+    "eamodio.gitlens",
+    "usernamehw.errorlens",
+    "streetsidesoftware.code-spell-checker",
+    "oderwat.indent-rainbow",
+    "gruntfuggly.todo-tree",
+    "vadimcn.vscode-lldb",
+    "enkia.tokyo-night",
+    "ms-vscode.cpptools",
+    "ms-vscode.cmake-tools",
+    "ms-vscode.makefile-tools",
+    "xaver.clang-format",
+    "ms-azuretools.vscode-docker",
+    "vknabel.vscode-swift-development-environment",
+    "vknabel.vscode-swiftlint",
+    "sswg.swift-lang",
+    "trunk.io",
+    "ms-vscode.remote-repositories",
+    "ms-vscode-remote.remote-containers",
+    "ms-vscode.remote-ssh",
+    "ms-vsliveshare.vsliveshare",
+    "ms-vscode.js-debug-nightly",
+    "ms-playwright.playwright"
+  ]
+}

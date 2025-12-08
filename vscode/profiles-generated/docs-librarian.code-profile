@@ -1,0 +1,76 @@
+{
+  "name": "Docs & Librarian",
+  "settings": {
+    "[markdown]": {
+      "editor.wordWrap": "bounded",
+      "editor.wordWrapColumn": 100,
+      "editor.quickSuggestions": {
+        "comments": false,
+        "strings": false,
+        "other": false
+      }
+    },
+    "[asciidoc]": {
+      "editor.wordWrap": "bounded",
+      "editor.wordWrapColumn": 100
+    },
+    "editor.formatOnSave": true,
+    "editor.insertSpaces": true,
+    "editor.rulers": [
+      80,
+      100
+    ],
+    "editor.tabSize": 2,
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true,
+    "cSpell.language": "en-GB",
+    "cSpell.enabledLanguageIds": [
+      "markdown",
+      "asciidoc",
+      "plaintext",
+      "yaml",
+      "json"
+    ],
+    "ltex.language": "en-GB",
+    "ltex.enabled": [
+      "markdown",
+      "asciidoc",
+      "latex"
+    ],
+    "ltex.checkFrequency": "save",
+    "vale.core.useCLI": true,
+    "vale.valeCLI.config": "${workspaceFolder}/.vale.ini",
+    "workbench.colorTheme": "Tokyo Night"
+  },
+  "extensions": [
+    "GitHub.copilot",
+    "GitHub.copilot-chat",
+    "GitHub.vscode-github-actions",
+    "EditorConfig.EditorConfig",
+    "yzhang.markdown-all-in-one",
+    "DavidAnson.vscode-markdownlint",
+    "bierner.markdown-preview-github-styles",
+    "yzane.markdown-pdf",
+    "hediet.vscode-drawio",
+    "jebbs.plantuml",
+    "streetsidesoftware.code-spell-checker",
+    "bierner.markdown-mermaid",
+    "shd101wyy.markdown-preview-enhanced",
+    "redhat.vscode-yaml",
+    "chrischinchilla.vale-vscode",
+    "ltex-plus.vscode-ltex-plus",
+    "asciidoctor.asciidoctor-vscode",
+    "pomdtr.markdown-kroki",
+    "aikebang.mkdocs-syntax-highlight",
+    "jorgebertocchini.mkdocs-alias-navigator",
+    "mermaidchart.vscode-mermaid-chart",
+    "vstirbu.vscode-mermaid-preview",
+    "bpruitt-goddard.mermaid-markdown-syntax-highlighting",
+    "quarto.quarto",
+    "aykutsarac.jsoncrack-vscode",
+    "tamasfe.even-better-toml",
+    "eliostruyf.vscode-front-matter",
+    "enkia.tokyo-night",
+    "trunk.io"
+  ]
+}

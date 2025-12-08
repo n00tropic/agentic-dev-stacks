@@ -2,6 +2,8 @@
 
 This file maps internal profile slugs to their dist exports for quick import via VS Code **Import Profile… (VS Code expects a single .code-profile file)**. Dist artefacts live in `vscode/profiles-dist/*.code-profile` (exported from VS Code) for local/offline use, and may also have optional secret gist URLs for one-click import.
 
+For generated, pack-derived profiles (optional and minimal), run `python3 vscode/scripts/generate-code-profiles.py` to output files under `vscode/profiles-generated/`.
+
 > Dist files are **generated** via VS Code “Export Profile…”; do **not** hand-edit them. If a file or gist is missing, treat it as `<TO_FILL>` and regenerate.
 
 <!-- vale off -->

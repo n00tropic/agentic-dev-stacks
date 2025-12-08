@@ -94,6 +94,8 @@ Production stacks with published profiles:
 
 See `PROFILE_DIST.md` for the full slug → file map (including beta stacks and gist URLs).
 
+Optional (generated, minimal profiles): `python3 vscode/scripts/generate-code-profiles.py` writes pack-derived `.code-profile` files to `vscode/profiles-generated/` for fast, scriptable bootstraps. These do not replace the reviewed exports in `vscode/profiles-dist/`.
+
 Mini golden path (JS/TS)
 
 - Open Copilot Chat and select the `refactor-surgeon` agent.
