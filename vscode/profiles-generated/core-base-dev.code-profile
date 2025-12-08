@@ -1,29 +1,5 @@
 {
   "name": "Core / Base Dev",
-  "settings": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true,
-    "editor.insertSpaces": true,
-    "editor.rulers": [
-      80,
-      100
-    ],
-    "editor.tabSize": 2,
-    "files.insertFinalNewline": true,
-    "files.trimTrailingWhitespace": true,
-    "workbench.colorTheme": "Tokyo Night",
-    "cSpell.language": "en-GB"
-  },
-  "extensions": [
-    "GitHub.copilot",
-    "GitHub.copilot-chat",
-    "eamodio.gitlens",
-    "usernamehw.errorlens",
-    "streetsidesoftware.code-spell-checker",
-    "oderwat.indent-rainbow",
-    "gruntfuggly.todo-tree",
-    "esbenp.prettier-vscode",
-    "enkia.tokyo-night",
-    "trunk.io"
-  ]
+  "settings": "{\n  \"editor.defaultFormatter\": \"esbenp.prettier-vscode\",\n  \"editor.formatOnSave\": true,\n  \"editor.insertSpaces\": true,\n  \"editor.rulers\": [\n    80,\n    100\n  ],\n  \"editor.tabSize\": 2,\n  \"files.insertFinalNewline\": true,\n  \"files.trimTrailingWhitespace\": true,\n  \"workbench.colorTheme\": \"Tokyo Night\",\n  \"cSpell.language\": \"en-GB\"\n}",
+  "extensions": "[\n  {\n    \"identifier\": {\n      \"id\": \"GitHub.copilot\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"GitHub.copilot-chat\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"eamodio.gitlens\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"usernamehw.errorlens\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"streetsidesoftware.code-spell-checker\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"oderwat.indent-rainbow\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"gruntfuggly.todo-tree\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"esbenp.prettier-vscode\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"enkia.tokyo-night\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"trunk.io\"\n    }\n  }\n]"
 }

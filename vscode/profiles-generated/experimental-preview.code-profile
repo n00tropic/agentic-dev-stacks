@@ -1,36 +1,5 @@
 {
   "name": "Experimental / Preview",
-  "settings": {
-    "editor.formatOnSave": true,
-    "editor.insertSpaces": true,
-    "editor.rulers": [
-      80,
-      100
-    ],
-    "editor.tabSize": 2,
-    "files.insertFinalNewline": true,
-    "files.trimTrailingWhitespace": true,
-    "workbench.colorTheme": "Tokyo Night",
-    "cSpell.language": "en-GB"
-  },
-  "extensions": [
-    "GitHub.copilot",
-    "GitHub.copilot-chat",
-    "eamodio.gitlens",
-    "usernamehw.errorlens",
-    "streetsidesoftware.code-spell-checker",
-    "oderwat.indent-rainbow",
-    "gruntfuggly.todo-tree",
-    "ms-vscode.vscode-typescript-next",
-    "ms-python.python",
-    "ms-python.vscode-pylance",
-    "esbenp.prettier-vscode",
-    "enkia.tokyo-night",
-    "trunk.io",
-    "continue.continue",
-    "codeium.codeium",
-    "tabnine.tabnine-vscode",
-    "ms-vsliveshare.vsliveshare",
-    "ms-vscode.remote-repositories"
-  ]
+  "settings": "{\n  \"editor.formatOnSave\": true,\n  \"editor.insertSpaces\": true,\n  \"editor.rulers\": [\n    80,\n    100\n  ],\n  \"editor.tabSize\": 2,\n  \"files.insertFinalNewline\": true,\n  \"files.trimTrailingWhitespace\": true,\n  \"workbench.colorTheme\": \"Tokyo Night\",\n  \"cSpell.language\": \"en-GB\"\n}",
+  "extensions": "[\n  {\n    \"identifier\": {\n      \"id\": \"GitHub.copilot\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"GitHub.copilot-chat\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"eamodio.gitlens\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"usernamehw.errorlens\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"streetsidesoftware.code-spell-checker\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"oderwat.indent-rainbow\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"gruntfuggly.todo-tree\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"ms-vscode.vscode-typescript-next\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"ms-python.python\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"ms-python.vscode-pylance\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"esbenp.prettier-vscode\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"enkia.tokyo-night\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"trunk.io\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"continue.continue\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"codeium.codeium\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"tabnine.tabnine-vscode\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"ms-vsliveshare.vsliveshare\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"ms-vscode.remote-repositories\"\n    }\n  }\n]"
 }

@@ -1,53 +1,5 @@
 {
   "name": "Desktop & GUI \u2013 Swift / TS / Python",
-  "settings": {
-    "editor.formatOnSave": true,
-    "editor.insertSpaces": true,
-    "editor.rulers": [
-      80,
-      100
-    ],
-    "editor.tabSize": 2,
-    "files.insertFinalNewline": true,
-    "files.trimTrailingWhitespace": true,
-    "workbench.colorTheme": "Tokyo Night",
-    "cSpell.language": "en-GB"
-  },
-  "extensions": [
-    "GitHub.copilot",
-    "GitHub.copilot-chat",
-    "tauri-apps.tauri-vscode",
-    "bradlc.vscode-tailwindcss",
-    "esbenp.prettier-vscode",
-    "dbaeumer.vscode-eslint",
-    "biomejs.biome",
-    "yoavbls.pretty-ts-errors",
-    "ms-vscode.vscode-typescript-next",
-    "firsttris.vscode-jest-runner",
-    "vitest.explorer",
-    "ms-python.python",
-    "ms-python.vscode-pylance",
-    "charliermarsh.ruff",
-    "ms-vscode.cpptools",
-    "ms-azuretools.vscode-docker",
-    "vknabel.vscode-swift-development-environment",
-    "vknabel.vscode-swiftlint",
-    "vadimcn.vscode-lldb",
-    "enkia.tokyo-night",
-    "trunk.io",
-    "eamodio.gitlens",
-    "usernamehw.errorlens",
-    "streetsidesoftware.code-spell-checker",
-    "oderwat.indent-rainbow",
-    "gruntfuggly.todo-tree",
-    "ms-vscode.js-debug-nightly",
-    "ms-playwright.playwright",
-    "rangav.vscode-thunder-client",
-    "humao.rest-client",
-    "ms-vscode.remote-repositories",
-    "ms-vsliveshare.vsliveshare",
-    "ms-vscode-remote.remote-containers",
-    "ms-vscode.remote-ssh",
-    "ms-vscode.cpptools-extension-pack"
-  ]
+  "settings": "{\n  \"editor.formatOnSave\": true,\n  \"editor.insertSpaces\": true,\n  \"editor.rulers\": [\n    80,\n    100\n  ],\n  \"editor.tabSize\": 2,\n  \"files.insertFinalNewline\": true,\n  \"files.trimTrailingWhitespace\": true,\n  \"workbench.colorTheme\": \"Tokyo Night\",\n  \"cSpell.language\": \"en-GB\"\n}",
+  "extensions": "[\n  {\n    \"identifier\": {\n      \"id\": \"GitHub.copilot\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"GitHub.copilot-chat\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"tauri-apps.tauri-vscode\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"bradlc.vscode-tailwindcss\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"esbenp.prettier-vscode\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"dbaeumer.vscode-eslint\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"biomejs.biome\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"yoavbls.pretty-ts-errors\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"ms-vscode.vscode-typescript-next\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"firsttris.vscode-jest-runner\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"vitest.explorer\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"ms-python.python\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"ms-python.vscode-pylance\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"charliermarsh.ruff\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"ms-vscode.cpptools\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"ms-azuretools.vscode-docker\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"vknabel.vscode-swift-development-environment\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"vknabel.vscode-swiftlint\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"vadimcn.vscode-lldb\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"enkia.tokyo-night\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"trunk.io\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"eamodio.gitlens\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"usernamehw.errorlens\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"streetsidesoftware.code-spell-checker\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"oderwat.indent-rainbow\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"gruntfuggly.todo-tree\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"ms-vscode.js-debug-nightly\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"ms-playwright.playwright\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"rangav.vscode-thunder-client\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"humao.rest-client\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"ms-vscode.remote-repositories\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"ms-vsliveshare.vsliveshare\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"ms-vscode-remote.remote-containers\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"ms-vscode.remote-ssh\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"ms-vscode.cpptools-extension-pack\"\n    }\n  }\n]"
 }

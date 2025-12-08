@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """Generate minimal .code-profile files from pack settings and extensions.
 
-The output mirrors VS Code's `IUserDataProfileTemplate` surface: name,
-settings object, and a list of extension ids. We deliberately omit `shortName`,
-`globalState`, `tasks`, `snippets`, and `keybindings` to keep profiles minimal
-and machine-agnostic. Settings and extensions are pulled directly from
-`vscode/packs/**` (source of truth).
+The output mirrors VS Code's `IUserDataProfileTemplate` surface: `name`,
+`settings` (JSON as string), and `extensions` (JSON as string). We omit
+`shortName`, `globalState`, `tasks`, `snippets`, and `keybindings` to keep
+profiles minimal and machine-agnostic. Settings and extensions are pulled
+directly from `vscode/packs/**` (source of truth).
 """
 
 from __future__ import annotations
@@ -15,6 +15,16 @@ import json
 import sys
 from pathlib import Path
 from typing import Dict, List
+
+# Internal shape (pre-serialisation):
+# - name: str
+# - settings: dict (standard settings.json)
+# - extensions: list[str] (extension ids like "publisher.extension")
+#
+# Serialised shape (IUserDataProfileTemplate):
+# - name: str
+# - settings: stringified JSON object
+# - extensions: stringified JSON array of { identifier: { id } }
 
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_MAP = ROOT / "vscode" / "profile-map.json"
@@ -70,6 +80,35 @@ def merge_extensions(extension_lists: List[List[str]]) -> List[str]:
     return merged
 
 
+def serialise_profile(name: str, settings: Dict, extensions: List[str]) -> Dict:
+    settings_json = settings or {}
+    extensions_json = [{"identifier": {"id": ext_id}} for ext_id in (extensions or [])]
+
+    template: Dict = {"name": name}
+    template["settings"] = json.dumps(settings_json, indent=2, ensure_ascii=True)
+    template["extensions"] = json.dumps(extensions_json, indent=2, ensure_ascii=True)
+    return template
+
+
+def validate_profile_file(path: Path) -> None:
+    data = json.loads(path.read_text(encoding="utf-8"))
+
+    for key in ("settings", "extensions"):
+        if key not in data:
+            raise ValueError(f"{path}: missing required field '{key}'")
+        if not isinstance(data[key], str):
+            raise ValueError(f"{path}: field '{key}' must be a string")
+        inner = json.loads(data[key])
+        if key == "extensions":
+            if not isinstance(inner, list):
+                raise ValueError(f"{path}: extensions inner JSON must be a list")
+            for idx, item in enumerate(inner):
+                ident = item.get("identifier", {}) if isinstance(item, dict) else None
+                ext_id = ident.get("id") if isinstance(ident, dict) else None
+                if not isinstance(ext_id, str) or not ext_id.strip():
+                    raise ValueError(f"{path}: extensions[{idx}] missing identifier.id")
+
+
 def generate_profile(slug: str, entry: dict, out_dir: Path) -> Path:
     name = entry.get("name")
     packs = entry.get("packs") or []
@@ -88,11 +127,11 @@ def generate_profile(slug: str, entry: dict, out_dir: Path) -> Path:
         settings_list.append(load_settings(settings_path))
         ext_lists.append(load_extensions(extensions_path))
 
-    profile_template = {
-        "name": name,
-        "settings": merge_settings(settings_list),
-        "extensions": merge_extensions(ext_lists),
-    }
+    profile_template = serialise_profile(
+        name=name,
+        settings=merge_settings(settings_list),
+        extensions=merge_extensions(ext_lists),
+    )
 
     out_dir.mkdir(parents=True, exist_ok=True)
     dest = out_dir / f"{slug}.code-profile"
@@ -100,6 +139,7 @@ def generate_profile(slug: str, entry: dict, out_dir: Path) -> Path:
         json.dumps(profile_template, indent=2, ensure_ascii=True) + "\n",
         encoding="utf-8",
     )
+    validate_profile_file(dest)
     return dest
 
 

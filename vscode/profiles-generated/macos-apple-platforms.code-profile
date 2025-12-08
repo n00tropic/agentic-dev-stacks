@@ -1,45 +1,5 @@
 {
   "name": "macOS \u2013 Apple Platforms & Tooling",
-  "settings": {
-    "editor.formatOnSave": true,
-    "editor.insertSpaces": true,
-    "editor.rulers": [
-      80,
-      100
-    ],
-    "editor.tabSize": 2,
-    "files.insertFinalNewline": true,
-    "files.trimTrailingWhitespace": true,
-    "terminal.integrated.defaultProfile.osx": "zsh",
-    "swift.path": "<TO_FILL>",
-    "lldb.executable": "<TO_FILL>",
-    "workbench.colorTheme": "Tokyo Night",
-    "cSpell.language": "en-GB"
-  },
-  "extensions": [
-    "GitHub.copilot",
-    "GitHub.copilot-chat",
-    "eamodio.gitlens",
-    "usernamehw.errorlens",
-    "streetsidesoftware.code-spell-checker",
-    "oderwat.indent-rainbow",
-    "gruntfuggly.todo-tree",
-    "vadimcn.vscode-lldb",
-    "enkia.tokyo-night",
-    "ms-vscode.cpptools",
-    "ms-vscode.cmake-tools",
-    "ms-vscode.makefile-tools",
-    "xaver.clang-format",
-    "ms-azuretools.vscode-docker",
-    "vknabel.vscode-swift-development-environment",
-    "vknabel.vscode-swiftlint",
-    "sswg.swift-lang",
-    "trunk.io",
-    "ms-vscode.remote-repositories",
-    "ms-vscode-remote.remote-containers",
-    "ms-vscode.remote-ssh",
-    "ms-vsliveshare.vsliveshare",
-    "ms-vscode.js-debug-nightly",
-    "ms-playwright.playwright"
-  ]
+  "settings": "{\n  \"editor.formatOnSave\": true,\n  \"editor.insertSpaces\": true,\n  \"editor.rulers\": [\n    80,\n    100\n  ],\n  \"editor.tabSize\": 2,\n  \"files.insertFinalNewline\": true,\n  \"files.trimTrailingWhitespace\": true,\n  \"terminal.integrated.defaultProfile.osx\": \"zsh\",\n  \"swift.path\": \"<TO_FILL>\",\n  \"lldb.executable\": \"<TO_FILL>\",\n  \"workbench.colorTheme\": \"Tokyo Night\",\n  \"cSpell.language\": \"en-GB\"\n}",
+  "extensions": "[\n  {\n    \"identifier\": {\n      \"id\": \"GitHub.copilot\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"GitHub.copilot-chat\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"eamodio.gitlens\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"usernamehw.errorlens\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"streetsidesoftware.code-spell-checker\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"oderwat.indent-rainbow\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"gruntfuggly.todo-tree\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"vadimcn.vscode-lldb\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"enkia.tokyo-night\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"ms-vscode.cpptools\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"ms-vscode.cmake-tools\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"ms-vscode.makefile-tools\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"xaver.clang-format\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"ms-azuretools.vscode-docker\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"vknabel.vscode-swift-development-environment\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"vknabel.vscode-swiftlint\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"sswg.swift-lang\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"trunk.io\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"ms-vscode.remote-repositories\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"ms-vscode-remote.remote-containers\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"ms-vscode.remote-ssh\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"ms-vsliveshare.vsliveshare\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"ms-vscode.js-debug-nightly\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"ms-playwright.playwright\"\n    }\n  }\n]"
 }

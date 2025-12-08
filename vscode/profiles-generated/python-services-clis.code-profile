@@ -1,34 +1,5 @@
 {
   "name": "Python Services & CLIs",
-  "settings": {
-    "editor.formatOnSave": true,
-    "editor.insertSpaces": true,
-    "editor.rulers": [
-      80,
-      100
-    ],
-    "editor.tabSize": 2,
-    "files.insertFinalNewline": true,
-    "files.trimTrailingWhitespace": true,
-    "python.analysis.typeCheckingMode": "basic",
-    "workbench.colorTheme": "Tokyo Night",
-    "cSpell.language": "en-GB"
-  },
-  "extensions": [
-    "GitHub.copilot",
-    "GitHub.copilot-chat",
-    "ms-python.python",
-    "ms-python.vscode-pylance",
-    "charliermarsh.ruff",
-    "ms-python.black-formatter",
-    "ms-python.isort",
-    "ms-toolsai.jupyter",
-    "ms-python.debugpy",
-    "kevinrose.vsc-python-indent",
-    "humao.rest-client",
-    "enkia.tokyo-night",
-    "trunk.io",
-    "ms-azuretools.vscode-docker",
-    "redhat.ansible"
-  ]
+  "settings": "{\n  \"editor.formatOnSave\": true,\n  \"editor.insertSpaces\": true,\n  \"editor.rulers\": [\n    80,\n    100\n  ],\n  \"editor.tabSize\": 2,\n  \"files.insertFinalNewline\": true,\n  \"files.trimTrailingWhitespace\": true,\n  \"python.analysis.typeCheckingMode\": \"basic\",\n  \"workbench.colorTheme\": \"Tokyo Night\",\n  \"cSpell.language\": \"en-GB\"\n}",
+  "extensions": "[\n  {\n    \"identifier\": {\n      \"id\": \"GitHub.copilot\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"GitHub.copilot-chat\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"ms-python.python\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"ms-python.vscode-pylance\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"charliermarsh.ruff\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"ms-python.black-formatter\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"ms-python.isort\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"ms-toolsai.jupyter\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"ms-python.debugpy\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"kevinrose.vsc-python-indent\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"humao.rest-client\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"enkia.tokyo-night\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"trunk.io\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"ms-azuretools.vscode-docker\"\n    }\n  },\n  {\n    \"identifier\": {\n      \"id\": \"redhat.ansible\"\n    }\n  }\n]"
 }
