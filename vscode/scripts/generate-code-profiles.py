@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """Generate minimal .code-profile files from pack settings and extensions.
 
-The output format mirrors VS Code's IUserDataProfileTemplate surface: a name,
-settings object, and a list of extension ids. We deliberately omit global
-state, tasks, snippets, and keybindings to keep the generated profiles minimal
-and machine-agnostic.
+The output mirrors VS Code's `IUserDataProfileTemplate` surface: name,
+settings object, and a list of extension ids. We deliberately omit `shortName`,
+`globalState`, `tasks`, `snippets`, and `keybindings` to keep profiles minimal
+and machine-agnostic. Settings and extensions are pulled directly from
+`vscode/packs/**` (source of truth).
 """
 
 from __future__ import annotations
@@ -71,23 +72,18 @@ def merge_extensions(extension_lists: List[List[str]]) -> List[str]:
 
 def generate_profile(slug: str, entry: dict, out_dir: Path) -> Path:
     name = entry.get("name")
-    sources = entry.get("sources") or []
+    packs = entry.get("packs") or []
 
-    if not name or not sources:
-        raise SystemExit(f"Profile '{slug}' is missing 'name' or 'sources' in the map")
+    if not name or not packs:
+        raise SystemExit(f"Profile '{slug}' is missing 'name' or 'packs' in the map")
 
     settings_list: List[Dict] = []
     ext_lists: List[List[str]] = []
 
-    for source in sources:
-        pack = source.get("pack")
-        profile_id = source.get("profile") or slug
-        if not pack:
-            raise SystemExit(f"Profile '{slug}' has a source without 'pack'")
-
+    for pack in packs:
         pack_dir = ROOT / "vscode" / "packs" / pack
-        settings_path = pack_dir / "settings" / f"settings.{profile_id}.json"
-        extensions_path = pack_dir / "extensions" / f"extensions.{profile_id}.txt"
+        settings_path = pack_dir / "settings" / f"settings.{slug}.json"
+        extensions_path = pack_dir / "extensions" / f"extensions.{slug}.txt"
 
         settings_list.append(load_settings(settings_path))
         ext_lists.append(load_extensions(extensions_path))
