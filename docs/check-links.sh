@@ -9,6 +9,34 @@ log() {
 	printf '[%s] %s\n' "${SCRIPT_NAME}" "$*" >&2
 }
 
+usage() {
+	cat <<'USAGE'
+Usage: docs/check-links.sh [--help]
+
+Runs lychee against built docs. Set CHECK_EXTERNAL=1 to include external links.
+
+Options:
+  -h, --help    Show this help message
+
+Environment:
+  CHECK_EXTERNAL=1   Include external HTTP/HTTPS links
+USAGE
+}
+
+if (($#)); then
+	case "$1" in
+	-h | --help)
+		usage
+		exit 0
+		;;
+	*)
+		printf 'Unknown option: %s\n' "$1" >&2
+		usage
+		exit 1
+		;;
+	esac
+fi
+
 if [[ ! -d build/site ]]; then
 	log "Docs not built. Run ./build-docs.sh first."
 	exit 1
