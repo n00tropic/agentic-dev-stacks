@@ -46,7 +46,7 @@ run_trunk_check() {
 
 run_python_compile() {
 	if ! command -v python3 >/dev/null 2>&1; then
-		log "python3 not found; skipping compile step"
+		log "python3 not found; skipping Python bytecode compilation step (run_python_compile). Please install python3 to enable this validation."
 		return
 	fi
 	log "Running python -m compileall (excluding node_modules)"
@@ -71,9 +71,12 @@ for path in root.rglob('*.json'):
 		continue
 	try:
 		json.loads(path.read_text(encoding='utf-8'))
-	except Exception as exc:  # pragma: no cover - CI guardrail
+	except (json.JSONDecodeError, UnicodeDecodeError, OSError) as exc:  # CI guardrail
 		print(f"{path}: {exc}")
 		fail = True
+	except Exception as exc:
+		print(f"{path}: Unexpected error: {exc}")
+		raise
 
 if fail:
 	sys.exit(1)
@@ -90,7 +93,7 @@ import os, pathlib, sys
 
 try:
 	import tomllib  # Python 3.11+
-except Exception:  # pragma: no cover - best effort
+except ImportError:  # pragma: no cover - best effort
 	sys.exit(0)
 
 root = pathlib.Path(os.environ["ROOT_PATH"])
@@ -103,7 +106,7 @@ for path in root.rglob('*.toml'):
 		continue
 	try:
 		tomllib.loads(path.read_text(encoding='utf-8'))
-	except Exception as exc:  # pragma: no cover - CI guardrail
+	except (tomllib.TOMLDecodeError, UnicodeDecodeError, FileNotFoundError) as exc:  # pragma: no cover - CI guardrail
 		print(f"{path}: {exc}")
 		fail = True
 
@@ -122,6 +125,10 @@ run_psscriptanalyzer() {
 	pwsh -NoLogo -NoProfile -Command - <<'PS'
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
+if (-not $env:ROOT_PATH -or [string]::IsNullOrEmpty($env:ROOT_PATH)) {
+    Write-Error "ROOT_PATH environment variable is not set; cannot run script validation."
+    exit 1
+}
 $root = "$env:ROOT_PATH"
 $config = Join-Path $root "scripts/psscriptanalyzer.psd1"
 $files = Get-ChildItem -Path $root -Include *.ps1,*.psm1 -File -Recurse
