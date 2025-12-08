@@ -6,7 +6,7 @@
 ## Checklist
 
 - [ ] Docs updated (README/docs/prompts) if behaviour or UX changed
-- [ ] Validations run locally (e.g. `bash scripts/qa-preflight.sh`, `cd docs && ./build-docs.sh` if docs touched)
+- [ ] Validations run locally (e.g. `bash scripts/validate-all.sh` or `bash scripts/validate-all.sh --fast`)
 - [ ] MCP/devcontainer changes reviewed for safety (no secrets committed; least-privilege defaults)
 
 ## Testing

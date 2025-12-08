@@ -19,11 +19,11 @@ runtimes:
 lint:
   enabled:
     - osv-scanner@2.3.0
-    - renovate@42.39.2
+    - renovate@42.39.4
     - vale@3.13.0
     - actionlint@1.7.9
     - bandit@1.9.2
-    - black@25.11.0
+    - black@25.12.0
     - checkov@3.2.495
     - git-diff-check
     - isort@7.0.0
@@ -67,6 +67,9 @@ lint:
       linters:
         - vale
         - markdownlint
+    - paths:
+        - vscode/exports/**
+      linters: [ALL]
 actions:
   enabled:
     - trunk-announce

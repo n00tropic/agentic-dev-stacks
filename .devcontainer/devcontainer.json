@@ -9,7 +9,7 @@
       "version": "22"
     }
   },
-  "postCreateCommand": "pip3 install --user pyyaml toml && python3 vscode/scripts/build-bundles.py && bash vscode/scripts/validate-all-bundles.sh && (command -v trunk >/dev/null 2>&1 && trunk check --no-progress || true)",
+  "postCreateCommand": "pip3 install --user pyyaml toml && npm ci --prefix docs/ui/agentic-neon-ui --no-fund --no-audit",
   "customizations": {
     "vscode": {
       "settings": {

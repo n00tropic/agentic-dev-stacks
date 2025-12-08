@@ -12,11 +12,10 @@ Thanks for helping improve Agentic Dev Stacks. This project aims to be a referen
 Before sending a PR, run:
 
 ```bash
-bash scripts/qa-preflight.sh
-cd docs && ./build-docs.sh
+bash scripts/validate-all.sh    # use --fast to skip docs build locally
 ```
 
-`qa-preflight` covers extension lists, MCP config structure, script linting, metadata checks, and agent ecosystem validations. The docs build ensures the Antora site still compiles.
+This covers trunk (if installed), QA preflight (extensions, MCP config structure, scripts, metadata, agent ecosystems), and docs build (unless skipped with `--fast`).
 
 ## PR expectations
 
