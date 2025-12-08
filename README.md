@@ -16,8 +16,9 @@ Why this exists
 
 ## Hero quickstart (Codespaces or devcontainer)
 
-- Codespaces: open this repo in GitHub Codespaces (default devcontainer) and wait for build; then run `bash scripts/validate-all.sh --fast` (full run without `--fast` builds docs).
-- Local devcontainer: `devcontainer up --workspace-folder .` (requires Docker/Podman + Dev Containers extension), then `bash scripts/validate-all.sh --fast`.
+- Codespaces (recommended): open this repo in GitHub Codespaces (default devcontainer). After the build installs Python 3.12 + Node 22 + `requirements-dev.txt`, run `bash scripts/validate-all.sh --fast` (omit `--fast` to include docs build).
+- Local devcontainer: `devcontainer up --workspace-folder .` (Docker/Podman + Dev Containers extension), then run `bash scripts/validate-all.sh --fast` inside the container.
+- No container? Install Python 3.11+ and Node 18+, run `pip3 install --user -r requirements-dev.txt`, then `bash scripts/validate-all.sh --fast`.
 - Prefer the Core / Base Dev flow below for the quickest profile install per OS.
 
 ## Quickstart: Core / Base Dev (3 minutes)
