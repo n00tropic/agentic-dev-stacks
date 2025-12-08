@@ -2,15 +2,22 @@
 
 # Agentic Dev Stacks
 
-Scoped, cross-OS VS Code packs plus MCP manifests and devcontainers, aimed at teams that want governed, reproducible AI-ready setups (not ad-hoc dotfiles or one-off machines). Recommended path: Codespaces or the bundled devcontainer.
+Scoped, cross-OS VS Code packs plus MCP manifests and devcontainers, aimed at teams that want
+governed, reproducible AI-ready setups (not ad-hoc dotfiles or one-off machines). Recommended
+path: Codespaces or the bundled devcontainer.
 
-[![CI (minimal)](https://github.com/n00tropic/agentic-dev-stacks/actions/workflows/ci-minimal.yml/badge.svg)](https://github.com/n00tropic/agentic-dev-stacks/actions/workflows/ci-minimal.yml)
-
-**Docs → <https://n00tropic.github.io/agentic-dev-stacks/>**
+[![CI (minimal)](https://github.com/n00tropic/agentic-dev-stacks/actions/workflows/ci-minimal.yml/badge.svg)](https://github.com/n00tropic/agentic-dev-stacks/actions/workflows/ci-minimal.yml) [**Docs →**](https://n00tropic.github.io/agentic-dev-stacks/)
 
 ## What is this?
 
-Agentic development stacks built as a compiler: packs in `vscode/packs/**`, agents in `agents/**`, MCP manifests under `vscode/packs/*/mcp/`, and reproducible exports under `vscode/exports/**` (git-ignored). Dist profile exports live in `vscode/profiles-dist/*.code-profile` (never hand-edit; regenerate via VS Code **Export Profile…**); see `PROFILE_DIST.md` for the slug → `.code-profile` map.
+Agentic development stacks built as a compiler: packs in `vscode/packs/**`, agents in
+`agents/**`, MCP manifests under `vscode/packs/*/mcp/`, and reproducible exports under
+`vscode/exports/**` (git-ignored). Dist profile exports live in
+`vscode/profiles-dist/*.code-profile` (never hand-edit; regenerate via VS Code **Export
+Profile…**); see `PROFILE_DIST.md` for the slug → `.code-profile` map. These dist files are the
+canonical, user-facing exports and safe to import. Any generated profiles under
+`vscode/profiles-generated/**` are internal tooling outputs for fast bootstraps only—do not
+import them directly.
 
 Why this exists
 
@@ -20,7 +27,10 @@ Why this exists
 
 ## Hero quickstart (Codespaces or devcontainer)
 
-- Codespaces (recommended): open this repo in GitHub Codespaces (default devcontainer). After the build installs Python 3.12 + Node 22 + `requirements-dev.txt`, run `bash scripts/validate-all.sh --fast` (omit `--fast` to include docs build).
+- Codespaces (recommended): open this repo in GitHub Codespaces (default devcontainer). After the
+  build installs Python 3.12 + Node 24, `requirements-dev.txt`, and docs UI deps (`npm ci` under
+  `docs/ui/agentic-neon-ui`), run `bash scripts/validate-all.sh --fast` (omit `--fast` to include
+  docs build).
 - Local devcontainer: `devcontainer up --workspace-folder .` (Docker/Podman + Dev Containers extension), then run `bash scripts/validate-all.sh --fast` inside the container.
 - No container? Install Python 3.11+ and Node 18+, run `pip3 install --user -r requirements-dev.txt`, then `bash scripts/validate-all.sh --fast`.
 - Prefer the Core / Base Dev flow below for the quickest profile install per OS.
@@ -110,12 +120,12 @@ Mini golden path (JS/TS)
 
 ## Stacks you can install
 
-| Stack                 | Persona                      | Status     | Supported OSes          | Agents & toolsets (high level)                                               | Quickstart                                                                                       |
-| --------------------- | ---------------------------- | ---------- | ----------------------- | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| core-base-dev         | Core / Base Dev              | Production | macOS / Windows / Linux | Baseline extensions and settings; no MCP by default                          | `cd vscode && ./scripts/install-core-base-dev.sh` (Windows: `./scripts/Install-CoreBaseDev.ps1`) |
-| fullstack-js-ts       | Full-stack JS/TS – Web & API | Production | macOS / Windows / Linux | refactor-surgeon, test-writer, doc-surgeon; local-dev + review-only toolsets | `./scripts/install/fullstack-js-ts-<os>.sh`                                                      |
-| python-data-analytics | Data/ML/analytics            | Beta       | macOS / Windows / Linux | data-explorer, pipeline-refactorer, doc-surgeon; local-dev + review-only     | `./scripts/install/python-data-analytics-<os>.sh`                                                |
-| infra-ops-sre         | Infra / SRE                  | Beta       | macOS / Windows / Linux | infra-reviewer, incident-scribe, doc-surgeon; review-only                    | `./scripts/install/infra-ops-sre-<os>.sh`                                                        |
+| Stack                 | Persona                      | Status     | Supported OSes          | Agents & toolsets (high level)                                               | Quickstart                                                                                                                                                                                                                                                                  |
+| --------------------- | ---------------------------- | ---------- | ----------------------- | ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| core-base-dev         | Core / Base Dev              | Production | macOS / Windows / Linux | Baseline extensions and settings; no MCP by default                          | macOS/Linux: `cd vscode && ./scripts/install-core-base-dev.sh`<br>Windows (PowerShell): `cd vscode; ./scripts/Install-CoreBaseDev.ps1`                                                                                                                                      |
+| fullstack-js-ts       | Full-stack JS/TS – Web & API | Production | macOS / Windows / Linux | refactor-surgeon, test-writer, doc-surgeon; local-dev + review-only toolsets | macOS: `./scripts/install/fullstack-js-ts-macos.sh`<br>Linux: `./scripts/install/fullstack-js-ts-linux.sh`<br>Windows (PowerShell): `./scripts/install/fullstack-js-ts-windows.ps1`                                                                                         |
+| python-data-analytics | Data/ML/analytics            | Beta       | macOS / Windows / Linux | data-explorer, pipeline-refactorer, doc-surgeon; local-dev + review-only     | macOS: `./scripts/install/python-data-analytics-macos.sh`<br>Linux: `./scripts/install/python-data-analytics-linux.sh`<br>Windows (PowerShell): `./scripts/install/python-data-analytics-windows.ps1`<br>Profiles: see `PROFILE_DIST.md` / `CONTROL.md` for canonical slugs |
+| infra-ops-sre         | Infra / SRE                  | Beta       | macOS / Windows / Linux | infra-reviewer, incident-scribe, doc-surgeon; review-only                    | macOS: `./scripts/install/infra-ops-sre-macos.sh`<br>Linux: `./scripts/install/infra-ops-sre-linux.sh`<br>Windows (PowerShell): `./scripts/install/infra-ops-sre-windows.ps1`<br>Profiles: see `PROFILE_DIST.md` / `CONTROL.md` for canonical slugs                         |
 
 More detail: `docs/stack-catalogue.md` (personas, MCP servers, prompts).
 
@@ -136,7 +146,8 @@ Status: JS/TS and Core are production-quality; other stacks are in active develo
 
 ## QA and validation
 
-- Canonical: `bash scripts/validate-all.sh` (includes trunk if available, QA preflight, docs build + link check). First run: `bash scripts/validate-all.sh --fast`; full run (docs + links): `bash scripts/validate-all.sh`.
+- Canonical entrypoint: `bash scripts/validate-all.sh` (includes trunk if available, QA preflight, docs build + link check). Use `--fast` on first run to skip docs/link checks; omit it for the full pass.
+- CI tie-in: the “CI – Minimal validation” workflow runs `bash scripts/validate-all.sh --fast` on pull requests and the full command on pushes to `main` (see `.github/workflows/ci-minimal.yml`).
 - Validate profile dist: `python3 scripts/check-profile-dist.py` (set `SKIP_PROFILE_DIST_CHECK=1` to skip while iterating on exports).
 - Validate extensions only: `cd vscode && ./scripts/helpers/validate-extensions.sh`
 - Validate bundles only: `cd vscode && bash scripts/validate-all-bundles.sh`

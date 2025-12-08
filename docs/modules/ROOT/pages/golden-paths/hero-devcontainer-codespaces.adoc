@@ -18,7 +18,7 @@ Follow this <15 minute path to try the stack with a reproducible devcontainer (a
 
 The devcontainer installs:
 
-- Node 22 and Python 3.12 via official devcontainer features.
+- Node 24 and Python 3.12 via official devcontainer features.
 - `requirements-dev.txt` (jsonschema, PyYAML) for validations.
 - Docs UI deps (`npm ci` under `docs/ui/agentic-neon-ui`).
 
