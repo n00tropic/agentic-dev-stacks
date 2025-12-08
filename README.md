@@ -4,6 +4,10 @@
 
 Scoped, cross-OS VS Code packs plus MCP manifests and devcontainers, aimed at teams that want governed, reproducible AI-ready setups (not ad-hoc dotfiles or one-off machines). Recommended path: Codespaces or the bundled devcontainer.
 
+[![CI (minimal)](https://github.com/n00tropic/agentic-dev-stacks/actions/workflows/ci-minimal.yml/badge.svg)](https://github.com/n00tropic/agentic-dev-stacks/actions/workflows/ci-minimal.yml)
+
+**Docs → <https://n00tropic.github.io/agentic-dev-stacks/>**
+
 ## What is this?
 
 Agentic development stacks built as a compiler: packs in `vscode/packs/**`, agents in `agents/**`, MCP manifests under `vscode/packs/*/mcp/`, and reproducible exports under `vscode/exports/**` (git-ignored). Dist profile exports live in `vscode/profiles-dist/*.code-profile` (never hand-edit; regenerate via VS Code **Export Profile…**).
@@ -115,7 +119,7 @@ Status: JS/TS and Core are production-quality; other stacks are in active develo
 
 ## QA and validation
 
-- Canonical: `bash scripts/validate-all.sh` (includes trunk if available, QA preflight, docs build). Use `--fast` to skip docs build.
+- Canonical: `bash scripts/validate-all.sh` (includes trunk if available, QA preflight, docs build + link check). First run: `bash scripts/validate-all.sh --fast`; full run (docs + links): `bash scripts/validate-all.sh`.
 - Validate extensions only: `cd vscode && ./scripts/helpers/validate-extensions.sh`
 - Validate bundles only: `cd vscode && bash scripts/validate-all-bundles.sh`
 
