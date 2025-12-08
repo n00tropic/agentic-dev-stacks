@@ -1,2 +1,5 @@
 # Prettier friendly markdownlint config (all formatting rules disabled)
 extends: markdownlint/style/prettier
+MD033: false # allow inline HTML for badges and templates
+MD034: false # allow bare URLs in instruction docs
+MD041: false # permit non-heading-first files (templates, prompt files)
