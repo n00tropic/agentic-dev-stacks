@@ -46,7 +46,7 @@ run_trunk_check() {
 
 run_python_compile() {
 	if ! command -v python3 >/dev/null 2>&1; then
-		log "python3 not found; skipping compile step"
+		log "python3 not found; skipping Python bytecode compilation step (run_python_compile). Please install python3 to enable this validation."
 		return
 	fi
 	log "Running python -m compileall (excluding node_modules)"
