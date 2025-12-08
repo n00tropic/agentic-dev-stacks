@@ -19,7 +19,7 @@ runtimes:
 lint:
   enabled:
     - osv-scanner@2.3.0
-    - renovate@42.39.4
+    - renovate@42.40.0
     - vale@3.13.0
     - actionlint@1.7.9
     - bandit@1.9.2
