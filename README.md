@@ -107,6 +107,11 @@ Status: JS/TS and Core are production-quality; other stacks are in active develo
 - Dist profiles: `.code-profile` files are regenerated via VS Code **Export Profile…**; never hand-edit.
 - See `GOVERNANCE.md` and `AGENTS.md` for invariants and reviewer expectations.
 
+## Security
+
+- Read the security policy: `SECURITY.md` (reporting channel, scope, expectations).
+- MCP security posture: `docs/modules/ROOT/pages/mcp-security.adoc` (threat model, least privilege, config hygiene).
+
 ## QA and validation
 
 - Canonical: `bash scripts/validate-all.sh` (includes trunk if available, QA preflight, docs build). Use `--fast` to skip docs build.
