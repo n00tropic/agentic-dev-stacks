@@ -5,7 +5,6 @@
     ":semanticCommits",
     ":label(renovate)",
     ":automergeBranch",
-    "github>renovatebot/renovate-config:helpers:pinGitHubActionDigests",
     "schedule:weekly"
   ],
   "timezone": "America/New_York",
@@ -16,12 +15,16 @@
       "description": "Group GitHub Actions updates",
       "matchManagers": ["github-actions"],
       "groupName": "github-actions",
-      "separateMajorMinor": true
+      "separateMajorMinor": true,
+      "pinDigests": true
     },
     {
       "description": "Python tooling",
       "matchManagers": ["pip_requirements"],
-      "matchPaths": ["vscode/requirements*.txt", "scripts/requirements*.txt"],
+      "matchFileNames": [
+        "vscode/requirements*.txt",
+        "scripts/requirements*.txt"
+      ],
       "groupName": "python-deps",
       "separateMajorMinor": true
     },
@@ -33,7 +36,7 @@
     },
     {
       "description": "Do not touch generated exports",
-      "matchPaths": ["vscode/exports/**"],
+      "matchFileNames": ["vscode/exports/**"],
       "enabled": false
     }
   ]
