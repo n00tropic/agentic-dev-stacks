@@ -1,10 +1,17 @@
 #!/usr/bin/env bash
 set -euo pipefail
+IFS=$'\n\t'
 cd "$(dirname "$0")"
+
+SCRIPT_NAME="build-docs"
+
+log() {
+	printf '[%s] %s\n' "${SCRIPT_NAME}" "$*" >&2
+}
 
 # Build the custom Agentic Neon UI bundle before running Antora.
 if [ -d "ui/agentic-neon-ui" ]; then
-	echo "Building Agentic Neon UI bundle..."
+	log "Building Agentic Neon UI bundle..."
 	(
 		cd ui/agentic-neon-ui
 		npm ci --no-fund --no-audit

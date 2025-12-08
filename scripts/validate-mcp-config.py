@@ -106,18 +106,19 @@ def validate_server(name: str, srv: Dict[str, Any]) -> None:
     _warn_inline_secrets(name, srv)
 
 
-def main() -> None:
+def main() -> int:
     data = load_json(MCP_PATH)
     if "mcpServers" not in data or not isinstance(data["mcpServers"], dict):
         sys.stderr.write("ERROR: top-level 'mcpServers' must be an object\n")
-        sys.exit(1)
+        return 1
     for name, srv in data["mcpServers"].items():
         if not isinstance(srv, dict):
             sys.stderr.write(f"ERROR: server '{name}' must be an object\n")
-            sys.exit(1)
+            return 1
         validate_server(name, srv)
     print("MCP config looks structurally valid.")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
