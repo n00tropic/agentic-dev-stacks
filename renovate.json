@@ -5,7 +5,7 @@
     ":semanticCommits",
     ":label(renovate)",
     ":automergeBranch",
-    "github>renovatebot/renovate-config//helpers:pinGitHubActionDigests",
+    "github>renovatebot/renovate-config:helpers:pinGitHubActionDigests",
     "schedule:weekly"
   ],
   "timezone": "America/New_York",
