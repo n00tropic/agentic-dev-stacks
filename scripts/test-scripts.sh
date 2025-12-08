@@ -11,6 +11,31 @@ log() {
 	printf '[%s] %s\n' "${SCRIPT_NAME}" "$*" >&2
 }
 
+usage() {
+	cat <<'USAGE'
+Usage: scripts/test-scripts.sh [--help]
+
+Runs lightweight self-tests for scripts that implement --help to ensure they respond successfully.
+
+Options:
+  -h, --help    Show this help message
+USAGE
+}
+
+if (($#)); then
+	case "$1" in
+	-h | --help)
+		usage
+		exit 0
+		;;
+	*)
+		printf 'Unknown option: %s\n' "$1" >&2
+		usage
+		exit 1
+		;;
+	esac
+fi
+
 SCRIPTS_WITH_HELP=(
 	"scripts/validate-all.sh"
 	"scripts/qa-preflight.sh"

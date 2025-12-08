@@ -10,6 +10,36 @@ log() {
 	printf '[%s] %s\n' "${SCRIPT_NAME}" "$*" >&2
 }
 
+usage() {
+	cat <<'USAGE'
+Usage: scripts/qa/validate-docs.sh [--help]
+
+Builds docs (unless SKIP_DOCS_BUILD=1) then runs link checks. By default link
+checks run in offline mode; set CHECK_EXTERNAL=1 to include external HTTP/HTTPS.
+
+Options:
+  -h, --help    Show this help message
+
+Environment:
+  SKIP_DOCS_BUILD=1  Skip docs build step
+  CHECK_EXTERNAL=1   Include external link checks
+USAGE
+}
+
+if (($#)); then
+	case "$1" in
+	-h | --help)
+		usage
+		exit 0
+		;;
+	*)
+		printf 'Unknown option: %s\n' "$1" >&2
+		usage
+		exit 1
+		;;
+	esac
+fi
+
 cd "${DOCS_DIR}"
 
 if [[ ${SKIP_DOCS_BUILD:-0} == "1" ]]; then

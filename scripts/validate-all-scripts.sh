@@ -46,7 +46,8 @@ run_trunk_check() {
 		return
 	fi
 	if ! command -v "${TRUNK_BIN}" >/dev/null 2>&1; then
-		fatal "trunk CLI not found; install trunk or set TRUNK to its path"
+		log "trunk CLI not found; skipping trunk check (set TRUNK to override binary path)"
+		return
 	fi
 	log "Running trunk check (${TRUNK_BIN} ${TRUNK_FLAGS[*]})"
 	"${TRUNK_BIN}" check "${TRUNK_FLAGS[@]}"
