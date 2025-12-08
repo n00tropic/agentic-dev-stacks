@@ -1,1 +1,2 @@
 * xref:mcp-provisioning.adoc[MCP provisioning]
+* xref:mcp-security.adoc[MCP security & governance]

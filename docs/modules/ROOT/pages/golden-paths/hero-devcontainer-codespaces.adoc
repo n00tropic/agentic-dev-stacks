@@ -1,0 +1,54 @@
+:page-layout: default
+
+= Devcontainer / Codespaces Golden Path
+
+Follow this <15 minute path to try the stack with a reproducible devcontainer (also used by Codespaces).
+
+== Prerequisites
+
+- GitHub account with Codespaces access, or Docker/Podman + VS Code Dev Containers extension for local containers.
+- No host toolchain required beyond Git.
+
+== Step 1 – Open in Codespaces or Dev Containers
+
+- **Codespaces:** In GitHub, click *Code* → *Codespaces* → *Create codespace on main* (or this branch). The default devcontainer will build automatically.
+- **Local:** Clone the repo, open in VS Code, and run *Dev Containers: Open Folder in Container…* (or `devcontainer up --workspace-folder .`).
+
+== Step 2 – Wait for the build
+
+The devcontainer installs:
+
+- Node 22 and Python 3.12 via official devcontainer features.
+- `requirements-dev.txt` (jsonschema, PyYAML) for validations.
+- Docs UI deps (`npm ci` under `docs/ui/agentic-neon-ui`).
+
+== Step 3 – Run validations
+
+From repo root inside the container:
+
+```bash
+bash scripts/validate-all.sh --fast
+```
+
+Use the full run to include docs build:
+
+```bash
+bash scripts/validate-all.sh
+```
+
+== Step 4 – Optional sample task
+
+Try the tiny sample under `examples/js-ts-baseline`:
+
+```bash
+cd examples/js-ts-baseline
+npm install
+npm test
+```
+
+Fix the deliberate failing expectation in `src/sum.js` or add another check, then re-run `npm test`. Re-run `bash scripts/validate-all.sh --fast` from repo root to mirror CI.
+
+== Where to go next
+
+- Install a profile stack per `README.md` if you want a full persona setup.
+- Review MCP security posture: xref:mcp-security.adoc[] before enabling any optional MCP servers.

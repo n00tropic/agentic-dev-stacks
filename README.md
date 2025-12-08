@@ -16,9 +16,11 @@ Why this exists
 
 ## Hero quickstart (Codespaces or devcontainer)
 
-- Codespaces: open this repo in GitHub Codespaces (default devcontainer) and wait for build; then run `bash scripts/validate-all.sh --fast` (full run without `--fast` builds docs).
-- Local devcontainer: `devcontainer up --workspace-folder .` (requires Docker/Podman + Dev Containers extension), then `bash scripts/validate-all.sh --fast`.
+- Codespaces (recommended): open this repo in GitHub Codespaces (default devcontainer). After the build installs Python 3.12 + Node 22 + `requirements-dev.txt`, run `bash scripts/validate-all.sh --fast` (omit `--fast` to include docs build).
+- Local devcontainer: `devcontainer up --workspace-folder .` (Docker/Podman + Dev Containers extension), then run `bash scripts/validate-all.sh --fast` inside the container.
+- No container? Install Python 3.11+ and Node 18+, run `pip3 install --user -r requirements-dev.txt`, then `bash scripts/validate-all.sh --fast`.
 - Prefer the Core / Base Dev flow below for the quickest profile install per OS.
+- Detailed steps: see `docs/modules/ROOT/pages/golden-paths/hero-devcontainer-codespaces.adoc`.
 
 ## Quickstart: Core / Base Dev (3 minutes)
 
@@ -105,6 +107,11 @@ Status: JS/TS and Core are production-quality; other stacks are in active develo
 - Secrets stay out of git: MCP manifests use `<TO_FILL>` placeholders; copy generated TOML into `~/.codex/config.toml` per `codex/docs/config-guides.md`.
 - Dist profiles: `.code-profile` files are regenerated via VS Code **Export Profile…**; never hand-edit.
 - See `GOVERNANCE.md` and `AGENTS.md` for invariants and reviewer expectations.
+
+## Security
+
+- Read the security policy: `SECURITY.md` (reporting channel, scope, expectations).
+- MCP security posture: `docs/modules/ROOT/pages/mcp-security.adoc` (threat model, least privilege, config hygiene).
 
 ## QA and validation
 

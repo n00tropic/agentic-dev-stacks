@@ -1,0 +1,8 @@
+{
+  "name": "js-ts-baseline",
+  "version": "0.1.0",
+  "description": "Tiny JS baseline sample for the Agentic Dev Stacks devcontainer",
+  "scripts": {
+    "test": "node --test"
+  }
+}

@@ -1,6 +1,7 @@
 // vale off
 * xref:index.adoc[Overview]
 * xref:devcontainer-quickstart.adoc[Devcontainer Quickstart]
+* xref:golden-paths/hero-devcontainer-codespaces.adoc[Devcontainer Golden Path]
 * xref:golden-path.adoc[Golden Path]
 * xref:stack-catalogue.adoc[Stack Catalogue]
 * xref:vscode:packs.adoc[VS Code Packs & Bundles]
