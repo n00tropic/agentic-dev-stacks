@@ -23,7 +23,7 @@ from typing import Dict, List
 #
 # Serialised shape (IUserDataProfileTemplate):
 # - name: str
-# - settings: stringified JSON object
+# - settings: stringified JSON object: { "settings": "<settings.json text>" }
 # - extensions: stringified JSON array of { identifier: { id } }
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -81,11 +81,13 @@ def merge_extensions(extension_lists: List[List[str]]) -> List[str]:
 
 
 def serialise_profile(name: str, settings: Dict, extensions: List[str]) -> Dict:
-    settings_json = settings or {}
+    inner_settings = {
+        "settings": json.dumps(settings or {}, indent=2, ensure_ascii=True)
+    }
     extensions_json = [{"identifier": {"id": ext_id}} for ext_id in (extensions or [])]
 
     template: Dict = {"name": name}
-    template["settings"] = json.dumps(settings_json, indent=2, ensure_ascii=True)
+    template["settings"] = json.dumps(inner_settings, indent=2, ensure_ascii=True)
     template["extensions"] = json.dumps(extensions_json, indent=2, ensure_ascii=True)
     return template
 
@@ -99,6 +101,13 @@ def validate_profile_file(path: Path) -> None:
         if not isinstance(data[key], str):
             raise ValueError(f"{path}: field '{key}' must be a string")
         inner = json.loads(data[key])
+        if key == "settings":
+            if not isinstance(inner, dict):
+                raise ValueError(f"{path}: settings inner JSON must be an object")
+            if "settings" not in inner or not isinstance(inner["settings"], str):
+                raise ValueError(
+                    f"{path}: settings inner JSON must contain string field 'settings'"
+                )
         if key == "extensions":
             if not isinstance(inner, list):
                 raise ValueError(f"{path}: extensions inner JSON must be a list")
