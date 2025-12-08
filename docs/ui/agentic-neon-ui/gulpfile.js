@@ -4,7 +4,9 @@ const { src, dest, series, parallel, watch } = require("gulp");
 const postcss = require("gulp-postcss");
 const autoprefixer = require("autoprefixer");
 const cssnano = require("cssnano");
-const zip = require("gulp-zip");
+// gulp-zip is ESM-first; .default is required when loading via CommonJS
+const zipModule = require("gulp-zip");
+const zip = zipModule.default || zipModule;
 const { deleteAsync } = require("del");
 
 const paths = {
