@@ -122,6 +122,10 @@ run_psscriptanalyzer() {
 	pwsh -NoLogo -NoProfile -Command - <<'PS'
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
+if (-not $env:ROOT_PATH -or [string]::IsNullOrEmpty($env:ROOT_PATH)) {
+    Write-Error "ROOT_PATH environment variable is not set; cannot run script validation."
+    exit 1
+}
 $root = "$env:ROOT_PATH"
 $config = Join-Path $root "scripts/psscriptanalyzer.psd1"
 $files = Get-ChildItem -Path $root -Include *.ps1,*.psm1 -File -Recurse
