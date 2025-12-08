@@ -90,7 +90,7 @@ import os, pathlib, sys
 
 try:
 	import tomllib  # Python 3.11+
-except Exception:  # pragma: no cover - best effort
+except ImportError:  # pragma: no cover - best effort
 	sys.exit(0)
 
 root = pathlib.Path(os.environ["ROOT_PATH"])
