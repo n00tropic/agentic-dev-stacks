@@ -103,7 +103,7 @@ for path in root.rglob('*.toml'):
 		continue
 	try:
 		tomllib.loads(path.read_text(encoding='utf-8'))
-	except Exception as exc:  # pragma: no cover - CI guardrail
+	except (tomllib.TOMLDecodeError, UnicodeDecodeError, FileNotFoundError) as exc:  # pragma: no cover - CI guardrail
 		print(f"{path}: {exc}")
 		fail = True
 
