@@ -13,7 +13,7 @@ The recommended way to try these stacks is via the bundled devcontainer (also us
 1. Open the repository in Codespaces **or** run `devcontainer up --workspace-folder .` locally.
 2. Wait for the container build (installs Python 3.12, Node 22, `requirements-dev.txt`, and docs UI deps).
 3. Run the hero validation command:
-
++
 [source,bash]
 ----
 bash scripts/validate-all.sh --fast
