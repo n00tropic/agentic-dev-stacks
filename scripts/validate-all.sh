@@ -144,7 +144,7 @@ main() {
 		python3 scripts/check-profile-dist.py
 	fi
 
-	if [[ ${FAST} == "1" ]]; then
+	if [[ ${FAST:-0} == "1" ]]; then
 		log "Skipping docs build (--fast)"
 	else
 		log "Building docs and running link check"
