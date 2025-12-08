@@ -1,4 +1,6 @@
 name: Agent Ecosystems Release
+permissions:
+  contents: write
 
 on:
   push:
