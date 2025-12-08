@@ -1,10 +1,14 @@
+<!-- trunk-ignore-all(prettier) -->
 ---
 description: Configuration for AI behavior when interacting with the `Codacy` MCP Server
+<!-- trunk-ignore(vale/error) -->
 applyTo: "**"
 ---
 
+<!-- trunk-ignore(vale/error) -->
 # Codacy Rules
 
+<!-- trunk-ignore(vale/error) -->
 Configuration for AI behavior when interacting with Codacy's MCP Server
 
 ## using any tool that accepts the arguments: `provider`, `organization`, or `repository`

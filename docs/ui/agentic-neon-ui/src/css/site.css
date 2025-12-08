@@ -319,6 +319,19 @@ pre {
   color: var(--fg-muted);
 }
 
+.breadcrumbs {
+  font-size: 0.9rem;
+  opacity: 0.85;
+  margin: 0 0 var(--spacing-sm);
+}
+
+.doc {
+  max-width: 72ch;
+  margin-inline: auto;
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+}
+
 .page-versions {
   background: rgba(255, 255, 255, 0.04);
   border-radius: var(--radius-sm);
@@ -329,31 +342,53 @@ pre {
   font-family: var(--font-family-heading);
   font-size: var(--font-size-h1);
   line-height: var(--line-height-heading);
-  margin-top: 0;
-  margin-bottom: var(--spacing-md);
+  margin: 0 0 var(--spacing-lg);
 }
 
 .doc h2 {
   font-family: var(--font-family-heading);
   font-size: var(--font-size-h2);
-  margin-top: var(--spacing-xl);
-  margin-bottom: var(--spacing-sm);
+  margin: var(--spacing-xl) 0 var(--spacing-sm);
 }
 
 .doc h3 {
   font-family: var(--font-family-heading);
   font-size: var(--font-size-h3);
-  margin-top: var(--spacing-lg);
-  margin-bottom: var(--spacing-xs);
+  margin: var(--spacing-lg) 0 var(--spacing-xs);
 }
 
-.doc p {
+.doc p,
+.doc ul,
+.doc ol,
+.doc pre {
   color: var(--fg-muted);
-  margin-bottom: var(--spacing-md);
+  margin: 0 0 var(--spacing-md);
+}
+
+.doc p + p {
+  margin-top: var(--spacing-xs);
 }
 
 .doc a {
   color: var(--accent-cyan);
+}
+
+.doc ul,
+.doc ol {
+  padding-left: 1.5rem;
+}
+
+.doc li {
+  margin-bottom: 6px;
+  line-height: 1.5;
+}
+
+.doc pre {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-sm);
+  margin: var(--spacing-lg) 0;
+  line-height: 1.45;
+  font-size: 0.95rem;
 }
 
 .doc table {
