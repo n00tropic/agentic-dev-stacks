@@ -1,0 +1,12 @@
+{
+  "folders": [
+    {
+      "name": "agentic-dev-stacks",
+      "path": "../../../.."
+    },
+    {
+      "name": "js-ts-baseline",
+      "path": "../../../../examples/js-ts-baseline"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Validate (fast)",
+      "type": "shell",
+      "command": "bash scripts/validate-all.sh --fast",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "detail": "Run the fast validation sweep (lint/config checks)."
+    },
+    {
+      "label": "Validate (full)",
+      "type": "shell",
+      "command": "bash scripts/validate-all.sh",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "detail": "Run the full validation pipeline."
+    },
+    {
+      "label": "QA preflight",
+      "type": "shell",
+      "command": "bash scripts/qa-preflight.sh",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "detail": "End-to-end QA checks for extensions, MCP, scripts, and metadata."
+    },
+    {
+      "label": "JS/TS baseline tests",
+      "type": "shell",
+      "command": "npm test",
+      "options": {
+        "cwd": "${workspaceFolder}/examples/js-ts-baseline"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "detail": "Run the built-in node:test suite for the JS/TS baseline example."
+    }
+  ]
+}

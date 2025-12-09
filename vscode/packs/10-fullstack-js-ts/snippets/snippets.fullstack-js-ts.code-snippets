@@ -1,0 +1,44 @@
+{
+  "nodeTest": {
+    "prefix": "ntest",
+    "description": "Node.js test skeleton using node:test",
+    "body": [
+      "import { test, strictEqual } from 'node:test';",
+      "",
+      "test('${1:does the thing}', async (t) => {",
+      "  const result = ${2:await doWork()};",
+      "  strictEqual(result, ${3:expected});",
+      "});"
+    ]
+  },
+  "reactComponentTsx": {
+    "prefix": "rfc",
+    "description": "TypeScript React function component",
+    "body": [
+      "import { useState } from 'react';",
+      "",
+      "type ${1:ComponentName}Props = {",
+      "  ${2:title}?: string;",
+      "};",
+      "",
+      "export function ${1:ComponentName}({ ${2:title} = '${3:Heading}' }: ${1:ComponentName}Props) {",
+      "  const [value, setValue] = useState(${4:0});",
+      "  return (",
+      "    <section>",
+      "      <h2>{${2:title}}</h2>",
+      "      <button onClick={() => setValue((prev) => prev + 1)}>",
+      "        {value}",
+      "      </button>",
+      "    </section>",
+      "  );",
+      "}"
+    ]
+  },
+  "labeledJsonLog": {
+    "prefix": "logj",
+    "description": "Console log a labeled JSON snapshot",
+    "body": [
+      "console.log(`[${1:label}]`, JSON.stringify(${2:value}, null, 2));"
+    ]
+  }
+}

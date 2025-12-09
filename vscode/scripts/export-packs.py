@@ -86,7 +86,17 @@ def write_workspace_file(
 ) -> None:
     dest.parent.mkdir(parents=True, exist_ok=True)
     if template_override and template_override.is_file():
-        shutil.copy2(template_override, dest)
+        try:
+            workspace = json.loads(template_override.read_text(encoding="utf-8"))
+        except json.JSONDecodeError as exc:  # pragma: no cover - CLI validation
+            raise ValueError(f"Workspace template is not valid JSON: {exc}") from exc
+        if not isinstance(workspace, dict):  # pragma: no cover - CLI validation
+            raise ValueError("Workspace template must be a JSON object")
+        workspace.setdefault("name", profile_name)
+        workspace.setdefault("settings", settings)
+        if extensions and "extensions" not in workspace:
+            workspace["extensions"] = {"recommendations": extensions}
+        dest.write_text(json.dumps(workspace, indent=2) + "\n", encoding="utf-8")
         return
     workspace = {
         "folders": [{"path": ".."}],

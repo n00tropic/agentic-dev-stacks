@@ -60,6 +60,8 @@ python scripts/apply-profile-assets.py --slug fullstack-js-ts --dry-run
 python scripts/apply-profile-assets.py --slug fullstack-js-ts --apply --target-dir /path/to/workspace
 ```
 
+Fullstack JS/TS (`fullstack-js-ts`) ships with a richer workspace template, tasks, launch configs, and snippets—use the dry-run above (or `--apply`) to inspect or copy them into your workspace.
+
 > Fast path: `scripts/macos/install-profiles.sh`, `scripts/linux/install-profiles.sh`, or `scripts/windows/Install-Profiles.ps1` will loop through slugs (or the ones you pass) using `export-map.yaml`, ensure the profile exists, install extensions, and open the workspace once.
 
 ## Installation script generators
