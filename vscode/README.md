@@ -8,7 +8,12 @@ This directory holds the **source-of-truth packs** and the tooling to generate r
 - `packs/<pack>/extensions/extensions.<slug>.txt`: curated extensions.
 - `packs/<pack>/settings/settings.<slug>.json`: settings overlay for the profile.
 - `packs/<pack>/mcp/servers.<slug>.json`: Model Context Protocol (MCP) manifest for the profile.
-- `packs/<pack>/workspace-templates/`: example `.code-workspace` files.
+- Optional per-profile assets (pulled into exports when present):
+  - `packs/<pack>/tasks/tasks.<slug>.json`
+  - `packs/<pack>/launch/launch.<slug>.json`
+  - `packs/<pack>/snippets/snippets.<slug>.code-snippets`
+  - `packs/<pack>/keybindings/keybindings.<slug>.json`
+  - `packs/<pack>/workspace-templates/<slug>.code-workspace` (overrides the default export)
 - `scripts/`: export and validation tooling (`export-packs.py`, `merge-mcp-fragments.py`, helpers).
 - `export-map.yaml`: slug → pack → export paths → display name mapping.
 - `exports/`: **generated, gitignored** workspaces and install aids (safe to delete/regenerate).
@@ -22,10 +27,14 @@ python scripts/export-packs.py <slug> [<slug> ...]
 ```
 
 - Reads pack data via `export-map.yaml`.
-- Writes to `exports/workspaces/<slug>/`:
+- Writes to `exports/workspaces/<slug>/` (all optional except settings/extensions):
   - `.vscode/extensions.list`
   - `.vscode/settings.json`
-  - `<slug>.code-workspace`
+  - `.vscode/tasks.json`
+  - `.vscode/launch.json`
+  - `.vscode/keybindings.json`
+  - `.vscode/snippets/*.code-snippets`
+  - `<slug>.code-workspace` (overridden by `workspace-templates/<slug>.code-workspace` if present)
 - Overwrite-safe; never writes outside `exports/`.
 
 ## How to apply exports on a new machine
@@ -40,6 +49,16 @@ python scripts/export-packs.py <slug> [<slug> ...]
    ```bash
    code exports/workspaces/<slug>/<slug>.code-workspace --profile "<Profile Name>"
    ```
+
+### Post-import helper (apply-profile-assets)
+
+After importing a `.code-profile`, preview or apply extra assets (tasks/launch/snippets/keybindings) and print MCP TOML for a slug:
+
+```bash
+python scripts/apply-profile-assets.py --slug fullstack-js-ts --dry-run
+# Or apply into another workspace
+python scripts/apply-profile-assets.py --slug fullstack-js-ts --apply --target-dir /path/to/workspace
+```
 
 > Fast path: `scripts/macos/install-profiles.sh`, `scripts/linux/install-profiles.sh`, or `scripts/windows/Install-Profiles.ps1` will loop through slugs (or the ones you pass) using `export-map.yaml`, ensure the profile exists, install extensions, and open the workspace once.
 

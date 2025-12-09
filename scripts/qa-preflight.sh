@@ -168,6 +168,10 @@ done
 echo "All pack-level installation scripts found"
 '
 
+# 10. Profile invariants across CONTROL/profile-map/export-map/MCP/agents
+run_check "Profile invariants" \
+	python3 scripts/qa/check-profile-invariants.py
+
 # 10. Check that CONTROL.md and export-map.yaml are in sync
 run_check "Profile metadata consistency check" bash -c '
 python3 - <<PY
