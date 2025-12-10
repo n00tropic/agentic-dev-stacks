@@ -7,6 +7,7 @@ content:
     - url: ..
       branches: HEAD
       start_path: docs
+      edit_url: https://github.com/n00tropic/agentic-dev-stacks/edit/{refname}/{path}
 
 runtime:
   fetch: false

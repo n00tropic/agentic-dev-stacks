@@ -21,7 +21,26 @@ flowchart TD
 .Golden Path Workflow
 Diagram showing the two main paths for setting up a development environment on a new machine.
 
-== Repo-aware path
+== Hero quickstart (Codespaces or devcontainer)
+
+. Open the repo in GitHub Codespaces **or** run `devcontainer up --workspace-folder .` locally (Docker/Podman + Dev Containers extension).
+. Wait for the build (Python 3.12, Node 24, `requirements-dev.txt`, and `npm ci` under `docs/ui/agentic-neon-ui`).
+. From repo root inside the container, run:
++
+[source,bash]
+----
+bash scripts/validate-all.sh --fast
+# omit --fast to build docs + run link checks
+----
+. Optional: once you import a profile (for example `fullstack-js-ts`), preview tasks/launch/snippets and MCP TOML it would add:
++
+[source,bash]
+----
+python scripts/apply-profile-assets.py --slug fullstack-js-ts --dry-run
+----
+Use `--apply --target-dir <workspace>` to copy assets into another workspace.
+
+== Manual repo-aware path (advanced)
 
 . Clone the repo and enter the vscode directory.
 +
@@ -45,7 +64,7 @@ code exports/workspaces/core-base-dev/core-base-dev.code-workspace \
   --profile "Core / Base Dev"
 ----
 
-== Bundle path (no repo edits)
+== Bundle path (no repo edits, advanced)
 
 Use a prebuilt bundle zip (from `vscode/exports/bundles/<slug>-bundle.zip`):
 
@@ -59,8 +78,8 @@ Run Trunk and bundle validation when you change packs or MCP:
 +
 [source,bash]
 ----
-trunk check
-bash vscode/scripts/validate-all-bundles.sh
+bash scripts/validate-all.sh --fast
+# omit --fast to build docs + run link checks
 ----
 
 == Featured flows

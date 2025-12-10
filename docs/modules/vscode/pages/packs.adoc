@@ -68,6 +68,17 @@ code exports/workspaces/<slug>/<slug>.code-workspace --profile "<Profile Name>"
 
 Fast path: use `scripts/macos/install-profiles.sh`, `scripts/linux/install-profiles.sh`, or `scripts/windows/Install-Profiles.ps1` to loop through slugs.
 
+== Post-import helper (profile assets)
+
+After importing a profile, preview/apply tasks, launch configs, snippets, keybindings, and MCP TOML for a slug:
+
+[source,bash]
+----
+python scripts/apply-profile-assets.py --slug fullstack-js-ts --dry-run
+----
+
+Use `--apply --target-dir <workspace>` to copy `.vscode` assets into another workspace; the script prints MCP TOML to paste into `~/.codex/config.toml`.
+
 == Validation
 
 - After extension changes: `./scripts/helpers/validate-extensions.sh` (or PowerShell variant).

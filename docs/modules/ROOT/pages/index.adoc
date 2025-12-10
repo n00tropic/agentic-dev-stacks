@@ -50,6 +50,22 @@ Developer --> outputs : Use
 .Architecture Overview
 High-level architecture showing the relationship between packs, build system, outputs, and documentation.
 
+== Quickstart (hero path)
+
+. Open in GitHub Codespaces **or** start the local devcontainer: `devcontainer up --workspace-folder .`.
+. Wait for post-create (Python 3.12, Node 24, `requirements-dev.txt`, `npm ci` under `docs/ui/agentic-neon-ui`).
+. Run `bash scripts/validate-all.sh --fast` from repo root (omit `--fast` to include docs build + link check).
+
+OS installers (example: fullstack JS/TS):
+
+[cols="1,2",options="header"]
+|===
+| OS | Command
+| macOS | `./scripts/install/fullstack-js-ts-macos.sh`
+| Linux | `./scripts/install/fullstack-js-ts-linux.sh`
+| Windows (PowerShell) | `./scripts/install/fullstack-js-ts-windows.ps1`
+|===
+
 == What this project provides
 
 - VS Code packs (profiles, extensions, settings, MCP manifests) under `vscode/packs/**`.
